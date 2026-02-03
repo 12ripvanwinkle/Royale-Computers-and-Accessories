@@ -10,28 +10,24 @@ const Navbar = () => {
 
     // Runs once when the component loads
     useEffect(() => {
-
-        // Function that runs whenever the user scrolls
-        const handleScroll = () => {
-
-            // Check if the user scrolled more than 10px
-            const isScrolled = window.scrollY > 10;
-
-            // Update the state (currently always sets to true after scrolling)
+    const handleScroll = () => {
+        if (window.scrollY > 50) {  // Increased threshold
             setScrolled(true);
+        } else {
+            setScrolled(false);
         }
+    }
 
-        // Start listening for scroll events
-        window.addEventListener('scroll', handleScroll);
+    // Call it once on mount to set initial state
+    handleScroll();
 
-        // Cleanup: remove listener when component unmounts
-        return () => window.removeEventListener('scroll', handleScroll);
-
-    }, [])
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+}, []);
 
   return (
 
-    <header className='navbar'>
+    <header className={`navbar ${scrolled ? 'scrolled': 'not-scrolled'}`}>
         <div className="inner">
             {/* Logo that scrolls back to the hero section */}
             <a href="#home">
