@@ -35,7 +35,7 @@ const Hero = () => {
   }, { scope: heroRef });
 
   return (
-    <section ref={heroRef} id="hero" className="relative overflow-hidden">
+    <section ref={heroRef} id="home" className="relative overflow-hidden">
   <div className="hero-background">
     <img src="/images/hero-background.jpg" alt="Hero background" className="w-full h-auto" />
 
