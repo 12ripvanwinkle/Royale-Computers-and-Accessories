@@ -8,9 +8,17 @@ const navLinks = [
         link: "#services"
     },
     {
+        name: "Battle Cards",
+        link: "#cards"
+    },
+    {
+        name: "Markets We Cover",
+        link: "#markets"
+    },
+    {
         name: "About Us",
         link: "#about"
-    }
+    },
 ];
 
 export { navLinks };

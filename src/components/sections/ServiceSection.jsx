@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import TitleHeader from '../TitleHeader';
 
 // Register the ScrollTrigger plugin so GSAP can use scroll-based animations
 gsap.registerPlugin(ScrollTrigger);
@@ -60,7 +61,13 @@ const ShowcaseSection = () => {
     // Main section wrapper (used for fading animation)
     <section id='services' ref={sectionRef} className='app-showcase'>
         <div className="w-full">
-            <div className="showcaselayout">
+            
+            <div className="flex items-center justify-center gap-2 md:gap-4">
+                <TitleHeader title="RCA" className="text-orange-100"/> 
+                <TitleHeader title="Solutions"/>
+            </div>
+
+            <div className="showcaselayout mt-10">
 
                 {/* Left Side */}
                 <div className="first-project-wrapper" ref={project1Ref}>
