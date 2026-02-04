@@ -41,14 +41,14 @@ const Markets = () => {
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="mb-12 text-center">
-                  <div className="flex items-center justify-center gap-3 mb-4">
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
-                      What We Do 
+                  <div className="flex items-center justify-center gap-2 md:gap-3 mb-4 flex-wrap">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+                        What We Do 
                     </h1>
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-orange-100">
-                      Best
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-orange-100">
+                        Best
                     </h1>
-                  </div>
+                </div>
 
                   <p className="text-gray-400 text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
                     From strategy to execution, our services are built to elevate your brand, engage your audience, and drive measurable growth.

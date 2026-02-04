@@ -4,7 +4,7 @@ import Cards from './components/sections/cards'
 import Hero from './components/sections/Hero'
 import Markets from './components/sections/Markets'
 import ServiceSection from './components/sections/ServiceSection'
-import Holder from './components/sections/holder'
+import Contact from './components/sections/Contact'
 
 const App = () => {
   return (
@@ -15,7 +15,7 @@ const App = () => {
       <Cards />
       <Markets />
       <About />
-      {/* <Holder /> */}
+      <Contact />
     </>
   )
 }
