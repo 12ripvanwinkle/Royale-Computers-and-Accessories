@@ -5,6 +5,7 @@ import Hero from './components/sections/Hero'
 import Markets from './components/sections/Markets'
 import ServiceSection from './components/sections/ServiceSection'
 import Contact from './components/sections/Contact'
+import Footer from './components/sections/Footer'
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
       <Markets />
       <About />
       <Contact />
+      <Footer />
     </>
   )
 }

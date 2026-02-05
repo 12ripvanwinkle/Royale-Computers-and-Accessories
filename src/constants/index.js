@@ -110,4 +110,32 @@ const items = [
   }
 ];
 
-export { navLinks, items, aboutItems };
+const socialMedia = [
+    {
+        name: "insta",
+        url: "https://www.youtube.com/watch?v=VrBzJx7GzqY&list=RDMM&index=15",
+        imgPath: "/images/insta.png",
+        alt: "instagram"
+    },
+    {
+        name: "facebook",
+        url: "https://www.youtube.com/watch?v=l90QCMehK4Y&list=RDMM&index=24",
+        imgPath: "/images/fb.png",
+        alt: "facebook",
+    },
+    {
+        name: "twitter",
+        url: "https://www.youtube.com/watch?v=C4xbm83amc0&list=RDMM&index=43",
+        imgPath: "/images/x.png",
+        alt: "X/twitter",
+    },
+    {
+        name: "linkedin",
+        url: "https://www.youtube.com/watch?v=pmanD_s7G3U&list=RDMM&index=10",
+        imgPath: "/images/linkedin.png",
+        alt: "linkedin"
+    },
+
+];
+
+export { navLinks, items, aboutItems, socialMedia };
