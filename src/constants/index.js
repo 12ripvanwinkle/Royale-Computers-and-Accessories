@@ -1,4 +1,4 @@
-const navLinks = [
+const Main_navLinks = [
     {
         name: "Home",
         link: "#home"
@@ -19,6 +19,22 @@ const navLinks = [
         name: "About Us",
         link: "#about"
     },
+];
+
+const techSolutionsNavlinks = [
+  {
+    name: "Main Website",
+    link: "/"
+  },
+
+  {
+    name: "Solutions",
+    link: "#solutions"
+  },
+  {
+    name: "Testimonials",
+    link: "#testimonials"
+  },
 ];
 
 const items = [
@@ -138,4 +154,4 @@ const socialMedia = [
 
 ];
 
-export { navLinks, items, aboutItems, socialMedia };
+export { Main_navLinks, techSolutionsNavlinks, items, aboutItems, socialMedia };

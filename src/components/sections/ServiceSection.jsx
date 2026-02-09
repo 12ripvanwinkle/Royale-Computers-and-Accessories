@@ -2,7 +2,9 @@ import { useRef } from 'react'
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { Link } from 'react-router-dom'
 import TitleHeader from '../TitleHeader';
+
 
 // Register the ScrollTrigger plugin so GSAP can use scroll-based animations
 gsap.registerPlugin(ScrollTrigger);
@@ -72,7 +74,7 @@ const ShowcaseSection = () => {
                 {/* Left Side */}
                 <div className="first-project-wrapper" ref={project1Ref}>
                     <div className="image-wrapper">
-                        <a href="#"><img src="/images/placeholder-tech-solutions.jpg" alt="Technology Solutions" /></a>
+                        <Link to="/tech-solutions"><img src="/images/placeholder-tech-solutions.jpg" alt="Technology Solutions" /></Link>
                     </div>
 
                     <div className="text-content">

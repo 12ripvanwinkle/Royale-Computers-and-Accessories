@@ -128,7 +128,7 @@ section {
     }
 
     nav.desktop {
-      @apply hidden lg:flex items-center;
+      @apply hidden lg:flex items-center mr-20;
 
       ul {
         @apply flex space-x-8;
