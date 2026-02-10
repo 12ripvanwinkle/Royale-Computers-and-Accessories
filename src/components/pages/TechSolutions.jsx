@@ -134,7 +134,7 @@ const TechSolutions = () => {
         </div>
 
         {/* Solutions section */}
-        <div className="py-24 w-full mt-30">
+        <div className="py-24 w-full mt-30" id="solutions">
           <div className="max-w-7xl mx-auto px-6 space-y-24">
             {techSolutionsItems.map((service, index) => {
               const isReversed = index % 2 !== 0;
@@ -185,7 +185,7 @@ const TechSolutions = () => {
       </div>
 
         {/* Testimonials Section */}
-        <div className="py-">
+        <div className="" id="testimonials">
         
         {/* Header for the testimonial section */}
         <div className="max-w-7xl mx-auto px-6 text-center mb-16">

@@ -21,6 +21,21 @@ const Main_navLinks = [
     },
 ];
 
+const techServicesNavlinks = [
+  {
+    name: "Main Website",
+    link: "/"
+  },
+  {
+    name: "Features",
+    link: "#servicesFeatures"
+  },
+  {
+    name: "Services Offered",
+    link: "#servicesOffered"
+  },
+];
+
 const techSolutionsNavlinks = [
   {
     name: "Main Website",
@@ -189,4 +204,4 @@ const socialMedia = [
 
 ];
 
-export { Main_navLinks, techSolutionsNavlinks, techSolutionsItems, testimonials, items, aboutItems, socialMedia };
+export { Main_navLinks, techSolutionsNavlinks, techServicesNavlinks, techSolutionsItems, testimonials, items, aboutItems, socialMedia };

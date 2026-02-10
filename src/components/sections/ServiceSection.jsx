@@ -90,7 +90,7 @@ const ShowcaseSection = () => {
 
                     <div className="project" ref={project2Ref}>
                         <div className="image-wrapper bg-[#ffefdb]">
-                            <a href="#"><img src="/images/placeholder-tech-services.jpg" alt="Technology Services" /></a>
+                            <Link to="/tech-services"><img src="/images/placeholder-tech-services.jpg" alt="Technology Services" /></Link>
                         </div>
                         <h2 className='text-orange-100'>Our Technology Services</h2>
                     </div>

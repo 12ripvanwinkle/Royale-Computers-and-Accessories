@@ -67,7 +67,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Main_navLinks, techSolutionsNavlinks } from '../constants'
+import { Main_navLinks, techSolutionsNavlinks, techServicesNavlinks, } from '../constants'
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -75,6 +75,7 @@ const Navbar = () => {
 
   // Determine which set of nav links to show based on current route
   const isTechSolutionsPage = location.pathname === '/tech-solutions';
+  const isTechServicesPage = location.pathname === '/tech-services';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,7 +91,10 @@ const Navbar = () => {
   }, []);
 
   // Choose which links to display
-  const navLinks = isTechSolutionsPage ? techSolutionsNavlinks : Main_navLinks;
+  // Choose which links to display based on current page
+  const navLinks = isTechSolutionsPage ? techSolutionsNavlinks 
+    : isTechServicesPage ? techServicesNavlinks 
+    : Main_navLinks;
 
   return (
     <header className={`navbar ${scrolled ? 'scrolled' : 'not-scrolled'}`}>
