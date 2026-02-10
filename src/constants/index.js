@@ -37,6 +37,24 @@ const techSolutionsNavlinks = [
   },
 ];
 
+const techSolutionsItems = [
+  {
+    title: "Cloud Integration",
+    description: "Seamlessly connect your business to cloud platforms for improved scalability and security.",
+    image: "/images/Leon1.jpg",
+  },
+  {
+    title: "Custom Software",
+    description: "Tailored software solutions that address your specific business challenges.",
+    image: "/images/Leon2.jpg",
+  },
+  {
+    title: "IT Consulting",
+    description: "Expert guidance for technology adoption and digital transformation.",
+    image: "/images/Leon3.jpg",
+  },
+];
+
 const items = [
     {
       id: 1,
@@ -154,4 +172,4 @@ const socialMedia = [
 
 ];
 
-export { Main_navLinks, techSolutionsNavlinks, items, aboutItems, socialMedia };
+export { Main_navLinks, techSolutionsNavlinks, techSolutionsItems, items, aboutItems, socialMedia };
