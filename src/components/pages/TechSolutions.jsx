@@ -21,6 +21,10 @@ const TechSolutions = () => {
   const solutionsTextRefs = useRef([]);
   const solutionsImgRefs = useRef([]);
 
+  // Testimonials refs
+  const testimonialsHeaderRef = useRef(null);
+  const testimonialCardRefs = useRef([]);
+
   useGSAP(() => {
     // Title animation
     gsap.fromTo(
@@ -103,6 +107,48 @@ const TechSolutions = () => {
         }
       );
     });
+
+    // Testimonials header animation
+    gsap.fromTo(
+      testimonialsHeaderRef.current,
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: testimonialsHeaderRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+
+    // Animate each testimonial card
+    testimonials.forEach((_, index) => {
+      gsap.fromTo(
+        testimonialCardRefs.current[index],
+        {
+          y: 60,
+          opacity: 0,
+          scale: 0.95,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          delay: index * 0.2, // Stagger effect
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: testimonialCardRefs.current[index],
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
   }, { scope: sectionRef });
 
   return (
@@ -165,7 +211,7 @@ const TechSolutions = () => {
                   {/* IMAGE */}
                   <div
                     ref={(el) => (solutionsImgRefs.current[index] = el)}
-                    className={`aspect-square rounded-2xl bg-linear-to-br from-neutral-900 to-neutral-800 
+                    className={`aspect-square rounded-2xl bg-gradient-to-br from-neutral-900 to-neutral-800 
                                 flex items-center justify-center overflow-hidden
                                 ${isReversed ? "md:order-1" : "md:order-2"}`}
                   >
@@ -185,43 +231,44 @@ const TechSolutions = () => {
       </div>
 
         {/* Testimonials Section */}
-        <div className="" id="testimonials">
+        <div className="py-20" id="testimonials">
         
-        {/* Header for the testimonial section */}
-        <div className="max-w-7xl mx-auto px-6 text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
-            Client Voices
-            </h2>
-            <p className="text-xl text-gray-400">
-            Success stories from real clients.
-            </p>
-        </div>
+            {/* Header for the testimonial section */}
+            <div ref={testimonialsHeaderRef} className="max-w-7xl mx-auto px-6 text-center mb-16">
+                <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
+                Client Voices
+                </h2>
+                <p className="text-xl text-gray-400">
+                Success stories from real clients.
+                </p>
+            </div>
 
-        {/* Testimonial Cards */}
-        <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {testimonials.map((item, index) => (
-                    <div
-                    key={index}
-                    className="testimonial-card rounded-3xl bg-neutral-900 border border-neutral-800 p-8 flex flex-col justify-between min-h-100 hover:border-neutral-700 transition-all duration-300"
-                    >
-                    {/* Quote */}
-                    <p className="text-gray-400 text-lg leading-relaxed">
-                        "{item.quote}"
-                    </p>
+            {/* Testimonial Cards */}
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {testimonials.map((item, index) => (
+                        <div
+                        key={index}
+                        ref={(el) => (testimonialCardRefs.current[index] = el)}
+                        className="testimonial-card rounded-3xl bg-neutral-900 border border-neutral-800 p-8 flex flex-col justify-between min-h-100 hover:border-neutral-700 transition-all duration-300"
+                        >
+                        {/* Quote */}
+                        <p className="text-gray-400 text-lg leading-relaxed">
+                            "{item.quote}"
+                        </p>
 
-                    {/* Author info at bottom */}
-                    <div className="mt-auto pt-8">
-                        <p className="text-white font-semibold text-lg">
-                        {item.name}
-                        </p>
-                        <p className="text-gray-500 mt-1">
-                        {item.role}
-                        </p>
+                        {/* Author info at bottom */}
+                        <div className="mt-auto pt-8">
+                            <p className="text-white font-semibold text-lg">
+                            {item.name}
+                            </p>
+                            <p className="text-gray-500 mt-1">
+                            {item.role}
+                            </p>
+                        </div>
+                        </div>
+                    ))}
                     </div>
-                    </div>
-                ))}
-                </div>
             </div>
         </div>
 
