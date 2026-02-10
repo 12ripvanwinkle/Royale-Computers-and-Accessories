@@ -3,8 +3,10 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-import { techSolutionsItems } from "../../constants";
+import { techSolutionsItems, testimonials } from "../../constants";
 import TitleHeader from "../TitleHeader";
+import Contact from "../sections/Contact";
+import Footer from "../sections/Footer";
 
 // Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -182,8 +184,49 @@ const TechSolutions = () => {
         </div>
       </div>
 
-      {/* Testimonials Section */}
-      
+        {/* Testimonials Section */}
+        <div className="py-">
+        
+        {/* Header for the testimonial section */}
+        <div className="max-w-7xl mx-auto px-6 text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
+            Client Voices
+            </h2>
+            <p className="text-xl text-gray-400">
+            Success stories from real clients.
+            </p>
+        </div>
+
+        {/* Testimonial Cards */}
+        <div className="max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {testimonials.map((item, index) => (
+                    <div
+                    key={index}
+                    className="testimonial-card rounded-3xl bg-neutral-900 border border-neutral-800 p-8 flex flex-col justify-between min-h-100 hover:border-neutral-700 transition-all duration-300"
+                    >
+                    {/* Quote */}
+                    <p className="text-gray-400 text-lg leading-relaxed">
+                        "{item.quote}"
+                    </p>
+
+                    {/* Author info at bottom */}
+                    <div className="mt-auto pt-8">
+                        <p className="text-white font-semibold text-lg">
+                        {item.name}
+                        </p>
+                        <p className="text-gray-500 mt-1">
+                        {item.role}
+                        </p>
+                    </div>
+                    </div>
+                ))}
+                </div>
+            </div>
+        </div>
+
+        <Contact />
+        <Footer />
     </section>
   );
 };

@@ -55,6 +55,23 @@ const techSolutionsItems = [
   },
 ];
 
+const testimonials = [
+  {
+    quote: "Their solutions transformed our workflow.",
+    name: "Alex Kim",
+    role: "Something Important",
+  },
+  {
+    quote: "Reliable, innovative, and fast delivery.",
+    name: "Priya Rao",
+    role: "Something Important",
+  },{
+    quote: "Great team to collaborate with.",
+    name: "Greg Stevens",
+    role: "Something Important",
+  },
+];
+
 const items = [
     {
       id: 1,
@@ -172,4 +189,4 @@ const socialMedia = [
 
 ];
 
-export { Main_navLinks, techSolutionsNavlinks, techSolutionsItems, items, aboutItems, socialMedia };
+export { Main_navLinks, techSolutionsNavlinks, techSolutionsItems, testimonials, items, aboutItems, socialMedia };
