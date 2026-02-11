@@ -166,7 +166,7 @@ const TechSolutions = () => {
         {/* Hero image */}
         <div
           ref={heroImageRef}
-          className="w-full max-w-6xl mt-8 sm:mt-10 h-55 sm:h-75 md:h-100 lg:h-125 bg-zinc-950
+          className="w-full max-w-350 mx-auto sm:mt-10 h-55 sm:h-75 md:h-100 lg:h-170 bg-zinc-950
                       rounded-2xl sm:rounded-3xl
                       flex items-center justify-center
                       relative overflow-hidden
@@ -211,7 +211,7 @@ const TechSolutions = () => {
                   {/* IMAGE */}
                   <div
                     ref={(el) => (solutionsImgRefs.current[index] = el)}
-                    className={`aspect-square rounded-2xl bg-gradient-to-br from-neutral-900 to-neutral-800 
+                    className={`aspect-square rounded-2xl bg-linear-to-br from-neutral-900 to-neutral-800 
                                 flex items-center justify-center overflow-hidden
                                 ${isReversed ? "md:order-1" : "md:order-2"}`}
                   >

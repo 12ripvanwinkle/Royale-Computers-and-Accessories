@@ -7,6 +7,7 @@ import Markets from './components/sections/Markets'
 import ServiceSection from './components/sections/ServiceSection'
 import Contact from './components/sections/Contact'
 import Footer from './components/sections/Footer'
+import Holder from './components/sections/Footer'
 import TechSolutions from './components/pages/TechSolutions'
 import TechServices from './components/pages/TechServices'
 

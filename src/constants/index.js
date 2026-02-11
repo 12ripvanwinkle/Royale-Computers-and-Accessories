@@ -36,6 +36,28 @@ const techServicesNavlinks = [
   },
 ];
 
+const techServices = [
+  {
+    title: "Maintenance",
+    price: "$99",
+    description: "Routine checkups and updates to keep your IT systems performing at their best.",
+    image: "/images/download.jpg",
+  },
+  {
+    title: "Repair",
+    price: "$149",
+    description: "Rapid response for unexpected issues, restoring your business swiftly.",
+    image: "/images/batman.png",
+  },
+  {
+    title: "Cloud Setup",
+    price: "$89",
+    description:"Seamless migrations to cloud solutions—secure, stable, and ready for growth.",
+    image: "/images/knight.jpg",
+  },
+
+];
+
 const techSolutionsNavlinks = [
   {
     name: "Main Website",
@@ -204,4 +226,4 @@ const socialMedia = [
 
 ];
 
-export { Main_navLinks, techSolutionsNavlinks, techServicesNavlinks, techSolutionsItems, testimonials, items, aboutItems, socialMedia };
+export { Main_navLinks, techSolutionsNavlinks, techServicesNavlinks, techServices, techSolutionsItems, testimonials, items, aboutItems, socialMedia };
