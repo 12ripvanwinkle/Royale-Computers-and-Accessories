@@ -27,12 +27,12 @@ const techServicesNavlinks = [
     link: "/"
   },
   {
-    name: "Features",
+    name: "Our Services",
     link: "#servicesFeatures"
   },
   {
-    name: "Services Offered",
-    link: "#servicesOffered"
+    name: "Testimonials",
+    link: "#testimonials"
   },
 ];
 
@@ -55,7 +55,14 @@ const techServices = [
     description:"Seamless migrations to cloud solutions—secure, stable, and ready for growth.",
     image: "/images/knight.jpg",
   },
+];
 
+import { Wrench, Clock, Cloud, ShieldCheck, } from "lucide-react";
+const features = [
+  { icon: Wrench, title: "Device Setup" },
+  { icon: Clock, title: "Urgent Fix" },
+  { icon: Cloud, title: "Cloud Storage" },
+  { icon: ShieldCheck, title: "Cyber Security" },
 ];
 
 const techSolutionsNavlinks = [
@@ -92,7 +99,7 @@ const techSolutionsItems = [
   },
 ];
 
-const testimonials = [
+const TechSolutionstestimonials = [
   {
     quote: "Their solutions transformed our workflow.",
     name: "Alex Kim",
@@ -109,6 +116,22 @@ const testimonials = [
   },
 ];
 
+const TechServicestestimonials = [
+  {
+    quote: "Their solutions transformed our workflow.",
+    name: "Alex Kim",
+    role: "Something Important",
+  },
+  {
+    quote: "Reliable, innovative, and fast delivery.",
+    name: "Priya Rao",
+    role: "Something Important",
+  },{
+    quote: "Great team to collaborate with.",
+    name: "Greg Stevens",
+    role: "Something Important",
+  },
+];
 const items = [
     {
       id: 1,
@@ -226,4 +249,4 @@ const socialMedia = [
 
 ];
 
-export { Main_navLinks, techSolutionsNavlinks, techServicesNavlinks, techServices, techSolutionsItems, testimonials, items, aboutItems, socialMedia };
+export { Main_navLinks, techSolutionsNavlinks, techServicesNavlinks, techServices, features, techSolutionsItems, TechSolutionstestimonials, TechServicestestimonials, items, aboutItems, socialMedia };

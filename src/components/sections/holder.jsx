@@ -1,83 +1,64 @@
-import React from "react";
+import {
+  Wrench,
+  Clock,
+  Cloud,
+  ShieldCheck,
+} from "lucide-react";
 
-const services = [
-  {
-    title: "Maintenance",
-    price: "$99",
-    description:
-      "Routine checkups and updates to keep your IT systems performing at their best.",
-    icon: "square",
-  },
-  {
-    title: "Repair",
-    price: "$149",
-    description:
-      "Rapid response for unexpected issues, restoring your business swiftly.",
-    icon: "circle",
-  },
-  {
-    title: "Cloud Setup",
-    price: "$89",
-    description:
-      "Seamless migrations to cloud solutions—secure, stable, and ready for growth.",
-    icon: "triangle",
-  },
-];
-
-export default function ServicesSection() {
+export default function CompanyHighlights() {
   return (
-    <section className="w-full bg-black text-white py-24 px-6">
-      <div className="max-w-7xl mx-auto">
-        
-        {/* Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-semibold">
-            Effortless Tech.
-          </h2>
-          <p className="mt-4 text-lg text-gray-400">
-            Modern solutions for your business.
-          </p>
+    <section className="w-full bg-black text-white py-28 px-6">
+      <div className="max-w-6xl mx-auto">
+
+        {/* === Top Feature Icons === */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-10 text-center">
+          <Feature icon={<Wrench size={28} />} title="Device Setup" />
+          <Feature icon={<Clock size={28} />} title="Urgent Fix" />
+          <Feature icon={<Cloud size={28} />} title="Cloud Move" />
+          <Feature icon={<ShieldCheck size={28} />} title="Cyber Audit" />
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className="group flex flex-col"
-            >
-              {/* Card */}
-              <div className="relative rounded-3xl bg-neutral-900 h-80 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:-translate-y-2">
-                
-                {/* Icon Placeholder */}
-                {service.icon === "square" && (
-                  <div className="w-20 h-20 bg-neutral-700 rounded-lg" />
-                )}
-                {service.icon === "circle" && (
-                  <div className="w-20 h-20 bg-neutral-700 rounded-full" />
-                )}
-                {service.icon === "triangle" && (
-                  <div className="w-0 h-0 
-                                  border-l-[40px] border-l-transparent
-                                  border-r-[40px] border-r-transparent
-                                  border-b-[70px] border-b-neutral-700" />
-                )}
-              </div>
+        {/* Spacer */}
+        <div className="my-24 border-t border-neutral-800" />
 
-              {/* Text Content */}
-              <div className="mt-6">
-                <h3 className="text-xl font-semibold">
-                  {service.title}. {service.price}
-                </h3>
-                <p className="mt-3 text-gray-400 text-sm leading-relaxed max-w-sm">
-                  {service.description}
-                </p>
-              </div>
-            </div>
-          ))}
+        {/* === Stats Section === */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-16 text-center">
+          <Stat number="15+" label="Years Experience" />
+          <Stat number="120+" label="Projects" />
+          <Stat number="99%" label="Client Retention" />
         </div>
 
       </div>
     </section>
+  );
+}
+
+/* ----------------------------- */
+/* Sub Components */
+/* ----------------------------- */
+
+function Feature({ icon, title }) {
+  return (
+    <div className="flex flex-col items-center space-y-4">
+      <div className="text-neutral-400">
+        {icon}
+      </div>
+      <p className="text-white font-medium">
+        {title}
+      </p>
+    </div>
+  );
+}
+
+function Stat({ number, label }) {
+  return (
+    <div>
+      <h3 className="text-5xl md:text-6xl font-semibold">
+        {number}
+      </h3>
+      <p className="mt-3 text-gray-400">
+        {label}
+      </p>
+    </div>
   );
 }
