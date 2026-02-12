@@ -36,6 +36,26 @@ const techServicesNavlinks = [
   },
 ];
 
+const TechRetailNavlinks = [
+  {
+    name: "Main Website",
+    link: "/"
+  },
+  {
+    name: "Shop",
+    link: "#shop"
+  },
+  {
+    name: "Categories",
+    link: "#categories"
+  },
+  {
+    name: "Deals",
+    link: "#deals"
+  },
+];
+
+
 const techServices = [
   {
     title: "Maintenance",
@@ -132,6 +152,8 @@ const TechServicestestimonials = [
     role: "Something Important",
   },
 ];
+
+
 const items = [
     {
       id: 1,
@@ -168,7 +190,7 @@ const items = [
       span: "md:col-span-1 md:row-span-1",
       icon: "🔍"
     }
-  ];
+];
 
   const aboutItems = [
   {
@@ -249,4 +271,4 @@ const socialMedia = [
 
 ];
 
-export { Main_navLinks, techSolutionsNavlinks, techServicesNavlinks, techServices, features, techSolutionsItems, TechSolutionstestimonials, TechServicestestimonials, items, aboutItems, socialMedia };
+export { Main_navLinks, techSolutionsNavlinks, techServicesNavlinks, TechRetailNavlinks, techServices, features, techSolutionsItems, TechSolutionstestimonials, TechServicestestimonials, items, aboutItems, socialMedia };

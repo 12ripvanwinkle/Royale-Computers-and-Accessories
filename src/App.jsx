@@ -10,6 +10,7 @@ import Footer from './components/sections/Footer'
 import Holder from './components/sections/Footer'
 import TechSolutions from './components/pages/TechSolutions'
 import TechServices from './components/pages/TechServices'
+import TechRetail from './components/pages/TechRetail'
 
 // Create a HomePage component that holds all your sections
 const HomePage = () => (
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/tech-solutions" element={<TechSolutions />} />
         <Route path="/tech-services" element={<TechServices />}></Route>
+        <Route path="/tech-retail" element={<TechRetail />}></Route>
       </Routes>
     </BrowserRouter>
   )
