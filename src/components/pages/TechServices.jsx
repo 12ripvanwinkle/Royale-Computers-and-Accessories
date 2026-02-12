@@ -1,16 +1,130 @@
-import React from 'react'
+import React, {useRef,} from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
+
 import { techServices, features,TechServicestestimonials } from "../../constants";
 import Testimonials from '../Testimonials';
 import Contact from '../sections/Contact';
 import Footer from '../sections/Footer';
 
 const TechServices = () => {
+
+    // Refs for animations
+      const headerRef = useRef(null)
+      const heroImageRef = useRef(null)
+      const servicesHeaderRef = useRef(null)
+      const serviceCardRefs = useRef([])
+      const featureRefs = useRef([])
+
+      useGSAP(() => {
+          // Header animation
+          gsap.fromTo(
+            headerRef.current,
+            { y: 40, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: headerRef.current,
+                start: "top 80%",
+                toggleActions: "play none none none",
+              },
+            }
+          )
+      
+          // Hero image animation
+          gsap.fromTo(
+            heroImageRef.current,
+            { y: 60, opacity: 0, scale: 0.96 },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: heroImageRef.current,
+                start: "top 80%",
+                toggleActions: "play none none none",
+              },
+            }
+          )
+      
+          // Services header animation
+          gsap.fromTo(
+            servicesHeaderRef.current,
+            { y: 40, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: servicesHeaderRef.current,
+                start: "top 80%",
+                toggleActions: "play none none none",
+              },
+            }
+          )
+      
+          // Service cards animation (staggered)
+          serviceCardRefs.current.forEach((card, index) => {
+            gsap.fromTo(
+              card,
+              {
+                y: 60,
+                opacity: 0,
+                scale: 0.95,
+              },
+              {
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                duration: 0.8,
+                delay: index * 0.15, // Stagger effect
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: card,
+                  start: "top 85%",
+                  toggleActions: "play none none none",
+                },
+              }
+            )
+          })
+      
+          // Feature icons animation (staggered)
+          featureRefs.current.forEach((feature, index) => {
+            gsap.fromTo(
+              feature,
+              {
+                y: 40,
+                opacity: 0,
+              },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.6,
+                delay: index * 0.1, // Stagger effect
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: feature,
+                  start: "top 85%",
+                  toggleActions: "play none none none",
+                },
+              }
+            )
+          })
+        }, [])
+
   return (
     <section id='Tech Services' className="mt-70">
         <div className="w-full py-20 px-6">
             <div className="max-w-7xl mx-auto">
                 {/* Header Section */}
-                <div className="text-left mb-16">
+                <div className="text-left mb-16" ref={headerRef}>
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
                         Your Tech Partner.
                     </h2>
@@ -20,7 +134,7 @@ const TechServices = () => {
                 </div>
 
                 {/* Hero Image */}
-                <div 
+                <div ref={heroImageRef}
                     className="w-full max-w-350 mx-auto sm:mt-10 h-55 sm:h-75 md:h-100 lg:h-170 bg-zinc-950
                       rounded-2xl sm:rounded-3xl
                       flex items-center justify-center
@@ -36,7 +150,7 @@ const TechServices = () => {
                 <div className="max-w-7xl mx-auto mt-60">
 
                     {/* Services Header */}
-                    <div className="text-center mb-20">
+                    <div ref={servicesHeaderRef} className="text-center mb-20">
                         <h2 className="text-4xl md:text-5xl font-semibold">
                             Effortless Tech.
                         </h2>
@@ -48,7 +162,7 @@ const TechServices = () => {
                     {/* Service Cards */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10" id='servicesFeatures'>
                         {techServices.map((service, index) => (
-                            <div key={index} className="group flex flex-col">
+                            <div key={index} ref={(el) => (serviceCardRefs.current[index] = el)} className="group flex flex-col">
                                 
                                 {/* Card Itself */}
                                 <div className="relative rounded-3xl bg-neutral-900 h-80 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:-translate-y-2">
@@ -84,6 +198,7 @@ const TechServices = () => {
                             return (
                             <div
                                 key={index}
+                                ref={(el) => (featureRefs.current[index] = el)}
                                 className="flex flex-col items-center space-y-4 transition duration-300 hover:-translate-y-1"
                             >
                                 <Icon size={40} className="text-neutral-400 sm:w-12 sm:h-12 md:w-14 md:h-14" />

@@ -1,64 +1,214 @@
-import {
-  Wrench,
-  Clock,
-  Cloud,
-  ShieldCheck,
-} from "lucide-react";
+import React, { useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 
-export default function CompanyHighlights() {
+gsap.registerPlugin(ScrollTrigger)
+
+const YourComponent = () => {
+  // Refs for animations
+  const headerRef = useRef(null)
+  const heroImageRef = useRef(null)
+  const servicesHeaderRef = useRef(null)
+  const serviceCardRefs = useRef([])
+  const featureRefs = useRef([])
+
+  useGSAP(() => {
+    // Header animation
+    gsap.fromTo(
+      headerRef.current,
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: headerRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      }
+    )
+
+    // Hero image animation
+    gsap.fromTo(
+      heroImageRef.current,
+      { y: 60, opacity: 0, scale: 0.96 },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: heroImageRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      }
+    )
+
+    // Services header animation
+    gsap.fromTo(
+      servicesHeaderRef.current,
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: servicesHeaderRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      }
+    )
+
+    // Service cards animation (staggered)
+    serviceCardRefs.current.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        {
+          y: 60,
+          opacity: 0,
+          scale: 0.95,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          delay: index * 0.15, // Stagger effect
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      )
+    })
+
+    // Feature icons animation (staggered)
+    featureRefs.current.forEach((feature, index) => {
+      gsap.fromTo(
+        feature,
+        {
+          y: 40,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          delay: index * 0.1, // Stagger effect
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: feature,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      )
+    })
+  }, [])
+
   return (
-    <section className="w-full bg-black text-white py-28 px-6">
-      <div className="max-w-6xl mx-auto">
-
-        {/* === Top Feature Icons === */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-10 text-center">
-          <Feature icon={<Wrench size={28} />} title="Device Setup" />
-          <Feature icon={<Clock size={28} />} title="Urgent Fix" />
-          <Feature icon={<Cloud size={28} />} title="Cloud Move" />
-          <Feature icon={<ShieldCheck size={28} />} title="Cyber Audit" />
-        </div>
-
-        {/* Spacer */}
-        <div className="my-24 border-t border-neutral-800" />
-
-        {/* === Stats Section === */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-16 text-center">
-          <Stat number="15+" label="Years Experience" />
-          <Stat number="120+" label="Projects" />
-          <Stat number="99%" label="Client Retention" />
-        </div>
-
+    <>
+      {/* Header Section */}
+      <div ref={headerRef} className="text-left mb-16">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+              Your Tech Partner.
+          </h2>
+          <p className="text-xl md:text-2xl text-gray-500">
+              Simplifying IT. Trusted. Modern.
+          </p>
       </div>
-    </section>
-  );
-}
 
-/* ----------------------------- */
-/* Sub Components */
-/* ----------------------------- */
-
-function Feature({ icon, title }) {
-  return (
-    <div className="flex flex-col items-center space-y-4">
-      <div className="text-neutral-400">
-        {icon}
+      {/* Hero Image */}
+      <div 
+          ref={heroImageRef}
+          className="w-full max-w-[1400px] mx-auto sm:mt-10 h-[250px] sm:h-[350px] md:h-[500px] lg:h-[680px] bg-zinc-950
+                    rounded-2xl sm:rounded-3xl
+                    flex items-center justify-center
+                    relative overflow-hidden
+                    border border-white/5"
+      >
+          <img src="/images/elden-ring.jpg" alt="" className='w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-105' />
       </div>
-      <p className="text-white font-medium">
-        {title}
-      </p>
-    </div>
-  );
+
+      {/* Services Aspect */}
+      <div className="max-w-7xl mx-auto mt-60">
+
+          {/* Services Header */}
+          <div ref={servicesHeaderRef} className="text-center mb-20">
+              <h2 className="text-4xl md:text-5xl font-semibold">
+                  Effortless Tech.
+              </h2>
+              <p className="mt-4 text-lg text-gray-400">
+                  Modern solutions for your business.
+              </p>
+          </div>
+
+          {/* Service Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10" id='servicesFeatures'>
+              {techServices.map((service, index) => (
+                  <div 
+                      key={index} 
+                      ref={(el) => (serviceCardRefs.current[index] = el)}
+                      className="group flex flex-col"
+                  >
+                      
+                      {/* Card Itself */}
+                      <div className="relative rounded-3xl bg-neutral-900 h-80 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:-translate-y-2">
+      
+                          {/* Icon Placeholder */}
+                          {service.image && (
+                              <img src={service.image} className='w-full h-full object-cover rounded-2xl'/>
+                          )}
+                      </div>
+
+                      {/* Text for the Card */}
+                      <div className="mt-6">
+                          <h3 className="text-xl font-semibold">
+                              {service.title}. {service.price}
+                          </h3>
+                          <p className="mt-3 text-gray-400 text-sm leading-relaxed max-w-sm">
+                              {service.description}
+                          </p>
+                      </div>
+                  </div>
+              ))}
+          </div>
+      </div>
+
+      {/* Experience Section */}
+      <div className="max-w-6xl mx-auto mt-50">
+
+          {/* Top Feature Icons */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-10 text-center">
+              {features.map((item, index) => {
+                  const Icon = item.icon;
+
+                  return (
+                  <div
+                      key={index}
+                      ref={(el) => (featureRefs.current[index] = el)}
+                      className="flex flex-col items-center space-y-4 transition duration-300 hover:-translate-y-1"
+                  >
+                      <Icon size={40} className="text-neutral-400 sm:w-12 sm:h-12 md:w-14 md:h-14" />
+                      <p className="font-medium text-white">
+                          {item.title}
+                      </p>
+                  </div>
+                  );
+              })}
+          </div>
+      </div>
+    </>
+  )
 }
 
-function Stat({ number, label }) {
-  return (
-    <div>
-      <h3 className="text-5xl md:text-6xl font-semibold">
-        {number}
-      </h3>
-      <p className="mt-3 text-gray-400">
-        {label}
-      </p>
-    </div>
-  );
-}
+export default YourComponent
