@@ -1,7 +1,13 @@
-import React, { useState }  from 'react'
-import { ArrowRight, ChevronRight, MoveRight } from 'lucide-react'
+import React, { useState, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
+import { ArrowRight } from 'lucide-react'
+
 import Contact from '../sections/Contact';
 import Footer from '../sections/Footer';
+
+gsap.registerPlugin(ScrollTrigger)
 
 // Tech Retail Products/Categories
 const productCategories = {
@@ -84,6 +90,130 @@ export default function TechRetail() {
     const [selectedCategory, setSelectedCategory] = useState('deals');
     const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
 
+    // Refs for animations
+    const sectionRef = useRef(null)
+    const headerRef = useRef(null)
+    const categoryHeaderRef = useRef(null)
+    const categoryCardRefs = useRef([])
+    const headerTitleRef = useRef(null)
+    const headerTextRef = useRef(null)
+    const headerButtonRef = useRef(null)
+
+    useGSAP(() => {
+
+        // Header title animation
+    gsap.fromTo(
+        headerTitleRef.current,
+        { y: 40, opacity: 0 },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: headerTitleRef.current,
+                start: "top 80%",
+                toggleActions: "play none none none",
+            },
+        }
+    )
+
+    // Header text animation (with delay)
+    gsap.fromTo(
+        headerTextRef.current,
+        { y: 40, opacity: 0 },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            delay: 0.2,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: headerTitleRef.current,
+                start: "top 80%",
+                toggleActions: "play none none none",
+            },
+        }
+    )
+
+    // Header button animation (with more delay)
+    gsap.fromTo(
+        headerButtonRef.current,
+        { y: 40, opacity: 0, scale: 0.95 },
+        {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            delay: 0.4,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+                trigger: headerTitleRef.current,
+                start: "top 80%",
+                toggleActions: "play none none none",
+            },
+        }
+    )
+        // Header animation
+        gsap.fromTo(
+            headerRef.current,
+            { y: 40, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: headerRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none none",
+                },
+            }
+        )
+
+        // Category header animation
+        gsap.fromTo(
+            categoryHeaderRef.current,
+            { y: 40, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: categoryHeaderRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none none",
+                },
+            }
+        )
+
+        // Category cards staggered animation
+        categoryCardRefs.current.forEach((card, index) => {
+            if (card) { // Check if card exists
+                gsap.fromTo(
+                    card,
+                    {
+                        y: 60,
+                        opacity: 0,
+                    },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.8,
+                        delay: index * 0.1, // Stagger effect
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 85%",
+                            toggleActions: "play none none none",
+                        },
+                    }
+                )
+            }
+        })
+    }, { scope: sectionRef })
+
     // Get all sale items across all categories
     const getAllDeals = () => {
         const allDeals = [];
@@ -99,20 +229,20 @@ export default function TechRetail() {
         : productCategories[selectedCategory];
 
   return (
-    <section id='techRetail' className='mt-70'>
+    <section ref={sectionRef} id='techRetail' className='mt-70'>
         <div className="min-h-screen">
             {/* Header Section */}
             <div className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
-                    <div className="text-center">
-                        <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tight mb-6">
+                    <div ref={headerRef}  className="text-center">
+                        <h1 ref={headerTitleRef} className="text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tight mb-6">
                             Premium Tech
                         </h1>
-                        <p className="text-xl text-white/60 max-w-2xl mx-auto mb-12">
+                        <p ref={headerTextRef} className="text-xl text-white/60 max-w-2xl mx-auto mb-12">
                             Everything you need. Nothing you don't.
                         </p>
 
-                        <button className="px-8 py-4 bg-white text-black font-medium text-lg hover:bg-orange-100 transition">
+                        <button ref={headerButtonRef} className="px-8 py-4 bg-white text-black font-medium text-lg hover:bg-orange-100 transition">
                             Browse Products
                         </button>
                     </div>
@@ -122,19 +252,20 @@ export default function TechRetail() {
             {/* Category Selection - Bento Grid */}
             <div className="py-20 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
-                    <h2 className="text-4xl font-bold mb-12">Shop By Category</h2>
+                    <h2 ref={categoryHeaderRef} className="text-4xl font-bold mb-12">Shop By Category</h2>
 
                     {/* Bento Grid Layout */}
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[200px]">
 
                         {/* Deals Square - Large Featured (2x2) */}
-                        <div className="md:col-span-2 md:row-span-2 bg-linear-to-br from-purple-600 to-purple-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group relative overflow-hidden"
+                        <div ref={(el) => (categoryCardRefs.current[0] = el)}
+                            className="md:col-span-2 md:row-span-2 bg-linear-to-br from-purple-600 to-purple-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group relative overflow-hidden"
                             onClick={() => setSelectedCategory('deals')}
                         >
                             <div className="absolute top-4 right-4 w-12 h-12 bg-purple-400/30 rounded-full blur-2xl"></div>
                             
                             <div className="">
-                                <div className="text-5xl sm:text-6xl mb-4 sm:mb-6 transform transition-all duration-500 group-hover:rotate-12">
+                                <div className="text-5xl sm:text-6xl mb-4 sm:mb-6 transform transition-all duration-500 group-hover:rotate-7">
                                     🔥
                                 </div>
                                 <h3 className="text-3xl sm:text-4xl font-bold mb-2">Deals/Sales</h3>
@@ -154,7 +285,7 @@ export default function TechRetail() {
                         </div>
 
                         {/* Phones Square - (1x1) */}
-                        <div 
+                        <div ref={(el) => (categoryCardRefs.current[1] = el)}
                             className="bg-zinc-100 rounded-3xl p-6 flex flex-col justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group"
                             onClick={() => setSelectedCategory('phones')}
                         >
@@ -166,7 +297,7 @@ export default function TechRetail() {
                         </div>
 
                         {/* Computers */}
-                        <div 
+                        <div ref={(el) => (categoryCardRefs.current[2] = el)}
                             className="bg-zinc-100 rounded-3xl p-6 flex flex-col justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group"
                             onClick={() => setSelectedCategory('computers')}
                         >
@@ -178,7 +309,7 @@ export default function TechRetail() {
                         </div>
 
                         {/* Tablets */}
-                        <div 
+                        <div ref={(el) => (categoryCardRefs.current[3] = el)}
                             className="bg-linear-to-br from-purple-600 to-purple-800 rounded-3xl p-6 flex flex-col justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group"
                             onClick={() => setSelectedCategory('tablets')}
                         >
@@ -190,7 +321,7 @@ export default function TechRetail() {
                         </div>
 
                         {/* Tvs */}
-                        <div 
+                        <div ref={(el) => (categoryCardRefs.current[4] = el)}
                             className="bg-linear-to-br from-purple-600 to-purple-800 rounded-3xl p-6 flex flex-col justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group"
                             onClick={() => setSelectedCategory('tvs')}
                         >
@@ -202,7 +333,7 @@ export default function TechRetail() {
                         </div>
 
                         {/* Monitors */}
-                        <div 
+                        <div ref={(el) => (categoryCardRefs.current[5] = el)}
                             className="md:col-span-2 bg-zinc-100 rounded-3xl p-6 flex items-center justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group"
                             onClick={() => setSelectedCategory('monitors')}
                         >
@@ -219,7 +350,7 @@ export default function TechRetail() {
                         </div>
 
                         {/* Peripherals */}
-                        <div 
+                        <div ref={(el) => (categoryCardRefs.current[6] = el)}
                             className="bg-zinc-100 rounded-3xl p-6 flex flex-col justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group"
                             onClick={() => setSelectedCategory('peripherals')}
                         >
@@ -231,7 +362,7 @@ export default function TechRetail() {
                         </div>
 
                         {/* Printers */}
-                        <div 
+                        <div ref={(el) => (categoryCardRefs.current[7] = el)}
                             className="bg-linear-to-br from-purple-600 to-purple-800 rounded-3xl p-6 flex flex-col justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group"
                             onClick={() => setSelectedCategory('printers')}
                         >
