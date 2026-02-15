@@ -42,16 +42,8 @@ const TechRetailNavlinks = [
     link: "/"
   },
   {
-    name: "Shop",
-    link: "#shop"
-  },
-  {
-    name: "Categories",
-    link: "#categories"
-  },
-  {
-    name: "Deals",
-    link: "#deals"
+    name: "Products",
+    link: "#products"
   },
 ];
 
@@ -70,7 +62,7 @@ const techServices = [
     image: "/images/batman.png",
   },
   {
-    title: "Cloud Setup",
+    title: "CC TV Setup",
     price: "$89",
     description:"Seamless migrations to cloud solutions—secure, stable, and ready for growth.",
     image: "/images/knight.jpg",
