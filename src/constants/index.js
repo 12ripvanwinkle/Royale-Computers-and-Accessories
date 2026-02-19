@@ -8,11 +8,11 @@ const Main_navLinks = [
         link: "#services"
     },
     {
-        name: "Battle Cards",
+        name: "What Sets Us Apart",
         link: "#cards"
     },
     {
-        name: "Markets We Cover",
+        name: "What We Do Best",
         link: "#markets"
     },
     {
@@ -34,6 +34,14 @@ const techServicesNavlinks = [
     name: "Testimonials",
     link: "#testimonials"
   },
+  {
+    name: "Tech Retail",
+    link: "tech-retail"
+  },
+  {
+    name: "Tech Solutions",
+    link: "tech-solutions"
+  },
 ];
 
 const TechRetailNavlinks = [
@@ -45,14 +53,45 @@ const TechRetailNavlinks = [
     name: "Products",
     link: "#products"
   },
+  {
+    name: "Tech Services",
+    link: "tech-services"
+  },
+  {
+    name: "Tech Solutions",
+    link: "tech-solutions"
+  },
 ];
 
+const techSolutionsNavlinks = [
+  {
+    name: "Main Website",
+    link: "/"
+  },
+
+  {
+    name: "Solutions",
+    link: "#solutions"
+  },
+  {
+    name: "Testimonials",
+    link: "#testimonials"
+  },
+  {
+    name: "Tech Services",
+    link: "tech-services"
+  },
+  {
+    name: "Tech Retail",
+    link: "tech-retail"
+  },
+];
 
 const techServices = [
   {
     title: "Maintenance",
     price: "$99",
-    description: "Routine checkups and updates to keep your IT systems performing at their best.",
+    description: "Routine checkups and updates to keep your IT systems performing at their aest.",
     image: "/images/download.jpg",
   },
   {
@@ -76,23 +115,6 @@ const features = [
   { icon: Cloud, title: "Cloud Storage" },
   { icon: ShieldCheck, title: "Cyber Security" },
 ];
-
-const techSolutionsNavlinks = [
-  {
-    name: "Main Website",
-    link: "/"
-  },
-
-  {
-    name: "Solutions",
-    link: "#solutions"
-  },
-  {
-    name: "Testimonials",
-    link: "#testimonials"
-  },
-];
-
 const techSolutionsItems = [
   {
     title: "Cloud Integration",

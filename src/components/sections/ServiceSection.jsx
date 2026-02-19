@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { Link } from 'react-router-dom'
 import TitleHeader from '../TitleHeader';
+import Button from '../Button';
 
 
 // Register the ScrollTrigger plugin so GSAP can use scroll-based animations
@@ -70,38 +71,48 @@ const ShowcaseSection = () => {
             </div>
 
             <div className="showcaselayout mt-10">
-
-                {/* Left Side */}
+                {/* Main Feature - Technology Solutions */}
                 <div className="first-project-wrapper" ref={project1Ref}>
                     <div className="image-wrapper">
-                        <Link to="/tech-solutions"><img src="/images/placeholder-tech-solutions.jpg" alt="Technology Solutions" /></Link>
+                        <Link to="/tech-solutions">
+                            <img src="/images/placeholder-tech-solutions.jpg" alt="Technology Solutions" />
+                        </Link>
                     </div>
-
+                    
                     <div className="text-content">
                         <h2 className='text-orange-100'>Our Technology Solutions</h2>
-                        <p className='text-white-50 md:text-xl'>
-                            Reliable solutions. Honest service. Always.
-                        </p>
+                        <p>Reliable solutions. Honest service. Always.</p>
+                        <Link to="/tech-solutions">
+                            <Button id="button" text="Discover More" />
+                        </Link>
                     </div>
                 </div>
 
-                {/* Right Side */}
-                <div className="project-list-wrapper overflow-hidden">
-
+                {/* Side Cards */}
+                <div className="project-list-wrapper">
                     <div className="project" ref={project2Ref}>
-                        <div className="image-wrapper bg-[#ffefdb]">
-                            <Link to="/tech-services"><img src="/images/placeholder-tech-services.jpg" alt="Technology Services" /></Link>
+                        <div className="image-wrapper">
+                            <Link to="/tech-services">
+                                <img src="/images/placeholder-tech-services.jpg" alt="Technology Services" />
+                            </Link>
                         </div>
                         <h2 className='text-orange-100'>Our Technology Services</h2>
+                        <Link to="/tech-services">
+                            <Button id="button" text="Discover More"  className="mt-7"/>
+                        </Link>
                     </div>
 
                     <div className="project" ref={project3Ref}>
-                        <div className="image-wrapper bg-[#ffe7eb]">
-                            <Link to="/tech-retail"><img src="/images/placeholder-tech-retail.jpg" alt="Technology Retail" /></Link>
+                        <div className="image-wrapper">
+                            <Link to="/tech-retail">
+                                <img src="/images/placeholder-tech-retail.jpg" alt="Technology Retail" />
+                            </Link>
                         </div>
                         <h2 className='text-orange-100'>Our Technology Retail</h2>
+                        <Link to="/tech-retail">
+                            <Button id="button" text="Discover More"  className="mt-7"/>
+                        </Link>
                     </div>
-
                 </div>
             </div>
         </div>

@@ -59,13 +59,21 @@ const Hero = () => {
         >
           The Future in Technology Solutions in the Caribbean
         </p>
-
-        <Button
-          ref={buttonRef}
-          className="w-full sm:w-72 md:w-80 lg:w-90 h-12 md:h-16 mt-6 md:mt-10"
-          id="button"
-          text="Explore Our Services"
-        />
+        <div className="flex justify-start mt-10">
+            <Button
+            ref={buttonRef}
+            id="button"
+            text="Browse Products"
+            onClick={() => {
+                // Your click handler
+                const target = document.getElementById('services');
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            }}
+          />
+        </div>
+        
       </header>
     </div>
   </div>

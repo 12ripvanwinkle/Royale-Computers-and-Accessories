@@ -97,7 +97,6 @@ export default function TechRetail() {
     const categoryCardRefs = useRef([])
     const headerTitleRef = useRef(null)
     const headerTextRef = useRef(null)
-    const headerButtonRef = useRef(null)
 
     useGSAP(() => {
 
@@ -137,23 +136,6 @@ export default function TechRetail() {
     )
 
     // Header button animation (with more delay)
-    gsap.fromTo(
-        headerButtonRef.current,
-        { y: 40, opacity: 0, scale: 0.95 },
-        {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            delay: 0.4,
-            ease: "back.out(1.7)",
-            scrollTrigger: {
-                trigger: headerTitleRef.current,
-                start: "top 80%",
-                toggleActions: "play none none none",
-            },
-        }
-    )
         // Header animation
         gsap.fromTo(
             headerRef.current,
@@ -241,16 +223,13 @@ export default function TechRetail() {
                         <p ref={headerTextRef} className="text-xl text-white/60 max-w-2xl mx-auto mb-12">
                             Everything you need. Nothing you don't.
                         </p>
-
-                        <button ref={headerButtonRef} className="px-8 py-4 bg-white text-black font-medium text-lg hover:bg-orange-100 transition">
-                            Browse Products
-                        </button>
+                        <img src="/images/navii.jpg" alt="Tech solutions" className="w-full h-full object-cover transition-transform duration-700 rounded-xl ease-out hover:scale-105"/>
                     </div>
                 </div>
             </div>
 
             {/* Category Selection - Bento Grid */}
-            <div className="py-20 px-4 sm:px-6 lg:px-8">
+            <div className="py-20 px-4 sm:px-6 lg:px-8 mt-40">
                 <div className="max-w-7xl mx-auto">
                     <h2 ref={categoryHeaderRef} className="text-4xl font-bold mb-12">Shop By Category</h2>
 
