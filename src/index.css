@@ -30,6 +30,10 @@ section {
   --color-blue-100: #2d2d38;
 }
 
+@utility group {
+  @apply relative;
+}
+
 @layer utilities {
   .flex-center {
     @apply flex justify-center items-center;

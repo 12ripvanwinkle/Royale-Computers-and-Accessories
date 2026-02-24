@@ -208,7 +208,7 @@ export default function About() {
                         
                         {/* Bottom Left Content - Our approach */}
                         <div 
-                            className={`about-card md:col-span-2 md:row-span-1 group relative overflow-hidden rounded-3xl bg-neutral-800 border border-neutral-700 transition-all duration-500 ease-out hover:border-neutral-600 ${
+                            className={`about-card md:col-span-2 md:row-span-1 group overflow-hidden rounded-3xl bg-neutral-800 border border-neutral-700 transition-all duration-500 ease-out hover:border-neutral-600 ${
                             hoveredIndex === 5 ? 'scale-[1.02]' : 'scale-100'}`}
                             onMouseEnter={() => setHoveredIndex(5)}
                             onMouseLeave={() => setHoveredIndex(null)}
@@ -231,7 +231,7 @@ export default function About() {
 
                         {/* Bottom Right Content - Get Started */}
                         <div
-                            className={`md:col-span-2 md:row-span-1 group relative overflow-hidden rounded-3xl bg-linear-to-br from-orange-600 to-red-600 transition-all duration-500 ease-out cursor-pointer ${
+                            className={`about-card md:col-span-2 md:row-span-1 group overflow-hidden rounded-3xl bg-linear-to-br from-orange-600 to-red-600 transition-all duration-500 ease-out cursor-pointer ${
                             hoveredIndex === 6 ? 'scale-[1.02] shadow-2xl shadow-orange-500/20' : 'scale-100'}`}
                             onMouseEnter={() => setHoveredIndex(6)}
                             onMouseLeave={() => setHoveredIndex(null)}

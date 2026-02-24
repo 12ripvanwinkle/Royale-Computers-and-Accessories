@@ -60,7 +60,7 @@ const Markets = () => {
                   {items.map((item, index) => (
                     <div
                       key={item.id}
-                      className={`bento-card ${item.span} group relative overflow-hidden rounded-3xl bg-neutral-800 border border-neutral-700 transition-all duration-500 ease-out hover:border-neutral-600 ${
+                      className={`bento-card ${item.span} group overflow-hidden rounded-3xl bg-neutral-800 border border-neutral-700 transition-all duration-500 ease-out hover:border-neutral-600 ${
                         hoveredIndex === index ? 'scale-[1.02]' : 'scale-100'
                       }`}
                       onMouseEnter={() => setHoveredIndex(index)}
