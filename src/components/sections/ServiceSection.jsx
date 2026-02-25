@@ -15,96 +15,91 @@ const ShowcaseSection = () => {
     const project3Ref = useRef(null);
 
     useGSAP(() => {
-        // Set initial states immediately (no flash)
-        gsap.set([project1Ref.current, project2Ref.current, project3Ref.current], {
-            opacity: 0,
-            x: 0,
-            y: 30
+        const projects = [project1Ref.current, project2Ref.current, project3Ref.current];
+
+        projects.forEach((card, index) => {
+            gsap.fromTo(
+                card,
+                {
+                    y: 50,
+                    opacity: 0,
+                },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    delay: 0.3 * (index + 1),
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top bottom-=100',
+                    }
+                }
+            );
         });
 
-        // Animate one by one with small intervals using stagger
-        gsap.to(
-            [project1Ref.current, project2Ref.current, project3Ref.current],
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                ease: "power2.out",
-                stagger: 0.15, // 150ms between each card
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: 'top 75%',
-                    toggleActions: "play none none none"
-                }
-            }
-        );
-
-        // Section fade
         gsap.fromTo(
             sectionRef.current,
             { opacity: 0 },
-            { opacity: 1, duration: 0.4 }
+            { opacity: 1, duration: 1.5 }
         );
-
     }, []);
 
-  return (
-    <section id='services' ref={sectionRef} className='app-showcase'>
-        <div className="w-full">
-            
-            <div className="flex items-center justify-center gap-2 md:gap-4">
-                <TitleHeader title="RCA" className="text-orange-100"/> 
-                <TitleHeader title="Solutions"/>
-            </div>
+    return (
+        <section id='services' ref={sectionRef} className='app-showcase'>
+            <div className="w-full">
 
-            <div className="showcaselayout mt-10">
-                {/* Main Feature - Technology Solutions */}
-                <div className="first-project-wrapper" ref={project1Ref}>
-                    <div className="image-wrapper">
-                        <Link to="/tech-solutions">
-                            <img src="/images/placeholder-tech-solutions.jpg" alt="Technology Solutions" />
-                        </Link>
-                    </div>
-                    
-                    <div className="text-content">
-                        <h2 className='text-orange-100'>Our Technology Solutions</h2>
-                        <p>Reliable solutions. Honest service. Always.</p>
-                        <Link to="/tech-solutions">
-                            <Button id="button" text="Discover More" />
-                        </Link>
-                    </div>
+                <div className="flex items-center justify-center gap-2 md:gap-4">
+                    <TitleHeader title="RCA" className="text-orange-100"/>
+                    <TitleHeader title="Solutions"/>
                 </div>
 
-                {/* Side Cards */}
-                <div className="project-list-wrapper">
-                    <div className="project" ref={project2Ref}>
+                <div className="showcaselayout mt-10">
+                    {/* Main Feature - Technology Solutions */}
+                    <div className="first-project-wrapper" ref={project1Ref}>
                         <div className="image-wrapper">
+                            <Link to="/tech-solutions">
+                                <img src="/images/placeholder-tech-solutions.jpg" alt="Technology Solutions" />
+                            </Link>
+                        </div>
+                        <div className="text-content">
+                            <h2 className='text-orange-100'>Our Technology Solutions</h2>
+                            <p className='text-white-50 md:text-xl'>Reliable solutions. Honest service. Always.</p>
+                            <Link to="/tech-solutions">
+                                <Button id="button" text="Discover More" />
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* Side Cards */}
+                    <div className="project-list-wrapper overflow-hidden">
+                        <div className="project" ref={project2Ref}>
+                            <div className="image-wrapper bg-[#ffefdb]">
+                                <Link to="/tech-services">
+                                    <img src="/images/placeholder-tech-services.jpg" alt="Technology Services" />
+                                </Link>
+                            </div>
+                            <h2 className='text-orange-100'>Our Technology Services</h2>
                             <Link to="/tech-services">
-                                <img src="/images/placeholder-tech-services.jpg" alt="Technology Services" />
+                                <Button id="button" text="Discover More" className="mt-7"/>
                             </Link>
                         </div>
-                        <h2 className='text-orange-100'>Our Technology Services</h2>
-                        <Link to="/tech-services">
-                            <Button id="button" text="Discover More" className="mt-7"/>
-                        </Link>
-                    </div>
 
-                    <div className="project" ref={project3Ref}>
-                        <div className="image-wrapper">
+                        <div className="project" ref={project3Ref}>
+                            <div className="image-wrapper bg-[#ffe7eb]">
+                                <Link to="/tech-retail">
+                                    <img src="/images/placeholder-tech-retail.jpg" alt="Technology Retail" />
+                                </Link>
+                            </div>
+                            <h2 className='text-orange-100'>Our Technology Retail</h2>
                             <Link to="/tech-retail">
-                                <img src="/images/placeholder-tech-retail.jpg" alt="Technology Retail" />
+                                <Button id="button" text="Discover More" className="mt-7"/>
                             </Link>
                         </div>
-                        <h2 className='text-orange-100'>Our Technology Retail</h2>
-                        <Link to="/tech-retail">
-                            <Button id="button" text="Discover More" className="mt-7"/>
-                        </Link>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-  )
+        </section>
+    )
 }
 
 export default ShowcaseSection

@@ -213,7 +213,7 @@ const TechRetail = () => {
 
                         {/* Deals Square - Large Featured (2x2) */}
                         <div ref={(el) => (categoryCardRefs.current[0] = el)}
-                            className="md:col-span-2 md:row-span-2 bg-linear-to-br from-purple-600 to-purple-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group relative overflow-hidden"
+                            className="md:col-span-2 md:row-span-2 bg-linear-to-br from-purple-600 to-purple-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group overflow-hidden"
                             onClick={() => setSelectedCategory('deals')}
                         >
                             <div className="absolute top-4 right-4 w-12 h-12 bg-purple-400/30 rounded-full blur-2xl"></div>

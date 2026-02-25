@@ -30,7 +30,7 @@ const Hero = () => {
       buttonRef.current,          // use the ref here
       { y: 20, opacity: 0, scale: 0.95 },
       { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' },
-      '-=0.3'
+      '-=0.8'
     );
   }, { scope: heroRef });
 
@@ -61,17 +61,17 @@ const Hero = () => {
         </p>
         <div className="flex justify-start mt-10">
             <Button
-            ref={buttonRef}
-            id="button"
-            text="Browse Products"
-            onClick={() => {
-                // Your click handler
-                const target = document.getElementById('services');
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            }}
-          />
+              ref={buttonRef}
+              id="button"
+              text="Browse Products"
+              onClick={() => {
+                  // Your click handler
+                  const target = document.getElementById('services');
+                  if (target) {
+                      target.scrollIntoView({ behavior: 'smooth' });
+                  }
+              }}
+            />
         </div>
         
       </header>
