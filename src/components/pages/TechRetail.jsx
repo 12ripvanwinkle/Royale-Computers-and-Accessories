@@ -21,7 +21,67 @@ const TechRetail = () => {
         core: true,
         categorySpecific: true
     });
+
+
     const categoryCardRefs = useRef([]);
+    const sectionRef = useRef(null);
+    const headerRef = useRef(null);
+    const imageRef = useRef(null);
+
+    useGSAP(() => {
+        // Header text slides in from left
+        gsap.fromTo(
+            headerRef.current,
+            { y: 60, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: headerRef.current,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none',
+                }
+            }
+        );
+
+        // Hero image slides in from right
+        gsap.fromTo(
+            imageRef.current,
+            { opacity: 0 },
+            {
+                opacity: 1,
+                duration: 1,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: imageRef.current,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none',
+                }
+            }
+        );
+
+        // Cards alternate left and right
+        categoryCardRefs.current.forEach((card, index) => {
+            gsap.fromTo(
+                card,
+                { y: 60, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    delay: index * 0.1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none',
+                    }
+                }
+            );
+        });
+    }, { scope: sectionRef });
 
     // Core filter states
     const [filters, setFilters] = useState({
@@ -185,21 +245,27 @@ const TechRetail = () => {
     };
 
   return (
-    <section id='tech-retail' className='mt-70'>
+    <section id='tech-retail' className='mt-70' ref={sectionRef}>
 
         <div className="min-h-screen">
             {/* Header Section */}
             <div className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
 
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center">
+                <div className="max-w-7xl mx-auto overflow-hidden">
+                    <div className="text-center" ref={headerRef}>
                         <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tight mb-6">
                             Premium Tech.
                         </h1>
                         <p className="text-xl text-white/60 max-w-2xl mx-auto mb-1">
                             Everything You Need. Nothing You Don't.
                         </p>
-                        <img src="/images/navii.jpg" alt="Tech solutions" className="w-full h-full object-cover mt-12 transition-transform duration-700 rounded-xl ease-out hover:scale-105"/>
+                        <div ref={imageRef} className='w-full max-w-350 mx-auto sm:mt-10 h-55 sm:h-75 md:h-100 lg:h-170 bg-zinc-950
+                      rounded-2xl sm:rounded-3xl
+                      flex items-center justify-center
+                      relative overflow-hidden
+                      border border-white/5'>
+                            <img  src="/images/navii.jpg" alt="Tech solutions" className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-105"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -211,119 +277,125 @@ const TechRetail = () => {
                     {/* Bento Grid Insert */}
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[200px]">
 
-                        {/* Deals Square - Large Featured (2x2) */}
+                        {/* Deals Card */}
                         <div ref={(el) => (categoryCardRefs.current[0] = el)}
-                            className="md:col-span-2 md:row-span-2 bg-linear-to-br from-purple-600 to-purple-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group overflow-hidden"
+                            className="md:col-span-2 md:row-span-2 rounded-3xl cursor-pointer"
                             onClick={() => setSelectedCategory('deals')}
                         >
-                            <div className="absolute top-4 right-4 w-12 h-12 bg-purple-400/30 rounded-full blur-2xl"></div>
-                            
-                            <div className="">
-                                <div className="text-5xl sm:text-6xl mb-4 sm:mb-6 transform transition-all duration-500 group-hover:rotate-7">
-                                    🔥
+                            <div className="w-full h-full bg-linear-to-br from-purple-600 to-purple-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-0 group overflow-hidden hover:scale-[1.02] transition-[scale] duration-300">
+                                <div className="absolute top-4 right-4 w-12 h-12 bg-purple-400/30 rounded-full blur-2xl"></div>
+                                <div>
+                                    <div className="text-5xl sm:text-6xl mb-4 sm:mb-6 transition-transform duration-500 group-hover:rotate-7">🔥</div>
+                                    <h3 className="text-3xl sm:text-4xl font-bold mb-2">Deals/Sales</h3>
+                                    <p className="text-white/80 text-base sm:text-lg">Cant Miss Offers</p>
                                 </div>
-                                <h3 className="text-3xl sm:text-4xl font-bold mb-2">Deals/Sales</h3>
-                                <p className="text-white/80 text-base sm:text-lg">Cant Miss Offers</p>
-                            </div>
-                            
-                            <div className="flex items-center justify-between gap-2 mt-4">
-                                <span className="text-white font-semibold text-sm sm:text-base shrink-0">
-                                    {getAllDeals().length} Items
-                                </span>
-                                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-white/40 rounded-full flex items-center justify-center 
-                                                group-hover:bg-white/40 transition-all duration-300 group-hover:translate-x-1 
-                                                shrink-0 ml-auto -mt-4 sm:mt-0">
-                                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" strokeWidth={2.5} />
+                                <div className="flex items-center justify-between gap-2 mt-4">
+                                    <span className="text-white font-semibold text-sm sm:text-base shrink-0">{getAllDeals().length} Items</span>
+                                    <div className="w-9 h-9 sm:w-10 sm:h-10 bg-white/40 rounded-full flex items-center justify-center shrink-0 ml-auto -mt-4 sm:mt-0 transition-transform duration-300 group-hover:translate-x-1">
+                                        <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" strokeWidth={2.5} />
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Phones Square - (1x1) */}
+                        {/* Phones */}
                         <div ref={(el) => (categoryCardRefs.current[1] = el)}
-                            className="bg-zinc-100 rounded-3xl p-6 flex flex-col justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group"
+                            className="rounded-3xl cursor-pointer"
                             onClick={() => setSelectedCategory('phones')}
                         >
-                            <div className="text-5xl mb-6 transform transition-all duration-500 group-hover:rotate-6">📱</div>
-                            <div>
-                                <h3 className="text-xl font-bold text-zinc-900">Phones</h3>
-                                <p className="text-zinc-600 text-sm">30 models</p>
+                            <div className="w-full h-full bg-zinc-100 rounded-3xl p-6 flex flex-col justify-between group hover:scale-[1.02] transition-[scale] duration-300">
+                                <div className="text-5xl mb-6 transition-transform duration-500 group-hover:rotate-6">📱</div>
+                                <div>
+                                    <h3 className="text-xl font-bold text-zinc-900">Phones</h3>
+                                    <p className="text-zinc-600 text-sm">30 models</p>
+                                </div>
                             </div>
                         </div>
 
                         {/* Computers */}
                         <div ref={(el) => (categoryCardRefs.current[2] = el)}
-                            className="bg-zinc-100 rounded-3xl p-6 flex flex-col justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group"
+                            className="rounded-3xl cursor-pointer"
                             onClick={() => setSelectedCategory('computers')}
                         >
-                            <div className="text-5xl mb-6 transform transition-all duration-500 group-hover:rotate-6">💻</div>
-                            <div>
-                                <h3 className="text-xl font-bold text-zinc-900">Computers</h3>
-                                <p className="text-zinc-600 text-sm">30 models</p>
+                            <div className="w-full h-full bg-zinc-100 rounded-3xl p-6 flex flex-col justify-between group hover:scale-[1.02] transition-[scale] duration-300">
+                                <div className="text-5xl mb-6 transition-transform duration-500 group-hover:rotate-6">💻</div>
+                                <div>
+                                    <h3 className="text-xl font-bold text-zinc-900">Computers</h3>
+                                    <p className="text-zinc-600 text-sm">30 models</p>
+                                </div>
                             </div>
                         </div>
 
                         {/* Tablets */}
                         <div ref={(el) => (categoryCardRefs.current[3] = el)}
-                            className="bg-linear-to-br from-purple-600 to-purple-800 rounded-3xl p-6 flex flex-col justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group"
+                            className="rounded-3xl cursor-pointer"
                             onClick={() => setSelectedCategory('tablets')}
                         >
-                            <div className="text-5xl mb-6 transform transition-all duration-500 group-hover:rotate-6">📱</div>
-                            <div>
-                                <h3 className="text-xl font-bold">Tablets</h3>
-                                <p className="text-white/80 text-sm">30 models</p>
+                            <div className="w-full h-full bg-linear-to-br from-purple-600 to-purple-800 rounded-3xl p-6 flex flex-col justify-between group hover:scale-[1.02] transition-[scale] duration-300">
+                                <div className="text-5xl mb-6 transition-transform duration-500 group-hover:rotate-6">📱</div>
+                                <div>
+                                    <h3 className="text-xl font-bold">Tablets</h3>
+                                    <p className="text-white/80 text-sm">30 models</p>
+                                </div>
                             </div>
                         </div>
 
-                        {/* Tvs */}
+                        {/* TVs */}
                         <div ref={(el) => (categoryCardRefs.current[4] = el)}
-                            className="bg-linear-to-br from-purple-600 to-purple-800 rounded-3xl p-6 flex flex-col justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group"
+                            className="rounded-3xl cursor-pointer"
                             onClick={() => setSelectedCategory('tvs')}
                         >
-                            <div className="text-5xl mb-6 transform transition-all duration-500 group-hover:rotate-6">📺</div>
-                            <div>
-                                <h3 className="text-xl font-bold">TVs</h3>
-                                <p className="text-white/80 text-sm">30 models</p>
+                            <div className="w-full h-full bg-linear-to-br from-purple-600 to-purple-800 rounded-3xl p-6 flex flex-col justify-between group hover:scale-[1.02] transition-[scale] duration-300">
+                                <div className="text-5xl mb-6 transition-transform duration-500 group-hover:rotate-6">📺</div>
+                                <div>
+                                    <h3 className="text-xl font-bold">TVs</h3>
+                                    <p className="text-white/80 text-sm">30 models</p>
+                                </div>
                             </div>
                         </div>
 
                         {/* Monitors */}
                         <div ref={(el) => (categoryCardRefs.current[5] = el)}
-                            className="md:col-span-2 bg-zinc-100 rounded-3xl p-6 flex items-center justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group"
+                            className="md:col-span-2 rounded-3xl cursor-pointer"
                             onClick={() => setSelectedCategory('monitors')}
                         >
-                            <div>
-                                <div className="text-5xl mb-3 transform transition-all duration-500 group-hover:rotate-6">🖥️</div>
-                                <h3 className='text-2xl font-bold text-zinc-900'>Monitors</h3>
-                                <p className="text-zinc-600 text-sm">High Performance Displays</p>
-                            </div>
-                            <div className="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center 
-                                            group-hover:bg-purple-500 transition-all duration-300 
-                                            group-hover:translate-x-1">
-                                <ArrowRight className="w-5 h-5 text-white" strokeWidth={2.5} />
+                            <div className="w-full h-full bg-zinc-100 rounded-3xl p-6 flex items-center justify-between group hover:scale-[1.02] transition-[scale] duration-300">
+                                <div>
+                                    <div className="text-5xl mb-3 transition-transform duration-500 group-hover:rotate-6">🖥️</div>
+                                    <h3 className='text-2xl font-bold text-zinc-900'>Monitors</h3>
+                                    <p className="text-zinc-600 text-sm">High Performance Displays</p>
+                                </div>
+                                <div className="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 group-hover:bg-purple-500">
+                                    <ArrowRight className="w-5 h-5 text-white" strokeWidth={2.5} />
+                                </div>
                             </div>
                         </div>
 
                         {/* Peripherals */}
                         <div ref={(el) => (categoryCardRefs.current[6] = el)}
-                            className="bg-zinc-100 rounded-3xl p-6 flex flex-col justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group"
+                            className="rounded-3xl cursor-pointer"
                             onClick={() => setSelectedCategory('peripherals')}
                         >
-                            <div className='text-5xl mb-6 transform transition-all duration-500 group-hover:rotate-6'>⌨️</div>
-                            <div>
-                                <h3 className="text-xl font-bold text-zinc-900">Peripherals</h3>
-                                <p className="text-zinc-600 text-sm">30 items</p>
+                            <div className="w-full h-full bg-zinc-100 rounded-3xl p-6 flex flex-col justify-between group hover:scale-[1.02] transition-[scale] duration-300">
+                                <div className='text-5xl mb-6 transition-transform duration-500 group-hover:rotate-6'>⌨️</div>
+                                <div>
+                                    <h3 className="text-xl font-bold text-zinc-900">Peripherals</h3>
+                                    <p className="text-zinc-600 text-sm">30 items</p>
+                                </div>
                             </div>
                         </div>
 
                         {/* Printers */}
                         <div ref={(el) => (categoryCardRefs.current[7] = el)}
-                            className="bg-linear-to-br from-purple-600 to-purple-800 rounded-3xl p-6 flex flex-col justify-between border-0 hover:scale-[1.02] transition-all cursor-pointer group"
+                            className="rounded-3xl cursor-pointer"
                             onClick={() => setSelectedCategory('printers')}
                         >
-                            <div className='text-5xl mb-6 transform transition-all duration-500 group-hover:rotate-6'>🖨️</div>
-                            <div>
-                                <h3 className='text-xl font-bold'>Printers</h3>
-                                <p className='text-white/80 text-sm'>30 models</p>
+                            <div className="w-full h-full bg-linear-to-br from-purple-600 to-purple-800 rounded-3xl p-6 flex flex-col justify-between group hover:scale-[1.02] transition-[scale] duration-300">
+                                <div className='text-5xl mb-6 transition-transform duration-500 group-hover:rotate-6'>🖨️</div>
+                                <div>
+                                    <h3 className='text-xl font-bold'>Printers</h3>
+                                    <p className='text-white/80 text-sm'>30 models</p>
+                                </div>
                             </div>
                         </div>
                     </div>
