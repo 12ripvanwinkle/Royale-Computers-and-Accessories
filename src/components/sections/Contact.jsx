@@ -68,7 +68,7 @@ export default function Contact () {
     return (
         <section id="contact" ref={sectionRef}>
 
-            <div className="min-h-screen bg-linear-to-b from-[#050a30]  py-20 px-6 md:px-12">
+            <div className="min-h-screen bg-linear-to-b py-20 px-6 md:px-12">
                 <div className="max-w-7xl mx-auto">
 
                     {/* Header Section */}

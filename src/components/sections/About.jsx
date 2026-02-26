@@ -54,7 +54,7 @@ export default function About() {
     
     return (
         <section id="about" ref={aboutRef}>
-            <div className="min-h-screen bg-[#050a30] p-6 md:p-12">
+            <div className="min-h-screen p-6 md:p-12">
                 <div className="max-w-7xl mx-auto">
                     {/* Header */}
                     <div className="mb-12 text-center about-header">

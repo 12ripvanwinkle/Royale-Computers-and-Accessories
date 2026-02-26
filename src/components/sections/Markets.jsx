@@ -34,7 +34,7 @@ const Markets = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   
   return (
-    <section ref={sectionRef}id='markets' className='bg-[#050a30] mt-40'>
+    <section ref={sectionRef}id='markets' className=' mt-40'>
 
         <div className="min-h-screen  p-6 md:p-12">
 

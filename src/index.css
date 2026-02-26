@@ -7,12 +7,118 @@
 
 html,
 body {
-  width: 100dvw;
+  width: 100%;
   overflow-x: hidden;
-  background-color: #050a30;
+  background: linear-gradient(180deg, #2a4d6e 0%, #1a3852 50%, #0a2338 100%);
   color: white;
   scroll-behavior: smooth;
   font-family: "Playfair Display", serif;
+  position: relative;
+  
+  /* More visible dot pattern */
+  /* background-image: 
+    radial-gradient(circle, rgba(255, 255, 255, 0.15) 2px, transparent 2px),
+    linear-gradient(180deg, #2a4d6e 0%, #1a3852 50%, #0a2338 100%);
+  background-size: 50px 50px, 100% 100%; */
+
+  /* Video background container */
+  .video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .video-background video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    opacity: 0.3; /* Adjust this to make video more/less visible */
+    object-fit: cover;
+  }
+
+  /* Overlay to blend video with your gradient */
+  .video-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(42, 77, 110, 0.7) 0%, rgba(26, 56, 82, 0.8) 50%, rgba(10, 35, 56, 0.9) 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Ensure app content is above video */
+  .app-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Hide video on mobile for better performance */
+  @media (max-width: 768px) {
+    .video-background video {
+      display: none;
+    }
+  }
+}
+
+/* Larger, more visible floating orbs */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  opacity: 0.3;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::before {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(74, 144, 226, 0.8) 0%, transparent 70%);
+  top: -200px;
+  right: -200px;
+  animation: float1 20s ease-in-out infinite;
+}
+
+body::after {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(99, 179, 237, 0.6) 0%, transparent 70%);
+  bottom: -150px;
+  left: -150px;
+  animation: float2 25s ease-in-out infinite;
+}
+
+@keyframes float1 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-100px, 100px);
+  }
+}
+
+@keyframes float2 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(100px, -100px);
+  }
 }
 
 section {
