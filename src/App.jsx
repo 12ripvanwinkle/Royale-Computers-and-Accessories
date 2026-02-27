@@ -11,6 +11,7 @@ import Holder from './components/sections/Footer'
 import TechSolutions from './components/pages/TechSolutions'
 import TechServices from './components/pages/TechServices'
 import TechRetail from './components/pages/TechRetail'
+import SupabaseTest from './components/SupabaseTest'
 
 // Create a HomePage component that holds all your sections
 const HomePage = () => (
@@ -45,6 +46,7 @@ const App = () => {
           <Route path="/tech-solutions" element={<TechSolutions />} />
           <Route path="/tech-services" element={<TechServices />} />
           <Route path="/tech-retail" element={<TechRetail />} />
+          <Route path="/test-supabase" element={<SupabaseTest />} />
         </Routes>
       </div>
     </BrowserRouter>

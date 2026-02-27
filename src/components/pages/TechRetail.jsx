@@ -1,11 +1,11 @@
-import React, { useState, useRef, useMemo } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { ArrowRight, X, SlidersHorizontal, Search, ChevronDown, ChevronUp, ContactIcon } from 'lucide-react'
 
-import { productCategory, techRetailCategories, categoryFilters } from '../../constants'
-import { div, label, select } from 'three/tsl'
+import { supabase } from '../../lib/supabase'
+import { techRetailCategories, categoryFilters } from '../../constants'
 import Contact from '../sections/Contact'
 import Footer from '../sections/Footer'
 
@@ -16,6 +16,66 @@ const TechRetail = () => {
 
     const [selectedCategory, setSelectedCategory] = useState('deals');
     const [viewMode, setViewMode] = useState('grid');
+    
+    // ADD THESE NEW LINES:
+    const [products, setProducts] = useState({})
+    const [loading, setLoading] = useState(true)
+    const [dbError, setDbError] = useState(null)
+
+    // Fetch products from Supabase
+    useEffect(() => {
+        fetchProducts()
+    }, [])
+
+    const fetchProducts = async () => {
+        try {
+            setLoading(true)
+            setDbError(null)
+            
+            const { data, error } = await supabase
+                .from('products')
+                .select('*')
+            
+            if (error) throw error
+
+            // Organize by category
+            const organized = {}
+
+            data.forEach(product => {
+                const categoryKey = product.category?.toLowerCase().trim()
+
+                if (!organized[categoryKey]) {
+                    organized[categoryKey] = []
+                }
+
+                organized[categoryKey].push({
+                    id: product.id,
+                    name: product.name,
+                    brand: product.brand,
+                    price: product.price,
+                    originalPrice: product.original_price,
+                    onSale: product.on_sale,
+                    inStock: product.in_stock,
+                    preOrder: product.pre_order,
+                    rating: product.rating,
+                    warranty: product.warranty,
+                    image: product.image,
+                    bestSelling: product.best_selling,
+                    newArrival: product.new_arrival,
+                })
+            })
+            
+            setProducts(organized)
+            console.log('✅ Loaded products from Supabase:', organized)
+        } catch (error) {
+            console.error('❌ Error fetching products:', error)
+            setDbError(error.message)
+            setProducts({}) // Empty products on error
+        } finally {
+            setLoading(false)
+        }
+    }
+    
     const [showFilters, setShowFilters] = useState(false);
     const [expandedFilters, setExpandedFilters] = useState({
         core: true,
@@ -115,19 +175,21 @@ const TechRetail = () => {
     // Get all products
     const getAllDeals = () => {
         const allDeals = [];
-        Object.keys(productCategory).forEach(categoryKey => {
-            const categoryDeals = productCategory[categoryKey].filter(product => product.onSale);
-            allDeals.push(...categoryDeals);
+        Object.keys(products).forEach(categoryKey => {
+            if (products[categoryKey]) {
+                const categoryDeals = products[categoryKey].filter(product => product.onSale);
+                allDeals.push(...categoryDeals);
+            }
         });
         return allDeals;
     };
 
     // Get unique values for filters
     const getUniqueValues = (key) => {
-        const products = selectedCategory === 'deals' ? getAllDeals() : productCategory[selectedCategory];
-        if (!products) return [];
+        const productList = selectedCategory === 'deals' ? getAllDeals() : products[selectedCategory];
+        if (!productList) return [];
         
-        const values = products.map(p => p[key]).filter(Boolean);
+        const values = productList.map(p => p[key]).filter(Boolean);
         if (Array.isArray(values[0])) {
             return [...new Set(values.flat())].sort();
         }
@@ -136,18 +198,18 @@ const TechRetail = () => {
 
     // Apply all filters and sorting
     const getFilteredProducts = useMemo(() => {
-        let products = selectedCategory === 'deals' ? getAllDeals() : productCategory[selectedCategory] || [];
+        let productList = selectedCategory === 'deals' ? getAllDeals() : products[selectedCategory] || [];
         
         // Search filter
         if (filters.search) {
-            products = products.filter(p => 
+            productList = productList.filter(p => 
                 p.name.toLowerCase().includes(filters.search.toLowerCase())
             );
         }
         
         // Brand filter
         if (filters.brands.length > 0) {
-            products = products.filter(p => filters.brands.includes(p.brand));
+            productList = productList.filter(p => filters.brands.includes(p.brand));
         }
         
         // Price filter
@@ -158,19 +220,19 @@ const TechRetail = () => {
                 '500+': [500, Infinity]
             };
             const [min, max] = ranges[filters.pricePreset] || [0, Infinity];
-            products = products.filter(p => p.price >= min && p.price <= max);
+            productList = productList.filter(p => p.price >= min && p.price <= max);
         } else {
-            products = products.filter(p => p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1]);
+            productList = productList.filter(p => p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1]);
         }
         
         // Rating filter
         if (filters.rating > 0) {
-            products = products.filter(p => p.rating >= filters.rating);
+            productList = productList.filter(p => p.rating >= filters.rating);
         }
         
         // Availability filter
         if (filters.availability.length > 0) {
-            products = products.filter(p => {
+            productList = productList.filter(p => {
                 if (filters.availability.includes('inStock') && p.inStock) return true;
                 if (filters.availability.includes('preOrder') && p.preOrder) return true;
                 if (filters.availability.includes('onSale') && p.onSale) return true;
@@ -180,13 +242,13 @@ const TechRetail = () => {
         
         // Warranty filter
         if (filters.warranty.length > 0) {
-            products = products.filter(p => filters.warranty.includes(p.warranty));
+            productList = productList.filter(p => filters.warranty.includes(p.warranty));
         }
         
         // Category-specific filters
         Object.entries(filters.categoryFilters).forEach(([key, values]) => {
             if (values && values.length > 0) {
-                products = products.filter(p => {
+                productList = productList.filter(p => {
                     if (Array.isArray(p[key])) {
                         return values.some(v => p[key].includes(v));
                     }
@@ -198,26 +260,26 @@ const TechRetail = () => {
         // Sorting
         switch (filters.sortBy) {
             case 'priceLowHigh':
-                products.sort((a, b) => a.price - b.price);
+                productList.sort((a, b) => a.price - b.price);
                 break;
             case 'priceHighLow':
-                products.sort((a, b) => b.price - a.price);
+                productList.sort((a, b) => b.price - a.price);
                 break;
             case 'bestSelling':
-                products.sort((a, b) => (b.bestSelling ? 1 : 0) - (a.bestSelling ? 1 : 0));
+                productList.sort((a, b) => (b.bestSelling ? 1 : 0) - (a.bestSelling ? 1 : 0));
                 break;
             case 'newArrivals':
-                products.sort((a, b) => (b.newArrival ? 1 : 0) - (a.newArrival ? 1 : 0));
+                productList.sort((a, b) => (b.newArrival ? 1 : 0) - (a.newArrival ? 1 : 0));
                 break;
             case 'rating':
-                products.sort((a, b) => b.rating - a.rating);
+                productList.sort((a, b) => b.rating - a.rating);
                 break;
             default:
                 break;
         }
         
-        return products;
-    }, [selectedCategory, filters]);
+        return productList;
+    }, [selectedCategory, filters, products]);
 
     // Toggle functions
     const toggleArrayFilter = (filterKey, value) => {
@@ -243,6 +305,31 @@ const TechRetail = () => {
             };
         });
     };
+
+    // Add loading check BEFORE the main return
+    if (loading) {
+        return (
+        <section className="min-h-screen flex items-center justify-center">
+            <div className="text-center">
+            <div className="text-6xl mb-4">⏳</div>
+            <p className="text-2xl">Loading products...</p>
+            </div>
+        </section>
+        )
+    }
+
+    // Add error check BEFORE the main return
+    if (dbError) {
+        return (
+        <section className="min-h-screen flex items-center justify-center">
+            <div className="text-center max-w-md">
+            <div className="text-6xl mb-4">❌</div>
+            <p className="text-2xl mb-4">Database Connection Error</p>
+            <p className="text-white/60">{dbError}</p>
+            </div>
+        </section>
+        )
+    }
 
   return (
     <section id='tech-retail' className='mt-70' ref={sectionRef}>
@@ -404,7 +491,7 @@ const TechRetail = () => {
             </div>
 
             {/* product listing with the enhanced features */}
-            <div className="py-20 px-4 sm:px-6 lg:px-8 bg-zinc-950" id='products'>
+            <div className="py-20 px-4 sm:px-6 lg:px-8" id='products'>
                 <div className="max-w-7xl mx-auto">
 
                     {/* Search and sort textfield/bar */}

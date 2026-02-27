@@ -25,3 +25,8 @@ dist-ssr
 
 # Environmental variables
 .env
+.env.local
+node_modules/
+dist
+
+# files

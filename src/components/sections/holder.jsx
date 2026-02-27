@@ -1,10 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const services = [
-  { icon: "⬡", title: "Cloud Architecture", desc: "Design scalable, resilient cloud infrastructures tailored to your growth trajectory.", accent: "#00FFB2" },
-  { icon: "◈", title: "Cybersecurity", desc: "Harden your systems with enterprise-grade threat detection and zero-trust frameworks.", accent: "#00C8FF" },
-  { icon: "⬟", title: "Digital Transformation", desc: "Modernize legacy systems and unlock new operational efficiencies across your org.", accent: "#A78BFA" },
-  { icon: "◇", title: "IT Strategy", desc: "Align technology roadmaps with business objectives for measurable ROI.", accent: "#F472B6" },
+  {
+    icon: "⬡", title: "Cloud Architecture", accent: "#00FFB2",
+    desc: "Design scalable, resilient cloud infrastructures tailored to your growth trajectory.",
+    detail: "We architect multi-cloud and hybrid environments built for performance, cost-efficiency, and long-term scale. From initial design through live deployment, our certified engineers handle every layer — compute, networking, storage, and observability. Whether you're migrating from on-premise or optimising an existing cloud estate, we deliver a future-proof blueprint backed by rigorous testing and documentation.",
+    bullets: ["Multi-cloud & hybrid design (AWS, Azure, GCP)", "Infrastructure-as-Code with Terraform & Pulumi", "FinOps optimisation — reduce cloud spend by up to 40%", "24/7 monitoring, alerting & auto-scaling pipelines"],
+    tag: "Infrastructure",
+  },
+  {
+    icon: "◈", title: "Cybersecurity", accent: "#00C8FF",
+    desc: "Harden your systems with enterprise-grade threat detection and zero-trust frameworks.",
+    detail: "Our security practice is built around a zero-trust philosophy — assume breach, verify everything. We conduct comprehensive threat modelling, penetration testing, and vulnerability assessments, then design layered defences across your entire attack surface. Compliance with SOC 2, ISO 27001, GDPR, and HIPAA is embedded into every engagement, not bolted on at the end.",
+    bullets: ["Zero-trust architecture & identity access management", "Penetration testing & red team exercises", "SIEM implementation & 24/7 threat monitoring", "Compliance readiness: SOC 2, ISO 27001, GDPR, HIPAA"],
+    tag: "Security",
+  },
+  {
+    icon: "⬟", title: "Digital Transformation", accent: "#A78BFA",
+    desc: "Modernize legacy systems and unlock new operational efficiencies across your org.",
+    detail: "Digital transformation isn't just about new software — it's about reshaping how your organisation operates. We audit your existing technology stack, identify friction points, and co-design a transformation roadmap that balances ambition with realism. Our delivery squads embed with your teams, ensuring adoption is as strong as the technology itself.",
+    bullets: ["Legacy system modernisation & API-first re-architecture", "Process automation with RPA & AI-assisted workflows", "Change management & staff enablement programmes", "KPI frameworks to measure transformation ROI"],
+    tag: "Modernisation",
+  },
+  {
+    icon: "◇", title: "IT Strategy", accent: "#F472B6",
+    desc: "Align technology roadmaps with business objectives for measurable ROI.",
+    detail: "Great IT strategy connects technology decisions directly to business outcomes. We work alongside your C-suite and engineering leaders to build a coherent, prioritised technology roadmap — one that accounts for budget realities, team capacity, and competitive pressures. Our fractional CTO service gives growing organisations senior strategic guidance without the full-time overhead.",
+    bullets: ["Technology roadmap design & prioritisation", "Fractional CTO & interim technology leadership", "Vendor evaluation, procurement & contract negotiation", "Board-level reporting & technology governance frameworks"],
+    tag: "Strategy",
+  },
 ];
 
 const stats = [
@@ -23,8 +47,98 @@ const steps = [
 
 const techStack = ["AWS", "Azure", "GCP", "Kubernetes", "Terraform", "Zero Trust", "DevSecOps", "SOC 2"];
 
+function ExpandableServiceCard({ s, i, expanded, onToggle }) {
+  const bodyRef = useRef(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (bodyRef.current) {
+      setHeight(expanded ? bodyRef.current.scrollHeight : 0);
+    }
+  }, [expanded]);
+
+  return (
+    <div
+      className="card"
+      style={{
+        padding: "36px",
+        cursor: "default",
+        borderColor: expanded ? `${s.accent}35` : "var(--border)",
+        transition: "border-color 0.3s, transform 0.25s",
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 24 }}>
+        <div style={{ fontSize: 32, color: s.accent, opacity: 0.9 }}>{s.icon}</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <span style={{ fontSize: 10, fontFamily: "'JetBrains Mono'", color: s.accent, letterSpacing: "0.08em", background: `${s.accent}14`, border: `1px solid ${s.accent}30`, padding: "3px 10px", borderRadius: 100 }}>{s.tag}</span>
+          <span style={{ fontSize: 11, fontFamily: "'JetBrains Mono'", color: "var(--muted)", letterSpacing: "0.06em" }}>0{i + 1}</span>
+        </div>
+      </div>
+
+      <h3 style={{ fontWeight: 700, fontSize: 20, marginBottom: 12 }}>{s.title}</h3>
+      <p style={{ color: "var(--muted)", fontSize: 14, lineHeight: 1.8 }}>{s.desc}</p>
+
+      <button
+        onClick={onToggle}
+        style={{
+          marginTop: 24, display: "flex", alignItems: "center", gap: 6,
+          color: s.accent, fontSize: 12, fontFamily: "'JetBrains Mono'",
+          background: "none", border: "none", cursor: "pointer", padding: 0,
+          transition: "opacity 0.2s",
+        }}
+        onMouseEnter={e => e.currentTarget.style.opacity = "0.7"}
+        onMouseLeave={e => e.currentTarget.style.opacity = "1"}
+      >
+        {expanded ? "Show less" : "Learn more"}
+        <span style={{ display: "inline-block", transform: expanded ? "rotate(90deg)" : "rotate(0deg)", transition: "transform 0.3s" }}>→</span>
+      </button>
+
+      {/* Animated outer wrapper — controls open/close height */}
+      <div style={{ height, overflow: "hidden", transition: "height 0.4s cubic-bezier(0.4,0,0.2,1)" }}>
+        <div ref={bodyRef}>
+          {/* Scrollable inner panel */}
+          <div
+            className="service-scroll"
+            style={{
+              marginTop: 28,
+              paddingTop: 24,
+              borderTop: `1px solid ${s.accent}20`,
+              maxHeight: 260,
+              overflowY: "auto",
+              paddingRight: 8,
+            }}
+          >
+            <p style={{ color: "#9CA3AF", fontSize: 14, lineHeight: 1.85, marginBottom: 20 }}>{s.detail}</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {s.bullets.map((b, bi) => (
+                <div key={bi} style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: s.accent, marginTop: 6, flexShrink: 0, boxShadow: `0 0 6px ${s.accent}80` }} />
+                  <span style={{ color: "#9CA3AF", fontSize: 13, lineHeight: 1.7 }}>{b}</span>
+                </div>
+              ))}
+            </div>
+            <button
+              style={{
+                marginTop: 24, marginBottom: 4, padding: "11px 22px", borderRadius: 9,
+                fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 13,
+                background: `${s.accent}18`, color: s.accent,
+                border: `1px solid ${s.accent}35`, cursor: "pointer", transition: "all 0.25s",
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = `${s.accent}28`}
+              onMouseLeave={e => e.currentTarget.style.background = `${s.accent}18`}
+            >
+              Request a consultation →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [activeStep, setActiveStep] = useState(0);
+  const [expandedService, setExpandedService] = useState(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -128,6 +242,13 @@ export default function App() {
 
         nav a { text-decoration: none; color: var(--muted); font-weight: 600; font-size: 13px; transition: color 0.2s; }
         nav a:hover { color: #E8EAF0; }
+
+        /* Custom scrollbar for service expansion panels */
+        .service-scroll { scrollbar-width: thin; scrollbar-color: rgba(0,255,178,0.25) transparent; }
+        .service-scroll::-webkit-scrollbar { width: 4px; }
+        .service-scroll::-webkit-scrollbar-track { background: transparent; }
+        .service-scroll::-webkit-scrollbar-thumb { background: rgba(0,255,178,0.25); border-radius: 99px; }
+        .service-scroll::-webkit-scrollbar-thumb:hover { background: rgba(0,255,178,0.5); }
       `}</style>
 
       {/* ── NAV ── */}
@@ -202,20 +323,16 @@ export default function App() {
             <span style={{ color: "var(--green)", fontSize: 13, fontFamily: "'JetBrains Mono'", cursor: "pointer", paddingBottom: 4, flexShrink: 0 }}>View all services →</span>
           </div>
 
-          {/* 2×2 bento */}
+          {/* 2×2 bento — expandable */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
             {services.map((s, i) => (
-              <div key={i} className="card" style={{ cursor: "pointer", padding: "36px" }}>
-                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 24 }}>
-                  <div style={{ fontSize: 32, color: s.accent, opacity: 0.9 }}>{s.icon}</div>
-                  <span style={{ fontSize: 11, fontFamily: "'JetBrains Mono'", color: "var(--muted)", letterSpacing: "0.06em" }}>0{i + 1}</span>
-                </div>
-                <h3 style={{ fontWeight: 700, fontSize: 20, marginBottom: 12 }}>{s.title}</h3>
-                <p style={{ color: "var(--muted)", fontSize: 14, lineHeight: 1.8 }}>{s.desc}</p>
-                <div style={{ marginTop: 28, display: "flex", alignItems: "center", gap: 6, color: s.accent, fontSize: 12, fontFamily: "'JetBrains Mono'" }}>
-                  Learn more <span>→</span>
-                </div>
-              </div>
+              <ExpandableServiceCard
+                key={i}
+                s={s}
+                i={i}
+                expanded={expandedService === i}
+                onToggle={() => setExpandedService(expandedService === i ? null : i)}
+              />
             ))}
           </div>
 
@@ -234,7 +351,108 @@ export default function App() {
         <hr className="section-divider" />
 
         {/* ════════════════════════════════
-            § 3  CONSULTING MODEL
+            § 3  CERTIFICATIONS
+        ════════════════════════════════ */}
+        <div id="certifications" className="page-section">
+          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 40 }}>
+            <div>
+              <div className="label-chip">Trust & Compliance</div>
+              <h2 style={{ fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 800, letterSpacing: "-0.03em" }}>Certifications & Standards</h2>
+              <p style={{ color: "var(--muted)", fontSize: 15, lineHeight: 1.75, maxWidth: 500, marginTop: 10 }}>
+                Every engagement is backed by internationally recognised frameworks. Your compliance is our baseline, not an afterthought.
+              </p>
+            </div>
+          </div>
+
+          {/* Bento grid — 3 col top row, 2 col bottom row */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 14 }}>
+
+            {/* ISO 27001 — large featured card */}
+            <div className="card" style={{ gridColumn: "1 / 3", padding: "40px", background: "linear-gradient(135deg, #0D1117, #0A1118)" }}>
+              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 20 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                  <div style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(0,255,178,0.1)", border: "1px solid rgba(0,255,178,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>◎</div>
+                  <div>
+                    <div style={{ fontWeight: 800, fontSize: 20 }}>ISO 27001</div>
+                    <div style={{ color: "var(--muted)", fontSize: 12, fontFamily: "'JetBrains Mono'", marginTop: 2 }}>Information Security Management</div>
+                  </div>
+                </div>
+                <span style={{ fontSize: 10, fontFamily: "'JetBrains Mono'", color: "#00FFB2", background: "rgba(0,255,178,0.1)", border: "1px solid rgba(0,255,178,0.2)", padding: "4px 12px", borderRadius: 100, letterSpacing: "0.08em" }}>CERTIFIED</span>
+              </div>
+              <p style={{ color: "var(--muted)", fontSize: 14, lineHeight: 1.8, maxWidth: 520 }}>
+                Our ISO 27001 certification demonstrates a systematic approach to managing sensitive information. It covers people, processes, and technology — ensuring client data is protected across every touchpoint of an engagement.
+              </p>
+              <div style={{ display: "flex", gap: 10, marginTop: 24, flexWrap: "wrap" }}>
+                {["Risk Assessment", "Access Control", "Incident Response", "Business Continuity"].map(t => (
+                  <span key={t} className="tech-pill" style={{ fontSize: 11 }}>{t}</span>
+                ))}
+              </div>
+            </div>
+
+            {/* SOC 2 Type II */}
+            <div className="card" style={{ padding: "36px" }}>
+              <div style={{ width: 44, height: 44, borderRadius: 11, background: "rgba(0,200,255,0.1)", border: "1px solid rgba(0,200,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, marginBottom: 20 }}>⬡</div>
+              <div style={{ fontWeight: 800, fontSize: 18, marginBottom: 6 }}>SOC 2 Type II</div>
+              <div style={{ color: "var(--muted)", fontSize: 12, fontFamily: "'JetBrains Mono'", marginBottom: 14 }}>Security · Availability · Confidentiality</div>
+              <p style={{ color: "var(--muted)", fontSize: 13, lineHeight: 1.8 }}>
+                Independently audited controls covering security, availability, and confidentiality over an extended observation period — not just a point-in-time snapshot.
+              </p>
+              <div style={{ marginTop: 20, display: "flex", alignItems: "center", gap: 8 }}>
+                <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#00C8FF", boxShadow: "0 0 6px #00C8FF80" }} />
+                <span style={{ fontSize: 11, fontFamily: "'JetBrains Mono'", color: "#00C8FF" }}>Audited annually</span>
+              </div>
+            </div>
+
+            {/* AWS Partner */}
+            <div className="card" style={{ padding: "36px" }}>
+              <div style={{ width: 44, height: 44, borderRadius: 11, background: "rgba(167,139,250,0.1)", border: "1px solid rgba(167,139,250,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, marginBottom: 20 }}>◈</div>
+              <div style={{ fontWeight: 800, fontSize: 18, marginBottom: 6 }}>AWS Partner</div>
+              <div style={{ color: "var(--muted)", fontSize: 12, fontFamily: "'JetBrains Mono'", marginBottom: 14 }}>Advanced Tier · Migration Competency</div>
+              <p style={{ color: "var(--muted)", fontSize: 13, lineHeight: 1.8 }}>
+                Recognised by Amazon Web Services for demonstrated technical expertise and proven track record delivering cloud migrations and architecture at enterprise scale.
+              </p>
+              <div style={{ marginTop: 20, display: "flex", alignItems: "center", gap: 8 }}>
+                <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#A78BFA", boxShadow: "0 0 6px #A78BFA80" }} />
+                <span style={{ fontSize: 11, fontFamily: "'JetBrains Mono'", color: "#A78BFA" }}>Advanced Tier</span>
+              </div>
+            </div>
+
+            {/* CISSP */}
+            <div className="card" style={{ padding: "36px" }}>
+              <div style={{ width: 44, height: 44, borderRadius: 11, background: "rgba(244,114,182,0.1)", border: "1px solid rgba(244,114,182,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, marginBottom: 20 }}>⬟</div>
+              <div style={{ fontWeight: 800, fontSize: 18, marginBottom: 6 }}>CISSP</div>
+              <div style={{ color: "var(--muted)", fontSize: 12, fontFamily: "'JetBrains Mono'", marginBottom: 14 }}>Certified Information Systems Security</div>
+              <p style={{ color: "var(--muted)", fontSize: 13, lineHeight: 1.8 }}>
+                Our lead security consultants hold CISSP certification — the gold standard in information security — ensuring every engagement is led by credentialled professionals.
+              </p>
+              <div style={{ marginTop: 20, display: "flex", alignItems: "center", gap: 8 }}>
+                <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#F472B6", boxShadow: "0 0 6px #F472B680" }} />
+                <span style={{ fontSize: 11, fontFamily: "'JetBrains Mono'", color: "#F472B6" }}>ISC² Certified</span>
+              </div>
+            </div>
+
+            {/* Compliance banner card */}
+            <div className="card" style={{ gridColumn: "2 / 4", padding: "36px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
+              <div>
+                <div style={{ fontWeight: 800, fontSize: 18, marginBottom: 8 }}>Additional Compliance Coverage</div>
+                <p style={{ color: "var(--muted)", fontSize: 13, lineHeight: 1.75, maxWidth: 420 }}>
+                  All engagements are scoped and delivered with awareness of GDPR, HIPAA, PCI-DSS, and NIST frameworks where applicable to your industry.
+                </p>
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, flexShrink: 0 }}>
+                {["GDPR", "HIPAA", "PCI-DSS", "NIST"].map(c => (
+                  <span key={c} style={{ padding: "7px 16px", borderRadius: 8, fontFamily: "'JetBrains Mono'", fontSize: 12, fontWeight: 600, background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", color: "#E8EAF0" }}>{c}</span>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <hr className="section-divider" />
+
+        {/* ════════════════════════════════
+            § 4  CONSULTING MODEL (now § 4)
         ════════════════════════════════ */}
         <div id="process" className="page-section">
           <div style={{ textAlign: "center", marginBottom: 56 }}>
@@ -349,28 +567,18 @@ export default function App() {
               </div>
             </div>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              <div className="card" style={{ flex: 1 }}>
-                <div style={{ fontFamily: "'JetBrains Mono'", fontSize: 11, color: "var(--muted)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 20 }}>Contact</div>
-                {[
-                  { label: "Email", value: "hello@nexusit.co" },
-                  { label: "Response time", value: "< 4 hours" },
-                  { label: "Coverage", value: "Global" },
-                ].map((item, i, arr) => (
-                  <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "13px 0", borderBottom: i < arr.length - 1 ? "1px solid var(--border)" : "none" }}>
-                    <span style={{ color: "var(--muted)", fontSize: 13 }}>{item.label}</span>
-                    <span style={{ fontSize: 14, fontWeight: 600 }}>{item.value}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="card" style={{ flex: 1 }}>
-                <div style={{ fontFamily: "'JetBrains Mono'", fontSize: 11, color: "var(--muted)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 16 }}>Certifications</div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                  {["ISO 27001", "SOC 2 Type II", "AWS Partner", "CISSP"].map(c => (
-                    <div key={c} className="tech-pill">{c}</div>
-                  ))}
+            <div className="card" style={{ flex: 1 }}>
+              <div style={{ fontFamily: "'JetBrains Mono'", fontSize: 11, color: "var(--muted)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 20 }}>Contact</div>
+              {[
+                { label: "Email", value: "hello@nexusit.co" },
+                { label: "Response time", value: "< 4 hours" },
+                { label: "Coverage", value: "Global" },
+              ].map((item, i, arr) => (
+                <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "13px 0", borderBottom: i < arr.length - 1 ? "1px solid var(--border)" : "none" }}>
+                  <span style={{ color: "var(--muted)", fontSize: 13 }}>{item.label}</span>
+                  <span style={{ fontSize: 14, fontWeight: 600 }}>{item.value}</span>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
