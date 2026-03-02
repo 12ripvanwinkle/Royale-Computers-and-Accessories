@@ -85,14 +85,14 @@ export default function Contact () {
 
                         {/* The Contact Form itself */}
                         <div className={`transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'}`}>
-                            <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl">
+                            <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
                                 <h3 className="text-3xl font-bold text-white mb-8">Send a Message</h3>
 
                                 <form onSubmit={handleSubmit} className="space-y-6" ref={formRef}>
 
                                     {/* Name Input */}
                                     <div className="group">
-                                        <label htmlFor="name" className="block text-sm font-semibold text-gray-300 mb-3">
+                                        <label htmlFor="name" className="block text-sm font-semibold text-white mb-3">
                                             Full Name *
                                         </label>
                                         <input 
@@ -102,29 +102,31 @@ export default function Contact () {
                                             value={formData.name}
                                             onChange={handleChange}
                                             required
-                                            className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300 hover:border-white/20"
+                                            className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-100 focus:border-orange-100 transition-all duration-300 hover:border-white/30 hover:bg-white/15"
                                             placeholder='John Doe'
                                         />
                                     </div>
 
                                     {/* Email Input */}
-                                    <label htmlFor="email" className="block text-sm font-semibold text-gray-300 mb-3">
-                                        Email Address
-                                    </label>
-                                    <input 
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        required 
-                                        className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300 hover:border-white/20"
-                                        placeholder='email@example.com'
-                                    />
+                                    <div className="group">
+                                        <label htmlFor="email" className="block text-sm font-semibold text-white mb-3">
+                                            Email Address *
+                                        </label>
+                                        <input 
+                                            type="email"
+                                            id="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            required 
+                                            className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-100 focus:border-orange-100 transition-all duration-300 hover:border-white/30 hover:bg-white/15"
+                                            placeholder='email@example.com'
+                                        />
+                                    </div>
 
                                     {/* Message Input */}
                                     <div className="group">
-                                        <label htmlFor="message" className="block text-sm font-semibold text-gray-300 mb-3">
+                                        <label htmlFor="message" className="block text-sm font-semibold text-white mb-3">
                                             Your Message *
                                         </label>
 
@@ -135,18 +137,22 @@ export default function Contact () {
                                             onChange={handleChange}
                                             required
                                             rows="6"
-                                            className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300 hover:border-white/20 resize-none"
+                                            className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-100 focus:border-orange-100 transition-all duration-300 hover:border-white/30 hover:bg-white/15 resize-none"
                                             placeholder="Tell us about your project or inquiry..."
                                         />
                                     </div>
 
                                     {/* Submit Button */}
-                                    <button type="submit" disabled={loading} className='group w-full bg-linear-to-r from-blue-600 via-blue-700 to-purple-600 text-white font-bold py-5 px-8 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/30 relative overflow-hidden'> 
+                                    <button 
+                                        type="submit" 
+                                        disabled={loading} 
+                                        className='group w-full bg-linear-to-r from-orange-100 to-orange-500 text-white font-bold py-5 px-8 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-orange-100/30 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden'
+                                    > 
                                         <span className="relative z-10 flex items-center justify-center gap-3">
                                             {loading ? 'Sending...' : 'Send Message'}
                                             <span className='text-xl transform group-hover:translate-x-1 transition-transform'>✈️</span>
                                         </span>
-                                        <div className="absolute inset-0 bg-linear-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        <div className="absolute inset-0 bg-linear-to-r from-orange-500 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                     </button>
 
                                 </form>
@@ -157,7 +163,7 @@ export default function Contact () {
                         <div className={`space-y-6 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}>
 
                             {/* Opening Hours Card */}
-                            <div className="bg-linear-to-br from-indigo-600 via-purple-600 to-pink-600 rounded-3xl p-8 shadow-2xl transform hover:scale-[1.02] transition-all duration-300 relative overflow-hidden group">
+                            <div className="bg-linear-to-br from-indigo-600 via-purple-600 to-pink-600 rounded-3xl p-8 shadow-2xl transform hover:scale-[1.02] transition-all duration-300 relative overflow-hidden">
                                 {/* Background Decoration */}
                                 <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
 
@@ -187,7 +193,7 @@ export default function Contact () {
                             </div>
                             
                             {/* Location Card */}
-                            <div className="bg-linear-to-br from-emerald-600 via-teal-600 to-cyan-600 rounded-3xl p-8 shadow-2xl transform hover:scale-[1.02] transition-all duration-300 relative overflow-hidden group">
+                            <div className="bg-linear-to-br from-emerald-600 via-teal-600 to-cyan-600 rounded-3xl p-8 shadow-2xl transform hover:scale-[1.02] transition-all duration-300 relative overflow-hidden">
                                 {/* Background Decoration */}
                                 <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
                                 
@@ -231,7 +237,7 @@ export default function Contact () {
                             </div>
 
                             {/* Contact Details */}
-                            <div className="bg-linear-to-br from-orange-600 via-red-600 to-pink-600 rounded-3xl p-6 md:p-8 shadow-2xl transform hover:scale-[1.02] transition-all duration-300 relative overflow-hidden group">
+                            <div className="bg-linear-to-br from-orange-600 via-red-600 to-pink-600 rounded-3xl p-6 md:p-8 shadow-2xl transform hover:scale-[1.02] transition-all duration-300 relative overflow-hidden">
                             {/* Background Decoration */}
                             <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
                             

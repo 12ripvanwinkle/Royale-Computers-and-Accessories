@@ -38,17 +38,18 @@ const TechRetail = () => {
             
             if (error) throw error
 
-            // Organize by category
             const organized = {}
 
             data.forEach(product => {
-                const categoryKey = product.category?.toLowerCase().trim()
+                const normalizedCategory = product.category?.toLowerCase().trim()
 
-                if (!organized[categoryKey]) {
-                    organized[categoryKey] = []
+                if (!normalizedCategory) return  // skip broken data safely
+
+                if (!organized[normalizedCategory]) {
+                    organized[normalizedCategory] = []
                 }
 
-                organized[categoryKey].push({
+                organized[normalizedCategory].push({
                     id: product.id,
                     name: product.name,
                     brand: product.brand,
@@ -57,25 +58,33 @@ const TechRetail = () => {
                     onSale: product.on_sale,
                     inStock: product.in_stock,
                     preOrder: product.pre_order,
-                    rating: product.rating,
-                    warranty: product.warranty,
                     image: product.image,
                     bestSelling: product.best_selling,
                     newArrival: product.new_arrival,
+
+                    // Category-specific fields (only these)
+                    processor: product.processor,        // Computers: CPU
+                    ram: product.ram,                    // Computers, Phones, Tablets
+                    storage: product.storage,            // Computers, Phones, Tablets
+                    graphics: product.graphics,          // Computers: GPU
+                    screenSize: product.screen_size,     // Phones, TVs, Monitors, Tablets
+                    resolution: product.resolution,      // TVs, Monitors
+                    smartTV: product.smart_tv,          // TVs
+                    peripheralType: product.peripheral_type, // Peripherals
                 })
             })
-            
+
             setProducts(organized)
             console.log('✅ Loaded products from Supabase:', organized)
         } catch (error) {
             console.error('❌ Error fetching products:', error)
             setDbError(error.message)
-            setProducts({}) // Empty products on error
+            setProducts({})
         } finally {
             setLoading(false)
         }
     }
-    
+        
     const [showFilters, setShowFilters] = useState(false);
     const [expandedFilters, setExpandedFilters] = useState({
         core: true,
@@ -150,9 +159,7 @@ const TechRetail = () => {
         brands: [],
         priceRange: [0, 5000],
         pricePreset: 'all',
-        rating: 0,
         availability: [],
-        warranty: [],
         // Category-specific filters
         categoryFilters: {}
     });
@@ -165,9 +172,7 @@ const TechRetail = () => {
             brands: [],
             priceRange: [0, 5000],
             pricePreset: 'all',
-            rating: 0,
             availability: [],
-            warranty: [],
             categoryFilters: {}
         });
     };
@@ -225,11 +230,6 @@ const TechRetail = () => {
             productList = productList.filter(p => p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1]);
         }
         
-        // Rating filter
-        if (filters.rating > 0) {
-            productList = productList.filter(p => p.rating >= filters.rating);
-        }
-        
         // Availability filter
         if (filters.availability.length > 0) {
             productList = productList.filter(p => {
@@ -238,11 +238,6 @@ const TechRetail = () => {
                 if (filters.availability.includes('onSale') && p.onSale) return true;
                 return false;
             });
-        }
-        
-        // Warranty filter
-        if (filters.warranty.length > 0) {
-            productList = productList.filter(p => filters.warranty.includes(p.warranty));
         }
         
         // Category-specific filters
@@ -307,16 +302,16 @@ const TechRetail = () => {
     };
 
     // Add loading check BEFORE the main return
-    if (loading) {
-        return (
-        <section className="min-h-screen flex items-center justify-center">
-            <div className="text-center">
-            <div className="text-6xl mb-4">⏳</div>
-            <p className="text-2xl">Loading products...</p>
-            </div>
-        </section>
-        )
-    }
+    // if (loading) {
+    //     return (
+    //     <section className="min-h-screen flex items-center justify-center">
+    //         <div className="text-center">
+    //         <div className="text-6xl mb-4">⏳</div>
+    //         <p className="text-2xl">Loading products...</p>
+    //         </div>
+    //     </section>
+    //     )
+    // }
 
     // Add error check BEFORE the main return
     if (dbError) {
@@ -627,29 +622,7 @@ const TechRetail = () => {
                                                 ))}
                                             </div>
 
-                                            {/* Rating Filter */}
-                                            <div>
-                                                <h4 className="font-medium mb-3 text-lg">Rating</h4>
-                                                <div className="space-y-2">
-                                                    {[
-                                                        { value: 0, label: 'All Ratings' },
-                                                        { value: 3, label: '3★ & above' },
-                                                        { value: 4, label: '4★ & above' },
-                                                        { value: 5, label: '5★ only' }
-                                                    ].map(rating => (
-                                                        <label key={rating.value} className='flex items-center gap-2 cursor-pointer group'>
-                                                            <input 
-                                                                type="checkbox"
-                                                                name="rating" 
-                                                                checked={filters.rating === rating.value}
-                                                                onChange={() => setFilters(prev => ({ ...prev, rating: rating.value }))}
-                                                                className='w-4 h-4'
-                                                            />
-                                                            <span className="text-sm group-hover:text-white transition">{rating.label}</span>
-                                                        </label>
-                                                    ))}
-                                                </div>
-                                            </div>
+                                            
 
                                             {/* Availability */}
                                             <div className='mt-4'>
@@ -673,29 +646,12 @@ const TechRetail = () => {
                                                 </div>
                                             </div>
                                             
-                                            {/* Warranty */}
-                                            <div className='mt-7'>
-                                                <h4 className="font-medium mb-3 text-lg">Warranty</h4>
-                                                <div className="space-y-2">
-                                                    {getUniqueValues('warranty').map(warranty => (
-                                                        <label key={warranty} className="flex items-center gap-2 cursor-pointer group">
-                                                            <input
-                                                                type="checkbox"
-                                                                checked={filters.warranty.includes(warranty)}
-                                                                onChange={() => toggleArrayFilter('warranty', warranty)}
-                                                                className="w-4 h-4 rounded"
-                                                            />
-                                                            <span className="text-sm group-hover:text-white transition">{warranty}</span>
-                                                        </label>
-                                                    ))}
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 )}
                             </div>
 
-                            {/* Category Specific Filters */}
+                            {/* CATEGORY-SPECIFIC FILTERS */}
                             {selectedCategory !== 'deals' &&
                             categoryFilters[selectedCategory] &&
                             categoryFilters[selectedCategory].length > 0 && (
@@ -704,7 +660,15 @@ const TechRetail = () => {
                                         onClick={() => setExpandedFilters(prev => ({ ...prev, categorySpecific: !prev.categorySpecific }))}
                                         className='w-full flex items-center justify-between mb-4 font-semibold text-orange-100'
                                     >
-                                        <span>Category Filters</span>
+                                        <span>
+                                            {selectedCategory === 'computers' && 'Computer Specs'}
+                                            {selectedCategory === 'phones' && 'Phone Specs'}
+                                            {selectedCategory === 'tvs' && 'TV Specs'}
+                                            {selectedCategory === 'monitors' && 'Monitor Specs'}
+                                            {selectedCategory === 'peripherals' && 'Peripheral Specs'}
+                                            {selectedCategory === 'printers' && 'Printer Specs'}
+                                            {selectedCategory === 'tablets' && 'Tablet Specs'}
+                                        </span>
                                         {expandedFilters.categorySpecific ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                                     </button>
 
@@ -715,21 +679,14 @@ const TechRetail = () => {
                                                     <h4 className="font-medium mb-3 text-sm">{filter.label}</h4>
                                                     <div className="space-y-2 max-h-48 overflow-y-auto">
                                                         {getUniqueValues(filter.key).map(option => {
-                                                            const isChecked = filter.isBoolean
-                                                                ? (filters.categoryFilters[filter.key] || []).includes(option === 'Yes')
-                                                                : (filters.categoryFilters[filter.key] || []).includes(option);
+                                                            const isChecked = (filters.categoryFilters[filter.key] || []).includes(option);
 
                                                             return (
                                                                 <label key={option} className="flex items-center gap-2 cursor-pointer group">
                                                                     <input
                                                                         type="checkbox"
                                                                         checked={isChecked}
-                                                                        onChange={() =>
-                                                                            toggleCategoryFilter(
-                                                                                filter.key,
-                                                                                filter.isBoolean ? (option === 'Yes') : option
-                                                                            )
-                                                                        }
+                                                                        onChange={() => toggleCategoryFilter(filter.key, option)}
                                                                         className="w-4 h-4 rounded"
                                                                     />
                                                                     <span className="text-sm group-hover:text-white transition">{option}</span>
@@ -777,9 +734,9 @@ const TechRetail = () => {
                                                 <div className="p-4">
                                                     <p className="text-xs text-white/40 mb-1">{product.brand}</p>
                                                     <h3 className="font-medium mb-2 line-clamp-2">{product.name}</h3>
-                                                    <div className="flex items-center gap-1 mb-2 text-yellow-400">
+                                                    {/* <div className="flex items-center gap-1 mb-2 text-yellow-400">
                                                         {'⭐'.repeat(product.rating)}
-                                                    </div>
+                                                    </div> */}
                                                     <div className="flex items-baseline gap-2">
                                                         <span className="text-xl font-bold">${product.price}</span>
                                                         {product.onSale && product.originalPrice && (
@@ -804,9 +761,9 @@ const TechRetail = () => {
                                                 <div className='flex-1'>
                                                     <p className="text-xs text-white/40 mb-1">{product.brand}</p>
                                                     <h3 className="font-medium text-lg mb-1">{product.name}</h3>
-                                                    <div className="flex items-center gap-1 mb-2 text-yellow-400">
+                                                    {/* <div className="flex items-center gap-1 mb-2 text-yellow-400">
                                                         {'⭐'.repeat(product.rating)}
-                                                    </div>
+                                                    </div> */}
                                                     <div className='flex items-baseline gap-3'>
                                                         <span className="text-2xl font-bold">${product.price}</span>
                                                             {product.onSale && product.originalPrice && (

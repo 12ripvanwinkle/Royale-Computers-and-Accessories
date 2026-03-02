@@ -444,57 +444,32 @@ const techRetailCategories = [
   { id: 'printers', name: 'Printers', icon: '🖨️' }
 ];
 
+// Category-specific filter configurations
 const categoryFilters = {
   computers: [
-    { key: 'type', label: 'Type' },
-    { key: 'processor', label: 'Processor' },
+    { key: 'processor', label: 'CPU' },
     { key: 'ram', label: 'RAM' },
     { key: 'storage', label: 'Storage' },
-    { key: 'graphics', label: 'Graphics' },
-    { key: 'os', label: 'Operating System' }
+    { key: 'graphics', label: 'GPU' }
   ],
-
   phones: [
-    { key: 'os', label: 'Operating System' },
     { key: 'storage', label: 'Storage' },
-    { key: 'ram', label: 'RAM' },
-    { key: 'screenSize', label: 'Screen Size' },
-    { key: 'camera', label: 'Camera' },
-    { key: 'connectivity', label: 'Connectivity' }
+    { key: 'screenSize', label: 'Screen Size' }
   ],
-
   tvs: [
     { key: 'screenSize', label: 'Screen Size' },
     { key: 'resolution', label: 'Resolution' },
-    { key: 'displayType', label: 'Display Type' },
-    { key: 'smartTV', label: 'Smart TV', isBoolean: true },
-    { key: 'refreshRate', label: 'Refresh Rate' }
+    { key: 'smartTV', label: 'Smart TV', isBoolean: true }
   ],
-
   monitors: [
     { key: 'screenSize', label: 'Screen Size' },
-    { key: 'resolution', label: 'Resolution' },
-    { key: 'panelType', label: 'Panel Type' },
-    { key: 'refreshRate', label: 'Refresh Rate' },
-    { key: 'usage', label: 'Usage' }
+    { key: 'resolution', label: 'Resolution' }
   ],
-
   peripherals: [
-    { key: 'category', label: 'Category' },
-    { key: 'connectionType', label: 'Connection Type' },
-    { key: 'compatibility', label: 'Compatibility' },
-    { key: 'useCase', label: 'Use Case' }
+    { key: 'peripheralType', label: 'Type' }
   ],
-
-  printers: [
-    { key: 'printerType', label: 'Printer Type' },
-    { key: 'color', label: 'Color' },
-    { key: 'functions', label: 'Functions' },
-    { key: 'connectivity', label: 'Connectivity' },
-    { key: 'paperSize', label: 'Paper Size' }
-  ],
-
   tablets: [
+    { key: 'screenSize', label: 'Screen Size' },
     { key: 'storage', label: 'Storage' }
   ]
 };
@@ -514,5 +489,4 @@ export { Main_navLinks,
          productCategory,
          techRetailCategories,
          categoryFilters,
-         
         };
