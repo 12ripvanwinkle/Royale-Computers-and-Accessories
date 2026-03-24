@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -161,6 +162,16 @@ const TechSolutions = () => {
                     <p className="text-2xl text-gray-400 max-w-md">
                       {service.description}
                     </p>
+
+                    {service.route && (
+                      <Link 
+                        to={service.route}
+                        className="group inline-flex items-center gap-3 bg-linear-to-r from-orange-100 to-orange-500 text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-orange-100/30 w-fit"
+                      >
+                        <span>Learn More</span>
+                        <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                      </Link>
+                    )}
                   </div>
 
                   {/* IMAGE */}

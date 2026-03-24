@@ -5,7 +5,7 @@ import { useGSAP } from '@gsap/react'
 import { ArrowRight, X, SlidersHorizontal, Search, ChevronDown, ChevronUp, ContactIcon } from 'lucide-react'
 
 import { supabase } from '../../lib/supabase'
-import { techRetailCategories, categoryFilters } from '../../constants'
+// import { techRetailCategories, categoryFilters } from '../../constants'
 import Contact from '../sections/Contact'
 import Footer from '../sections/Footer'
 
