@@ -23,7 +23,7 @@ const Main_navLinks = [
 
 const techServicesNavlinks = [
   {
-    name: "Main Website",
+    name: "Home",
     link: "/"
   },
   {
@@ -46,7 +46,7 @@ const techServicesNavlinks = [
 
 const TechRetailNavlinks = [
   {
-    name: "Main Website",
+    name: "Home",
     link: "/"
   },
   {
@@ -65,7 +65,7 @@ const TechRetailNavlinks = [
 
 const techSolutionsNavlinks = [
   {
-    name: "Main Website",
+    name: "Home",
     link: "/"
   },
 
@@ -89,7 +89,7 @@ const techSolutionsNavlinks = [
 
 const accessSolutionNavlinks = [
   {
-    name: "Main Website",
+    name: "Home",
     link: "/"
   },
   {
@@ -101,7 +101,7 @@ const accessSolutionNavlinks = [
     link: "#services"
   },
   {
-    name: "Assessment",
+    name: "Our Process",
     link: "#assess"
   },
   {
@@ -112,6 +112,33 @@ const accessSolutionNavlinks = [
     name: "FAQs",
     link: "#faqs"
   },
+];
+
+const cctvNavlinks = [
+  {
+    name: "Home",
+    link: "/"
+  },
+  {
+    name: "Solutions",
+    link: "/tech-solutions"
+  },
+  {
+    name: "Features",
+    link: "#features",
+  },
+  {
+    name: "Systems",
+    link: "#types",
+  },
+  {
+    name: "Process",
+    link: "#assess"
+  },
+  {
+    name: "FAQs",
+    link: "#faqs"
+  }
 ];
 
 const techServices = [
@@ -144,29 +171,17 @@ const features = [
 ];
 const techSolutionsItems = [
   {
-    title: "Cloud Integration",
-    description: "Seamlessly connect your business to cloud platforms for improved scalability and security.",
-    image: "/images/Leon1.jpg",
-    route: "/tech-solutions/access-control",
-  },
-  {
-    title: "Custom Software",
-    description: "Tailored software solutions that address your specific business challenges.",
-    image: "/images/Leon2.jpg",
-    route: "/tech-solutions/access-control",
-  },
-  {
-    title: "IT Consulting",
-    description: "Expert guidance for technology adoption and digital transformation.",
-    image: "/images/Leon3.jpg",
-    route: "/tech-solutions/access-control",
-  },
-  {
     title: "Access Control",
     description: "Implement robust access control systems to protect your business assets.",
     image: "/images/Leon3.jpg",
     route: "/tech-solutions/access-control",
-  }
+  },
+  {
+    title: "CCTV Solutions",
+    description: "Keep a watchful eye on what matters most with smart CCTV designed for your peace of mind.",
+    image: "/images/Leon3.jpg",
+    route: "/tech-solutions/CCTV"
+  },
 ];
 
 const TechSolutionstestimonials = [
@@ -334,4 +349,5 @@ export { Main_navLinks,
          aboutItems, 
          socialMedia,
          accessSolutionNavlinks,
+         cctvNavlinks
         };

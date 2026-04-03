@@ -94,6 +94,7 @@ const AccessControl = () => {
           }}
           onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.15)"; }}
           onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}
+          onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
         >
           Learn More
         </button>

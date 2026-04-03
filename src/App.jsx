@@ -12,7 +12,7 @@ import TechServices from './components/pages/TechServices'
 import TechRetail from './components/pages/TechRetail'
 import SupabaseTest from './components/SupabaseTest'
 import AccessControl from './components/pages/TechSolutionsWebPages/AccessControl'
-
+import CCTV from './components/pages/TechSolutionsWebPages/CCTV'
 // Create a HomePage component that holds all your sections
 const HomePage = () => (
   <>
@@ -45,6 +45,7 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/tech-solutions" element={<TechSolutions />} />
           <Route path="/tech-solutions/access-control" element={<AccessControl />} />
+          <Route path="/tech-solutions/CCTV" element={<CCTV />} />
           <Route path="/tech-services" element={<TechServices />} />
           <Route path="/tech-retail" element={<TechRetail />} />
           <Route path="/test-supabase" element={<SupabaseTest />} />
