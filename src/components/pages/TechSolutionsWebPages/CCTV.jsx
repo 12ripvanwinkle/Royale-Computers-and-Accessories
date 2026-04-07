@@ -4,7 +4,8 @@ import TitleHeader from '../../TitleHeader'
 
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
-import { Features } from '../../../components/CCTV-Holder';
+import { Features, Systems, TrustUs } from '../../../components/CCTV-Holder';
+import {StepFlow} from '../../../components/access-control'
 
 const CCTV = () => {
   return (
@@ -59,6 +60,21 @@ const CCTV = () => {
 
         {/* Features */}
         <Features />
+
+        {/* CCTV Systems */}
+        <Systems />
+
+        {/* Step Flow */}
+        <StepFlow />
+
+        {/* Why Choose us / Why Trust Us */}
+        <TrustUs />
+
+        {/* Contact Section */}
+        <Contact />
+
+        {/* Footer  */}
+        <Footer />
 
       </div>
     </section>
