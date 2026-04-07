@@ -6,6 +6,7 @@ import { Main_navLinks,
      TechRetailNavlinks, 
      accessSolutionNavlinks,
      cctvNavlinks,
+     digitalSignageNavlinks
      } from '../constants'
 
 const Navbar = () => {
@@ -17,7 +18,8 @@ const Navbar = () => {
   const isTechServicesPage = location.pathname === '/tech-services';
   const isTechRetailPage = location.pathname === '/tech-retail';
   const isAccessControlPage = location.pathname === '/tech-solutions/access-control';
-  const isCCTVPage = location.pathname === '/tech-solutions/CCTV'
+  const isCCTVPage = location.pathname === '/tech-solutions/CCTV';
+  const isDigitalSignagePage = location.pathname === '/tech-solutions/digital-signage';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,6 +41,7 @@ const Navbar = () => {
     : isTechRetailPage ? TechRetailNavlinks
     : isAccessControlPage ? accessSolutionNavlinks
     : isCCTVPage ? cctvNavlinks
+    : isDigitalSignagePage ? digitalSignageNavlinks
     : Main_navLinks;
 
   return (

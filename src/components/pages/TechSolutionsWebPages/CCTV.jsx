@@ -5,7 +5,63 @@ import TitleHeader from '../../TitleHeader'
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
 import { Features, Systems, TrustUs } from '../../../components/CCTV-Holder';
-import {StepFlow} from '../../../components/access-control'
+import {StepFlow} from '../../../components/access-control';
+
+
+function Faqs() {
+  
+  const faqs = [
+    { question: "Placeholder question?", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." },
+    { question: "Placeholder question?", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." },
+    { question: "Placeholder question?", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." },
+    { question: "Placeholder question?", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." },
+  ];
+
+  const [openIndex, setOpenIndex] = useState(0);
+  const toggle = (i) => setOpenIndex(openIndex === i ? null : i);
+
+  return (
+    <div className="min-h-screen flex items-center justify-center px-4 py-16 mt-10" id='faqs'>
+      <div className="w-full max-w-7xl">
+        <div className="mb-20">
+          <TitleHeader title="Frequently Asked Questions" className="text-white" />
+        </div>
+
+        <div className="flex flex-col gap-2 mt-30">
+          {faqs.map((faq, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <div key={i} className="rounded-2xl overflow-hidden transition-all duration-300"
+                style={{
+                  background: isOpen ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.07)",
+                  border: isOpen ? "1px solid rgba(255,255,255,0.25)" : "1px solid rgba(255,255,255,0.12)",
+                  backdropFilter: "blur(8px)",
+                }}>
+                <button
+                  onClick={() => toggle(i)}
+                  className="w-full flex items-center justify-between px-5 py-4 text-left"
+                >
+                  <span className="text-base md:text-lg font-semibold text-white">{faq.question}</span>
+                  <div className="shrink-0 ml-4 w-7 h-7 rounded-full flex items-center justify-center"
+                    style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)" }}>
+                    <span className="text-white text-base leading-none">{isOpen ? "×" : "+"}</span>
+                  </div>
+                </button>
+                <div className="transition-all duration-300 ease-in-out overflow-hidden"
+                  style={{ maxHeight: isOpen ? 200 : 0 }}>
+                  <p className="px-5 pb-5 text-md leading-relaxed"
+                    style={{ color: "rgba(255,255,255,0.65)" }}>
+                    {faq.answer}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const CCTV = () => {
   return (
@@ -69,6 +125,9 @@ const CCTV = () => {
 
         {/* Why Choose us / Why Trust Us */}
         <TrustUs />
+
+        {/* FAQs */}
+        <Faqs />
 
         {/* Contact Section */}
         <Contact />

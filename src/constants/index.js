@@ -141,6 +141,33 @@ const cctvNavlinks = [
   }
 ];
 
+const digitalSignageNavlinks = [
+  {
+    name: "Home",
+    link: "/"
+  },
+  {
+    name: "Solutions",
+    link: "/tech-solutions"
+  },
+  {
+    name: "Features",
+    link: "#features",
+  },
+  {
+    name: "Types",
+    link: "#types",
+  },
+  {
+    name: "Integration",
+    link: "#integration"
+  },
+  {
+    name: "Why Choose Us",
+    link: "#whyUs"
+  }
+];
+
 const techServices = [
   {
     title: "Maintenance",
@@ -181,6 +208,12 @@ const techSolutionsItems = [
     description: "Keep a watchful eye on what matters most with smart CCTV designed for your peace of mind.",
     image: "/images/Leon3.jpg",
     route: "/tech-solutions/CCTV"
+  },
+  {
+    title: "Digital Signage",
+    description: "Engage your audience with dynamic digital signage solutions that captivate and inform.",
+    image: "/images/Leon3.jpg",
+    route: "/tech-solutions/digital-signage"
   },
 ];
 
@@ -349,5 +382,6 @@ export { Main_navLinks,
          aboutItems, 
          socialMedia,
          accessSolutionNavlinks,
-         cctvNavlinks
+         cctvNavlinks,
+         digitalSignageNavlinks,
         };
