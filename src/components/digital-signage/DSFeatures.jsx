@@ -5,7 +5,7 @@ import {
   MonitorPlay, Zap, Film, Clock, LayoutGrid,
   TouchpadOff, Cloud, BarChart2
 } from 'lucide-react'
-import {Chip, CardLabel, CmsMockup, RealtimeMockup, ScheduleMockup, MultiScreenMockup, AnalyticsMockup} from './SignageHolder'
+import {Chip, CardLabel, CmsMockup, RealtimeMockup, ScheduleMockup, MultiScreenMockup, AnalyticsMockup} from './SignageFeaturesHolder'
 
 
 function DSFeatures() {
