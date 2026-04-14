@@ -4,6 +4,7 @@ import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
 import DSFeatures from '../../digital-signage/DSFeatures'
 import Types from '../../digital-signage/Types'
+import HowItWorks from '../../digital-signage/HowItWorks'
 
 const DigitalSignage = () => {
   return (
@@ -61,6 +62,9 @@ const DigitalSignage = () => {
 
             {/* Types of Digital Signage */}
             <Types />
+
+            {/* How it works */}
+            <HowItWorks />
         </div>
     </section>
   )

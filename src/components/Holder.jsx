@@ -1,200 +1,104 @@
-import React, { useState } from 'react'
-import { Lightbulb, Monitor, TouchpadOff, LayoutGrid, UtensilsCrossed, Sun } from 'lucide-react'
-import { glass, glassHover } from '../CCTV-Holder'
-import { glassStrong, innerSurface } from './digitalStyles'
+import React, { useState, useEffect } from 'react'
+import { MessageSquare, MonitorCheck, Wrench, LayoutTemplate, HeadphonesIcon } from 'lucide-react'
+import { glass } from '../CCTV-Holder'
+import { glassStrong } from './digitalStyles'
 
-const types = [
+const steps = [
   {
-    id: 1,
-    icon: <Lightbulb size={18} />,
-    badge: 'High Brightness',
-    badgeColor: '#fbbf24',
-    badgeBg: 'rgba(251,191,36,0.12)',
-    badgeBorder: 'rgba(251,191,36,0.3)',
-    title: 'LED Displays',
-    label: 'Vibrant · Energy Efficient',
+    number: '01',
+    icon: MessageSquare,
+    title: 'Consultation',
+    label: 'Understanding Your Needs',
     description:
-      'LED displays deliver exceptional brightness, vivid colour accuracy, and long operational lifespans — making them ideal for high-traffic environments where impact matters. Ultra-thin bezels and modular panel designs allow for seamless large-format installations.',
-    highlights: ['Up to 100,000hr lifespan', 'Ultra-high brightness', 'Modular panel design'],
-    image: '/images/signage/led.jpg',
-    imageFallbackBg: 'linear-gradient(135deg, rgba(251,191,36,0.25), rgba(45,74,107,0.9))',
+      'We begin with a thorough discovery session to understand your goals, audience, locations, and budget. Our consultants map out the right signage strategy before a single screen is specified.',
+    highlights: ['Site walkthrough', 'Goals & budget review', 'Audience analysis'],
+    accent: '#93c5fd',
+    accentBg: 'rgba(147,197,253,0.1)',
+    accentBorder: 'rgba(147,197,253,0.25)',
   },
   {
-    id: 2,
-    icon: <Monitor size={18} />,
-    badge: 'Versatile',
-    badgeColor: '#93c5fd',
-    badgeBg: 'rgba(147,197,253,0.12)',
-    badgeBorder: 'rgba(147,197,253,0.3)',
-    title: 'LCD Screens',
-    label: 'Sharp · Cost-Effective',
+    number: '02',
+    icon: MonitorCheck,
+    title: 'Display Selection',
+    label: 'Right Screen for the Job',
     description:
-      'LCD screens are the most widely deployed digital signage format — offering sharp resolution, wide viewing angles, and competitive pricing. Available in portrait or landscape orientations, they suit retail, corporate lobbies, and waiting areas.',
-    highlights: ['4K resolution options', 'Wide viewing angles', 'Portrait & landscape'],
-    image: '/images/signage/lcd.jpg',
-    imageFallbackBg: 'linear-gradient(135deg, rgba(147,197,253,0.2), rgba(45,74,107,0.9))',
+      'Based on your consultation, we recommend the best hardware — LED, LCD, outdoor, interactive, or video wall — matched precisely to your environment, footfall, and content requirements.',
+    highlights: ['Hardware specification', 'Environment matching', 'Future-proof selection'],
+    accent: '#a78bfa',
+    accentBg: 'rgba(167,139,250,0.1)',
+    accentBorder: 'rgba(167,139,250,0.25)',
   },
   {
-    id: 3,
-    icon: <TouchpadOff size={18} />,
-    badge: 'Interactive',
-    badgeColor: '#5eead4',
-    badgeBg: 'rgba(94,234,212,0.12)',
-    badgeBorder: 'rgba(94,234,212,0.3)',
-    title: 'Interactive Kiosks',
-    label: 'Self-Service · Engaging',
+    number: '03',
+    icon: Wrench,
+    title: 'Installation',
+    label: 'Clean & Professional',
     description:
-      'Interactive kiosks turn passive viewers into active users. With multi-touch screens, wayfinding maps, self-checkout, and product discovery tools — kiosks reduce staff workload while improving the customer experience.',
-    highlights: ['Multi-touch display', 'Wayfinding & self-checkout', 'ADA compliant options'],
-    image: '/images/signage/kiosk.jpg',
-    imageFallbackBg: 'linear-gradient(135deg, rgba(94,234,212,0.2), rgba(45,74,107,0.9))',
+      'Our certified engineers handle full installation — mounting, cabling, media players, and network setup — with minimal disruption to your operation. Every install is tested on-site before sign-off.',
+    highlights: ['Full hardware install', 'Network & media setup', 'On-site testing'],
+    accent: '#4ade80',
+    accentBg: 'rgba(74,222,128,0.1)',
+    accentBorder: 'rgba(74,222,128,0.25)',
   },
   {
-    id: 4,
-    icon: <LayoutGrid size={18} />,
-    badge: 'Large Format',
-    badgeColor: '#a78bfa',
-    badgeBg: 'rgba(167,139,250,0.12)',
-    badgeBorder: 'rgba(167,139,250,0.3)',
-    title: 'Video Walls',
-    label: 'Immersive · Impactful',
+    number: '04',
+    icon: LayoutTemplate,
+    title: 'Content Setup',
+    label: 'Ready to Broadcast',
     description:
-      'Video walls combine multiple displays into a single seamless canvas — creating immersive brand experiences at scale. Used in control rooms, broadcast studios, retail flagships, and event spaces. Bezel-free and ultra-thin configurations available.',
-    highlights: ['Seamless bezel-free joins', 'Any size configuration', 'Control room ready'],
-    image: '/images/signage/videowall.jpg',
-    imageFallbackBg: 'linear-gradient(135deg, rgba(167,139,250,0.25), rgba(45,74,107,0.9))',
+      'We configure your CMS, load your brand assets, set up playlists, schedules, and templates — so your screens are live and looking great from day one. Training included.',
+    highlights: ['CMS configuration', 'Schedule & playlist setup', 'Team training included'],
+    accent: '#fbbf24',
+    accentBg: 'rgba(251,191,36,0.1)',
+    accentBorder: 'rgba(251,191,36,0.25)',
   },
   {
-    id: 5,
-    icon: <UtensilsCrossed size={18} />,
-    badge: 'Food & Retail',
-    badgeColor: '#4ade80',
-    badgeBg: 'rgba(74,222,128,0.12)',
-    badgeBorder: 'rgba(74,222,128,0.3)',
-    title: 'Menu Boards',
-    label: 'Dynamic · Appetising',
+    number: '05',
+    icon: HeadphonesIcon,
+    title: 'Ongoing Management',
+    label: 'We Stay With You',
     description:
-      'Digital menu boards let hospitality and retail businesses update pricing, promotions, and availability instantly — no printing, no delay. Daypart scheduling automatically switches content for breakfast, lunch, and dinner without manual input.',
-    highlights: ['Instant price updates', 'Daypart scheduling', 'POS integration ready'],
-    image: '/images/signage/menuboard.jpg',
-    imageFallbackBg: 'linear-gradient(135deg, rgba(74,222,128,0.2), rgba(45,74,107,0.9))',
-  },
-  {
-    id: 6,
-    icon: <Sun size={18} />,
-    badge: 'Weatherproof',
-    badgeColor: '#f87171',
-    badgeBg: 'rgba(248,113,113,0.12)',
-    badgeBorder: 'rgba(248,113,113,0.3)',
-    title: 'Outdoor Digital Displays',
-    label: 'Rugged · All-Weather',
-    description:
-      'Outdoor displays are engineered to perform in rain, dust, direct sunlight, and extreme temperatures. High-brightness panels (up to 5,000 nits) ensure visibility in full daylight, while IP65-rated enclosures protect hardware year-round.',
-    highlights: ['Up to 5,000 nit brightness', 'IP65 weatherproof rated', 'Anti-glare coating'],
-    image: '/images/signage/outdoor.jpg',
-    imageFallbackBg: 'linear-gradient(135deg, rgba(248,113,113,0.2), rgba(45,74,107,0.9))',
+      'Post-launch, we provide remote monitoring, content updates, firmware management, and a dedicated support line — keeping your network performing at its best 24/7.',
+    highlights: ['Remote monitoring', 'Content & firmware updates', '24/7 support line'],
+    accent: '#5eead4',
+    accentBg: 'rgba(94,234,212,0.1)',
+    accentBorder: 'rgba(94,234,212,0.25)',
   },
 ]
 
-function TypeCard({ type, index }) {
-  const [hovered, setHovered] = useState(false)
+function StepConnector({ accent }) {
   return (
-    <div
-      className="rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-0.5"
-      style={hovered ? glassHover : glass}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {/* Image */}
-      <div className="relative w-full overflow-hidden shrink-0" style={{ height: 160 }}>
-        <div className="absolute inset-0" style={{ background: type.imageFallbackBg }} />
-        <img
-          src={type.image}
-          alt={type.title}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ opacity: 0.8 }}
-          onError={e => { e.currentTarget.style.display = 'none' }}
-        />
-        <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.2)' }} />
-
-        {/* Badge */}
-        <div className="absolute top-3 left-3">
-          <span
-            className="text-xs font-semibold px-2.5 py-1 rounded-full"
-            style={{
-              background: type.badgeBg,
-              border: `1px solid ${type.badgeBorder}`,
-              color: type.badgeColor,
-            }}
-          >
-            {type.badge}
-          </span>
-        </div>
-
-        {/* Step number watermark */}
-        <div
-          className="absolute bottom-2 right-3 font-black select-none"
-          style={{
-            fontSize: 44,
-            color: 'rgba(255,255,255,0.07)',
-            lineHeight: 1,
-            fontFamily: 'monospace',
-          }}
-        >
-          {String(index + 1).padStart(2, '0')}
-        </div>
-      </div>
-
-      {/* Text */}
-      <div className="flex flex-col gap-3 p-5 flex-1">
-        {/* Icon + label */}
-        <div className="flex items-center gap-2.5">
+    <div className="hidden lg:flex items-center justify-center w-8 shrink-0 mt-8">
+      <div className="flex flex-col items-center gap-1">
+        {[0, 1, 2].map(i => (
           <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+            key={i}
+            className="rounded-full"
             style={{
-              background: type.badgeBg,
-              color: type.badgeColor,
-              border: `1px solid ${type.badgeBorder}`,
+              width: 3,
+              height: 3,
+              background: accent,
+              opacity: 1 - i * 0.25,
             }}
-          >
-            {type.icon}
-          </div>
-          <span
-            className="text-xs font-medium tracking-wide"
-            style={{ color: 'rgba(255,255,255,0.45)' }}
-          >
-            {type.label}
-          </span>
-        </div>
-
-        {/* Title */}
-        <h3 className="text-base font-semibold text-white leading-snug">
-          {type.title}
-        </h3>
-
-        {/* Description */}
-        <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.58)' }}>
-          {type.description}
-        </p>
-
-        {/* Highlights */}
-        <div className="flex flex-col gap-1.5 mt-auto pt-2">
-          {type.highlights.map(h => (
-            <div key={h} className="flex items-center gap-2">
-              <div
-                className="w-1.5 h-1.5 rounded-full shrink-0"
-                style={{ background: type.badgeColor }}
-              />
-              <span className="text-xs" style={{ color: 'rgba(255,255,255,0.65)' }}>{h}</span>
-            </div>
-          ))}
-        </div>
+          />
+        ))}
       </div>
     </div>
   )
 }
 
-const SignageTypes = () => {
+const HowItWorks = () => {
+  const [activeStep, setActiveStep] = useState(0)
+
+  useEffect(() => {
+    const iv = setInterval(() => {
+      setActiveStep(s => (s + 1) % steps.length)
+    }, 2800)
+    return () => clearInterval(iv)
+  }, [])
+
+  const active = steps[activeStep]
+
   return (
     <div className="w-full px-4 md:px-6 py-16 md:py-24">
       <div className="max-w-5xl mx-auto">
@@ -205,34 +109,265 @@ const SignageTypes = () => {
             className="text-xs font-semibold tracking-widest uppercase mb-4"
             style={{ color: 'rgba(255,255,255,0.45)' }}
           >
-            What We Supply & Install
+            Our Process
           </p>
           <h2 className="text-3xl md:text-5xl font-light text-white leading-tight mb-4">
-            Types of Digital Signage
+            How It Works
           </h2>
           <p
             className="text-sm md:text-base max-w-xl mx-auto leading-relaxed"
             style={{ color: 'rgba(255,255,255,0.55)' }}
           >
-            From indoor retail screens to weatherproof outdoor displays — we supply,
-            install, and manage every format of digital signage.
+            From first conversation to live screens — a clear, managed process
+            with no surprises.
           </p>
         </div>
 
         {/* ── Bento grid ──
-            Row 1: [LED — wide 2col] [LCD — 1col]
-            Row 2: [Kiosk — 1col]   [Video Wall — wide 2col]
-            Row 3: [Menu Board — wide 2col] [Outdoor — 1col]
+            Top: stepper progress bar (full width)
+            Row 1: Active step detail (wide 2col) | Quick summary list (1col)
+            Row 2: 5 mini step cards full width
         ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {types.map((type, index) => (
-            <TypeCard key={type.id} type={type} index={index} />
-          ))}
-        </div>
+        <div className="flex flex-col gap-4">
 
+          {/* Stepper bar */}
+          <div
+            className="rounded-2xl px-6 py-4"
+            style={glass}
+          >
+            <div className="flex items-center">
+              {steps.map((step, i) => {
+                const Icon = step.icon
+                const isActive = i === activeStep
+                const isDone = i < activeStep
+                return (
+                  <React.Fragment key={step.number}>
+                    <button
+                      onClick={() => setActiveStep(i)}
+                      className="flex items-center gap-2 shrink-0 transition-all duration-300"
+                    >
+                      <div
+                        className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300"
+                        style={{
+                          background: isActive ? step.accentBg : isDone ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.05)',
+                          border: `1.5px solid ${isActive ? step.accent : isDone ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.1)'}`,
+                          color: isActive ? step.accent : isDone ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.25)',
+                          boxShadow: isActive ? `0 0 14px ${step.accent}40` : 'none',
+                        }}
+                      >
+                        <Icon size={14} />
+                      </div>
+                      <span
+                        className="text-xs font-medium hidden sm:block transition-all duration-300"
+                        style={{ color: isActive ? 'white' : 'rgba(255,255,255,0.35)' }}
+                      >
+                        {step.title}
+                      </span>
+                    </button>
+
+                    {i < steps.length - 1 && (
+                      <div
+                        className="flex-1 mx-2 h-px transition-all duration-500"
+                        style={{
+                          background: i < activeStep
+                            ? steps[i].accent
+                            : 'rgba(255,255,255,0.1)',
+                        }}
+                      />
+                    )}
+                  </React.Fragment>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Main content row */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+            {/* Active step detail — wide */}
+            <div
+              className="md:col-span-2 rounded-2xl p-7 flex flex-col gap-5 transition-all duration-500"
+              style={glassStrong}
+            >
+              {/* Step number + icon */}
+              <div className="flex items-center gap-4">
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-300"
+                  style={{
+                    background: active.accentBg,
+                    border: `1px solid ${active.accentBorder}`,
+                    color: active.accent,
+                  }}
+                >
+                  {React.createElement(active.icon, { size: 24 })}
+                </div>
+                <div>
+                  <span
+                    className="text-xs font-semibold tracking-widest"
+                    style={{ color: active.accent, fontFamily: 'monospace' }}
+                  >
+                    STEP {active.number}
+                  </span>
+                  <h3 className="text-xl font-semibold text-white leading-snug mt-0.5">
+                    {active.title}
+                  </h3>
+                </div>
+              </div>
+
+              {/* Description */}
+              <p
+                className="text-sm leading-relaxed"
+                style={{ color: 'rgba(255,255,255,0.65)' }}
+              >
+                {active.description}
+              </p>
+
+              {/* Highlights */}
+              <div className="flex flex-col gap-2.5">
+                {active.highlights.map(h => (
+                  <div key={h} className="flex items-center gap-3">
+                    <div
+                      className="w-5 h-5 rounded-md flex items-center justify-center shrink-0"
+                      style={{ background: active.accentBg, border: `1px solid ${active.accentBorder}` }}
+                    >
+                      <div
+                        className="w-1.5 h-1.5 rounded-full"
+                        style={{ background: active.accent }}
+                      />
+                    </div>
+                    <span className="text-sm" style={{ color: 'rgba(255,255,255,0.75)' }}>{h}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Progress dots */}
+              <div className="flex items-center gap-2 mt-auto pt-2">
+                {steps.map((s, i) => (
+                  <button
+                    key={s.number}
+                    onClick={() => setActiveStep(i)}
+                    className="rounded-full transition-all duration-300"
+                    style={{
+                      width: i === activeStep ? 20 : 6,
+                      height: 6,
+                      background: i === activeStep ? active.accent : 'rgba(255,255,255,0.18)',
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Summary list */}
+            <div
+              className="md:col-span-1 rounded-2xl p-5 flex flex-col gap-2"
+              style={glass}
+            >
+              <p
+                className="text-xs font-semibold tracking-widest uppercase mb-2"
+                style={{ color: 'rgba(255,255,255,0.35)' }}
+              >
+                All Steps
+              </p>
+              {steps.map((step, i) => {
+                const Icon = step.icon
+                const isActive = i === activeStep
+                return (
+                  <button
+                    key={step.number}
+                    onClick={() => setActiveStep(i)}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-left w-full transition-all duration-300"
+                    style={{
+                      background: isActive ? step.accentBg : 'transparent',
+                      border: `1px solid ${isActive ? step.accentBorder : 'rgba(255,255,255,0.06)'}`,
+                    }}
+                  >
+                    <div
+                      className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300"
+                      style={{
+                        background: isActive ? step.accentBg : 'rgba(255,255,255,0.07)',
+                        color: isActive ? step.accent : 'rgba(255,255,255,0.35)',
+                        border: `1px solid ${isActive ? step.accentBorder : 'rgba(255,255,255,0.08)'}`,
+                      }}
+                    >
+                      <Icon size={13} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div
+                        className="text-xs font-medium leading-tight"
+                        style={{ color: isActive ? 'white' : 'rgba(255,255,255,0.55)' }}
+                      >
+                        {step.title}
+                      </div>
+                      <div
+                        className="text-xs mt-0.5 truncate"
+                        style={{ color: isActive ? step.accent : 'rgba(255,255,255,0.25)', fontSize: 10 }}
+                      >
+                        {step.label}
+                      </div>
+                    </div>
+                    <span
+                      className="text-xs shrink-0"
+                      style={{ color: 'rgba(255,255,255,0.2)', fontFamily: 'monospace' }}
+                    >
+                      {step.number}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Bottom mini cards — one per step */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+            {steps.map((step, i) => {
+              const Icon = step.icon
+              const isActive = i === activeStep
+              return (
+                <button
+                  key={step.number}
+                  onClick={() => setActiveStep(i)}
+                  className="rounded-xl p-4 text-left transition-all duration-300 hover:-translate-y-0.5"
+                  style={{
+                    background: isActive ? step.accentBg : 'rgba(255,255,255,0.05)',
+                    border: `1px solid ${isActive ? step.accentBorder : 'rgba(255,255,255,0.09)'}`,
+                    backdropFilter: 'blur(12px)',
+                  }}
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <div
+                      className="w-7 h-7 rounded-lg flex items-center justify-center"
+                      style={{
+                        background: isActive ? `${step.accent}25` : 'rgba(255,255,255,0.08)',
+                        color: isActive ? step.accent : 'rgba(255,255,255,0.4)',
+                      }}
+                    >
+                      <Icon size={13} />
+                    </div>
+                    <span
+                      className="text-xs font-bold"
+                      style={{
+                        color: isActive ? step.accent : 'rgba(255,255,255,0.15)',
+                        fontFamily: 'monospace',
+                      }}
+                    >
+                      {step.number}
+                    </span>
+                  </div>
+                  <div
+                    className="text-xs font-semibold leading-tight"
+                    style={{ color: isActive ? 'white' : 'rgba(255,255,255,0.5)' }}
+                  >
+                    {step.title}
+                  </div>
+                </button>
+              )
+            })}
+          </div>
+
+        </div>
       </div>
     </div>
   )
 }
 
-export default SignageTypes
+export default HowItWorks

@@ -1,4 +1,15 @@
-import { Lightbulb, Monitor, TouchpadOff, LayoutGrid, UtensilsCrossed, Sun } from 'lucide-react'
+import { Lightbulb, 
+        Monitor, 
+        TouchpadOff,
+        LayoutGrid, 
+        UtensilsCrossed, 
+        Sun, 
+        MessageSquare, 
+        MonitorCheck,
+        Wrench, 
+        LayoutTemplate, 
+        HeadphonesIcon
+    } from 'lucide-react'
 
 export const types = [
     {
@@ -85,5 +96,63 @@ export const types = [
         highlights: ['Up to 5,000 nit brightness', 'IP65 weatherproof rated', 'Anti-glare coating'],
         image: '/images/max.jpg',
         imageFallbackBg: 'linear-gradient(135deg, rgba(248,113,113,0.2), rgba(45,74,107,0.9))',
+    },
+];
+
+export const steps = [
+    {
+        number: '01',
+        icon: MessageSquare,
+        title: 'Consultation',
+        label: 'Understanding Your Needs',
+        description: 'We begin with a thorough discovery session to understand your goals, audience, locations, and budget. Our consultants map out the right signage strategy before a single screen is specified.',
+        highlights: ['Site walkthrough', 'Goals & budget review', 'Audience analysis'],
+        accent: '#93c5fd',
+        accentBg: 'rgba(147,197,253,0.1)',
+        accentBorder: 'rgba(147,197,253,0.25)',   
+    },
+    {
+        number: '02',
+        icon: MonitorCheck,
+        title: 'Display Selection',
+        label: 'Right Screen for the Job',
+        description: 'Based on your consultation, we recommend the best hardware — LED, LCD, outdoor, interactive, or video wall — matched precisely to your environment, footfall, and content requirements.',
+        highlights: ['Hardware specification', 'Environment matching', 'Future-proof selection'],
+        accent: '#a78bfa',
+        accentBg: 'rgba(167,139,250,0.1)',
+        accentBorder: 'rgba(167,139,250,0.25)',
+    },
+    {
+        number: '03',
+        icon: Wrench,
+        title: 'Installation',
+        label: 'Clean & Professional',
+        description: 'Our certified engineers handle full installation — mounting, cabling, media players, and network setup — with minimal disruption to your operation. Every install is tested on-site before sign-off.',
+        highlights: ['Full hardware install', 'Network & media setup', 'On-site testing'],
+        accent: '#4ade80',
+        accentBg: 'rgba(74,222,128,0.1)',
+        accentBorder: 'rgba(74,222,128,0.25)',
+    },
+    {
+        number: '04',
+        icon: LayoutTemplate,
+        title: 'Content Setup',
+        label: 'Ready to Broadcast',
+        description: 'We configure your CMS, load your brand assets, set up playlists, schedules, and templates — so your screens are live and looking great from day one. Training included.',
+        highlights: ['CMS configuration', 'Schedule & playlist setup', 'Team training included'],
+        accent: '#fbbf24',
+        accentBg: 'rgba(251,191,36,0.1)',
+        accentBorder: 'rgba(251,191,36,0.25)',
+    },
+    {
+        number: '05',
+        icon: HeadphonesIcon,
+        title: 'Ongoing Management',
+        label: 'We Stay With You',
+        description: 'Post-launch, we provide remote monitoring, content updates, firmware management, and a dedicated support line — keeping your network performing at its best 24/7.',
+        highlights: ['Remote monitoring', 'Content & firmware updates', '24/7 support line'],
+        accent: '#5eead4',
+        accentBg: 'rgba(94,234,212,0.1)',
+        accentBorder: 'rgba(94,234,212,0.25)',
     },
 ];
