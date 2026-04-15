@@ -8,8 +8,14 @@ import { Lightbulb,
         MonitorCheck,
         Wrench, 
         LayoutTemplate, 
-        HeadphonesIcon
+        HeadphonesIcon,
+        Cloud, 
+        ShoppingCart, 
+        Plug, 
+        Radio
     } from 'lucide-react'
+
+import {CloudCmsMockup, PosMockup, ApiMockup, DataFeedMockup} from './IntegrationComponents'
 
 export const types = [
     {
@@ -156,3 +162,72 @@ export const steps = [
         accentBorder: 'rgba(94,234,212,0.25)',
     },
 ];
+
+export const platforms = [
+    {name: "Screenly", color: "#93c5fd", status:'Connected'},
+    {name: "Yodeck", color: "#4ade80", status:'Connected'},
+    {name: "NoviSign", color: "#a78bfa", status:'Available'},
+    {name: "ScreenCloud", color: "#fbbf24", status:'Available'},
+];
+
+export const endpoints = [
+    { method: 'POST', path: '/screens/push',    color: '#4ade80' },
+    { method: 'GET',  path: '/screens/status',  color: '#93c5fd' },
+    { method: 'PUT',  path: '/schedule/update', color: '#fbbf24' },
+    { method: 'DEL',  path: '/content/:id',     color: '#f87171' }, 
+]
+
+export const cards = [
+    {
+      id: 'cms',
+      icon: Cloud,
+      accent: '#93c5fd',
+      accentBg: 'rgba(147,197,253,0.12)',
+      accentBorder: 'rgba(147,197,253,0.28)',
+      label: 'Cloud Infrastructure',
+      title: 'Cloud CMS Platforms',
+      description: 'Deploy and manage content across all your screens through industry-leading cloud CMS platforms. We integrate with Screenly, Yodeck, NoviSign, ScreenCloud and more — or connect your existing platform of choice.',
+      highlights: ['Multi-platform support', 'Browser-based management', 'Auto software updates'],
+      mockup: CloudCmsMockup,
+      wide: true,
+    },
+    {
+      id: 'pos',
+      icon: ShoppingCart,
+      accent: '#4ade80',
+      accentBg: 'rgba(74,222,128,0.12)',
+      accentBorder: 'rgba(74,222,128,0.28)',
+      label: 'Point of Sale',
+      title: 'POS System Integration',
+      description: 'Sync your digital signage directly with your point-of-sale system. Menu prices, stock levels, and promotions update on screen the moment they change in your POS — no manual editing required.',
+      highlights: ['Auto price sync', 'Stock-aware content', 'Works with Square, Lightspeed & more'],
+      mockup: PosMockup,
+      wide: false,
+    },
+    {
+      id: 'api',
+      icon: Plug,
+      accent: '#a78bfa',
+      accentBg: 'rgba(167,139,250,0.12)',
+      accentBorder: 'rgba(167,139,250,0.28)',
+      label: 'Developer-Friendly',
+      title: 'API Integrations',
+      description: 'Our open REST API lets developers connect any external system to your signage network. Trigger content changes, pull screen status, update schedules, and automate workflows from your own applications.',
+      highlights: ['Full REST API', 'Webhook support', 'OAuth 2.0 authentication'],
+      mockup: ApiMockup,
+      wide: false,
+    },
+    {
+      id: 'feeds',
+      icon: Radio,
+      accent: '#fbbf24',
+      accentBg: 'rgba(251,191,36,0.12)',
+      accentBorder: 'rgba(251,191,36,0.28)',
+      label: 'Live Data',
+      title: 'Real-Time Data Feeds',
+      description:'Pull live data directly onto your screens — weather, currency rates, sports scores, social feeds, visitor counters, and custom business metrics. Content stays fresh and relevant without manual updates.',
+      highlights: ['Weather & news feeds', 'Custom data sources', 'Auto-refresh intervals'],
+      mockup: DataFeedMockup,
+      wide: true,
+    },
+]
