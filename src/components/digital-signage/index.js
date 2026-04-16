@@ -12,7 +12,10 @@ import { Lightbulb,
         Cloud, 
         ShoppingCart, 
         Plug, 
-        Radio
+        Radio, 
+        Sliders, 
+        Shield, 
+        MousePointerClick, 
     } from 'lucide-react'
 
 import {CloudCmsMockup, PosMockup, ApiMockup, DataFeedMockup} from './IntegrationComponents'
@@ -230,4 +233,59 @@ export const cards = [
       mockup: DataFeedMockup,
       wide: true,
     },
+]
+
+export const trustPoints = [
+  {
+    id: 1,
+    icon: Sliders,
+    accent: '#93c5fd',
+    eyebrow: 'Tailored for You',
+    title: 'Custom Display Solutions',
+    description: 'No two businesses are alike. We design and configure every display system around your space, brand, and goals — from screen size and placement to content layout and scheduling.',
+    stats: [
+      { value: '100%', label: 'Bespoke builds' },
+      { value: '50+', label: 'Install types' },
+    ],
+    highlights: ['Site survey & consultation', 'Brand-matched content templates', 'Scalable from 1 to 100+ screens'],
+  },
+  {
+    id: 2,
+    icon: Shield,
+    accent: '#4ade80',
+    eyebrow: 'Built to Last',
+    title: 'Reliable Hardware',
+    description: 'We source commercial-grade displays rated for 16/7 and 24/7 operation. Every unit is tested before installation, backed by manufacturer warranties and our own service guarantee.',
+    stats: [
+      { value: '24/7', label: 'Rated operation' },
+      { value: '3yr', label: 'Avg. warranty' },
+    ],
+    highlights: ['Commercial-grade panels only', 'Pre-install burn-in testing', 'Redundant power options'],
+  },
+  {
+    id: 3,
+    icon: MousePointerClick,
+    accent: '#a78bfa',
+    eyebrow: 'No Learning Curve',
+    title: 'Easy-to-Use Systems',
+    description: 'Our CMS platforms are designed for everyday users — not IT departments. Update content, schedule campaigns, and manage screens from any device in minutes.',
+    stats: [
+      { value: '<5min', label: 'To update content' },
+      { value: 'Any', label: 'Device, anywhere' },
+    ],
+    highlights: ['Drag-and-drop content editor', 'Remote screen management', 'Role-based access controls'],
+  },
+  {
+    id: 4,
+    icon: HeadphonesIcon,
+    accent: '#fbbf24',
+    eyebrow: 'Always Here',
+    title: 'Full Support',
+    description: 'From installation day onward, our team is on call. We offer remote monitoring, on-site servicing, staff training, and proactive maintenance — so your screens never go dark.',
+    stats: [
+      { value: '< 4hr', label: 'Response time' },
+      { value: 'Free', label: 'Staff training' },
+    ],
+    highlights: ['Remote diagnostics & monitoring', 'On-site repair service', 'Dedicated account manager'],
+  },
 ]

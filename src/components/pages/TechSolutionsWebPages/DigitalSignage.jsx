@@ -6,6 +6,7 @@ import DSFeatures from '../../digital-signage/DSFeatures'
 import Types from '../../digital-signage/Types'
 import HowItWorks from '../../digital-signage/HowItWorks'
 import IntegrationTech from '../../digital-signage/IntegrationTech'
+import TrustUs from '../../digital-signage/TrustUs'
 
 const DigitalSignage = () => {
   return (
@@ -69,6 +70,15 @@ const DigitalSignage = () => {
 
             {/* Technology Integration */}
             <IntegrationTech />
+
+            {/* Why Choose us */}
+            <TrustUs />
+
+            {/* Contact us section */}
+            <Contact />
+
+            {/* Footer Section */}
+            <Footer />
         </div>
     </section>
   )
