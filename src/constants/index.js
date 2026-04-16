@@ -93,7 +93,7 @@ const accessSolutionNavlinks = [
     link: "/"
   },
   {
-    name: "Tech Solutions",
+    name: "Solutions",
     link: "/tech-solutions"
   },
   {
@@ -168,6 +168,30 @@ const digitalSignageNavlinks = [
   }
 ];
 
+const SoftwareSecurityNavlinks = [
+  {
+    name: "Home",
+    link: "/"
+  },
+  {
+    name: "Solutions",
+    link: "/tech-solutions"
+  },
+  {
+    name: "Features",
+    link: "#features",
+  },
+  {
+    name: "Aspects of Protection",
+    link: "#aspects"
+  },
+  {
+    name: "Why Choose Us",
+    link: "#whyUs"
+  },
+
+];
+
 const techServices = [
   {
     title: "Maintenance",
@@ -214,6 +238,12 @@ const techSolutionsItems = [
     description: "Engage your audience with dynamic digital signage solutions that captivate and inform.",
     image: "/images/Leon3.jpg",
     route: "/tech-solutions/digital-signage"
+  },
+  {
+    title: "Software Security",
+    description: "Secure your enterprise with robust software solutions that protect and empower.",
+    image: "/images/Leon3.jpg",
+    route: "/tech-solutions/software-security"
   },
 ];
 
@@ -384,4 +414,5 @@ export { Main_navLinks,
          accessSolutionNavlinks,
          cctvNavlinks,
          digitalSignageNavlinks,
+         SoftwareSecurityNavlinks
         };
