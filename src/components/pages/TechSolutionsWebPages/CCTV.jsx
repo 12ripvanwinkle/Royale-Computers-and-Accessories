@@ -4,8 +4,8 @@ import TitleHeader from '../../TitleHeader'
 
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
-import { Features, Systems, TrustUs } from '../../../components/CCTV-Holder';
-import {StepFlow} from '../../../components/access-control';
+import { Features, Systems, TrustUs } from '../../Aspects/CCTV-Holder';
+import {StepFlow} from '../../Aspects/access-control';
 
 
 function Faqs() {

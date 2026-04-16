@@ -13,7 +13,7 @@ import {
   CctvCard,
   StepFlow,
   WhyChooseUs,
-} from "../../../components/access-control";
+} from "../../Aspects/access-control";
 
 function Faqs() {
   

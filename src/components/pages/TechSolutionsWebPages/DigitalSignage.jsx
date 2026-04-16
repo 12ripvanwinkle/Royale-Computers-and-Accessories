@@ -2,11 +2,11 @@ import React from 'react'
 import TitleHeader from '../../TitleHeader'
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
-import DSFeatures from '../../digital-signage/DSFeatures'
-import Types from '../../digital-signage/Types'
-import HowItWorks from '../../digital-signage/HowItWorks'
-import IntegrationTech from '../../digital-signage/IntegrationTech'
-import TrustUs from '../../digital-signage/TrustUs'
+import DSFeatures from '../../Aspects/digital-signage/DSFeatures'
+import Types from '../../Aspects/digital-signage/DSFeatures'
+import HowItWorks from '../../Aspects/digital-signage/DSFeatures'
+import IntegrationTech from '../../Aspects/digital-signage/DSFeatures'
+import TrustUs from '../../Aspects/digital-signage/DSFeatures'
 
 const DigitalSignage = () => {
   return (
