@@ -5,8 +5,15 @@ import {
   Plug,
   Users,
   Activity,
-  ClipboardList,
+  ClipboardList, 
+  AppWindow, 
+  Cloud, 
+  Plug2, 
+  UserCheck, 
+  DatabaseZap
 } from 'lucide-react'
+
+import { AppSecMockup, CloudMockup, ApiMockup, IamMockup, DataMockup } from './ProtectionComponents';
 
 export const features = [
   {
@@ -85,5 +92,82 @@ export const features = [
     highlights: ['Annual third-party audits', 'Compliance documentation', 'Remediation support'],
     stat: { value: 'Annual', label: 'Full audit cycle' },
     wide: true,
+  },
+];
+
+export const layers = [
+    { label: 'Input Validation', status: 'pass', color: '#4ade80' },
+    { label: 'Auth Middleware', status: 'pass', color: '#4ade80' },
+    { label: 'SQL Injection', status: 'blocked', color: '#f87171' },
+    { label: 'XSS Filter', status: 'pass', color: '#4ade80' },
+];
+
+export const calls = [
+    { method: 'GET', path: '/api/users', status: 200 },
+    { method: 'POST', path: '/api/auth', status: 401 },
+    { method: 'DELETE', path: '/api/data', status: 403 },
+];
+
+export const roles = [
+    { role: 'Admin', perms: 'Full access', color: '#f87171' },
+    { role: 'Editor', perms: 'Read + Write', color: '#fbbf24' },
+    { role: 'Viewer', perms: 'Read only', color: '#4ade80' },
+];
+
+export const protections = [
+  {
+    id: 1,
+    icon: AppWindow,
+    accent: '#f87171',
+    eyebrow: 'App Layer',
+    title: 'Application Security',
+    description: 'Protect your software at every layer — from input validation and authentication middleware to XSS filtering and SQL injection prevention. Code-level and runtime defences working together.',
+    highlights: ['OWASP Top 10 coverage', 'Runtime app self-protection', 'Secure SDLC integration'],
+    mockup: AppSecMockup,
+    colSpan: 'md:col-span-3',
+  },
+  {
+    id: 2,
+    icon: Cloud,
+    accent: '#93c5fd',
+    eyebrow: 'Infrastructure',
+    title: 'Cloud Security',
+    description: 'Secure multi-cloud and hybrid environments with continuous posture management, workload protection, and region-level monitoring across all your cloud infrastructure.',
+    highlights: ['CSPM & CWPP', 'Multi-region coverage', 'Zero-trust networking'],
+    mockup: CloudMockup,
+    colSpan: 'md:col-span-3',
+  },
+  {
+    id: 3,
+    icon: Plug2,
+    accent: '#a78bfa',
+    eyebrow: 'Integration Security',
+    title: 'API Security',
+    description: 'Authenticate, rate-limit, and monitor every API call. Prevent injection attacks, enforce schema validation, and log all gateway traffic for full audit trails.',
+    highlights: ['OAuth 2.0 & JWT auth', 'Schema validation', 'Rate limiting & DDoS shield'],
+    mockup: ApiMockup,
+    colSpan: 'md:col-span-2',
+  },
+  {
+    id: 4,
+    icon: UserCheck,
+    accent: '#fbbf24',
+    eyebrow: 'Access Control',
+    title: 'Identity & Access Management',
+    description: 'Define and enforce who can access what — with granular role-based permissions, SSO, MFA, and full audit trails for every identity in your organisation.',
+    highlights: ['SSO & MFA enforced', 'Granular RBAC', 'Privileged access management'],
+    mockup: IamMockup,
+    colSpan: 'md:col-span-2',
+  },
+  {
+    id: 5,
+    icon: DatabaseZap,
+    accent: '#5eead4',
+    eyebrow: 'Privacy & Compliance',
+    title: 'Data Protection',
+    description: 'Encrypt sensitive data at rest and in transit, mask PII in logs, and enforce retention policies — keeping you compliant with GDPR, HIPAA, and industry standards.',
+    highlights: ['AES-256 + TLS 1.3', 'PII masking & tokenisation', 'GDPR / HIPAA ready'],
+    mockup: DataMockup,
+    colSpan: 'md:col-span-2',
   },
 ];

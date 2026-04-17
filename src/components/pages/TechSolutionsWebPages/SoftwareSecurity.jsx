@@ -3,6 +3,7 @@ import TitleHeader from '../../TitleHeader'
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
 import Features from '../../Aspects/Software-security/Features'
+import Protection from '../../Aspects/Software-security/Protection'
 
 const SoftwareSecurity = () => {
   return (
@@ -60,6 +61,9 @@ const SoftwareSecurity = () => {
 
         {/* Features */}
         <Features />
+
+        {/* Aspects of Protection */}
+        <Protection />
       </div>
     </div>
   )
