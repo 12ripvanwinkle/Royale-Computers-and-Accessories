@@ -2,6 +2,7 @@ import React from 'react'
 import TitleHeader from '../../TitleHeader'
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
+import Features from '../../Aspects/Software-security/Features'
 
 const SoftwareSecurity = () => {
   return (
@@ -58,7 +59,7 @@ const SoftwareSecurity = () => {
         </div>
 
         {/* Features */}
-
+        <Features />
       </div>
     </div>
   )
