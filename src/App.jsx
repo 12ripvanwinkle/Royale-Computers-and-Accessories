@@ -15,6 +15,7 @@ import AccessControl from './components/pages/TechSolutionsWebPages/AccessContro
 import CCTV from './components/pages/TechSolutionsWebPages/CCTV'
 import DigitalSignage from './components/pages/TechSolutionsWebPages/DigitalSignage'
 import SoftwareSecurity from './components/pages/TechSolutionsWebPages/SoftwareSecurity'
+import PowerManagement from './components/pages/TechSolutionsWebPages/PowerManagement'
 // Create a HomePage component that holds all your sections
 const HomePage = () => (
   <>
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/tech-solutions/CCTV" element={<CCTV />} />
           <Route path='/tech-solutions/digital-signage' element={<DigitalSignage />} />
           <Route path='/tech-solutions/software-security' element={<SoftwareSecurity />} />
+          <Route path='/tech-solutions/power-management' element={<PowerManagement />} />
           <Route path="/tech-services" element={<TechServices />} />
           <Route path="/tech-retail" element={<TechRetail />} />
           <Route path="/test-supabase" element={<SupabaseTest />} />

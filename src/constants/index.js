@@ -189,7 +189,29 @@ const SoftwareSecurityNavlinks = [
     name: "Why Choose Us",
     link: "#whyUs"
   },
+];
 
+const PowerManagementNavlinks = [
+  {
+    name: "Home",
+    link: "/"
+  },
+  {
+    name: "Solutions",
+    link: "/tech-solutions"
+  },
+  {
+    name: "Features",
+    link: "#features",
+  },
+  {
+    name: "Systems",
+    link: "#systems",
+  },
+  {
+    name: "Services",
+    link: "#services",
+  },
 ];
 
 const techServices = [
@@ -244,6 +266,12 @@ const techSolutionsItems = [
     description: "Secure your enterprise with robust software solutions that protect and empower.",
     image: "/images/Leon3.jpg",
     route: "/tech-solutions/software-security"
+  },
+  {
+    title: "Power Management",
+    description: "Optimize your enterprise with robust power solutions that perform and sustain.",
+    image: "/images/Leon3.jpg",
+    route: "/tech-solutions/power-management"
   },
 ];
 
@@ -414,5 +442,6 @@ export { Main_navLinks,
          accessSolutionNavlinks,
          cctvNavlinks,
          digitalSignageNavlinks,
-         SoftwareSecurityNavlinks
+         SoftwareSecurityNavlinks,
+         PowerManagementNavlinks,
         };
