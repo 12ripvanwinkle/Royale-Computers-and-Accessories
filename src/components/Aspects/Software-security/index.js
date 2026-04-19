@@ -14,7 +14,9 @@ import {
   Search, 
   Crosshair, 
   Wrench, 
-  MonitorCheck 
+  MonitorCheck, 
+  PenTool, 
+  FlaskConical, 
 } from 'lucide-react'
 
 import { AppSecMockup, CloudMockup, ApiMockup, IamMockup, DataMockup } from './ProtectionComponents';
@@ -207,8 +209,6 @@ export const events = [
     { label: 'SSL cert renewed', time: '6m ago', ok: true, color: '#4ade80' },
 ];
 
-
-
 export const services = [
   {
     id: 1,
@@ -253,5 +253,102 @@ export const services = [
     highlights: ['24/7 SOC monitoring', 'Sub-4hr incident response', 'Dedicated account engineer'],
     mockup: MonitoringMockup,
     colSpan: 'md:col-span-4',
+  },
+];
+
+export const risks = [
+    { label: 'Exposed endpoints', level: 'High', color: '#f87171', w: 85 },
+    { label: 'Unpatched services', level: 'Med', color: '#fbbf24', w: 58 },
+    { label: 'Access controls', level: 'Low', color: '#4ade80', w: 32 },
+    { label: 'Data encryption', level: 'Med', color: '#fbbf24', w: 61 },
+];
+
+export const Designlayers = [
+    { label: 'Perimeter', icon: '⬡', color: '#93c5fd', desc: 'Firewall + WAF' },
+    { label: 'Network', icon: '⬡', color: '#a78bfa', desc: 'Segmentation' },
+    { label: 'Application', icon: '⬡', color: '#5eead4', desc: 'Auth + APIs' },
+    { label: 'Data', icon: '⬡', color: '#4ade80', desc: 'Encryption' },
+];
+
+export const ImplementationTasks = [
+  'Firewall rules applied',
+  'Endpoint agents deployed',
+  'SIEM configured',
+  'Policies enforced',
+  'Go-live confirmed',
+]
+
+export const TestingSteps = [
+  { label: 'Reconnaissance', done: true },
+  { label: 'Scanning', done: true },
+  { label: 'Exploitation', done: false },
+  { label: 'Post-exploit', done: false },
+  { label: 'Reporting', done: false },
+];
+
+export const MonitorEvents = [
+  { label: 'Brute-force blocked', time: 'just now', color: '#f87171' },
+  { label: 'Patch pushed — 14 hosts', time: '1m ago', color: '#4ade80' },
+  { label: 'Anomalous login flagged', time: '3m ago', color: '#fbbf24' },
+  { label: 'SSL cert renewed', time: '5m ago', color: '#4ade80' },
+];
+
+import {RiskMockup, DesignMockup, ProcessImplementationMockup, TestingMockup, MonitorMockup} from './HowItWorksComponents'
+
+export const HowItWorksSteps = [
+  {
+    id: 1,
+    icon: ScanSearch,
+    accent: '#fbbf24',
+    eyebrow: 'Step 01',
+    title: 'Risk Assessment',
+    description: 'We begin by mapping your entire attack surface — infrastructure, apps, and access points. Every risk is scored and ranked so remediation effort goes exactly where it matters most.',
+    highlights: ['Full attack surface mapping', 'Risk scoring & prioritisation', 'Executive summary report'],
+    mockup: RiskMockup,
+    colSpan: 'md:col-span-3',
+  },
+  {
+    id: 2,
+    icon: PenTool,
+    accent: '#93c5fd',
+    eyebrow: 'Step 02',
+    title: 'Security Design',
+    description: 'Using assessment findings, we architect a layered defence strategy — from perimeter firewalls and network segmentation down to application-level controls and data encryption policies.',
+    highlights: ['Defence-in-depth architecture', 'Zero-trust network design', 'Policy & compliance alignment'],
+    mockup: DesignMockup,
+    colSpan: 'md:col-span-3',
+  },
+  {
+    id: 3,
+    icon: Wrench,
+    accent: '#a78bfa',
+    eyebrow: 'Step 03',
+    title: 'Implementation',
+    description: 'Our engineers deploy, configure, and integrate every component of your security stack — from endpoint agents and SIEM platforms to firewall rules and access control policies.',
+    highlights: ['End-to-end deployment', 'SIEM & EDR integration', 'Staff training & handover'],
+    mockup: ProcessImplementationMockup,
+    colSpan: 'md:col-span-2',
+  },
+  {
+    id: 4,
+    icon: FlaskConical,
+    accent: '#f87171',
+    eyebrow: 'Step 04',
+    title: 'Testing',
+    description: 'Before going live, we run penetration tests and red team exercises to validate every control — ensuring your defences hold up against real-world attack techniques.',
+    highlights: ['Full penetration testing', 'Red team simulations', 'Vulnerability validation'],
+    mockup: TestingMockup,
+    colSpan: 'md:col-span-2',
+  },
+  {
+    id: 5,
+    icon: Activity,
+    accent: '#4ade80',
+    eyebrow: 'Step 05',
+    title: 'Monitoring',
+    description: 'Once live, our SOC team watches your environment around the clock — detecting anomalies, responding to incidents, and continuously tuning defences as your threat landscape evolves.',
+    highlights: ['24/7 SOC monitoring', 'Sub-4hr incident response', 'Continuous posture improvement'],
+    mockup: MonitorMockup,
+    colSpan: 'md:col-span-2',
   },
 ];

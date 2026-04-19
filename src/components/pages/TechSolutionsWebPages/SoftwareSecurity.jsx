@@ -5,6 +5,7 @@ import Footer from '../../sections/Footer'
 import Features from '../../Aspects/Software-security/Features'
 import Protection from '../../Aspects/Software-security/Protection'
 import Services from '../../Aspects/Software-security/Services'
+import HowItWorks from '../../Aspects/Software-security/HowItWorks'
 
 const SoftwareSecurity = () => {
   return (
@@ -68,6 +69,15 @@ const SoftwareSecurity = () => {
 
         {/* Services */}
         <Services />
+
+        {/* How it works / our Process */}
+        <HowItWorks />
+
+        {/* Contact Us */}
+        <Contact />
+
+        {/* Footer */}
+        <Footer />
       </div>
     </div>
   )
