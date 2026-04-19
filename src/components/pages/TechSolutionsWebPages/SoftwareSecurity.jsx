@@ -4,6 +4,7 @@ import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
 import Features from '../../Aspects/Software-security/Features'
 import Protection from '../../Aspects/Software-security/Protection'
+import Services from '../../Aspects/Software-security/Services'
 
 const SoftwareSecurity = () => {
   return (
@@ -64,6 +65,9 @@ const SoftwareSecurity = () => {
 
         {/* Aspects of Protection */}
         <Protection />
+
+        {/* Services */}
+        <Services />
       </div>
     </div>
   )

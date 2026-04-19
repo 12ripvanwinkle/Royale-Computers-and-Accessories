@@ -10,10 +10,15 @@ import {
   Cloud, 
   Plug2, 
   UserCheck, 
-  DatabaseZap
+  DatabaseZap, 
+  Search, 
+  Crosshair, 
+  Wrench, 
+  MonitorCheck 
 } from 'lucide-react'
 
 import { AppSecMockup, CloudMockup, ApiMockup, IamMockup, DataMockup } from './ProtectionComponents';
+import {AssessmentMockup, PenTestMockup, ImplementationMockup ,MonitoringMockup} from './ServicesComponents'
 
 export const features = [
   {
@@ -169,5 +174,84 @@ export const protections = [
     highlights: ['AES-256 + TLS 1.3', 'PII masking & tokenisation', 'GDPR / HIPAA ready'],
     mockup: DataMockup,
     colSpan: 'md:col-span-2',
+  },
+];
+
+export const checks = [
+    { label: 'Network exposure', score: 82, color: '#4ade80' },
+    { label: 'Auth weaknesses', score: 61, color: '#fbbf24' },
+    { label: 'Patch compliance', score: 90, color: '#4ade80' },
+    { label: 'Data exposure', score: 44, color: '#f87171' },
+];
+
+export const steps = [
+    { label: 'Reconnaissance', status: 'done' },
+    { label: 'Vulnerability scan', status: 'done' },
+    { label: 'Exploitation attempt', status: 'active' },
+    { label: 'Privilege escalation', status: 'pending' },
+    { label: 'Report generation', status: 'pending' },
+];
+
+export const tasks = [
+    'Firewall configuration',
+    'Endpoint agent deploy',
+    'SIEM integration',
+    'Policy enforcement',
+    'Go-live & handover',
+];
+
+export const events = [
+    { label: 'Brute-force blocked', time: 'just now', ok: false, color: '#f87171' },
+    { label: 'Patch pushed — 14 hosts', time: '1m ago', ok: true, color: '#4ade80' },
+    { label: 'Anomalous login flagged', time: '3m ago', ok: false, color: '#fbbf24' },
+    { label: 'SSL cert renewed', time: '6m ago', ok: true, color: '#4ade80' },
+];
+
+
+
+export const services = [
+  {
+    id: 1,
+    icon: Search,
+    accent: '#fbbf24',
+    eyebrow: 'Know Your Risk',
+    title: 'Security Assessments',
+    description: 'We perform thorough evaluations of your infrastructure, applications, and policies — scoring vulnerabilities, mapping attack surfaces, and delivering a prioritised remediation roadmap.',
+    highlights: ['Risk scoring & ranking', 'Full attack surface mapping', 'Remediation roadmap included'],
+    mockup: AssessmentMockup,
+    colSpan: 'md:col-span-3',
+  },
+  {
+    id: 2,
+    icon: Crosshair,
+    accent: '#f87171',
+    eyebrow: 'Simulate Real Attacks',
+    title: 'Penetration Testing',
+    description:'Our ethical hackers replicate real-world attack techniques — probing networks, applications, and social engineering vectors to expose exploitable gaps before bad actors do.',
+    highlights: ['Network & app pen testing', 'Social engineering simulations', 'Full exploitation report'],
+    mockup: PenTestMockup,
+    colSpan: 'md:col-span-3',
+  },
+  {
+    id: 3,
+    icon: Wrench,
+    accent: '#a78bfa',
+    eyebrow: 'Deploy & Configure',
+    title: 'Implementation',
+    description: 'From firewall setup to SIEM integration and endpoint deployment — we handle the full technical rollout of your security stack, configured to your environment and policies.',
+    highlights: ['End-to-end deployment', 'SIEM & EDR integration', 'Staff handover & training'],
+    mockup: ImplementationMockup,
+    colSpan: 'md:col-span-2',
+  },
+  {
+    id: 4,
+    icon: MonitorCheck,
+    accent: '#4ade80',
+    eyebrow: '24 / 7 Coverage',
+    title: 'Monitoring & Support',
+    description:'Round-the-clock threat monitoring, real-time alerting, and a dedicated support team — so threats are caught and neutralised fast, with minimal disruption to your operations.',
+    highlights: ['24/7 SOC monitoring', 'Sub-4hr incident response', 'Dedicated account engineer'],
+    mockup: MonitoringMockup,
+    colSpan: 'md:col-span-4',
   },
 ];

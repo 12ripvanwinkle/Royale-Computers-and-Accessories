@@ -1,35 +1,164 @@
 import React, { useState, useEffect } from 'react'
 import { glass, glassHover } from '../CCTV-Holder/CCTVStyles'
-import { AppWindow, Cloud, Plug2, UserCheck, DatabaseZap } from 'lucide-react'
+import { ClipboardSearch, Crosshair, Wrench, MonitorCheck } from 'lucide-react'
 
-/* ── App Security Mockup ─────────────────────────── */
-function AppSecMockup() {
-  const layers = [
-    { label: 'Input Validation', status: 'pass', color: '#4ade80' },
-    { label: 'Auth Middleware', status: 'pass', color: '#4ade80' },
-    { label: 'SQL Injection', status: 'blocked', color: '#f87171' },
-    { label: 'XSS Filter', status: 'pass', color: '#4ade80' },
+/* ── Security Assessment Mockup ──────────────────── */
+function AssessmentMockup() {
+  const [scanning, setScanning] = useState(0)
+  useEffect(() => {
+    const iv = setInterval(() => setScanning(s => (s + 1) % 5), 900)
+    return () => clearInterval(iv)
+  }, [])
+
+  const checks = [
+    { label: 'Network exposure', score: 82, color: '#4ade80' },
+    { label: 'Auth weaknesses', score: 61, color: '#fbbf24' },
+    { label: 'Patch compliance', score: 90, color: '#4ade80' },
+    { label: 'Data exposure', score: 44, color: '#f87171' },
   ]
+
   return (
     <div className="rounded-xl overflow-hidden mt-auto"
       style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
-      <div className="px-3 py-2 flex items-center gap-1.5"
+      <div className="px-3 py-2 flex items-center justify-between"
         style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        {['#f87171','#fbbf24','#4ade80'].map(c => (
-          <div key={c} className="w-2 h-2 rounded-full" style={{ background: c }} />
+        <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'monospace' }}>
+          risk-assessment.sh
+        </span>
+        <div className="flex items-center gap-1.5">
+          <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#fbbf24' }} />
+          <span className="text-xs" style={{ color: '#fbbf24' }}>Scanning…</span>
+        </div>
+      </div>
+      <div className="p-3 flex flex-col gap-2">
+        {checks.map((c, i) => (
+          <div key={c.label}>
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-xs" style={{ color: 'rgba(255,255,255,0.55)' }}>{c.label}</span>
+              <span className="text-xs font-semibold" style={{ color: c.color }}>{c.score}</span>
+            </div>
+            <div className="w-full h-1 rounded-full" style={{ background: 'rgba(255,255,255,0.08)' }}>
+              <div className="h-full rounded-full transition-all duration-700"
+                style={{
+                  width: i <= scanning ? `${c.score}%` : '0%',
+                  background: c.color,
+                  opacity: 0.8,
+                }} />
+            </div>
+          </div>
         ))}
-        <span className="text-xs ml-1" style={{ color: 'rgba(255,255,255,0.3)', fontFamily: 'monospace' }}>
-          security-scan
+      </div>
+    </div>
+  )
+}
+
+/* ── Penetration Testing Mockup ──────────────────── */
+function PenTestMockup() {
+  const [active, setActive] = useState(0)
+  useEffect(() => {
+    const iv = setInterval(() => setActive(a => (a + 1) % 5), 1000)
+    return () => clearInterval(iv)
+  }, [])
+
+  const steps = [
+    { label: 'Reconnaissance', status: 'done' },
+    { label: 'Vulnerability scan', status: 'done' },
+    { label: 'Exploitation attempt', status: 'active' },
+    { label: 'Privilege escalation', status: 'pending' },
+    { label: 'Report generation', status: 'pending' },
+  ]
+
+  const statusStyle = (s, i) => {
+    if (i < active) return { color: '#4ade80' }
+    if (i === active) return { color: '#f87171' }
+    return { color: 'rgba(255,255,255,0.28)' }
+  }
+
+  const dot = (s, i) => {
+    if (i < active) return '#4ade80'
+    if (i === active) return '#f87171'
+    return 'rgba(255,255,255,0.2)'
+  }
+
+  return (
+    <div className="rounded-xl overflow-hidden mt-auto"
+      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+      <div className="px-3 py-2"
+        style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+        <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'monospace' }}>
+          pentest-pipeline
         </span>
       </div>
+      <div className="p-3 flex flex-col gap-0">
+        {steps.map((s, i) => (
+          <div key={s.label} className="flex items-center gap-3 py-1.5">
+            <div className="flex flex-col items-center shrink-0" style={{ width: 10 }}>
+              <div className="w-2 h-2 rounded-full transition-all duration-300"
+                style={{ background: dot(s.status, i), boxShadow: i === active ? `0 0 6px ${dot(s.status, i)}` : 'none' }} />
+              {i < steps.length - 1 && (
+                <div className="w-px flex-1 mt-0.5" style={{ height: 10, background: 'rgba(255,255,255,0.1)' }} />
+              )}
+            </div>
+            <span className="text-xs transition-all duration-300" style={statusStyle(s.status, i)}>
+              {s.label}
+            </span>
+            {i === active && (
+              <span className="text-xs ml-auto px-1.5 py-0.5 rounded"
+                style={{ background: 'rgba(248,113,113,0.12)', color: '#f87171', border: '1px solid rgba(248,113,113,0.25)' }}>
+                live
+              </span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/* ── Implementation Mockup ───────────────────────── */
+function ImplementationMockup() {
+  const [done, setDone] = useState(2)
+  useEffect(() => {
+    const iv = setInterval(() => setDone(d => d >= 5 ? 0 : d + 1), 1400)
+    return () => clearInterval(iv)
+  }, [])
+
+  const tasks = [
+    'Firewall configuration',
+    'Endpoint agent deploy',
+    'SIEM integration',
+    'Policy enforcement',
+    'Go-live & handover',
+  ]
+
+  return (
+    <div className="rounded-xl overflow-hidden mt-auto"
+      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+      <div className="px-3 py-2 flex items-center justify-between"
+        style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+        <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'monospace' }}>
+          deployment-checklist
+        </span>
+        <span className="text-xs" style={{ color: '#a78bfa' }}>{done}/5 complete</span>
+      </div>
       <div className="p-3 flex flex-col gap-1.5">
-        {layers.map(l => (
-          <div key={l.label} className="flex items-center justify-between px-2 py-1.5 rounded-lg"
-            style={{ background: 'rgba(255,255,255,0.04)' }}>
-            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.6)', fontFamily: 'monospace' }}>{l.label}</span>
-            <span className="text-xs font-semibold px-2 py-0.5 rounded-full"
-              style={{ background: `${l.color}18`, color: l.color, border: `1px solid ${l.color}35` }}>
-              {l.status}
+        {tasks.map((t, i) => (
+          <div key={t} className="flex items-center gap-2.5 px-2 py-1.5 rounded-lg transition-all duration-300"
+            style={{ background: i < done ? 'rgba(167,139,250,0.07)' : 'transparent' }}>
+            <div className="w-4 h-4 rounded flex items-center justify-center shrink-0 transition-all duration-300"
+              style={{
+                background: i < done ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.06)',
+                border: `1px solid ${i < done ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.12)'}`,
+              }}>
+              {i < done && (
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+                  <path d="M1.5 4L3 5.5L6.5 2" stroke="#a78bfa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              )}
+            </div>
+            <span className="text-xs transition-all duration-300"
+              style={{ color: i < done ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.35)', textDecoration: i < done ? 'none' : 'none' }}>
+              {t}
             </span>
           </div>
         ))}
@@ -38,62 +167,39 @@ function AppSecMockup() {
   )
 }
 
-/* ── Cloud Security Mockup ───────────────────────── */
-function CloudMockup() {
-  const [active, setActive] = useState(0)
+/* ── Monitoring & Support Mockup ─────────────────── */
+function MonitoringMockup() {
+  const [tick, setTick] = useState(0)
   useEffect(() => {
-    const iv = setInterval(() => setActive(a => (a + 1) % 3), 1200)
+    const iv = setInterval(() => setTick(t => t + 1), 800)
     return () => clearInterval(iv)
   }, [])
-  const nodes = ['us-east-1', 'eu-west-2', 'ap-south-1']
-  return (
-    <div className="rounded-xl p-3 mt-auto"
-      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
-      <div className="flex items-center justify-between mb-3">
-        <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Cloud regions</span>
-        <div className="flex items-center gap-1.5">
-          <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#4ade80', boxShadow: '0 0 4px #4ade8099' }} />
-          <span className="text-xs" style={{ color: '#4ade80' }}>All secured</span>
-        </div>
-      </div>
-      <div className="flex gap-2">
-        {nodes.map((n, i) => (
-          <div key={n} className="flex-1 rounded-lg py-2 text-center transition-all duration-300"
-            style={{
-              background: i === active ? 'rgba(147,197,253,0.12)' : 'rgba(255,255,255,0.04)',
-              border: `1px solid ${i === active ? 'rgba(147,197,253,0.3)' : 'rgba(255,255,255,0.08)'}`,
-            }}>
-            <div className="w-1.5 h-1.5 rounded-full mx-auto mb-1"
-              style={{ background: i === active ? '#93c5fd' : '#4ade80' }} />
-            <span className="text-xs" style={{ color: i === active ? '#93c5fd' : 'rgba(255,255,255,0.4)', fontFamily: 'monospace', fontSize: 9 }}>{n}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
 
-/* ── API Security Mockup ─────────────────────────── */
-function ApiMockup() {
-  const calls = [
-    { method: 'GET', path: '/api/users', status: 200 },
-    { method: 'POST', path: '/api/auth', status: 401 },
-    { method: 'DELETE', path: '/api/data', status: 403 },
+  const events = [
+    { label: 'Brute-force blocked', time: 'just now', ok: false, color: '#f87171' },
+    { label: 'Patch pushed — 14 hosts', time: '1m ago', ok: true, color: '#4ade80' },
+    { label: 'Anomalous login flagged', time: '3m ago', ok: false, color: '#fbbf24' },
+    { label: 'SSL cert renewed', time: '6m ago', ok: true, color: '#4ade80' },
   ]
-  const statusColor = s => s === 200 ? '#4ade80' : s === 401 ? '#fbbf24' : '#f87171'
+
+  const activeRow = tick % events.length
+
   return (
     <div className="rounded-xl overflow-hidden mt-auto"
       style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
-      <div className="px-3 py-2" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'monospace' }}>API Gateway Log</span>
+      <div className="px-3 py-2 flex items-center gap-2"
+        style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+        <div className="w-2 h-2 rounded-full" style={{ background: '#4ade80', boxShadow: '0 0 5px #4ade8099' }} />
+        <span className="text-xs" style={{ color: '#4ade80' }}>Live threat feed</span>
       </div>
       <div className="p-2 flex flex-col gap-1">
-        {calls.map(c => (
-          <div key={c.path} className="flex items-center gap-2 px-2 py-1.5 rounded-lg"
-            style={{ background: 'rgba(255,255,255,0.03)' }}>
-            <span className="text-xs font-bold shrink-0" style={{ color: '#a78bfa', minWidth: 40, fontFamily: 'monospace' }}>{c.method}</span>
-            <span className="text-xs flex-1" style={{ color: 'rgba(255,255,255,0.55)', fontFamily: 'monospace' }}>{c.path}</span>
-            <span className="text-xs font-semibold" style={{ color: statusColor(c.status) }}>{c.status}</span>
+        {events.map((e, i) => (
+          <div key={e.label}
+            className="flex items-center gap-2 px-2 py-1.5 rounded-lg transition-all duration-300"
+            style={{ background: i === activeRow ? 'rgba(255,255,255,0.06)' : 'transparent' }}>
+            <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: e.color }} />
+            <span className="text-xs flex-1" style={{ color: 'rgba(255,255,255,0.7)' }}>{e.label}</span>
+            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>{e.time}</span>
           </div>
         ))}
       </div>
@@ -101,124 +207,58 @@ function ApiMockup() {
   )
 }
 
-/* ── IAM Mockup ──────────────────────────────────── */
-function IamMockup() {
-  const roles = [
-    { role: 'Admin', perms: 'Full access', color: '#f87171' },
-    { role: 'Editor', perms: 'Read + Write', color: '#fbbf24' },
-    { role: 'Viewer', perms: 'Read only', color: '#4ade80' },
-  ]
-  return (
-    <div className="rounded-xl p-3 mt-auto"
-      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
-      <div className="flex flex-col gap-1.5">
-        {roles.map(r => (
-          <div key={r.role} className="flex items-center gap-3 px-2 py-2 rounded-lg"
-            style={{ background: 'rgba(255,255,255,0.04)' }}>
-            <div className="w-6 h-6 rounded-full flex items-center justify-center shrink-0"
-              style={{ background: `${r.color}18`, border: `1px solid ${r.color}35` }}>
-              <div className="w-1.5 h-1.5 rounded-full" style={{ background: r.color }} />
-            </div>
-            <span className="text-xs font-medium text-white flex-1">{r.role}</span>
-            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>{r.perms}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-/* ── Data Protection Mockup ──────────────────────── */
-function DataMockup() {
-  const [progress, setProgress] = useState(68)
-  useEffect(() => {
-    const iv = setInterval(() => setProgress(p => p >= 100 ? 20 : p + 2), 120)
-    return () => clearInterval(iv)
-  }, [])
-  const fields = ['SSN ••••••••', 'Card ••••  4242', 'Email h***@***.com']
-  return (
-    <div className="rounded-xl p-3 mt-auto"
-      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
-      <div className="flex items-center justify-between mb-3">
-        <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Encryption progress</span>
-        <span className="text-xs font-semibold" style={{ color: '#5eead4' }}>{progress}%</span>
-      </div>
-      <div className="w-full h-1.5 rounded-full mb-3" style={{ background: 'rgba(255,255,255,0.08)' }}>
-        <div className="h-full rounded-full transition-all duration-100"
-          style={{ width: `${progress}%`, background: 'linear-gradient(90deg, #5eead4, #93c5fd)' }} />
-      </div>
-      <div className="flex flex-col gap-1">
-        {fields.map(f => (
-          <div key={f} className="flex items-center gap-2 px-2 py-1 rounded"
-            style={{ background: 'rgba(94,234,212,0.06)' }}>
-            <div className="w-1 h-1 rounded-full" style={{ background: '#5eead4' }} />
-            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'monospace' }}>{f}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-const protections = [
+const services = [
   {
     id: 1,
-    icon: AppWindow,
-    accent: '#f87171',
-    eyebrow: 'App Layer',
-    title: 'Application Security',
-    description: 'Protect your software at every layer — from input validation and authentication middleware to XSS filtering and SQL injection prevention. Code-level and runtime defences working together.',
-    highlights: ['OWASP Top 10 coverage', 'Runtime app self-protection', 'Secure SDLC integration'],
-    mockup: AppSecMockup,
+    icon: ClipboardSearch,
+    accent: '#fbbf24',
+    eyebrow: 'Know Your Risk',
+    title: 'Security Assessments',
+    description:
+      'We perform thorough evaluations of your infrastructure, applications, and policies — scoring vulnerabilities, mapping attack surfaces, and delivering a prioritised remediation roadmap.',
+    highlights: ['Risk scoring & ranking', 'Full attack surface mapping', 'Remediation roadmap included'],
+    mockup: AssessmentMockup,
     colSpan: 'md:col-span-3',
   },
   {
     id: 2,
-    icon: Cloud,
-    accent: '#93c5fd',
-    eyebrow: 'Infrastructure',
-    title: 'Cloud Security',
-    description: 'Secure multi-cloud and hybrid environments with continuous posture management, workload protection, and region-level monitoring across all your cloud infrastructure.',
-    highlights: ['CSPM & CWPP', 'Multi-region coverage', 'Zero-trust networking'],
-    mockup: CloudMockup,
+    icon: Crosshair,
+    accent: '#f87171',
+    eyebrow: 'Simulate Real Attacks',
+    title: 'Penetration Testing',
+    description:
+      'Our ethical hackers replicate real-world attack techniques — probing networks, applications, and social engineering vectors to expose exploitable gaps before bad actors do.',
+    highlights: ['Network & app pen testing', 'Social engineering simulations', 'Full exploitation report'],
+    mockup: PenTestMockup,
     colSpan: 'md:col-span-3',
   },
   {
     id: 3,
-    icon: Plug2,
+    icon: Wrench,
     accent: '#a78bfa',
-    eyebrow: 'Integration Security',
-    title: 'API Security',
-    description: 'Authenticate, rate-limit, and monitor every API call. Prevent injection attacks, enforce schema validation, and log all gateway traffic for full audit trails.',
-    highlights: ['OAuth 2.0 & JWT auth', 'Schema validation', 'Rate limiting & DDoS shield'],
-    mockup: ApiMockup,
+    eyebrow: 'Deploy & Configure',
+    title: 'Implementation',
+    description:
+      'From firewall setup to SIEM integration and endpoint deployment — we handle the full technical rollout of your security stack, configured to your environment and policies.',
+    highlights: ['End-to-end deployment', 'SIEM & EDR integration', 'Staff handover & training'],
+    mockup: ImplementationMockup,
     colSpan: 'md:col-span-2',
   },
   {
     id: 4,
-    icon: UserCheck,
-    accent: '#fbbf24',
-    eyebrow: 'Access Control',
-    title: 'Identity & Access Management',
-    description: 'Define and enforce who can access what — with granular role-based permissions, SSO, MFA, and full audit trails for every identity in your organisation.',
-    highlights: ['SSO & MFA enforced', 'Granular RBAC', 'Privileged access management'],
-    mockup: IamMockup,
-    colSpan: 'md:col-span-2',
-  },
-  {
-    id: 5,
-    icon: DatabaseZap,
-    accent: '#5eead4',
-    eyebrow: 'Privacy & Compliance',
-    title: 'Data Protection',
-    description: 'Encrypt sensitive data at rest and in transit, mask PII in logs, and enforce retention policies — keeping you compliant with GDPR, HIPAA, and industry standards.',
-    highlights: ['AES-256 + TLS 1.3', 'PII masking & tokenisation', 'GDPR / HIPAA ready'],
-    mockup: DataMockup,
-    colSpan: 'md:col-span-2',
+    icon: MonitorCheck,
+    accent: '#4ade80',
+    eyebrow: '24 / 7 Coverage',
+    title: 'Monitoring & Support',
+    description:
+      'Round-the-clock threat monitoring, real-time alerting, and a dedicated support team — so threats are caught and neutralised fast, with minimal disruption to your operations.',
+    highlights: ['24/7 SOC monitoring', 'Sub-4hr incident response', 'Dedicated account engineer'],
+    mockup: MonitoringMockup,
+    colSpan: 'md:col-span-4',
   },
 ]
 
-function ProtectionCard({ item, index }) {
+function ServiceCard({ item, index }) {
   const [hovered, setHovered] = useState(false)
   const IconComp = item.icon
   const MockupComp = item.mockup
@@ -266,13 +306,13 @@ function ProtectionCard({ item, index }) {
         ))}
       </div>
 
-      {/* Mockup */}
+      {/* Animated Mockup */}
       <MockupComp />
     </div>
   )
 }
 
-const ProtectionTypes = () => {
+const Services = () => {
   return (
     <div className="w-full px-4 md:px-6 py-16 md:py-24">
       <div className="max-w-5xl mx-auto">
@@ -281,25 +321,25 @@ const ProtectionTypes = () => {
         <div className="text-center mb-12">
           <p className="text-xs font-semibold tracking-widest uppercase mb-4"
             style={{ color: 'rgba(255,255,255,0.45)' }}>
-            Comprehensive Coverage
+            What We Do
           </p>
           <h2 className="text-3xl md:text-5xl font-light text-white leading-tight mb-4">
-            Types of Protection
+            Services
           </h2>
           <p className="text-sm md:text-base max-w-xl mx-auto leading-relaxed"
             style={{ color: 'rgba(255,255,255,0.55)' }}>
-            Every vector. Every layer. Every threat — covered by purpose-built security
-            disciplines that work together as a unified defence.
+            From identifying risk to deploying defences and keeping watch around the clock —
+            our services cover every phase of your security lifecycle.
           </p>
         </div>
 
         {/* Bento Grid
-            Row 1: [App Security — 3col] [Cloud Security — 3col]       (2 equal halves)
-            Row 2: [API Security — 2col] [IAM — 2col] [Data — 2col]   (3 equal thirds)
+            Row 1: [Assessments — 3col] [Pen Testing — 3col]    (2 equal halves)
+            Row 2: [Implementation — 2col] [Monitoring — 4col]  (narrow + wide)
         */}
         <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
-          {protections.map((item, index) => (
-            <ProtectionCard key={item.id} item={item} index={index} />
+          {services.map((item, index) => (
+            <ServiceCard key={item.id} item={item} index={index} />
           ))}
         </div>
 
@@ -308,4 +348,4 @@ const ProtectionTypes = () => {
   )
 }
 
-export default ProtectionTypes
+export default Services
