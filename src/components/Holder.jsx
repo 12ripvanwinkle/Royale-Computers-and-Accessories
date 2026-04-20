@@ -1,374 +1,358 @@
 import React, { useState, useEffect } from 'react'
 import { glass, glassHover } from '../CCTV-Holder/CCTVStyles'
-import { Zap, Scale, BatteryCharging, ShieldAlert, BarChart3, Wifi } from 'lucide-react'
+import { BatteryCharging, LayoutGrid, BarChart2, Gauge } from 'lucide-react'
 
-/* ── Energy Monitoring Mockup (Hero) ─────────────── */
-function EnergyHeroMockup() {
-  const [val, setVal] = useState(72)
-  useEffect(() => {
-    const iv = setInterval(() => setVal(v => Math.min(99, Math.max(50, v + (Math.random() > 0.5 ? 1 : -1) * Math.floor(Math.random() * 4)))), 900)
-    return () => clearInterval(iv)
-  }, [])
-  const bars = [55, 70, 45, 80, 60, 90, 65, 78, 50, 85, 72, val]
-  return (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-end gap-3">
-        <span className="font-black text-white leading-none" style={{ fontSize: 64 }}>{val}</span>
-        <div className="mb-2">
-          <div className="text-sm font-semibold" style={{ color: '#4ade80' }}>kWh</div>
-          <div className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>live draw</div>
-        </div>
-        <div className="mb-2 ml-auto flex items-center gap-1.5">
-          <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#4ade80', boxShadow: '0 0 6px #4ade8099' }} />
-          <span className="text-xs" style={{ color: '#4ade80' }}>Live</span>
-        </div>
-      </div>
-      <div className="flex items-end gap-1" style={{ height: 52 }}>
-        {bars.map((h, i) => (
-          <div key={i} className="flex-1 rounded-sm transition-all duration-500"
-            style={{
-              height: `${h}%`,
-              background: i === bars.length - 1
-                ? 'linear-gradient(180deg,#4ade80,#22c55e)'
-                : `rgba(74,222,128,${0.12 + (i / bars.length) * 0.28})`,
-              borderRadius: 3,
-            }} />
-        ))}
-      </div>
-      <div className="grid grid-cols-3 gap-2">
-        {[
-          { label: 'Peak today', value: '94 kWh', color: '#fbbf24' },
-          { label: 'Avg load', value: '68 kWh', color: '#93c5fd' },
-          { label: 'Savings', value: '−18%', color: '#4ade80' },
-        ].map(s => (
-          <div key={s.label} className="rounded-xl p-2.5 text-center"
+/* ── UPS Mockup ──────────────────────────────────── */
+function UpsMockup() {
+    const [charge, setCharge] = useState(88)
+    const [status, setStatus] = useState('On Battery')
+    useEffect(() => {
+        const iv = setInterval(() => {
+            setCharge(c => {
+                const next = Math.min(100, Math.max(10, c + (Math.random() > 0.4 ? 1 : -2)))
+                setStatus(next > 80 ? 'Fully Charged' : next > 40 ? 'On Battery' : 'Low Battery')
+                return next
+            })
+        }, 600)
+        return () => clearInterval(iv)
+    }, [])
+    const color = charge > 70 ? '#4ade80' : charge > 30 ? '#fbbf24' : '#f87171'
+    const segs = 12
+    const filled = Math.round((charge / 100) * segs)
+    return (
+        <div className="rounded-xl p-3 mt-4"
             style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <div className="text-sm font-bold" style={{ color: s.color }}>{s.value}</div>
-            <div className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.38)' }}>{s.label}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-/* ── Backup Power Mockup ─────────────────────────── */
-function BackupMockup() {
-  const [charge, setCharge] = useState(67)
-  useEffect(() => {
-    const iv = setInterval(() => setCharge(c => c >= 100 ? 40 : c + 1), 180)
-    return () => clearInterval(iv)
-  }, [])
-  const segs = 10
-  const filled = Math.round((charge / 100) * segs)
-  const color = charge > 70 ? '#4ade80' : charge > 30 ? '#fbbf24' : '#f87171'
-  return (
-    <div className="flex flex-col items-center gap-3 mt-auto">
-      <div className="flex items-center gap-1">
-        <div className="rounded-lg p-2 flex items-center gap-1"
-          style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}>
-          {Array.from({ length: segs }).map((_, i) => (
-            <div key={i} className="rounded-sm transition-all duration-200"
-              style={{ width: 8, height: 20, background: i < filled ? color : 'rgba(255,255,255,0.08)' }} />
-          ))}
+            <div className="flex items-center justify-between mb-3">
+                <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>UPS Status</span>
+                <span className="text-xs font-semibold px-2 py-0.5 rounded-full"
+                    style={{ background: `${color}15`, color, border: `1px solid ${color}30` }}>
+                    {status}
+                </span>
+            </div>
+            <div className="flex items-center gap-1 mb-2">
+                {Array.from({ length: segs }).map((_, i) => (
+                    <div key={i} className="flex-1 rounded-sm transition-all duration-300"
+                        style={{ height: 14, background: i < filled ? color : 'rgba(255,255,255,0.08)' }} />
+                ))}
+                <div className="rounded-sm ml-0.5" style={{ width: 3, height: 8, background: 'rgba(255,255,255,0.2)' }} />
+            </div>
+            <div className="flex justify-between">
+                <span className="text-xs font-bold text-white">{charge}%</span>
+                <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                    ~{Math.round(charge * 1.2)}min runtime
+                </span>
+            </div>
         </div>
-        <div className="rounded-sm" style={{ width: 4, height: 10, background: 'rgba(255,255,255,0.2)' }} />
-      </div>
-      <div className="text-center">
-        <div className="text-2xl font-bold text-white">{charge}%</div>
-        <div className="text-xs" style={{ color }}>Charging</div>
-      </div>
-    </div>
-  )
+    )
 }
 
-/* ── Surge Protection Mockup ─────────────────────── */
-function SurgeMockup() {
-  const [blocked, setBlocked] = useState(4)
-  useEffect(() => {
-    const iv = setInterval(() => setBlocked(b => b + (Math.random() > 0.7 ? 1 : 0)), 1400)
-    return () => clearInterval(iv)
-  }, [])
-  return (
-    <div className="flex flex-col items-center justify-center gap-2 mt-auto">
-      <div className="w-14 h-14 rounded-full flex items-center justify-center"
-        style={{ background: 'rgba(248,113,113,0.12)', border: '2px solid rgba(248,113,113,0.3)' }}>
-        <ShieldAlert size={24} color="#f87171" />
-      </div>
-      <div className="text-center">
-        <div className="text-2xl font-bold text-white">{blocked}</div>
-        <div className="text-xs" style={{ color: 'rgba(255,255,255,0.45)' }}>surges blocked today</div>
-      </div>
-      <span className="text-xs px-2.5 py-1 rounded-full"
-        style={{ background: 'rgba(74,222,128,0.1)', color: '#4ade80', border: '1px solid rgba(74,222,128,0.25)' }}>
-        All systems protected
-      </span>
-    </div>
-  )
-}
-
-/* ── Load Balancing Mockup ───────────────────────── */
-function LoadMockup() {
-  const [loads, setLoads] = useState([78, 45, 62])
-  useEffect(() => {
-    const iv = setInterval(() => setLoads(l => l.map(v => Math.min(99, Math.max(20, v + (Math.random() > 0.5 ? 2 : -2))))), 800)
-    return () => clearInterval(iv)
-  }, [])
-  const labels = ['Phase A', 'Phase B', 'Phase C']
-  const colors = ['#93c5fd', '#a78bfa', '#5eead4']
-  return (
-    <div className="rounded-xl p-3 mt-auto"
-      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
-      <div className="flex flex-col gap-2.5">
-        {labels.map((l, i) => (
-          <div key={l}>
-            <div className="flex justify-between mb-1">
-              <span className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>{l}</span>
-              <span className="text-xs font-semibold" style={{ color: colors[i] }}>{loads[i]}%</span>
+/* ── PDU Mockup ──────────────────────────────────── */
+function PduMockup() {
+    const [outlets, setOutlets] = useState([
+        { id: 'A1', load: 340, on: true },
+        { id: 'A2', load: 120, on: true },
+        { id: 'A3', load: 0,   on: false },
+        { id: 'B1', load: 580, on: true },
+        { id: 'B2', load: 210, on: true },
+        { id: 'B3', load: 95,  on: true },
+    ])
+    useEffect(() => {
+        const iv = setInterval(() => {
+            setOutlets(prev => prev.map(o => ({
+                ...o,
+                load: o.on ? Math.max(50, Math.min(600, o.load + (Math.random() > 0.5 ? 15 : -15))) : 0
+            })))
+        }, 900)
+        return () => clearInterval(iv)
+    }, [])
+    return (
+        <div className="rounded-xl overflow-hidden mt-4"
+            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <div className="px-3 py-2 flex items-center justify-between"
+                style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'monospace' }}>PDU — Rack A</span>
+                <span className="text-xs" style={{ color: '#93c5fd' }}>
+                    {outlets.filter(o => o.on).length}/{outlets.length} active
+                </span>
             </div>
-            <div className="w-full h-1.5 rounded-full" style={{ background: 'rgba(255,255,255,0.08)' }}>
-              <div className="h-full rounded-full transition-all duration-500"
-                style={{ width: `${loads[i]}%`, background: colors[i], opacity: 0.8 }} />
+            <div className="p-2 grid grid-cols-3 gap-1.5">
+                {outlets.map(o => (
+                    <div key={o.id} className="rounded-lg px-2 py-1.5 flex flex-col gap-0.5"
+                        style={{
+                            background: o.on ? 'rgba(147,197,253,0.08)' : 'rgba(255,255,255,0.03)',
+                            border: `1px solid ${o.on ? 'rgba(147,197,253,0.2)' : 'rgba(255,255,255,0.07)'}`,
+                        }}>
+                        <span className="text-xs font-mono" style={{ color: o.on ? '#93c5fd' : 'rgba(255,255,255,0.25)' }}>{o.id}</span>
+                        <span className="text-xs" style={{ color: o.on ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.2)' }}>
+                            {o.on ? `${o.load}W` : 'OFF'}
+                        </span>
+                    </div>
+                ))}
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-/* ── Usage Analytics Mockup ──────────────────────── */
-function AnalyticsMockup() {
-  const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
-  const vals = [60, 80, 55, 90, 70, 45, 75]
-  return (
-    <div className="rounded-xl p-3 mt-auto"
-      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
-      <div className="flex items-end gap-1.5" style={{ height: 52 }}>
-        {vals.map((v, i) => (
-          <div key={i} className="flex-1 flex flex-col items-center gap-1">
-            <div className="w-full rounded-sm"
-              style={{ height: `${v}%`, background: i === 3 ? '#fbbf24' : 'rgba(251,191,36,0.28)', borderRadius: 3 }} />
-            <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.3)' }}>{days[i]}</span>
-          </div>
-        ))}
-      </div>
-      <div className="flex gap-4 mt-2.5">
-        <div>
-          <div className="text-sm font-bold text-white">8.4k</div>
-          <div className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>kWh / week</div>
         </div>
-        <div>
-          <div className="text-sm font-bold" style={{ color: '#4ade80' }}>−12%</div>
-          <div className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>vs last week</div>
+    )
+}
+
+/* ── Energy Monitoring System Mockup ─────────────── */
+function EmsMockup() {
+    const [tick, setTick] = useState(0)
+    useEffect(() => {
+        const iv = setInterval(() => setTick(t => t + 1), 700)
+        return () => clearInterval(iv)
+    }, [])
+    const readings = [
+        { zone: 'Server Room', kw: 4.2, trend: '+0.1', color: '#4ade80' },
+        { zone: 'Office Floor', kw: 2.8, trend: '−0.2', color: '#93c5fd' },
+        { zone: 'Comms Rack', kw: 1.1, trend: '+0.0', color: '#fbbf24' },
+    ]
+    return (
+        <div className="rounded-xl overflow-hidden mt-4"
+            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <div className="px-3 py-2 flex items-center gap-2"
+                style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#4ade80', boxShadow: '0 0 4px #4ade8099' }} />
+                <span className="text-xs" style={{ color: '#4ade80' }}>Live readings</span>
+            </div>
+            <div className="p-2 flex flex-col gap-1">
+                {readings.map((r, i) => (
+                    <div key={r.zone}
+                        className="flex items-center gap-2 px-2 py-1.5 rounded-lg transition-all duration-300"
+                        style={{ background: i === tick % 3 ? 'rgba(255,255,255,0.05)' : 'transparent' }}>
+                        <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: r.color }} />
+                        <span className="text-xs flex-1" style={{ color: 'rgba(255,255,255,0.65)' }}>{r.zone}</span>
+                        <span className="text-xs font-semibold" style={{ color: r.color }}>{r.kw} kW</span>
+                        <span className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>{r.trend}</span>
+                    </div>
+                ))}
+            </div>
         </div>
-      </div>
-    </div>
-  )
+    )
 }
 
-/* ── Remote Monitoring Mockup ────────────────────── */
-function RemoteMockup() {
-  const [ping, setPing] = useState(24)
-  const [active, setActive] = useState(0)
-  useEffect(() => {
-    const iv1 = setInterval(() => setPing(p => Math.max(10, Math.min(80, p + (Math.random() > 0.5 ? 3 : -3)))), 700)
-    const iv2 = setInterval(() => setActive(a => (a + 1) % 4), 1000)
-    return () => { clearInterval(iv1); clearInterval(iv2) }
-  }, [])
-  const sites = ['HQ — Floor 1', 'Warehouse B', 'Server Room', 'Retail Unit']
-  return (
-    <div className="rounded-xl overflow-hidden mt-auto"
-      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
-      <div className="px-3 py-2 flex items-center justify-between"
-        style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        <div className="flex items-center gap-1.5">
-          <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#4ade80', boxShadow: '0 0 4px #4ade8099' }} />
-          <span className="text-xs" style={{ color: '#4ade80' }}>Online</span>
+/* ── Generator Mockup ────────────────────────────── */
+function GeneratorMockup() {
+    const [rpm, setRpm] = useState(0)
+    const [running, setRunning] = useState(false)
+    useEffect(() => {
+        const iv = setInterval(() => {
+            setRunning(r => {
+                const next = !r
+                setRpm(next ? Math.floor(Math.random() * 400 + 1400) : 0)
+                return next
+            })
+        }, 3000)
+        return () => clearInterval(iv)
+    }, [])
+    useEffect(() => {
+        if (!running) return
+        const iv = setInterval(() => setRpm(r => Math.max(1200, Math.min(1800, r + (Math.random() > 0.5 ? 20 : -20)))), 300)
+        return () => clearInterval(iv)
+    }, [running])
+
+    const pct = Math.round((rpm / 1800) * 100)
+
+    return (
+        <div className="rounded-xl p-3 mt-4"
+            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <div className="flex items-center justify-between mb-3">
+                <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Generator</span>
+                <span className="text-xs font-semibold px-2 py-0.5 rounded-full"
+                    style={{
+                        background: running ? 'rgba(74,222,128,0.12)' : 'rgba(255,255,255,0.06)',
+                        color: running ? '#4ade80' : 'rgba(255,255,255,0.35)',
+                        border: `1px solid ${running ? 'rgba(74,222,128,0.3)' : 'rgba(255,255,255,0.1)'}`,
+                    }}>
+                    {running ? 'Running' : 'Standby'}
+                </span>
+            </div>
+            {/* RPM dial */}
+            <div className="flex items-center gap-4">
+                <div className="relative shrink-0" style={{ width: 56, height: 56 }}>
+                    <svg viewBox="0 0 56 56" width="56" height="56">
+                        <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="4" />
+                        <circle cx="28" cy="28" r="22" fill="none"
+                            stroke={running ? '#fbbf24' : 'rgba(255,255,255,0.15)'}
+                            strokeWidth="4"
+                            strokeDasharray={`${2 * Math.PI * 22}`}
+                            strokeDashoffset={`${2 * Math.PI * 22 * (1 - pct / 100)}`}
+                            strokeLinecap="round"
+                            style={{ transition: 'stroke-dashoffset 0.3s', transformOrigin: '28px 28px', transform: 'rotate(-90deg)' }}
+                        />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-xs font-bold" style={{ color: running ? '#fbbf24' : 'rgba(255,255,255,0.3)', fontSize: 9 }}>
+                            {running ? `${pct}%` : '—'}
+                        </span>
+                    </div>
+                </div>
+                <div className="flex flex-col gap-1">
+                    <div>
+                        <div className="text-sm font-bold text-white">{running ? `${rpm} RPM` : '— RPM'}</div>
+                        <div className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Engine speed</div>
+                    </div>
+                    <div className="text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                        {running ? 'Auto-started on outage' : 'Awaiting trigger'}
+                    </div>
+                </div>
+            </div>
         </div>
-        <span className="text-xs" style={{ color: 'rgba(255,255,255,0.3)', fontFamily: 'monospace' }}>{ping}ms</span>
-      </div>
-      <div className="p-2 flex flex-col gap-0.5">
-        {sites.map((s, i) => (
-          <div key={s} className="flex items-center gap-2 px-2 py-1.5 rounded-lg transition-all duration-300"
-            style={{ background: i === active ? 'rgba(167,139,250,0.08)' : 'transparent' }}>
-            <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: '#4ade80' }} />
-            <span className="text-xs flex-1" style={{ color: 'rgba(255,255,255,0.65)' }}>{s}</span>
-            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.28)' }}>live</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
+    )
 }
 
-/* ── Shared card wrapper ─────────────────────────── */
-function Card({ children, colSpan = '', rowSpan = '', style: extraStyle = {} }) {
-  const [hovered, setHovered] = useState(false)
-  return (
-    <div
-      className={`${colSpan} ${rowSpan} rounded-2xl p-6 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden`}
-      style={{ ...(hovered ? glassHover : glass), ...extraStyle }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {children}
-    </div>
-  )
-}
+/* ── Data ────────────────────────────────────────── */
+const systems = [
+    {
+        id: 1,
+        icon: BatteryCharging,
+        accent: '#4ade80',
+        eyebrow: 'Uninterruptible Power',
+        title: 'UPS Systems',
+        stat: { value: '<10ms', label: 'Failover switchover' },
+        description: 'Uninterruptible Power Supplies provide instant battery backup the moment mains power fails — protecting sensitive equipment from data loss, hardware damage, and unexpected shutdowns with zero-gap continuity.',
+        highlights: ['Instant <10ms switchover', 'Online & line-interactive modes', 'Scalable battery runtime'],
+        mockup: UpsMockup,
+    },
+    {
+        id: 2,
+        icon: LayoutGrid,
+        accent: '#93c5fd',
+        eyebrow: 'Outlet Management',
+        title: 'Power Distribution Units',
+        stat: { value: 'Per-outlet', label: 'Monitoring & control' },
+        description: 'PDUs distribute power from a single source to multiple devices within a rack or enclosure. Managed PDUs allow remote per-outlet switching, load monitoring, and current alerts — maximising uptime and visibility.',
+        highlights: ['Remote per-outlet switching', 'Current & wattage metering', 'Horizontal & vertical rack mount'],
+        mockup: PduMockup,
+    },
+    {
+        id: 3,
+        icon: BarChart2,
+        accent: '#fbbf24',
+        eyebrow: 'Consumption Intelligence',
+        title: 'Energy Monitoring Systems',
+        stat: { value: 'Real-time', label: 'Zone-level metering' },
+        description: 'Dedicated EMS platforms provide granular visibility into power consumption across zones, floors, and individual circuits — enabling informed decisions on efficiency, capacity planning, and cost reduction.',
+        highlights: ['Zone & circuit-level metering', 'Historical trend analysis', 'Anomaly & waste detection'],
+        mockup: EmsMockup,
+    },
+    {
+        id: 4,
+        icon: Gauge,
+        accent: '#f87171',
+        eyebrow: 'Long-Duration Backup',
+        title: 'Backup Generators',
+        stat: { value: 'Auto-start', label: 'On mains failure' },
+        description: 'Diesel and gas generators provide extended backup power for outages that outlast UPS battery capacity. Auto-start controllers detect mains failure and bring the generator online within seconds.',
+        highlights: ['Automatic mains-fail start', 'Diesel & gas options', 'Scheduled load testing'],
+        mockup: GeneratorMockup,
+    },
+]
 
-function CardHeader({ icon: Icon, accent, eyebrow }) {
-  return (
-    <div className="flex items-center gap-3">
-      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-        style={{ background: `${accent}18`, color: accent, border: `1px solid ${accent}30` }}>
-        <Icon size={18} />
-      </div>
-      {eyebrow && (
-        <span className="text-xs font-semibold tracking-widest uppercase"
-          style={{ color: 'rgba(255,255,255,0.4)' }}>{eyebrow}</span>
-      )}
-    </div>
-  )
-}
-
-function Bullets({ items, accent }) {
-  return (
-    <div className="flex flex-col gap-1.5">
-      {items.map(h => (
-        <div key={h} className="flex items-center gap-2">
-          <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: accent }} />
-          <span className="text-xs" style={{ color: 'rgba(255,255,255,0.65)' }}>{h}</span>
+/* ── Shared card ─────────────────────────────────── */
+function Card({ children }) {
+    const [hovered, setHovered] = useState(false)
+    return (
+        <div
+            className="rounded-2xl p-6 flex flex-col transition-all duration-300 hover:-translate-y-0.5 overflow-hidden"
+            style={hovered ? glassHover : glass}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+        >
+            {children}
         </div>
-      ))}
-    </div>
-  )
+    )
 }
 
-/* ── Main section ────────────────────────────────── */
-const KeyFeatures = () => {
-  return (
-    <div className="w-full px-4 md:px-6 py-16 md:py-24">
-      <div className="max-w-5xl mx-auto">
-
-        {/* Header */}
-        <div className="text-center mb-12">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-4"
-            style={{ color: 'rgba(255,255,255,0.45)' }}>
-            Built-In Intelligence
-          </p>
-          <h2 className="text-3xl md:text-5xl font-light text-white leading-tight mb-4">
-            Key Features
-          </h2>
-          <p className="text-sm md:text-base max-w-xl mx-auto leading-relaxed"
-            style={{ color: 'rgba(255,255,255,0.55)' }}>
-            Every tool you need to monitor, protect, and optimise your electrical infrastructure —
-            from a single circuit to a multi-site operation.
-          </p>
+function StatPill({ value, label, accent }) {
+    return (
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full self-start"
+            style={{ background: `${accent}12`, border: `1px solid ${accent}30` }}>
+            <span className="text-xs font-bold" style={{ color: accent }}>{value}</span>
+            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>{label}</span>
         </div>
-
-        {/*
-          Bento Layout (PromptPal-style):
-          ┌─────────────────────┬──────────────┬────────┐
-          │                     │  Backup      │ Surge  │
-          │  Energy Monitor     │  Power       │        │
-          │  (tall hero)        ├──────────────┤        │
-          │                     │  Load        │        │
-          │                     │  Balancing   │        │
-          ├────────────────────────────────────┴────────┤ <- won't work cleanly, use:
-          ┌─────────────────────┬──────────────┬────────┐
-          Row 1: [Energy 3×2] | [Backup 2] | [Surge 1]
-          Row 2: [Energy 3×2] | [Load Bal 3]
-          Row 3: [Analytics 3] | [Remote 3]
-        */}
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-4"
-          style={{ gridTemplateRows: 'auto auto auto' }}>
-
-          {/* ── Energy Monitor — tall hero left ── */}
-          <Card colSpan="md:col-span-3" rowSpan="md:row-span-2">
-            <CardHeader icon={Zap} accent="#4ade80" eyebrow="Real-Time" />
-            <h3 className="text-2xl font-semibold text-white leading-snug">Energy Monitoring</h3>
-            <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.58)' }}>
-              Track live power draw across every circuit, zone, and device — with second-by-second updates,
-              peak detection, and automated alerts when consumption spikes beyond set thresholds.
-            </p>
-            <Bullets items={['Live kWh per circuit', 'Peak load detection', 'Threshold alerts']} accent="#4ade80" />
-            <div className="flex-1 flex flex-col justify-end">
-              <EnergyHeroMockup />
-            </div>
-          </Card>
-
-          {/* ── Backup Power ── */}
-          <Card colSpan="md:col-span-2">
-            <CardHeader icon={BatteryCharging} accent="#5eead4" eyebrow="Backup Systems" />
-            <h3 className="text-base font-semibold text-white">Backup Power</h3>
-            <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.58)' }}>
-              UPS and generator integration ensures critical systems stay online during outages,
-              with automatic failover and runtime estimation.
-            </p>
-            <Bullets items={['Auto failover', 'UPS integration', 'Runtime estimation']} accent="#5eead4" />
-            <div className="flex-1 flex flex-col justify-end">
-              <BackupMockup />
-            </div>
-          </Card>
-
-          {/* ── Surge Protection — slim accent card ── */}
-          <Card colSpan="md:col-span-1">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-              style={{ background: 'rgba(248,113,113,0.18)', color: '#f87171', border: '1px solid rgba(248,113,113,0.3)' }}>
-              <ShieldAlert size={18} />
-            </div>
-            <h3 className="text-base font-semibold text-white leading-snug">Surge Protection</h3>
-            <div className="flex-1 flex flex-col justify-end">
-              <SurgeMockup />
-            </div>
-          </Card>
-
-          {/* ── Load Balancing — right of hero row 2 ── */}
-          <Card colSpan="md:col-span-3">
-            <CardHeader icon={Scale} accent="#93c5fd" eyebrow="Distribution" />
-            <h3 className="text-base font-semibold text-white">Load Balancing</h3>
-            <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.58)' }}>
-              Intelligent distribution prevents bottlenecks by automatically redistributing demand
-              across phases to maximise efficiency and hardware lifespan.
-            </p>
-            <Bullets items={['3-phase balancing', 'Auto redistribution', 'Overload prevention']} accent="#93c5fd" />
-            <div className="flex-1 flex flex-col justify-end">
-              <LoadMockup />
-            </div>
-          </Card>
-
-          {/* ── Row 3: Analytics + Remote ── */}
-          <Card colSpan="md:col-span-3">
-            <CardHeader icon={BarChart3} accent="#fbbf24" eyebrow="Insights" />
-            <h3 className="text-base font-semibold text-white">Usage Analytics</h3>
-            <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.58)' }}>
-              Weekly and monthly reports surface consumption trends, cost projections, and
-              efficiency opportunities — so you can cut bills and carbon footprint.
-            </p>
-            <Bullets items={['Weekly trend reports', 'Cost projections', 'Carbon footprint tracking']} accent="#fbbf24" />
-            <div className="flex-1 flex flex-col justify-end">
-              <AnalyticsMockup />
-            </div>
-          </Card>
-
-          <Card colSpan="md:col-span-3">
-            <CardHeader icon={Wifi} accent="#a78bfa" eyebrow="Remote Access" />
-            <h3 className="text-base font-semibold text-white">Remote Monitoring</h3>
-            <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.58)' }}>
-              Manage and monitor all sites from a single cloud dashboard — real-time status,
-              instant alerts, and remote control from any device, anywhere.
-            </p>
-            <Bullets items={['Multi-site dashboard', 'Mobile app access', 'Instant push alerts']} accent="#a78bfa" />
-            <div className="flex-1 flex flex-col justify-end">
-              <RemoteMockup />
-            </div>
-          </Card>
-
-        </div>
-      </div>
-    </div>
-  )
+    )
 }
 
-export default KeyFeatures
+/* ── Section ─────────────────────────────────────── */
+const SystemTypes = () => {
+    return (
+        <div className="w-full px-4 md:px-6 py-16 md:py-24">
+            <div className="max-w-5xl mx-auto">
+
+                {/* Header */}
+                <div className="text-center mb-12">
+                    <p className="text-xs font-semibold tracking-widest uppercase mb-4"
+                        style={{ color: 'rgba(255,255,255,0.45)' }}>
+                        What We Supply & Install
+                    </p>
+                    <h2 className="text-3xl md:text-5xl font-light text-white leading-tight mb-4">
+                        Types of Systems
+                    </h2>
+                    <p className="text-sm md:text-base max-w-xl mx-auto leading-relaxed"
+                        style={{ color: 'rgba(255,255,255,0.55)' }}>
+                        From instant battery backup to long-duration generators — we supply, install,
+                        and maintain every tier of power protection infrastructure.
+                    </p>
+                </div>
+
+                {/*
+                    Row 1: [UPS — 1/2] [PDU — 1/2]
+                    Row 2: [EMS — 1/2] [Generator — 1/2]
+                */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {systems.map(s => {
+                        const IconComp = s.icon
+                        const MockupComp = s.mockup
+                        return (
+                            <Card key={s.id}>
+                                {/* Icon + eyebrow + watermark */}
+                                <div className="flex items-start justify-between">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                                            style={{ background: `${s.accent}18`, color: s.accent, border: `1px solid ${s.accent}30` }}>
+                                            <IconComp size={18} />
+                                        </div>
+                                        <span className="text-xs font-semibold tracking-widest uppercase"
+                                            style={{ color: 'rgba(255,255,255,0.4)' }}>
+                                            {s.eyebrow}
+                                        </span>
+                                    </div>
+                                    <span className="font-black select-none"
+                                        style={{ fontSize: 36, color: 'rgba(255,255,255,0.06)', lineHeight: 1, fontFamily: 'monospace' }}>
+                                        {String(s.id).padStart(2, '0')}
+                                    </span>
+                                </div>
+
+                                {/* Title */}
+                                <h3 className="text-lg font-semibold text-white leading-snug">{s.title}</h3>
+
+                                {/* Description */}
+                                <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.58)' }}>
+                                    {s.description}
+                                </p>
+
+                                {/* Stat pill */}
+                                <StatPill value={s.stat.value} label={s.stat.label} accent={s.accent} />
+
+                                {/* Highlights */}
+                                <div className="flex flex-col gap-1.5">
+                                    {s.highlights.map(h => (
+                                        <div key={h} className="flex items-center gap-2">
+                                            <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: s.accent }} />
+                                            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.65)' }}>{h}</span>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* Animated mockup */}
+                                <MockupComp />
+                            </Card>
+                        )
+                    })}
+                </div>
+
+            </div>
+        </div>
+    )
+}
+
+export default SystemTypes
