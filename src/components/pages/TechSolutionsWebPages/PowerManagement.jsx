@@ -4,6 +4,7 @@ import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
 import Features from '../../Aspects/power-management/Features'
 import SystemTypes from '../../Aspects/power-management/SystemTypes'
+import Benefits from '../../Aspects/power-management/Benefits'
 
 const PowerManagement = () => {
   return (
@@ -65,6 +66,9 @@ const PowerManagement = () => {
 
             {/* Types of Systems */}
             <SystemTypes />
+
+            {/* Benefits */}
+            <Benefits />
 
         </div>
     </div>

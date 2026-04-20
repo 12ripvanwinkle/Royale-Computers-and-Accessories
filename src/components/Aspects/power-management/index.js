@@ -1,4 +1,4 @@
-import { BatteryCharging, LayoutGrid, BarChart2, Gauge } from 'lucide-react'
+import { BatteryCharging, LayoutGrid, BarChart2, Gauge, TrendingDown, ShieldCheck, Cpu, Zap} from 'lucide-react'
 
 export const readings = [
     { zone: 'Server Room', kw: 4.2, trend: '+0.1', color: '#4ade80' },
@@ -52,5 +52,61 @@ export const systems = [
         description: 'Diesel and gas generators provide extended backup power for outages that outlast UPS battery capacity. Auto-start controllers detect mains failure and bring the generator online within seconds.',
         highlights: ['Automatic mains-fail start', 'Diesel & gas options', 'Scheduled load testing'],
         mockup: Generator,
+    },
+];
+
+export const threats = [
+    { label: 'Voltage spike', severity: 'High', blocked: true, color: '#f87171' },
+    { label: 'Harmonic distortion', severity: 'Med', blocked: true, color: '#fbbf24' },
+    { label: 'Brown-out event', severity: 'High', blocked: true, color: '#f87171' },
+    { label: 'Frequency drift', severity: 'Low', blocked: true, color: '#4ade80' },
+];
+
+import {Cost, Downtime, Protection, Efficiency} from './Benefits'
+
+export const benefits = [
+    {
+        id: 1,
+        icon: TrendingDown,
+        accent: '#4ade80',
+        eyebrow: 'Cost Reduction',
+        title: 'Reduce Energy Costs',
+        stat: { value: 'Up to 40%', label: 'Energy bill reduction' },
+        description: 'Smart monitoring and load optimisation identify waste, eliminate idle consumption, and shift loads to off-peak tariff windows — delivering measurable reductions on your monthly energy bill from day one.',
+        highlights: ['Off-peak load shifting', 'Idle circuit detection', 'Cost-per-zone reporting'],
+        mockup: Cost,
+    },
+    {
+        id: 2,
+        icon: ShieldCheck,
+        accent: '#93c5fd',
+        eyebrow: 'Business Continuity',
+        title: 'Prevent Downtime',
+        stat: { value: '99.99%', label: 'Guaranteed uptime' },
+        description: 'Layered UPS, generator, and automatic transfer switch systems ensure that power failures never become operational failures. Failover is measured in milliseconds — invisible to the systems that depend on it.',
+        highlights: ['<10ms automatic failover', 'Redundant power paths', 'Proactive fault detection'],
+        mockup: Downtime,
+    },
+    {
+        id: 3,
+        icon: Cpu,
+        accent: '#f87171',
+        eyebrow: 'Hardware Longevity',
+        title: 'Protect Equipment',
+        stat: { value: '3×', label: 'Longer hardware lifespan' },
+        description: 'Voltage spikes, brown-outs, and harmonic distortion silently degrade hardware over time. Our surge suppressors, line conditioners, and UPS systems act as a clean power barrier — extending equipment life significantly.',
+        highlights: ['Surge & spike suppression', 'Voltage regulation', 'Harmonic distortion filtering'],
+        mockup: Protection,
+    },
+    {
+        id: 4,
+        icon: Zap,
+        accent: '#fbbf24',
+        eyebrow: 'Operational Excellence',
+        title: 'Improve Efficiency',
+        stat: { value: 'PUE < 1.4', label: 'Industry-leading rating' },
+        description: 'Power Usage Effectiveness (PUE) measures how efficiently a facility uses energy. Our systems target sub-1.4 PUE through intelligent load balancing, hot-aisle containment guidance, and continuous efficiency benchmarking.',
+        highlights: ['PUE monitoring & reporting', 'Load factor optimisation', 'Capacity planning tools'],
+        mockup: Efficiency,
     },
 ]

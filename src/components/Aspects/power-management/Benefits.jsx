@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { glass, glassHover } from '../CCTV-Holder/CCTVStyles'
-import { TrendingDown, ShieldCheck, Cpu, Zap } from 'lucide-react'
+import { threats, benefits} from './index'
 
-/* ── Energy Cost Mockup ──────────────────────────── */
-function CostMockup() {
+export function Cost() {
+
     const months = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     const before = [92, 95, 88, 97, 91, 94]
-    const after  = [92, 85, 76, 68, 61, 55]
-    return (
+    const after = [92, 85, 76, 68, 61, 55]
+
+    return(
         <div className="rounded-xl p-3 mt-4"
-            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+            style={{background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)'}}
+        >
             <div className="flex items-center justify-between mb-3">
                 <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Monthly energy spend</span>
                 <div className="flex items-center gap-3">
@@ -23,7 +25,8 @@ function CostMockup() {
                     </div>
                 </div>
             </div>
-            <div className="flex items-end gap-2" style={{ height: 56 }}>
+
+            <div className="flex items-center gap-2" style={{ height: 56}}>
                 {months.map((m, i) => (
                     <div key={m} className="flex-1 flex flex-col items-center gap-1">
                         <div className="w-full flex items-end gap-0.5" style={{ height: 48 }}>
@@ -44,8 +47,7 @@ function CostMockup() {
     )
 }
 
-/* ── Downtime Mockup ─────────────────────────────── */
-function DowntimeMockup() {
+export function Downtime() {
     const [uptime, setUptime] = useState(99.97)
     const [events, setEvents] = useState([
         { label: 'Mains failure detected', time: '09:14', resolved: true },
@@ -56,11 +58,14 @@ function DowntimeMockup() {
         const iv = setInterval(() => setUptime(u => parseFloat(Math.min(99.99, u + 0.001).toFixed(3))), 1200)
         return () => clearInterval(iv)
     }, [])
-    return (
+
+    return(
         <div className="rounded-xl overflow-hidden mt-4"
-            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+            style={{background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)'}}
+        >
             <div className="px-3 py-2 flex items-center justify-between"
-                style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                style={{borderBottom: '1px solid rgba(255,255,255,0.08)'}}
+            >
                 <div className="flex items-center gap-1.5">
                     <div className="w-2 h-2 rounded-full" style={{ background: '#4ade80', boxShadow: '0 0 5px #4ade8099' }} />
                     <span className="text-xs" style={{ color: '#4ade80' }}>Systems online</span>
@@ -84,24 +89,21 @@ function DowntimeMockup() {
     )
 }
 
-/* ── Equipment Protection Mockup ─────────────────── */
-function ProtectionMockup() {
+export function Protection(){
+
     const [tick, setTick] = useState(0)
     useEffect(() => {
         const iv = setInterval(() => setTick(t => t + 1), 900)
         return () => clearInterval(iv)
     }, [])
-    const threats = [
-        { label: 'Voltage spike', severity: 'High', blocked: true, color: '#f87171' },
-        { label: 'Harmonic distortion', severity: 'Med', blocked: true, color: '#fbbf24' },
-        { label: 'Brown-out event', severity: 'High', blocked: true, color: '#f87171' },
-        { label: 'Frequency drift', severity: 'Low', blocked: true, color: '#4ade80' },
-    ]
-    return (
+
+    return(
         <div className="rounded-xl overflow-hidden mt-4"
-            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+            style={{background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)'}}
+        >
             <div className="px-3 py-2 flex items-center justify-between"
-                style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                style={{borderBottom: '1px solid rgba(255,255,255,0.08)'}}
+            >
                 <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Threat log — today</span>
                 <span className="text-xs font-semibold px-2 py-0.5 rounded-full"
                     style={{ background: 'rgba(74,222,128,0.1)', color: '#4ade80', border: '1px solid rgba(74,222,128,0.25)' }}>
@@ -127,21 +129,24 @@ function ProtectionMockup() {
     )
 }
 
-/* ── Efficiency Mockup ───────────────────────────── */
-function EfficiencyMockup() {
+export function Efficiency() {
     const [pue, setPue] = useState(1.62)
     useEffect(() => {
         const iv = setInterval(() => setPue(p => parseFloat(Math.max(1.20, Math.min(1.65, p + (Math.random() > 0.5 ? 0.01 : -0.01))).toFixed(2))), 800)
         return () => clearInterval(iv)
-    }, [])
+    },[])
+
     const metrics = [
         { label: 'PUE rating', value: pue.toFixed(2), target: '< 1.4', color: pue < 1.4 ? '#4ade80' : '#fbbf24' },
         { label: 'Load factor', value: '87%', target: '> 80%', color: '#93c5fd' },
         { label: 'Waste heat', value: '−28%', target: 'vs baseline', color: '#5eead4' },
-    ]
-    return (
+    ];
+
+    
+    return(
         <div className="rounded-xl p-3 mt-4"
-            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+            style={{background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)'}}
+        >
             <div className="flex flex-col gap-2.5">
                 {metrics.map(m => (
                     <div key={m.label} className="flex items-center justify-between">
@@ -160,60 +165,12 @@ function EfficiencyMockup() {
     )
 }
 
-/* ── Data ────────────────────────────────────────── */
-const benefits = [
-    {
-        id: 1,
-        icon: TrendingDown,
-        accent: '#4ade80',
-        eyebrow: 'Cost Reduction',
-        title: 'Reduce Energy Costs',
-        stat: { value: 'Up to 40%', label: 'Energy bill reduction' },
-        description: 'Smart monitoring and load optimisation identify waste, eliminate idle consumption, and shift loads to off-peak tariff windows — delivering measurable reductions on your monthly energy bill from day one.',
-        highlights: ['Off-peak load shifting', 'Idle circuit detection', 'Cost-per-zone reporting'],
-        mockup: CostMockup,
-    },
-    {
-        id: 2,
-        icon: ShieldCheck,
-        accent: '#93c5fd',
-        eyebrow: 'Business Continuity',
-        title: 'Prevent Downtime',
-        stat: { value: '99.99%', label: 'Guaranteed uptime' },
-        description: 'Layered UPS, generator, and automatic transfer switch systems ensure that power failures never become operational failures. Failover is measured in milliseconds — invisible to the systems that depend on it.',
-        highlights: ['<10ms automatic failover', 'Redundant power paths', 'Proactive fault detection'],
-        mockup: DowntimeMockup,
-    },
-    {
-        id: 3,
-        icon: Cpu,
-        accent: '#f87171',
-        eyebrow: 'Hardware Longevity',
-        title: 'Protect Equipment',
-        stat: { value: '3×', label: 'Longer hardware lifespan' },
-        description: 'Voltage spikes, brown-outs, and harmonic distortion silently degrade hardware over time. Our surge suppressors, line conditioners, and UPS systems act as a clean power barrier — extending equipment life significantly.',
-        highlights: ['Surge & spike suppression', 'Voltage regulation', 'Harmonic distortion filtering'],
-        mockup: ProtectionMockup,
-    },
-    {
-        id: 4,
-        icon: Zap,
-        accent: '#fbbf24',
-        eyebrow: 'Operational Excellence',
-        title: 'Improve Efficiency',
-        stat: { value: 'PUE < 1.4', label: 'Industry-leading rating' },
-        description: 'Power Usage Effectiveness (PUE) measures how efficiently a facility uses energy. Our systems target sub-1.4 PUE through intelligent load balancing, hot-aisle containment guidance, and continuous efficiency benchmarking.',
-        highlights: ['PUE monitoring & reporting', 'Load factor optimisation', 'Capacity planning tools'],
-        mockup: EfficiencyMockup,
-    },
-]
+function Card({children}) {
 
-/* ── Shared card ─────────────────────────────────── */
-function Card({ children }) {
     const [hovered, setHovered] = useState(false)
-    return (
-        <div
-            className="rounded-2xl p-6 flex flex-col transition-all duration-300 hover:-translate-y-0.5 overflow-hidden"
+
+    return(
+        <div className="rounded-2xl p-6 flex flex-col transition-all duration-300 hover:-translate-y-0.5 overflow-hidden"
             style={hovered ? glassHover : glass}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
@@ -223,19 +180,19 @@ function Card({ children }) {
     )
 }
 
-function StatPill({ value, label, accent }) {
-    return (
+function StatPill({ value, label, accent}) {
+    return(
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full self-start"
-            style={{ background: `${accent}12`, border: `1px solid ${accent}30` }}>
+            style={{background: `${accent}12`, border: `1px solid ${accent}30`}}
+        >
             <span className="text-xs font-bold" style={{ color: accent }}>{value}</span>
             <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>{label}</span>
         </div>
     )
 }
 
-/* ── Section ─────────────────────────────────────── */
 const Benefits = () => {
-    return (
+    return(
         <div className="w-full px-4 md:px-6 py-16 md:py-24">
             <div className="max-w-5xl mx-auto">
 
@@ -255,10 +212,7 @@ const Benefits = () => {
                     </p>
                 </div>
 
-                {/*
-                    Row 1: [Reduce Costs — 1/2] [Prevent Downtime — 1/2]
-                    Row 2: [Protect Equipment — 1/2] [Improve Efficiency — 1/2]
-                */}
+                {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {benefits.map(b => {
                         const IconComp = b.icon
@@ -310,10 +264,8 @@ const Benefits = () => {
                         )
                     })}
                 </div>
-
             </div>
         </div>
     )
 }
-
 export default Benefits
