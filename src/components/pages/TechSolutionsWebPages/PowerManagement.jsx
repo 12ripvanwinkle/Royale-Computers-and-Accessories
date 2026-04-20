@@ -2,6 +2,7 @@ import React from 'react'
 import TitleHeader from '../../TitleHeader'
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
+import Features from '../../Aspects/power-management/Features'
 
 const PowerManagement = () => {
   return (
@@ -59,6 +60,7 @@ const PowerManagement = () => {
             </div>
 
             {/* Features */}
+            <Features />
 
         </div>
     </div>
