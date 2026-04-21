@@ -1,4 +1,16 @@
-import { BatteryCharging, LayoutGrid, BarChart2, Gauge, TrendingDown, ShieldCheck, Cpu, Zap} from 'lucide-react'
+import { BatteryCharging, 
+        LayoutGrid, 
+        BarChart2, 
+        Gauge, 
+        TrendingDown, 
+        ShieldCheck, 
+        Cpu, 
+        Zap,
+        ClipboardList,
+        HardHat, 
+        MonitorCheck, 
+        Wrench,
+    } from 'lucide-react'
 
 export const readings = [
     { zone: 'Server Room', kw: 4.2, trend: '+0.1', color: '#4ade80' },
@@ -109,4 +121,82 @@ export const benefits = [
         highlights: ['PUE monitoring & reporting', 'Load factor optimisation', 'Capacity planning tools'],
         mockup: Efficiency,
     },
-]
+];
+
+export const checks = [
+    { label: 'Peak demand windows', score: 74, color: '#fbbf24' },
+    { label: 'Idle circuit waste',  score: 88, color: '#f87171' },
+    { label: 'Power factor rating', score: 61, color: '#fbbf24' },
+    { label: 'Tariff optimisation', score: 45, color: '#f87171' },
+];
+
+export const tasks = [
+    'Site survey complete',
+    'Cabling & conduit run',
+    'UPS units racked',
+    'PDUs wired & labelled',
+    'Load test passed',
+];
+
+export const feeds = [
+    { label: 'UPS — Server Room',  status: 'Online',  color: '#4ade80' },
+    { label: 'PDU — Rack A',       status: 'Online',  color: '#4ade80' },
+    { label: 'Generator — Roof',   status: 'Standby', color: '#fbbf24' },
+    { label: 'EMS — Floor 2',      status: 'Online',  color: '#4ade80' },
+];
+
+export const schedule = [
+    { task: 'UPS battery test',      due: 'Today',      color: '#f87171' },
+    { task: 'Generator load test',   due: 'In 3 days',  color: '#fbbf24' },
+    { task: 'PDU thermal scan',      due: 'In 1 week',  color: '#fbbf24' },
+    { task: 'Full system inspection',due: 'In 1 month', color: '#4ade80' },
+];
+
+import {Audit, Install, Monitor, Maintenance} from './Services'
+
+export const services = [
+    {
+        id: 1,
+        icon: ClipboardList,
+        accent: '#fbbf24',
+        eyebrow: 'Step 01',
+        title: 'Energy Audits',
+        stat: { value: 'Full site', label: 'Consumption analysis' },
+        description: 'We begin every engagement with a detailed energy audit — mapping consumption across all circuits, identifying peak demand windows, wasteful loads, and tariff inefficiencies to build a targeted improvement plan.',
+        highlights: ['Full circuit-level mapping', 'Tariff & demand analysis', 'Written recommendations report'],
+        mockup: Audit,
+    },
+    {
+        id: 2,
+        icon: HardHat,
+        accent: '#93c5fd',
+        eyebrow: 'Step 02',
+        title: 'System Installation',
+        stat: { value: 'End-to-end', label: 'Supply & fit' },
+        description: 'Our engineers handle every aspect of installation — from cabling and containment through to racking UPS units, wiring PDUs, and commissioning the full system with a documented load test before sign-off.',
+        highlights: ['Full supply & installation', 'Cable management & labelling', 'Commissioning & load testing'],
+        mockup: Install,
+    },
+    {
+        id: 3,
+        icon: MonitorCheck,
+        accent: '#4ade80',
+        eyebrow: 'Step 03',
+        title: 'Monitoring Setup',
+        stat: { value: '24 / 7', label: 'Live dashboard access' },
+        description: 'We configure your cloud monitoring dashboard, connect all devices, set alert thresholds, and ensure your team has full visibility across every UPS, PDU, and generator from day one — on any device.',
+        highlights: ['Cloud dashboard configuration', 'Custom alert thresholds', 'Mobile & remote access'],
+        mockup: Monitor,
+    },
+    {
+        id: 4,
+        icon: Wrench,
+        accent: '#a78bfa',
+        eyebrow: 'Step 04',
+        title: 'Maintenance',
+        stat: { value: 'Planned', label: 'Preventive schedule' },
+        description: 'Scheduled preventive maintenance keeps your systems performing at peak. Battery tests, generator load runs, thermal scans, and firmware updates are all managed proactively — before faults become failures.',
+        highlights: ['Scheduled battery testing', 'Generator load test runs', 'Firmware & software updates'],
+        mockup: Maintenance,
+    },
+];

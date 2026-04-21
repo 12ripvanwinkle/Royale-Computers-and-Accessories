@@ -5,6 +5,7 @@ import Footer from '../../sections/Footer'
 import Features from '../../Aspects/power-management/Features'
 import SystemTypes from '../../Aspects/power-management/SystemTypes'
 import Benefits from '../../Aspects/power-management/Benefits'
+import Services from '../../Aspects/power-management/Services'
 
 const PowerManagement = () => {
   return (
@@ -69,6 +70,9 @@ const PowerManagement = () => {
 
             {/* Benefits */}
             <Benefits />
+
+            {/* Services */}
+            <Services />
 
         </div>
     </div>

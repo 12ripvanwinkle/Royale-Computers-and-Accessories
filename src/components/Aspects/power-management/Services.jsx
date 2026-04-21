@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { glass, glassHover } from '../CCTV-Holder/CCTVStyles'
-import { ClipboardList, HardHat, MonitorCheck, Wrench } from 'lucide-react'
+import {checks, tasks, feeds, schedule, services} from './index'
 
-/* ── Energy Audit Mockup ─────────────────────────── */
-function AuditMockup() {
+export function Audit() {
     const [scanning, setScanning] = useState(0)
     useEffect(() => {
         const iv = setInterval(() => setScanning(s => (s + 1) % 5), 800)
         return () => clearInterval(iv)
     }, [])
-    const checks = [
-        { label: 'Peak demand windows', score: 74, color: '#fbbf24' },
-        { label: 'Idle circuit waste',  score: 88, color: '#f87171' },
-        { label: 'Power factor rating', score: 61, color: '#fbbf24' },
-        { label: 'Tariff optimisation', score: 45, color: '#f87171' },
-    ]
-    return (
+
+
+    return(
         <div className="rounded-xl overflow-hidden mt-4"
-            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <div className="px-3 py-2 flex items-center justify-between"
-                style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+            style={{background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)'}}
+        >
+            <div className="px-3 py-2 flex items-center justify-center"
+                style={{borderBottom: '1px solid rgba(255,255,255,0.08)'}}
+            >   
                 <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'monospace' }}>energy-audit.sh</span>
                 <div className="flex items-center gap-1.5">
                     <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#fbbf24' }} />
@@ -44,25 +41,21 @@ function AuditMockup() {
     )
 }
 
-/* ── Installation Mockup ─────────────────────────── */
-function InstallMockup() {
+export function Install(){
+
     const [done, setDone] = useState(0)
     useEffect(() => {
         const iv = setInterval(() => setDone(d => d >= 5 ? 0 : d + 1), 1100)
         return () => clearInterval(iv)
     }, [])
-    const tasks = [
-        'Site survey complete',
-        'Cabling & conduit run',
-        'UPS units racked',
-        'PDUs wired & labelled',
-        'Load test passed',
-    ]
-    return (
+
+    return(
         <div className="rounded-xl overflow-hidden mt-4"
-            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+            style={{background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)'}}
+        >
             <div className="px-3 py-2 flex items-center justify-between"
-                style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                style={{borderBottom: '1px solid rgba(255,255,255,0.08)'}}
+            >
                 <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'monospace' }}>install-checklist</span>
                 <span className="text-xs" style={{ color: '#93c5fd' }}>{done}/{tasks.length} done</span>
             </div>
@@ -92,30 +85,29 @@ function InstallMockup() {
     )
 }
 
-/* ── Monitoring Setup Mockup ─────────────────────── */
-function MonitoringMockup() {
+export function Monitor() {
+
     const [tick, setTick] = useState(0)
     const [ping, setPing] = useState(18)
+
     useEffect(() => {
         const iv1 = setInterval(() => setTick(t => t + 1), 900)
         const iv2 = setInterval(() => setPing(p => Math.max(10, Math.min(60, p + (Math.random() > 0.5 ? 3 : -3)))), 700)
         return () => { clearInterval(iv1); clearInterval(iv2) }
     }, [])
-    const feeds = [
-        { label: 'UPS — Server Room',  status: 'Online',  color: '#4ade80' },
-        { label: 'PDU — Rack A',       status: 'Online',  color: '#4ade80' },
-        { label: 'Generator — Roof',   status: 'Standby', color: '#fbbf24' },
-        { label: 'EMS — Floor 2',      status: 'Online',  color: '#4ade80' },
-    ]
+    
     return (
         <div className="rounded-xl overflow-hidden mt-4"
-            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+            style={{background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)'}}
+        >
             <div className="px-3 py-2 flex items-center justify-between"
-                style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                style={{borderBottom: '1px solid rgba(255,255,255,0.08)'}}
+            >
                 <div className="flex items-center gap-1.5">
                     <div className="w-2 h-2 rounded-full" style={{ background: '#4ade80', boxShadow: '0 0 5px #4ade8099' }} />
                     <span className="text-xs" style={{ color: '#4ade80' }}>Dashboard live</span>
                 </div>
+
                 <span className="text-xs font-mono" style={{ color: 'rgba(255,255,255,0.3)' }}>{ping}ms</span>
             </div>
             <div className="p-2 flex flex-col gap-0.5">
@@ -133,24 +125,21 @@ function MonitoringMockup() {
     )
 }
 
-/* ── Maintenance Mockup ──────────────────────────── */
-function MaintenanceMockup() {
+export function Maintenance() {
+
     const [active, setActive] = useState(0)
     useEffect(() => {
         const iv = setInterval(() => setActive(a => (a + 1) % 4), 1200)
         return () => clearInterval(iv)
     }, [])
-    const schedule = [
-        { task: 'UPS battery test',      due: 'Today',      color: '#f87171' },
-        { task: 'Generator load test',   due: 'In 3 days',  color: '#fbbf24' },
-        { task: 'PDU thermal scan',      due: 'In 1 week',  color: '#fbbf24' },
-        { task: 'Full system inspection',due: 'In 1 month', color: '#4ade80' },
-    ]
+
     return (
-        <div className="rounded-xl overflow-hidden mt-4"
-            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+        <div className="rounded-xl overview-hidden mt-4"
+            style={{background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)'}}
+        >
             <div className="px-3 py-2 flex items-center justify-between"
-                style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                style={{borderBottom: '1px solid rgba(255,255,255,0.08)'}}
+            >
                 <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Maintenance schedule</span>
                 <span className="text-xs" style={{ color: '#f87171' }}>1 due today</span>
             </div>
@@ -169,109 +158,59 @@ function MaintenanceMockup() {
     )
 }
 
-/* ── Data ────────────────────────────────────────── */
-const services = [
-    {
-        id: 1,
-        icon: ClipboardList,
-        accent: '#fbbf24',
-        eyebrow: 'Step 01',
-        title: 'Energy Audits',
-        stat: { value: 'Full site', label: 'Consumption analysis' },
-        description: 'We begin every engagement with a detailed energy audit — mapping consumption across all circuits, identifying peak demand windows, wasteful loads, and tariff inefficiencies to build a targeted improvement plan.',
-        highlights: ['Full circuit-level mapping', 'Tariff & demand analysis', 'Written recommendations report'],
-        mockup: AuditMockup,
-    },
-    {
-        id: 2,
-        icon: HardHat,
-        accent: '#93c5fd',
-        eyebrow: 'Step 02',
-        title: 'System Installation',
-        stat: { value: 'End-to-end', label: 'Supply & fit' },
-        description: 'Our engineers handle every aspect of installation — from cabling and containment through to racking UPS units, wiring PDUs, and commissioning the full system with a documented load test before sign-off.',
-        highlights: ['Full supply & installation', 'Cable management & labelling', 'Commissioning & load testing'],
-        mockup: InstallMockup,
-    },
-    {
-        id: 3,
-        icon: MonitorCheck,
-        accent: '#4ade80',
-        eyebrow: 'Step 03',
-        title: 'Monitoring Setup',
-        stat: { value: '24 / 7', label: 'Live dashboard access' },
-        description: 'We configure your cloud monitoring dashboard, connect all devices, set alert thresholds, and ensure your team has full visibility across every UPS, PDU, and generator from day one — on any device.',
-        highlights: ['Cloud dashboard configuration', 'Custom alert thresholds', 'Mobile & remote access'],
-        mockup: MonitoringMockup,
-    },
-    {
-        id: 4,
-        icon: Wrench,
-        accent: '#a78bfa',
-        eyebrow: 'Step 04',
-        title: 'Maintenance',
-        stat: { value: 'Planned', label: 'Preventive schedule' },
-        description: 'Scheduled preventive maintenance keeps your systems performing at peak. Battery tests, generator load runs, thermal scans, and firmware updates are all managed proactively — before faults become failures.',
-        highlights: ['Scheduled battery testing', 'Generator load test runs', 'Firmware & software updates'],
-        mockup: MaintenanceMockup,
-    },
-]
-
-/* ── Shared card ─────────────────────────────────── */
 function Card({ children }) {
+
     const [hovered, setHovered] = useState(false)
-    return (
-        <div
-            className="rounded-2xl p-6 flex flex-col transition-all duration-300 hover:-translate-y-0.5 overflow-hidden"
+
+    return(
+        <div className="rounded-2xl p-6 flex flex-col transition-all duration-300 hover:-translate-y-0.5 overflow-hidden"
             style={hovered ? glassHover : glass}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-        >
+        >   
             {children}
         </div>
     )
 }
 
-function StatPill({ value, label, accent }) {
+function StatPill({ value, label, accent}) {
     return (
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full self-start"
-            style={{ background: `${accent}12`, border: `1px solid ${accent}30` }}>
+            style={{background: `${accent}12`, border: `1px solid ${accent}30`}}
+        >
             <span className="text-xs font-bold" style={{ color: accent }}>{value}</span>
             <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>{label}</span>
         </div>
     )
 }
 
-/* ── Section ─────────────────────────────────────── */
 const Services = () => {
-    return (
-        <div className="w-full px-4 md:px-6 py-16 md:py-24">
-            <div className="max-w-5xl mx-auto">
+  return (
+    <div className="w-full px-4 md:px-6 py-16 md:py-24">
+        <div className="max-w-5xl mx-auto">
 
-                {/* Header */}
-                <div className="text-center mb-12">
-                    <p className="text-xs font-semibold tracking-widest uppercase mb-4"
-                        style={{ color: 'rgba(255,255,255,0.45)' }}>
-                        What We Do
-                    </p>
-                    <h2 className="text-3xl md:text-5xl font-light text-white leading-tight mb-4">
-                        Services
-                    </h2>
-                    <p className="text-sm md:text-base max-w-xl mx-auto leading-relaxed"
-                        style={{ color: 'rgba(255,255,255,0.55)' }}>
-                        From the first audit to long-term maintenance — we cover every phase
-                        of your power infrastructure lifecycle.
-                    </p>
-                </div>
+            {/* Header */}
+            <div className="text-center mb-12">
+                <p className="text-xs font-semibold tracking-widest upperecase mb-4"
+                    style={{color: 'rgba(255,255,255,0.45)'}}
+                >
+                    What We Do
+                </p>
+                <h2 className="text-3xl md:text-5xl font-light text-white leading-tight mb-4">
+                    Services
+                </h2>
+                <p className="text-sm md:text-base max-w-xl mx-auto leading-relaxed"
+                    style={{color: 'rgba(255,255,255,0.55)'}}
+                >
+                    From the first audit to long-term maintenance — we cover every phase
+                    of your power infrastructure lifecycle.
+                </p>
+            </div>
 
-                {/*
-                    Row 1: [Energy Audits — 1/2]    [System Installation — 1/2]
-                    Row 2: [Monitoring Setup — 1/2] [Maintenance — 1/2]
-                */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {services.map(s => {
-                        const IconComp = s.icon
-                        const MockupComp = s.mockup
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {services.map(s => {
+                    const IconComp = s.icon
+                    const MockupComp = s.mockup
                         return (
                             <Card key={s.id}>
                                 <div className="flex items-start justify-between">
@@ -308,15 +247,14 @@ const Services = () => {
                                     ))}
                                 </div>
 
-                                <MockupComp />
-                            </Card>
-                        )
-                    })}
-                </div>
-
+                            <MockupComp />
+                        </Card>
+                    )
+                })}
             </div>
         </div>
-    )
+    </div>
+  )
 }
 
 export default Services
