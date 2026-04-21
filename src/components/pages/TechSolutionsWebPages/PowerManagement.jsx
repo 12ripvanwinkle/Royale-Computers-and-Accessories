@@ -6,6 +6,7 @@ import Features from '../../Aspects/power-management/Features'
 import SystemTypes from '../../Aspects/power-management/SystemTypes'
 import Benefits from '../../Aspects/power-management/Benefits'
 import Services from '../../Aspects/power-management/Services'
+import HowItWorks from '../../Aspects/power-management/HowItWorks'
 
 const PowerManagement = () => {
   return (
@@ -73,6 +74,15 @@ const PowerManagement = () => {
 
             {/* Services */}
             <Services />
+
+            {/* How It Works */}
+            <HowItWorks />
+
+            {/* Contact us */}
+            <Contact />
+
+            {/* Footer */}
+            <Footer />
 
         </div>
     </div>

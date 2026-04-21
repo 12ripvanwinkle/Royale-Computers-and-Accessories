@@ -10,6 +10,9 @@ import { BatteryCharging,
         HardHat, 
         MonitorCheck, 
         Wrench,
+        ScanSearch, 
+        PenTool, 
+        TrendingUp
     } from 'lucide-react'
 
 export const readings = [
@@ -198,5 +201,77 @@ export const services = [
         description: 'Scheduled preventive maintenance keeps your systems performing at peak. Battery tests, generator load runs, thermal scans, and firmware updates are all managed proactively — before faults become failures.',
         highlights: ['Scheduled battery testing', 'Generator load test runs', 'Firmware & software updates'],
         mockup: Maintenance,
+    },
+];
+
+export const Assessmentchecks = [
+    { label: 'Load capacity headroom',   score: 68, color: '#fbbf24' },
+    { label: 'Single points of failure', score: 82, color: '#f87171' },
+    { label: 'Tariff efficiency',         score: 54, color: '#fbbf24' },
+    { label: 'Equipment condition',       score: 91, color: '#4ade80' },
+];
+
+export const layers = [
+    { label: 'Mains Supply',        detail: 'DNO intake',         color: '#93c5fd' },
+    { label: 'Distribution Board',  detail: 'MCB protection',     color: '#a78bfa' },
+    { label: 'UPS Layer',           detail: 'Online double conv',  color: '#5eead4' },
+    { label: 'PDU Outlets',         detail: 'Per-outlet metered',  color: '#4ade80' },
+    { label: 'End Devices',         detail: 'Protected loads',     color: '#fbbf24' },
+];
+
+export const Installtasks = [
+    'Cabling & containment',
+    'UPS units commissioned',
+    'PDUs wired & labelled',
+    'Monitoring agents live',
+    'Load test sign-off',
+];
+
+import {Assessment, Design, HIWInstall, Optimisation} from './HowItWorks'
+
+export const steps = [
+    {
+        id: 1,
+        icon: ScanSearch,
+        accent: '#fbbf24',
+        eyebrow: 'Step 01',
+        title: 'Assessment',
+        stat: { value: 'Full site', label: 'Infrastructure review' },
+        description: 'We start with a thorough on-site assessment — reviewing your existing power infrastructure, load profiles, single points of failure, and tariff arrangements to build a complete picture before any work begins.',
+        highlights: ['On-site load profiling', 'Risk & resilience review', 'Detailed findings report'],
+        mockup: Assessment,
+    },
+    {
+        id: 2,
+        icon: PenTool,
+        accent: '#93c5fd',
+        eyebrow: 'Step 02',
+        title: 'Design',
+        stat: { value: 'Bespoke', label: 'Architecture per site' },
+        description: 'Using assessment findings, we design a layered power architecture tailored to your site — specifying the right UPS topology, PDU configuration, monitoring integration, and redundancy level for your risk profile.',
+        highlights: ['Layered redundancy design', 'Equipment specification', 'Compliance & standards check'],
+        mockup: Design,
+    },
+    {
+        id: 3,
+        icon: HardHat,
+        accent: '#a78bfa',
+        eyebrow: 'Step 03',
+        title: 'Installation',
+        stat: { value: 'End-to-end', label: 'Supply, fit & commission' },
+        description: 'Our engineers handle everything from first fix cabling to final commissioning — racking UPS units, wiring PDUs, connecting monitoring agents, and completing a full load test before sign-off.',
+        highlights: ['Full supply & installation', 'Cable management & labels', 'Load test & sign-off'],
+        mockup: Install,
+    },
+    {
+        id: 4,
+        icon: TrendingUp,
+        accent: '#4ade80',
+        eyebrow: 'Step 04',
+        title: 'Optimisation',
+        stat: { value: 'Continuous', label: 'Efficiency improvement' },
+        description: 'Once live, we analyse real consumption data to fine-tune load scheduling, eliminate waste, and improve PUE — turning your power infrastructure into an active cost-reduction asset rather than a fixed overhead.',
+        highlights: ['Load scheduling & shifting', 'PUE benchmarking', 'Quarterly efficiency reports'],
+        mockup: Optimisation,
     },
 ];
