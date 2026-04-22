@@ -9,6 +9,7 @@ import { Main_navLinks,
      digitalSignageNavlinks,
      SoftwareSecurityNavlinks,
      PowerManagementNavlinks,
+     NetworkSecurityNavlinks
      } from '../constants'
 
 const Navbar = () => {
@@ -24,6 +25,7 @@ const Navbar = () => {
   const isDigitalSignagePage = location.pathname === '/tech-solutions/digital-signage';
   const isSoftwareSecurityPage = location.pathname === '/tech-solutions/software-security';
   const isPowerManagementPage = location.pathname === '/tech-solutions/power-management';
+  const isNetworkSecurityPage = location.pathname === '/tech-solutions/network-security';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,6 +50,7 @@ const Navbar = () => {
     : isDigitalSignagePage ? digitalSignageNavlinks
     : isSoftwareSecurityPage ? SoftwareSecurityNavlinks
     : isPowerManagementPage ? PowerManagementNavlinks
+    : isNetworkSecurityPage ? NetworkSecurityNavlinks
     : Main_navLinks;
 
   return (

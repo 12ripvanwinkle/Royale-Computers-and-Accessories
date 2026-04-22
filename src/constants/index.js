@@ -214,6 +214,29 @@ const PowerManagementNavlinks = [
   },
 ];
 
+const NetworkSecurityNavlinks = [
+  {
+    name: "Home",
+    link: "/"
+  },
+  {
+    name: "Solutions",
+    link: "/tech-solutions"
+  },
+  {
+    name: "Features",
+    link: "#features",
+  },
+  {
+    name: "Security Types",
+    link: "#security",
+  },
+  {
+    name: "Services",
+    link: "#services",
+  },
+];
+
 const techServices = [
   {
     title: "Maintenance",
@@ -272,6 +295,12 @@ const techSolutionsItems = [
     description: "Optimize your enterprise with robust power solutions that perform and sustain.",
     image: "/images/Leon3.jpg",
     route: "/tech-solutions/power-management"
+  },
+  {
+    title: "Network Security",
+    description: "Fortify your enterprise with robust security solutions that defend and scale.",
+    image: "/images/Leon3.jpg",
+    route: "/tech-solutions/network-security"
   },
 ];
 
@@ -444,4 +473,5 @@ export { Main_navLinks,
          digitalSignageNavlinks,
          SoftwareSecurityNavlinks,
          PowerManagementNavlinks,
+         NetworkSecurityNavlinks
         };
