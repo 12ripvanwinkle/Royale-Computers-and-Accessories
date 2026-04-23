@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {rules, alerts, tunnels, threats, endpoints,
     SecurityRules, SecurityTunnels, SecurityEndpoints, Securitythreats,
-    attempts, channels, datasets, services
+    attempts, channels, datasets, services,
+    checks, tasks, timeline, feeds, 
 } from './index'
 
 export function Firewall() {
@@ -611,6 +612,197 @@ export function Uptime() {
                         <span className="text-xs flex-1" style={{ color: 'rgba(255,255,255,0.65)' }}>{s.label}</span>
                         <span className="text-xs font-mono" style={{ color: 'rgba(255,255,255,0.3)' }}>{s.latency}</span>
                         <span className="text-xs font-medium" style={{ color: s.color }}>{s.status}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
+}
+
+export function Assessment() {
+
+    const [scanning, setScanning] = useState(0)
+    useEffect(() => {
+        const iv = setInterval(() => setScanning(s => (s + 1) % 5), 850)
+        return () => clearInterval(iv)
+    }, [])
+
+    return(
+        <div className="rounded-xl overflow-hidden mt-4"
+            style={{background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)'}}
+        >
+            <div className="px-3 py-2 flex items-center justify-between"
+                style={{borderBottom: '1px solid rgba(255,255,255,0.08)'}}
+            >
+                <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'monospace' }}>security-assessment.sh</span>
+                <div className="flex items-center gap-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#fbbf24' }} />
+                    <span className="text-xs" style={{ color: '#fbbf24' }}>Scanning…</span>
+                </div>
+            </div>
+            <div className="p-3 flex flex-col gap-2.5">
+                {checks.map((c, i) => (
+                    <div key={c.label}>
+                        <div className="flex items-center justify-between mb-1">
+                            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.55)' }}>{c.label}</span>
+                            <span className="text-xs font-semibold" style={{ color: c.color }}>{c.score}</span>
+                        </div>
+                        <div className="w-full h-1 rounded-full" style={{ background: 'rgba(255,255,255,0.08)' }}>
+                            <div className="h-full rounded-full transition-all duration-700"
+                                style={{ width: i <= scanning ? `${c.score}%` : '0%', background: c.color, opacity: 0.75 }} />
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
+}
+
+export function Implementation() {
+    const [done, setDone] = useState(0)
+    useEffect(() => {
+        const iv = setInterval(() => setDone(d => d >= 5 ? 0 : d + 1), 1100)
+        return () => clearInterval(iv)
+
+    }, [])
+
+    return(
+        <div className="rounded-xl overflow-hidden mt-4"
+            style={{background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)'}}
+        >
+            <div className="px-3 py-2 flex items-center justify-between"
+                style={{borderBottom: '1px solid rgba(255,255,255,0.08)'}}
+            >
+                <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'monospace' }}>deploy-checklist</span>
+                <span className="text-xs" style={{ color: '#a78bfa' }}>{done}/{tasks.length} done</span>
+            </div>
+
+            <div className="p-3 flex flex-col gap-1.5">
+                {tasks.map((t, i) => (
+                    <div key={t} className="flex items-center gap-2.5 px-2 py-1.5 rounded-lg transition-all duration-300"
+                        style={{ background: i < done ? 'rgba(167,139,250,0.07)' : 'transparent' }}>
+                        <div className="w-4 h-4 rounded flex items-center justify-center shrink-0 transition-all duration-300"
+                            style={{
+                                background: i < done ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.06)',
+                                border: `1px solid ${i < done ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.12)'}`,
+                            }}>
+                            {i < done && (
+                                <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+                                    <path d="M1.5 4L3 5.5L6.5 2" stroke="#a78bfa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                            )}
+                        </div>
+                        <span className="text-xs transition-all duration-300"
+                            style={{ color: i < done ? 'rgba(255,255,255,0.72)' : 'rgba(255,255,255,0.32)' }}>
+                            {t}
+                        </span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
+}
+
+export function Monitoring() {
+
+    const [vals, setVals] = useState([30, 45, 38, 60, 42, 75, 55, 68, 40, 82, 58, 70])
+    const [tick, setTick] = useState(0)
+
+    useEffect(() => {
+        const iv1 = setInterval(() => {
+            setVals(v => [...v.slice(1), Math.max(20, Math.min(99, v[v.length - 1] + (Math.random() > 0.5 ? 7 : -7)))])
+        }, 650)
+        const iv2 = setInterval(() => setTick(t => t + 1), 1000)
+        return () => { clearInterval(iv1); clearInterval(iv2) }
+    }, [])
+
+    return(
+        <div className="rounded-xl overflow-hidden mt-4"
+            style={{background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)'}}
+        >
+            <div className="px-3 py-2 flex items-center justify-between"
+                style={{borderBottom: '1px solid rgba(255,255,255,0.08)'}}
+            >
+                <div className="flex items-center gap-1.5">
+                    <div className="w-2 h-2 rounded-full" style={{ background: '#4ade80', boxShadow: '0 0 5px #4ade8099' }} />
+                    <span className="text-xs" style={{ color: '#4ade80' }}>SOC live</span>
+                </div>  
+                <span className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>24 / 7</span>
+            </div>
+
+            {/* Sparkline */}
+            <div className="px-3 pt-2 flex items-end gap-0.5" style={{height: 36}}>
+                {vals.map((h, i) => (
+                    <div key={i} className="flex-1 rounded-sm transition-all duration-300"
+                        style={{
+                            height: `${h}%`,
+                            background: i === vals.length - 1 ? '#4ade80' : `rgba(74,222,128,${0.12 + (i / vals.length) * 0.25})`,
+                            borderRadius: 2,
+                        }} />
+                ))}
+            </div>
+            <div className="p-2 flex flex-col gap-0.5">
+                {feeds.map((f, i) => (
+                    <div key={f.label}
+                        className="flex items-center gap-2 px-2 py-1.5 rounded-lg transition-all duration-300"
+                        style={{ background: i === tick % feeds.length ? 'rgba(74,222,128,0.05)' : 'transparent' }}>
+                        <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: f.color }} />
+                        <span className="text-xs flex-1" style={{ color: 'rgba(255,255,255,0.65)' }}>{f.label}</span>
+                        <span className="text-xs font-medium" style={{ color: f.color }}>{f.status}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
+}
+
+export function Incident() {
+    
+    const [step, setStep] = useState(0)
+    useEffect(() => {
+        const iv = setInterval(() => setStep(s => (s + 1) % 5), 1200)
+        return () => clearInterval(iv)
+    }, [])
+
+    return(
+        <div className="rounded-xl overflow-hidden mt-4"
+            style={{background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)'}}
+        >
+            <div className="px-3 py-2 flex items-center justify-between"
+                style={{borderBottom: '1px solid rgba(255,255,255,0.08)'}}
+            >
+                <div className="flex items-center gap-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full animate-pulse"
+                        style={{ background: '#f87171', boxShadow: '0 0 4px #f8717199' }} />
+                    <span className="text-xs" style={{ color: '#f87171' }}>Incident active</span>
+                </div>
+                <span className="text-xs font-mono" style={{ color: 'rgba(255,255,255,0.3)' }}>INC-0041</span>
+            </div>
+            
+            <div className="p-3 flex flex-col gap-0">
+                {timeline.map((t, i) => (
+                    <div key={t.label} className="flex items-center gap-3 py-1.5">
+                        <div className="flex flex-col items-center shrink-0" style={{ width: 10 }}>
+                            <div className="w-2 h-2 rounded-full transition-all duration-300"
+                                style={{
+                                    background: i < step ? '#4ade80' : i === step ? '#f87171' : 'rgba(255,255,255,0.15)',
+                                    boxShadow: i === step ? '0 0 6px #f87171' : 'none',
+                                }} />
+                            {i < timeline.length - 1 && (
+                                <div style={{ width: 1, height: 10, background: 'rgba(255,255,255,0.1)', marginTop: 2 }} />
+                            )}
+                        </div>
+                        <span className="text-xs flex-1 transition-all duration-300"
+                            style={{ color: i < step ? '#4ade80' : i === step ? '#f87171' : 'rgba(255,255,255,0.28)' }}>
+                            {t.label}
+                        </span>
+                        <span className="text-xs font-mono" style={{ color: 'rgba(255,255,255,0.25)', fontSize: 10 }}>{t.time}</span>
+                        {i === step && (
+                            <span className="text-xs px-1.5 py-0.5 rounded"
+                                style={{ background: 'rgba(248,113,113,0.12)', color: '#f87171', border: '1px solid rgba(248,113,113,0.25)', fontSize: 9 }}>
+                                live
+                            </span>
+                        )}
                     </div>
                 ))}
             </div>

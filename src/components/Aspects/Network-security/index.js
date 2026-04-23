@@ -8,6 +8,10 @@ import {ShieldAlert,
         MessageSquareLock, 
         Database, 
         ServerCrash,  
+        Search, 
+        Wrench, 
+        MonitorCheck, 
+        Siren,
     } from 'lucide-react'
 
 
@@ -279,3 +283,82 @@ export const benefits = [
         mockup: Uptime,
     },
 ];
+
+export const checks = [
+    { label: 'Perimeter exposure',    score: 78, color: '#f87171' },
+    { label: 'Auth vulnerabilities',  score: 62, color: '#fbbf24' },
+    { label: 'Patch compliance',      score: 91, color: '#4ade80' },
+    { label: 'Data exposure risk',    score: 44, color: '#f87171' },
+]
+
+export const tasks = [
+    'Firewall rules deployed',
+    'IDS/IPS signatures loaded',
+    'VPN tunnels established',
+    'EDR agents rolled out',
+    'Policies enforced & tested',
+]
+
+export const feeds = [
+    { label: 'Firewall — perimeter', status: 'Online',  color: '#4ade80' },
+    { label: 'IDS/IPS engine',       status: 'Online',  color: '#4ade80' },
+    { label: 'Endpoint agents',      status: 'Online',  color: '#4ade80' },
+    { label: 'VPN gateway',          status: 'Online',  color: '#4ade80' },
+];
+
+export const timeline = [
+    { label: 'Threat detected',      time: '09:14:02', done: true  },
+    { label: 'Alert triggered',       time: '09:14:03', done: true  },
+    { label: 'SOC analyst engaged',   time: '09:14:45', done: false },
+    { label: 'Endpoint isolated',     time: '09:15:10', done: false },
+    { label: 'Threat neutralised',    time: '09:16:38', done: false },
+]
+
+import {Assessment, Implementation, Monitoring, Incident} from './Components'
+
+export const services2 = [
+    {
+        id: 1,
+        icon: Search,
+        accent: '#fbbf24',
+        eyebrow: 'Step 01',
+        title: 'Network Security Assessment',
+        stat: { value: 'Full scope', label: 'Attack surface review' },
+        description: 'We begin with a comprehensive assessment of your network — mapping every exposed asset, evaluating firewall rules, testing authentication controls, and scoring vulnerabilities to build a prioritised remediation plan.',
+        highlights: ['Full attack surface mapping', 'Firewall & policy review', 'Prioritised risk report'],
+        mockup: Assessment,
+    },
+    {
+        id: 2,
+        icon: Wrench,
+        accent: '#a78bfa',
+        eyebrow: 'Step 02',
+        title: 'Implementation',
+        stat: { value: 'End-to-end', label: 'Deploy & configure' },
+        description: 'Our engineers deploy and configure every layer of your security stack — from next-gen firewalls and IDS/IPS to VPN tunnels, EDR agents, and access policies — all tested and documented before handover.',
+        highlights: ['Full stack deployment', 'Policy configuration & testing', 'Documentation & handover'],
+        mockup: Implementation,
+    },
+    {
+        id: 3,
+        icon: MonitorCheck,
+        accent: '#4ade80',
+        eyebrow: 'Step 03',
+        title: 'Monitoring',
+        stat: { value: '24 / 7', label: 'SOC coverage' },
+        description: 'Our Security Operations Centre monitors your entire network around the clock — correlating events across firewalls, endpoints, and logs to surface real threats fast and suppress false positives automatically.',
+        highlights: ['24/7 SOC analyst coverage', 'SIEM event correlation', 'False positive suppression'],
+        mockup: Monitoring,
+    },
+    {
+        id: 4,
+        icon: Siren,
+        accent: '#f87171',
+        eyebrow: 'Step 04',
+        title: 'Incident Response',
+        stat: { value: '< 15min', label: 'Mean time to respond' },
+        description: 'When a threat is confirmed, our incident response team activates immediately — isolating affected endpoints, containing lateral movement, neutralising the threat, and producing a full post-incident report.',
+        highlights: ['Sub-15min response SLA', 'Endpoint isolation & containment', 'Post-incident forensic report'],
+        mockup: Incident,
+    },
+]

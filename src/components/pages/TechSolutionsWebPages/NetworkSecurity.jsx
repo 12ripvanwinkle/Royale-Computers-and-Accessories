@@ -5,6 +5,7 @@ import Footer from '../../sections/Footer'
 import Features from '../../Aspects/Network-security/Features'
 import TypesOfSecurity from '../../Aspects/Network-security/TypesOfSecurity'
 import Benefits from '../../Aspects/Network-security/Benefits'
+import Services from '../../Aspects/Network-security/Services'
 
 const NetworkSecurity = () => {
   return (
@@ -69,6 +70,9 @@ const NetworkSecurity = () => {
 
             {/* Benefits */}
             <Benefits />
+
+            {/* Services */}
+            <Services />
         </div>
     </section>
   )
