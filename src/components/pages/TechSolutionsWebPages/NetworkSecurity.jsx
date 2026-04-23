@@ -2,6 +2,7 @@ import React from 'react'
 import TitleHeader from '../../TitleHeader'
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
+import Features from '../../Aspects/Network-security/Features'
 
 const NetworkSecurity = () => {
   return (
@@ -59,6 +60,9 @@ const NetworkSecurity = () => {
             </div>
 
             {/* Features */}
+            <Features />
+
+            {/* Types of Security */}
 
         </div>
     </section>
