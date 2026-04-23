@@ -3,7 +3,9 @@ import { ShieldAlert,
          Lock, 
          Bug, 
          Activity, 
-         Monitor, } from 'lucide-react'
+         Monitor,
+
+         } from 'lucide-react'
 
 
 export const rules = [
@@ -108,5 +110,92 @@ export const features = [
         description: 'EDR agents on every managed device provide continuous protection, patch status monitoring, and behavioural telemetry — all managed from a single console regardless of OS or location.',
         highlights: ['EDR on all managed devices', 'Patch compliance tracking', 'Remote isolation capability'],
         mockup: Endpoint,
+    },
+]
+
+export const SecurityRules = [
+    { src: '192.168.1.0/24', dst: 'INTERNET',    action: 'ALLOW', color: '#4ade80' },
+    { src: '0.0.0.0/0',      dst: 'PORT 22',     action: 'DENY',  color: '#f87171' },
+    { src: '10.0.0.5',       dst: 'PORT 3389',   action: 'DENY',  color: '#f87171' },
+    { src: 'TRUSTED ZONE',   dst: 'INTERNAL',    action: 'ALLOW', color: '#4ade80' },
+]
+
+export const SecurityTunnels = [
+    { label: 'HQ ↔ Branch Office',  users: 14, color: '#a78bfa' },
+    { label: 'HQ ↔ Remote Workers', users: 38, color: '#a78bfa' },
+    { label: 'HQ ↔ Data Centre',    users: 3,  color: '#a78bfa' },
+]
+
+export const SecurityEndpoints = [
+    { label: 'Workstation-01',   status: 'Protected', color: '#4ade80', os: 'Win 11' },
+    { label: 'Laptop-Sarah',     status: 'Protected', color: '#4ade80', os: 'macOS'  },
+    { label: 'Server-DB-01',     status: 'Protected', color: '#4ade80', os: 'Ubuntu' },
+    { label: 'Tablet-Reception', status: 'Updating',  color: '#fbbf24', os: 'iOS'   },
+]
+
+export const Securitythreats = [
+    { label: 'Port scan detected',    severity: 'High', color: '#f87171', blocked: true  },
+    { label: 'SQL injection attempt', severity: 'High', color: '#f87171', blocked: true  },
+    { label: 'Unusual auth pattern',  severity: 'Med',  color: '#fbbf24', blocked: true  },
+    { label: 'DNS anomaly flagged',   severity: 'Low',  color: '#4ade80', blocked: false },
+]
+
+import {SecurityFirewall, SecurityVpn, SecurityEndpoint, Network, Threat} from './Components'
+
+export const types = [
+    {
+        id: 1,
+        icon: ShieldAlert,
+        accent: '#f87171',
+        eyebrow: 'Perimeter Defence',
+        title: 'Firewall Protection',
+        stat: { value: 'Next-gen', label: 'Deep packet inspection' },
+        description: 'Next-generation firewalls inspect every packet at the application layer — enforcing granular allow/deny policies, blocking known threat actors, and segmenting your network into controlled trust zones.',
+        highlights: ['Application-layer filtering', 'Geo-blocking & IP reputation', 'Zone-based segmentation'],
+        mockup: SecurityFirewall,
+    },
+    {
+        id: 2,
+        icon: Lock,
+        accent: '#a78bfa',
+        eyebrow: 'Secure Connectivity',
+        title: 'VPN Solutions',
+        stat: { value: 'AES-256', label: 'End-to-end encryption' },
+        description: 'Site-to-site and remote-access VPNs keep all traffic between offices, data centres, and remote workers encrypted end-to-end — with certificate-based authentication and always-on enforcement policies.',
+        highlights: ['Site-to-site & remote access', 'Certificate-based auth', 'Always-on policy enforcement'],
+        mockup: SecurityVpn,
+    },
+    {
+        id: 3,
+        icon: Monitor,
+        accent: '#4ade80',
+        eyebrow: 'Device Protection',
+        title: 'Endpoint Security',
+        stat: { value: 'Centralised', label: 'Policy management' },
+        description: 'EDR agents deployed on every managed device provide continuous protection, real-time patch compliance tracking, and behavioural telemetry — all managed from a single console across every OS and location.',
+        highlights: ['EDR on all managed devices', 'Patch compliance tracking', 'Remote isolation capability'],
+        mockup: SecurityEndpoint,
+    },
+    {
+        id: 4,
+        icon: Activity,
+        accent: '#5eead4',
+        eyebrow: 'Full Visibility',
+        title: 'Network Monitoring',
+        stat: { value: 'Full flow', label: 'Packet-level analysis' },
+        description: 'Deep flow analysis provides complete visibility into every byte traversing your network — identifying bandwidth hogs, unusual data transfers, shadow IT, and potential exfiltration attempts in real time.',
+        highlights: ['Full packet capture', 'Bandwidth usage by device', 'Anomalous flow alerting'],
+        mockup: Network,
+    },
+    {
+        id: 5,
+        icon: Radar,
+        accent: '#fbbf24',
+        eyebrow: 'Proactive Security',
+        title: 'Threat Detection System',
+        stat: { value: 'Real-time', label: 'Automated blocking' },
+        description: 'Signature and behavioural analysis engines work in tandem to identify and neutralise threats like port scans, injection attempts, and lateral movement — automatically blocking attacks before they cause damage.',
+        highlights: ['Signature & behaviour engines', 'Automated threat blocking', 'Full alert audit trail'],
+        mockup: Threat,
     },
 ]
