@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {rules, alerts, tunnels, threats, endpoints,
-    SecurityRules, SecurityTunnels, SecurityEndpoints, Securitythreats
+    SecurityRules, SecurityTunnels, SecurityEndpoints, Securitythreats,
+    attempts, channels, datasets, services
 } from './index'
 
 export function Firewall() {
@@ -449,4 +450,170 @@ export function Threat() {
         </div>
     )
 
+}
+
+export function Breach() {
+
+    const [blocked, setBlocked] = useState(247)
+    const [tick, setTick] = useState(0)
+    useEffect(() => {
+        const iv1 = setInterval(() => setBlocked(b => b + (Math.random() > 0.6 ? 1 : 0)), 1200)
+        const iv2 = setInterval(() => setTick(t => t + 1), 950)
+        return () => { clearInterval(iv1); clearInterval(iv2) }
+    }, [])
+
+    return(
+        <div className="rounded-xl overflow-hidden mt-4"
+            style={{background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)'}}
+        >
+            <div className="px-3 py-2 flex items-center justify-between"
+                style={{borderBottom: '1px solid rgba(255,255,255,0.08)'}}
+            >
+                <div className="flex items-center gap-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full animate-pulse"
+                        style={{ background: '#f87171', boxShadow: '0 0 4px #f8717199' }} />
+                    <span className="text-xs" style={{ color: '#f87171' }}>Attack feed</span>
+                </div>
+                <span className="text-xs font-bold" style={{ color: '#4ade80' }}>{blocked} blocked</span>
+            </div>
+
+            <div className="p-2 flex flex-col gap-1">
+                {attempts.map((a, i) => (
+                    <div key={a.label}
+                        className="flex items-center gap-2 px-2 py-1.5 rounded-lg transition-all duration-300"
+                        style={{ background: i === tick % attempts.length ? 'rgba(255,255,255,0.05)' : 'transparent' }}>
+                        <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: a.color }} />
+                        <span className="text-xs flex-1" style={{ color: 'rgba(255,255,255,0.65)' }}>{a.label}</span>
+                        <span className="text-xs font-mono" style={{ color: 'rgba(255,255,255,0.28)', fontSize: 10 }}>{a.src}</span>
+                        <span className="text-xs font-bold" style={{ color: '#4ade80' }}>✓</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
+}
+
+export function Comms() {
+    const [tick, setTick] = useState(0)
+    const [ping, setPing] = useState(11)
+    useEffect(() => {
+        const iv1 = setInterval(() => setTick(t => t + 1), 1000)
+        const iv2 = setInterval(() => setPing(p => Math.max(8, Math.min(30, p + (Math.random() > 0.5 ? 1 : -1)))), 600)
+        return () => { clearInterval(iv1); clearInterval(iv2) }
+    },[])
+
+    return (
+        <div className="rounded-xl overflow-hidden mt-4"
+            style={{background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)'}}
+        >
+            <div className="px-3 py-2 flex items-center justify-between"
+                style={{borderBottom: '1px solid rgba(255,255,255,0.08)'}}
+            >
+                <div className="flex items-center gap-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full"
+                        style={{ background: '#93c5fd', boxShadow: '0 0 4px #93c5fd99' }} />
+                    <span className="text-xs" style={{ color: '#93c5fd' }}>All channels encrypted</span>
+                </div>
+                <span className="text-xs font-mono" style={{ color: 'rgba(255,255,255,0.3)' }}>{ping}ms</span>
+            </div>
+
+            <div className="p-2 flex flex-col gap-1">
+                {channels.map((c, i) => (
+                    <div key={c.label}
+                        className="flex items-center gap-2 px-2 py-1.5 rounded-lg transition-all duration-300"
+                        style={{ background: i === tick % channels.length ? 'rgba(147,197,253,0.07)' : 'transparent' }}>
+                        <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: c.color }} />
+                        <span className="text-xs flex-1" style={{ color: 'rgba(255,255,255,0.65)' }}>{c.label}</span>
+                        <span className="text-xs font-mono px-1.5 py-0.5 rounded"
+                            style={{ background: 'rgba(147,197,253,0.1)', color: '#93c5fd', border: '1px solid rgba(147,197,253,0.2)', fontSize: 10 }}>
+                            {c.enc}
+                        </span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
+}
+
+export function Data() {
+
+    const [progress, setProgress] = useState(72)
+    const [tick, setTick] = useState(0)
+    useEffect(() => {
+        const iv1 = setInterval(() => setProgress(p => p >= 100 ? 20 : p + 1), 120)
+        const iv2 = setInterval(() => setTick(t => t + 1), 850)
+        return () => { clearInterval(iv1); clearInterval(iv2) }
+    }, [])
+
+    return (
+        <div className="rounded-xl overflow-hidden mt-4"
+            style={{background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)'}}
+        >
+            <div className="px-3 py-2 flex items-center justify-between"
+                style={{borderBottom: '1px solid rgba(255,255,255,0.08)'}}
+            >
+                <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Data protection status</span>
+                <span className="text-xs font-semibold" style={{ color: '#5eead4' }}>{progress}%</span>
+            </div>
+            <div className="px-3 pt-2.5 pb-1">
+                <div className="w-full h-1.5 rounded-full" style={{background: 'rgba(255,255,255,0.08)'}}>
+                    <div className="h-full rounded-full transition-all duration-100"
+                        style={{ width: `${progress}%`, background: 'linear-gradient(90deg, #5eead4, #93c5fd)' }} />
+                </div>
+            </div>
+
+            <div className="p-2 flex flex-col gap-1">
+                {datasets.map((d, i) => (
+                    <div key={d.label}
+                        className="flex items-center gap-2 px-2 py-1.5 rounded-lg transition-all duration-300"
+                        style={{ background: i === tick % datasets.length ? 'rgba(94,234,212,0.06)' : 'transparent' }}>
+                        <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: d.color }} />
+                        <span className="text-xs flex-1" style={{ color: 'rgba(255,255,255,0.65)' }}>{d.label}</span>
+                        <span className="text-xs font-medium" style={{ color: d.color }}>{d.status}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )   
+}
+
+export function Uptime() {
+
+    const [uptime, setUptime] = useState(99.982)
+    const [tick, setTick] = useState(0)
+    useEffect(() => {
+        const iv1 = setInterval(() => setUptime(u => parseFloat(Math.min(99.999, u + 0.001).toFixed(3))), 1200)
+        const iv2 = setInterval(() => setTick(t => t + 1), 900)
+        return () => { clearInterval(iv1); clearInterval(iv2) }
+    }, [])
+
+    return(
+        <div className="rounded-xl overflow-hidden mt-4"
+            style={{background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)'}}
+        >
+            <div className="px-3 py-2 flex item-center justify-between"
+                style={{borderBottom: '1px solid rgba(255,255,255,0.08)'}}
+            >
+                <div className="flex items-center gap-1.5">
+                    <div className="w-2 h-2 rounded-full"
+                        style={{ background: '#4ade80', boxShadow: '0 0 6px #4ade8099' }} />
+                    <span className="text-xs" style={{ color: '#4ade80' }}>All systems operational</span>
+                </div>
+                <span className="text-xs font-bold" style={{ color: '#4ade80' }}>{uptime}%</span>
+            </div>
+
+            <div className="p-2 flex flex-col gap-1">
+                {services.map((s, i) => (
+                    <div key={s.label}
+                        className="flex items-center gap-2 px-2 py-1.5 rounded-lg transition-all duration-300"
+                        style={{ background: i === tick % services.length ? 'rgba(74,222,128,0.06)' : 'transparent' }}>
+                        <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: s.color }} />
+                        <span className="text-xs flex-1" style={{ color: 'rgba(255,255,255,0.65)' }}>{s.label}</span>
+                        <span className="text-xs font-mono" style={{ color: 'rgba(255,255,255,0.3)' }}>{s.latency}</span>
+                        <span className="text-xs font-medium" style={{ color: s.color }}>{s.status}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
 }

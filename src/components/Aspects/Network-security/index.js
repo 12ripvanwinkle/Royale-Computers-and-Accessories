@@ -1,11 +1,14 @@
-import { ShieldAlert,
-         Radar, 
-         Lock, 
-         Bug, 
-         Activity, 
-         Monitor,
-
-         } from 'lucide-react'
+import {ShieldAlert,
+        Radar, 
+        Lock, 
+        Bug, 
+        Activity, 
+        Monitor,
+        ShieldOff, 
+        MessageSquareLock, 
+        Database, 
+        ServerCrash,  
+    } from 'lucide-react'
 
 
 export const rules = [
@@ -199,3 +202,80 @@ export const types = [
         mockup: Threat,
     },
 ]
+
+export const attempts = [
+    { label: 'Brute-force login',     src: '45.33.32.156',   color: '#f87171' },
+    { label: 'Ransomware payload',    src: '198.51.100.22',  color: '#f87171' },
+    { label: 'Credential stuffing',   src: '203.0.113.99',   color: '#fbbf24' },
+    { label: 'Zero-day exploit',      src: '192.0.2.144',    color: '#f87171' },
+]
+
+export const channels = [
+    { label: 'Email gateway',       enc: 'TLS 1.3',    color: '#93c5fd' },
+    { label: 'VoIP traffic',        enc: 'SRTP',       color: '#93c5fd' },
+    { label: 'File transfers',      enc: 'SFTP/AES',   color: '#93c5fd' },
+    { label: 'Video conferencing',  enc: 'E2E AES-256', color: '#93c5fd' }, 
+]
+
+export const datasets = [
+    { label: 'Customer PII',    status: 'Encrypted', color: '#5eead4' },
+    { label: 'Payment records', status: 'Tokenised', color: '#5eead4' },
+    { label: 'Staff data',      status: 'Encrypted', color: '#5eead4' },
+    { label: 'Health records',  status: 'Encrypted', color: '#5eead4' },
+]
+
+export const services = [
+    { label: 'Core network',     status: 'Online',  latency: '2ms',  color: '#4ade80' },
+    { label: 'Firewall cluster', status: 'Online',  latency: '1ms',  color: '#4ade80' },
+    { label: 'VPN gateway',      status: 'Online',  latency: '14ms', color: '#4ade80' },
+    { label: 'IDS/IPS engine',   status: 'Online',  latency: '3ms',  color: '#4ade80' },
+]
+
+import {Breach, Comms, Data, Uptime} from './Components'
+
+export const benefits = [
+    {
+        id: 1,
+        icon: ShieldOff,
+        accent: '#f87171',
+        eyebrow: 'Attack Prevention',
+        title: 'Prevent Breaches',
+        stat: { value: '99.9%', label: 'Threat block rate' },
+        description: 'Layered defences across your perimeter, network, and endpoints stop breaches before they start — blocking ransomware, credential stuffing, zero-day exploits, and brute-force attacks automatically, around the clock.',
+        highlights: ['Perimeter + endpoint coverage', 'Zero-day exploit blocking', 'Automated incident response'],
+        mockup: Breach,
+    },
+    {
+        id: 2,
+        icon: MessageSquareLock,
+        accent: '#93c5fd',
+        eyebrow: 'Data in Transit',
+        title: 'Secure Communications',
+        stat: { value: 'End-to-end', label: 'All channel encryption' },
+        description: 'Every communication channel — email, VoIP, file transfers, and video conferencing — is encrypted in transit using modern protocols, ensuring sensitive conversations and data can never be intercepted or tampered with.',
+        highlights: ['TLS 1.3 email gateway', 'SRTP voice encryption', 'E2E video & file transfer'],
+        mockup: Comms,
+    },
+    {
+        id: 3,
+        icon: Database,
+        accent: '#5eead4',
+        eyebrow: 'Data at Rest',
+        title: 'Protect Sensitive Data',
+        stat: { value: 'AES-256', label: 'At-rest encryption' },
+        description: 'Customer PII, payment records, health data, and staff files are encrypted at rest, tokenised where appropriate, and access-controlled by role — keeping you compliant with GDPR, PCI-DSS, and HIPAA requirements.',
+        highlights: ['AES-256 at-rest encryption', 'PII tokenisation', 'GDPR / PCI-DSS / HIPAA ready'],
+        mockup: Data,
+    },
+    {
+        id: 4,
+        icon: ServerCrash,
+        accent: '#4ade80',
+        eyebrow: 'Business Continuity',
+        title: 'Maintain Uptime',
+        stat: { value: '99.99%', label: 'Network availability' },
+        description: 'Redundant security infrastructure — clustered firewalls, failover VPN gateways, and high-availability IDS/IPS — ensures your defences never become a single point of failure, keeping operations running without interruption.',
+        highlights: ['Clustered firewall HA', 'Failover VPN gateways', 'Zero-downtime updates'],
+        mockup: Uptime,
+    },
+];
