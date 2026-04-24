@@ -237,6 +237,29 @@ const NetworkSecurityNavlinks = [
   },
 ];
 
+const CRMNavlinks = [
+  {
+    name: "Home",
+    link: "/"
+  },
+  {
+    name: "Solutions",
+    link: "/tech-solutions"
+  },
+  {
+    name: "Features",
+    link: "#features",
+  },
+  {
+    name: "Modules",
+    link: "#modules",
+  },
+  {
+    name: "Services",
+    link: "#services",
+  },
+];
+
 const techServices = [
   {
     title: "Maintenance",
@@ -301,6 +324,12 @@ const techSolutionsItems = [
     description: "Fortify your enterprise with robust security solutions that defend and scale.",
     image: "/images/Leon3.jpg",
     route: "/tech-solutions/network-security"
+  },
+  {
+    title: "CRM Software",
+    description: "Empower your enterprise with robust CRM solutions that connect and grow.",
+    image: "/images/Leon3.jpg",
+    route: "/tech-solutions/CRM"
   },
 ];
 
@@ -473,5 +502,6 @@ export { Main_navLinks,
          digitalSignageNavlinks,
          SoftwareSecurityNavlinks,
          PowerManagementNavlinks,
-         NetworkSecurityNavlinks
+         NetworkSecurityNavlinks,
+         CRMNavlinks
         };

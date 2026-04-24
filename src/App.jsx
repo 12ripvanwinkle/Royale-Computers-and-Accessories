@@ -17,6 +17,7 @@ import DigitalSignage from './components/pages/TechSolutionsWebPages/DigitalSign
 import SoftwareSecurity from './components/pages/TechSolutionsWebPages/SoftwareSecurity'
 import PowerManagement from './components/pages/TechSolutionsWebPages/PowerManagement'
 import NetworkSecurity from './components/pages/TechSolutionsWebPages/NetworkSecurity'
+import CRM from './components/pages/TechSolutionsWebPages/CRM'
 // Create a HomePage component that holds all your sections
 const HomePage = () => (
   <>
@@ -54,6 +55,7 @@ const App = () => {
           <Route path='/tech-solutions/software-security' element={<SoftwareSecurity />} />
           <Route path='/tech-solutions/power-management' element={<PowerManagement />} />
           <Route path='/tech-solutions/network-security' element={<NetworkSecurity />} />
+          <Route path='/tech-solutions/CRM' element={<CRM />} />  
           <Route path="/tech-services" element={<TechServices />} />
           <Route path="/tech-retail" element={<TechRetail />} />
           <Route path="/test-supabase" element={<SupabaseTest />} />
