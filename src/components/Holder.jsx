@@ -1,41 +1,41 @@
 import React, { useState, useEffect } from 'react'
 import { glass, glassHover } from '../CCTV-Holder/CCTVStyles'
-import { ClipboardSearch, Wrench, MonitorCheck, Siren } from 'lucide-react'
+import { ScanSearch, ShieldCheck, MonitorCheck, TrendingUp } from 'lucide-react'
 
-/* ── Assessment Mockup ───────────────────────────── */
-function AssessmentMockup() {
+/* ── Risk Assessment Mockup ──────────────────────── */
+function RiskMockup() {
     const [scanning, setScanning] = useState(0)
     useEffect(() => {
         const iv = setInterval(() => setScanning(s => (s + 1) % 5), 850)
         return () => clearInterval(iv)
     }, [])
-    const checks = [
-        { label: 'Perimeter exposure',    score: 78, color: '#f87171' },
-        { label: 'Auth vulnerabilities',  score: 62, color: '#fbbf24' },
-        { label: 'Patch compliance',      score: 91, color: '#4ade80' },
-        { label: 'Data exposure risk',    score: 44, color: '#f87171' },
+    const risks = [
+        { label: 'Exposed attack surface', score: 74, color: '#f87171' },
+        { label: 'Auth weaknesses',        score: 58, color: '#fbbf24' },
+        { label: 'Unpatched services',     score: 82, color: '#f87171' },
+        { label: 'Data exposure risk',     score: 41, color: '#fbbf24' },
     ]
     return (
         <div className="rounded-xl overflow-hidden mt-4"
             style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
             <div className="px-3 py-2 flex items-center justify-between"
                 style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'monospace' }}>security-assessment.sh</span>
+                <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'monospace' }}>risk-scan.sh</span>
                 <div className="flex items-center gap-1.5">
                     <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#fbbf24' }} />
-                    <span className="text-xs" style={{ color: '#fbbf24' }}>Scanning…</span>
+                    <span className="text-xs" style={{ color: '#fbbf24' }}>Analysing…</span>
                 </div>
             </div>
             <div className="p-3 flex flex-col gap-2.5">
-                {checks.map((c, i) => (
-                    <div key={c.label}>
+                {risks.map((r, i) => (
+                    <div key={r.label}>
                         <div className="flex items-center justify-between mb-1">
-                            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.55)' }}>{c.label}</span>
-                            <span className="text-xs font-semibold" style={{ color: c.color }}>{c.score}</span>
+                            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.55)' }}>{r.label}</span>
+                            <span className="text-xs font-semibold" style={{ color: r.color }}>{r.score}</span>
                         </div>
                         <div className="w-full h-1 rounded-full" style={{ background: 'rgba(255,255,255,0.08)' }}>
                             <div className="h-full rounded-full transition-all duration-700"
-                                style={{ width: i <= scanning ? `${c.score}%` : '0%', background: c.color, opacity: 0.75 }} />
+                                style={{ width: i <= scanning ? `${r.score}%` : '0%', background: r.color, opacity: 0.75 }} />
                         </div>
                     </div>
                 ))}
@@ -44,8 +44,8 @@ function AssessmentMockup() {
     )
 }
 
-/* ── Implementation Mockup ───────────────────────── */
-function ImplementationMockup() {
+/* ── Security Setup Mockup ───────────────────────── */
+function SetupMockup() {
     const [done, setDone] = useState(0)
     useEffect(() => {
         const iv = setInterval(() => setDone(d => d >= 5 ? 0 : d + 1), 1100)
@@ -53,31 +53,31 @@ function ImplementationMockup() {
     }, [])
     const tasks = [
         'Firewall rules deployed',
-        'IDS/IPS signatures loaded',
-        'VPN tunnels established',
-        'EDR agents rolled out',
-        'Policies enforced & tested',
+        'IDS/IPS configured',
+        'VPN tunnels live',
+        'EDR agents installed',
+        'Policies enforced',
     ]
     return (
         <div className="rounded-xl overflow-hidden mt-4"
             style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
             <div className="px-3 py-2 flex items-center justify-between"
                 style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'monospace' }}>deploy-checklist</span>
-                <span className="text-xs" style={{ color: '#a78bfa' }}>{done}/{tasks.length} done</span>
+                <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'monospace' }}>security-setup</span>
+                <span className="text-xs" style={{ color: '#93c5fd' }}>{done}/{tasks.length} done</span>
             </div>
             <div className="p-3 flex flex-col gap-1.5">
                 {tasks.map((t, i) => (
                     <div key={t} className="flex items-center gap-2.5 px-2 py-1.5 rounded-lg transition-all duration-300"
-                        style={{ background: i < done ? 'rgba(167,139,250,0.07)' : 'transparent' }}>
+                        style={{ background: i < done ? 'rgba(147,197,253,0.07)' : 'transparent' }}>
                         <div className="w-4 h-4 rounded flex items-center justify-center shrink-0 transition-all duration-300"
                             style={{
-                                background: i < done ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.06)',
-                                border: `1px solid ${i < done ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.12)'}`,
+                                background: i < done ? 'rgba(147,197,253,0.2)' : 'rgba(255,255,255,0.06)',
+                                border: `1px solid ${i < done ? 'rgba(147,197,253,0.4)' : 'rgba(255,255,255,0.12)'}`,
                             }}>
                             {i < done && (
                                 <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
-                                    <path d="M1.5 4L3 5.5L6.5 2" stroke="#a78bfa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                    <path d="M1.5 4L3 5.5L6.5 2" stroke="#93c5fd" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                             )}
                         </div>
@@ -104,10 +104,10 @@ function MonitoringMockup() {
         return () => { clearInterval(iv1); clearInterval(iv2) }
     }, [])
     const feeds = [
-        { label: 'Firewall — perimeter', status: 'Online',  color: '#4ade80' },
-        { label: 'IDS/IPS engine',       status: 'Online',  color: '#4ade80' },
-        { label: 'Endpoint agents',      status: 'Online',  color: '#4ade80' },
-        { label: 'VPN gateway',          status: 'Online',  color: '#4ade80' },
+        { label: 'Firewall cluster',  status: 'Online', color: '#4ade80' },
+        { label: 'IDS/IPS engine',    status: 'Online', color: '#4ade80' },
+        { label: 'Endpoint agents',   status: 'Online', color: '#4ade80' },
+        { label: 'VPN gateway',       status: 'Online', color: '#4ade80' },
     ]
     return (
         <div className="rounded-xl overflow-hidden mt-4"
@@ -120,7 +120,6 @@ function MonitoringMockup() {
                 </div>
                 <span className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>24 / 7</span>
             </div>
-            {/* Sparkline */}
             <div className="px-3 pt-2 flex items-end gap-0.5" style={{ height: 36 }}>
                 {vals.map((h, i) => (
                     <div key={i} className="flex-1 rounded-sm transition-all duration-300"
@@ -146,86 +145,81 @@ function MonitoringMockup() {
     )
 }
 
-/* ── Incident Response Mockup ────────────────────── */
-function IncidentMockup() {
-    const [step, setStep] = useState(0)
+/* ── Continuous Improvement Mockup ──────────────── */
+function ImprovementMockup() {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
+    const threats  = [88, 72, 61, 48, 34, 22]
+    const coverage = [62, 70, 78, 85, 91, 97]
+    const [pct, setPct] = useState(0)
     useEffect(() => {
-        const iv = setInterval(() => setStep(s => (s + 1) % 5), 1200)
+        const iv = setInterval(() => setPct(p => p >= 100 ? 0 : p + 1), 60)
         return () => clearInterval(iv)
     }, [])
-    const timeline = [
-        { label: 'Threat detected',      time: '09:14:02', done: true  },
-        { label: 'Alert triggered',       time: '09:14:03', done: true  },
-        { label: 'SOC analyst engaged',   time: '09:14:45', done: false },
-        { label: 'Endpoint isolated',     time: '09:15:10', done: false },
-        { label: 'Threat neutralised',    time: '09:16:38', done: false },
-    ]
     return (
-        <div className="rounded-xl overflow-hidden mt-4"
+        <div className="rounded-xl p-3 mt-4"
             style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <div className="px-3 py-2 flex items-center justify-between"
-                style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div className="flex items-center gap-1.5">
-                    <div className="w-1.5 h-1.5 rounded-full animate-pulse"
-                        style={{ background: '#f87171', boxShadow: '0 0 4px #f8717199' }} />
-                    <span className="text-xs" style={{ color: '#f87171' }}>Incident active</span>
-                </div>
-                <span className="text-xs font-mono" style={{ color: 'rgba(255,255,255,0.3)' }}>INC-0041</span>
-            </div>
-            <div className="p-3 flex flex-col gap-0">
-                {timeline.map((t, i) => (
-                    <div key={t.label} className="flex items-center gap-3 py-1.5">
-                        <div className="flex flex-col items-center shrink-0" style={{ width: 10 }}>
-                            <div className="w-2 h-2 rounded-full transition-all duration-300"
-                                style={{
-                                    background: i < step ? '#4ade80' : i === step ? '#f87171' : 'rgba(255,255,255,0.15)',
-                                    boxShadow: i === step ? '0 0 6px #f87171' : 'none',
-                                }} />
-                            {i < timeline.length - 1 && (
-                                <div style={{ width: 1, height: 10, background: 'rgba(255,255,255,0.1)', marginTop: 2 }} />
-                            )}
+            <div className="flex items-center justify-between mb-3">
+                <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Security posture over time</span>
+                <div className="flex items-center gap-3">
+                    {[{ label: 'Threats', color: '#f87171' }, { label: 'Coverage', color: '#4ade80' }].map(l => (
+                        <div key={l.label} className="flex items-center gap-1">
+                            <div className="w-2 h-2 rounded-sm" style={{ background: l.color }} />
+                            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>{l.label}</span>
                         </div>
-                        <span className="text-xs flex-1 transition-all duration-300"
-                            style={{ color: i < step ? '#4ade80' : i === step ? '#f87171' : 'rgba(255,255,255,0.28)' }}>
-                            {t.label}
-                        </span>
-                        <span className="text-xs font-mono" style={{ color: 'rgba(255,255,255,0.25)', fontSize: 10 }}>{t.time}</span>
-                        {i === step && (
-                            <span className="text-xs px-1.5 py-0.5 rounded"
-                                style={{ background: 'rgba(248,113,113,0.12)', color: '#f87171', border: '1px solid rgba(248,113,113,0.25)', fontSize: 9 }}>
-                                live
-                            </span>
-                        )}
+                    ))}
+                </div>
+            </div>
+            <div className="flex items-end gap-2 mb-3" style={{ height: 48 }}>
+                {months.map((m, i) => (
+                    <div key={m} className="flex-1 flex flex-col items-center gap-1">
+                        <div className="w-full flex items-end gap-0.5" style={{ height: 40 }}>
+                            <div className="flex-1 rounded-sm transition-all duration-500"
+                                style={{ height: `${threats[i]}%`, background: 'rgba(248,113,113,0.5)', borderRadius: 3 }} />
+                            <div className="flex-1 rounded-sm transition-all duration-500"
+                                style={{ height: `${coverage[i]}%`, background: '#4ade80', opacity: 0.75, borderRadius: 3 }} />
+                        </div>
+                        <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.28)' }}>{m}</span>
                     </div>
                 ))}
+            </div>
+            <div className="flex items-center justify-between pt-2"
+                style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+                <div>
+                    <span className="text-xs font-bold" style={{ color: '#4ade80' }}>+35% coverage</span>
+                    <span className="text-xs ml-1" style={{ color: 'rgba(255,255,255,0.3)' }}>in 6 months</span>
+                </div>
+                <div>
+                    <span className="text-xs font-bold" style={{ color: '#f87171' }}>−75% threats</span>
+                    <span className="text-xs ml-1" style={{ color: 'rgba(255,255,255,0.3)' }}>detected</span>
+                </div>
             </div>
         </div>
     )
 }
 
 /* ── Data ────────────────────────────────────────── */
-const services = [
+const steps = [
     {
         id: 1,
-        icon: ClipboardSearch,
+        icon: ScanSearch,
         accent: '#fbbf24',
         eyebrow: 'Step 01',
-        title: 'Network Security Assessment',
+        title: 'Risk Assessment',
         stat: { value: 'Full scope', label: 'Attack surface review' },
-        description: 'We begin with a comprehensive assessment of your network — mapping every exposed asset, evaluating firewall rules, testing authentication controls, and scoring vulnerabilities to build a prioritised remediation plan.',
-        highlights: ['Full attack surface mapping', 'Firewall & policy review', 'Prioritised risk report'],
-        mockup: AssessmentMockup,
+        description: 'We start by mapping every asset, evaluating your existing controls, and scoring vulnerabilities across your perimeter, network, and endpoints — producing a clear, prioritised risk register to guide everything that follows.',
+        highlights: ['Full attack surface mapping', 'Control gap analysis', 'Prioritised risk register'],
+        mockup: RiskMockup,
     },
     {
         id: 2,
-        icon: Wrench,
-        accent: '#a78bfa',
+        icon: ShieldCheck,
+        accent: '#93c5fd',
         eyebrow: 'Step 02',
-        title: 'Implementation',
-        stat: { value: 'End-to-end', label: 'Deploy & configure' },
-        description: 'Our engineers deploy and configure every layer of your security stack — from next-gen firewalls and IDS/IPS to VPN tunnels, EDR agents, and access policies — all tested and documented before handover.',
-        highlights: ['Full stack deployment', 'Policy configuration & testing', 'Documentation & handover'],
-        mockup: ImplementationMockup,
+        title: 'Security Setup',
+        stat: { value: 'Bespoke', label: 'Configured for your network' },
+        description: 'Using risk findings, we deploy and configure your full security stack — firewalls, IDS/IPS, VPN gateways, and EDR agents — all tailored to your network topology, user base, and compliance requirements.',
+        highlights: ['Full stack deployment', 'Topology-aware configuration', 'Compliance alignment'],
+        mockup: SetupMockup,
     },
     {
         id: 3,
@@ -234,20 +228,20 @@ const services = [
         eyebrow: 'Step 03',
         title: 'Monitoring',
         stat: { value: '24 / 7', label: 'SOC coverage' },
-        description: 'Our Security Operations Centre monitors your entire network around the clock — correlating events across firewalls, endpoints, and logs to surface real threats fast and suppress false positives automatically.',
-        highlights: ['24/7 SOC analyst coverage', 'SIEM event correlation', 'False positive suppression'],
+        description: 'Our Security Operations Centre watches your environment around the clock — correlating events across every layer, surfacing real threats fast, and responding to incidents before they escalate into breaches.',
+        highlights: ['24/7 SOC analyst coverage', 'SIEM event correlation', 'Sub-15min incident response'],
         mockup: MonitoringMockup,
     },
     {
         id: 4,
-        icon: Siren,
-        accent: '#f87171',
+        icon: TrendingUp,
+        accent: '#5eead4',
         eyebrow: 'Step 04',
-        title: 'Incident Response',
-        stat: { value: '< 15min', label: 'Mean time to respond' },
-        description: 'When a threat is confirmed, our incident response team activates immediately — isolating affected endpoints, containing lateral movement, neutralising the threat, and producing a full post-incident report.',
-        highlights: ['Sub-15min response SLA', 'Endpoint isolation & containment', 'Post-incident forensic report'],
-        mockup: IncidentMockup,
+        title: 'Continuous Improvement',
+        stat: { value: 'Ongoing', label: 'Posture hardening' },
+        description: 'Security is never static. We run quarterly reviews, update threat signatures, close newly discovered gaps, and measure your posture over time — ensuring your defences grow stronger as the threat landscape evolves.',
+        highlights: ['Quarterly posture reviews', 'Threat intelligence updates', 'Coverage & gap tracking'],
+        mockup: ImprovementMockup,
     },
 ]
 
@@ -277,7 +271,7 @@ function StatPill({ value, label, accent }) {
 }
 
 /* ── Section ─────────────────────────────────────── */
-const Services = () => {
+const Process = () => {
     return (
         <div className="w-full px-4 md:px-6 py-16 md:py-24">
             <div className="max-w-5xl mx-auto">
@@ -286,24 +280,24 @@ const Services = () => {
                 <div className="text-center mb-12">
                     <p className="text-xs font-semibold tracking-widest uppercase mb-4"
                         style={{ color: 'rgba(255,255,255,0.45)' }}>
-                        What We Do
+                        How We Work
                     </p>
                     <h2 className="text-3xl md:text-5xl font-light text-white leading-tight mb-4">
-                        Services
+                        Our Process
                     </h2>
                     <p className="text-sm md:text-base max-w-xl mx-auto leading-relaxed"
                         style={{ color: 'rgba(255,255,255,0.55)' }}>
-                        From the initial assessment to round-the-clock monitoring and rapid incident
-                        response — we cover every phase of your network security lifecycle.
+                        A four-phase cycle that takes you from raw exposure to a hardened,
+                        continuously improving network security posture.
                     </p>
                 </div>
 
                 {/*
-                    Row 1: [Assessment — 1/2]   [Implementation — 1/2]
-                    Row 2: [Monitoring — 1/2]   [Incident Response — 1/2]
+                    Row 1: [Risk Assessment — 1/2] [Security Setup — 1/2]
+                    Row 2: [Monitoring — 1/2]      [Continuous Improvement — 1/2]
                 */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {services.map(s => {
+                    {steps.map(s => {
                         const IconComp = s.icon
                         const MockupComp = s.mockup
                         return (
@@ -353,4 +347,4 @@ const Services = () => {
     )
 }
 
-export default Services
+export default Process

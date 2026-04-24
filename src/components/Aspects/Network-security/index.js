@@ -12,6 +12,8 @@ import {ShieldAlert,
         Wrench, 
         MonitorCheck, 
         Siren,
+        ShieldCheck, 
+        TrendingUp,
     } from 'lucide-react'
 
 
@@ -360,5 +362,76 @@ export const services2 = [
         description: 'When a threat is confirmed, our incident response team activates immediately — isolating affected endpoints, containing lateral movement, neutralising the threat, and producing a full post-incident report.',
         highlights: ['Sub-15min response SLA', 'Endpoint isolation & containment', 'Post-incident forensic report'],
         mockup: Incident,
+    },
+]
+
+export const risks = [
+    { label: 'Exposed attack surface', score: 74, color: '#f87171' },
+    { label: 'Auth weaknesses',        score: 58, color: '#fbbf24' },
+    { label: 'Unpatched services',     score: 82, color: '#f87171' },
+    { label: 'Data exposure risk',     score: 41, color: '#fbbf24' },
+]
+
+export const tasks2 = [
+    'Firewall rules deployed',
+    'IDS/IPS configured',
+    'VPN tunnels live',
+    'EDR agents installed',
+    'Policies enforced',
+]
+
+export const feeds2 = [
+    { label: 'Firewall cluster',  status: 'Online', color: '#4ade80' },
+    { label: 'IDS/IPS engine',    status: 'Online', color: '#4ade80' },
+    { label: 'Endpoint agents',   status: 'Online', color: '#4ade80' },
+    { label: 'VPN gateway',       status: 'Online', color: '#4ade80' },
+]
+
+import {Risk, Setup, Monitoring2, Improvement} from './Components'
+
+export const steps = [
+    {
+        id: 1,
+        icon: Search,
+        accent: '#fbbf24',
+        eyebrow: 'Step 01',
+        title: 'Risk Assessment',
+        stat: { value: 'Full scope', label: 'Attack surface review' },
+        description: 'We start by mapping every asset, evaluating your existing controls, and scoring vulnerabilities across your perimeter, network, and endpoints — producing a clear, prioritised risk register to guide everything that follows.',
+        highlights: ['Full attack surface mapping', 'Control gap analysis', 'Prioritised risk register'],
+        mockup: Risk,
+    },
+    {
+        id: 2,
+        icon: ShieldCheck,
+        accent: '#93c5fd',
+        eyebrow: 'Step 02',
+        title: 'Security Setup',
+        stat: { value: 'Bespoke', label: 'Configured for your network' },
+        description: 'Using risk findings, we deploy and configure your full security stack — firewalls, IDS/IPS, VPN gateways, and EDR agents — all tailored to your network topology, user base, and compliance requirements.',
+        highlights: ['Full stack deployment', 'Topology-aware configuration', 'Compliance alignment'],
+        mockup: Setup,
+    },
+    {
+        id: 3,
+        icon: MonitorCheck,
+        accent: '#4ade80',
+        eyebrow: 'Step 03',
+        title: 'Monitoring',
+        stat: { value: '24 / 7', label: 'SOC coverage' },
+        description: 'Our Security Operations Centre watches your environment around the clock — correlating events across every layer, surfacing real threats fast, and responding to incidents before they escalate into breaches.',
+        highlights: ['24/7 SOC analyst coverage', 'SIEM event correlation', 'Sub-15min incident response'],
+        mockup: Monitoring,
+    },
+    {
+        id: 4,
+        icon: TrendingUp,
+        accent: '#5eead4',
+        eyebrow: 'Step 04',
+        title: 'Continuous Improvement',
+        stat: { value: 'Ongoing', label: 'Posture hardening' },
+        description: 'Security is never static. We run quarterly reviews, update threat signatures, close newly discovered gaps, and measure your posture over time — ensuring your defences grow stronger as the threat landscape evolves.',
+        highlights: ['Quarterly posture reviews', 'Threat intelligence updates', 'Coverage & gap tracking'],
+        mockup: Improvement,
     },
 ]
