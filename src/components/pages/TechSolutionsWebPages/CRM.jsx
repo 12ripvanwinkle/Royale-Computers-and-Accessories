@@ -2,6 +2,8 @@ import React from 'react'
 import TitleHeader from '../../TitleHeader'
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
+import Features from '../../Aspects/CRM/Features'
+import Holder from '../../Holder'
 
 const CRM = () => {
   return (
@@ -57,6 +59,12 @@ const CRM = () => {
                     your sales team can nurture leads, monitor pipeline health, or close complex deals across one or a thousand accounts in real-time.
                 </p>
             </div>
+
+            {/* Key Features */}
+            <Features />
+
+            {/* Holder */}
+            <Holder />
 
         </div>
     </section>
