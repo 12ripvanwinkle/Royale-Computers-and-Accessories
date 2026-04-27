@@ -3,10 +3,10 @@ import TitleHeader from '../../TitleHeader'
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
 import DSFeatures from '../../Aspects/digital-signage/DSFeatures'
-import Types from '../../Aspects/digital-signage/DSFeatures'
-import HowItWorks from '../../Aspects/digital-signage/DSFeatures'
-import IntegrationTech from '../../Aspects/digital-signage/DSFeatures'
-import TrustUs from '../../Aspects/digital-signage/DSFeatures'
+import Types from '../../Aspects/digital-signage/Types'
+import HowItWorks from '../../Aspects/digital-signage/HowItWorks'
+import IntegrationTech from '../../Aspects/digital-signage/IntegrationTech'
+import TrustUs from '../../Aspects/digital-signage/TrustUs'
 
 const DigitalSignage = () => {
   return (
