@@ -3,6 +3,9 @@ import TitleHeader from '../../TitleHeader'
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
 import Holder from '../../Holder'
+import Features from '../../Aspects/school/features'
+
+
 
 
 const School = () => {
@@ -61,9 +64,10 @@ const School = () => {
             </div>
 
             {/* Features */}
+            <Features />
 
             {/* Holder */}
-            <Holder />
+            {/* <Holder /> */}
         </div>
     </section>
   )
