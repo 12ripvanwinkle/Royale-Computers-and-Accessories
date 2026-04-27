@@ -181,7 +181,7 @@ export function ProtectionCard({ item, index }) {
                 <span className="font-black select-none"
                     style={{fontSize: 36, color: 'rgba(255,255,255,0.06)', lineHeight: 1, fontFamily: 'monospace'}}
                 >
-                   {String(index + 1).padStart(2, '0')} 
+                   {/* {String(index + 1).padStart(2, '0')}  */}
                 </span>
             </div>
 

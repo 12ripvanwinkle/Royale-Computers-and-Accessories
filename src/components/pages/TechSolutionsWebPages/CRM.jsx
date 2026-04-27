@@ -3,8 +3,10 @@ import TitleHeader from '../../TitleHeader'
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
 import Features from '../../Aspects/CRM/Features'
-import Holder from '../../Holder'
 import Modules from '../../Aspects/CRM/Modules'
+import Services from '../../Aspects/CRM/Services'
+// import Holder from '../../Holder'
+
 
 const CRM = () => {
   return (
@@ -67,8 +69,20 @@ const CRM = () => {
             {/* Modules */}
             <Modules />
 
+            {/* Services */}
+            <Services />
+
             {/* Holder */}
-            <Holder />
+            {/* <Holder /> */}
+
+            {/* FAQS */}
+            
+
+            {/* Contact */}
+            <Contact />
+
+            {/* Footer */}
+            <Footer />
 
         </div>
     </section>

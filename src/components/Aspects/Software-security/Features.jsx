@@ -53,7 +53,7 @@ function FeatureCard({feature, index}) {
                         fontFamily: 'monospace',
                     }}
                 >
-                  {String(index + 1).padStart(2, '0')}  
+                  {/* {String(index + 1).padStart(2, '0')}   */}
                 </span>
             </div>
 

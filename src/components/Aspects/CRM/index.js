@@ -1,7 +1,7 @@
 import { Users, TrendingUp, Target, Megaphone, BarChart3, GitBranch,
-    HeadphonesIcon,
-} from 'lucide-react'
+    HeadphonesIcon, Search, Wrench, MonitorCheck, Siren, ShieldCheck,
 
+} from 'lucide-react'
 
 export const customers = [
     { name: 'Acme Corp',       segment: 'Enterprise', value: '$48k', color: '#93c5fd' },
