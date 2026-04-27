@@ -260,6 +260,29 @@ const CRMNavlinks = [
   },
 ];
 
+const schoolNavlinks = [
+  {
+    name: "Home",
+    link: "/"
+  },
+  {
+    name: "Solutions",
+    link: "/tech-solutions"
+  },
+  {
+    name: "Features",
+    link: "#features",
+  },
+  {
+    name: "Modules",
+    link: "#modules",
+  },
+  {
+    name: "Process",
+    link: "#process",
+  },
+];
+
 const techServices = [
   {
     title: "Maintenance",
@@ -330,6 +353,12 @@ const techSolutionsItems = [
     description: "Empower your enterprise with robust CRM solutions that connect and grow.",
     image: "/images/Leon3.jpg",
     route: "/tech-solutions/CRM"
+  },
+  {
+    title: "School Management System",
+    description: "Elevate your institution with robust management solutions that educate and excel.",
+    image: "/images/Leon3.jpg",
+    route: "/tech-solutions/School"
   },
 ];
 
@@ -503,5 +532,6 @@ export { Main_navLinks,
          SoftwareSecurityNavlinks,
          PowerManagementNavlinks,
          NetworkSecurityNavlinks,
-         CRMNavlinks
+         CRMNavlinks,
+         schoolNavlinks,
         };
