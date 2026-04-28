@@ -5,6 +5,7 @@ import Footer from '../../sections/Footer'
 import Holder from '../../Holder'
 import Features from '../../Aspects/school/features'
 import Modules from '../../Aspects/school/Modules'
+import Services from '../../Aspects/school/Services'
 
 
 
@@ -69,6 +70,9 @@ const School = () => {
 
             {/* Modules */}
             <Modules />
+
+            {/* Services */}
+            <Services />
 
             {/* Holder */}
             {/* <Holder /> */}

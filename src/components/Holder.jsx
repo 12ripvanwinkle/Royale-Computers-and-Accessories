@@ -1,11 +1,11 @@
 import { useState } from "react";
 import {
-  Database,
-  GraduationCap,
-  CalendarCheck,
-  Clock4,
-  MessagesSquare,
-  CreditCard,
+  Settings2,
+  SlidersHorizontal,
+  DatabaseZap,
+  Users2,
+  LifeBuoy,
+  CheckCircle2,
 } from "lucide-react";
 
 // ── Glass styles ──────────────────────────────────────────────────────────
@@ -40,7 +40,7 @@ const innerSurface = {
 function Chip({ children, color = "#93c5fd" }) {
   return (
     <span
-      className="inline-block text-xs px-2.5 py-1 rounded-full"
+      className="inline-block text-xs px-2.5 py-1 rounded-full whitespace-nowrap"
       style={{ background: `${color}18`, border: `1px solid ${color}35`, color }}
     >
       {children}
@@ -63,21 +63,21 @@ function FeatureRow({ children }) {
 function StatBox({ value, label }) {
   return (
     <div
-      className="flex-1 rounded-xl px-3 py-2.5 text-center"
+      className="rounded-xl px-3 py-2.5 text-center w-full"
       style={{
         background: "rgba(255,255,255,0.08)",
         border: "1px solid rgba(255,255,255,0.1)",
       }}
     >
       <div className="text-base font-semibold text-white leading-tight">{value}</div>
-      <div className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>{label}</div>
+      <div className="text-xs mt-0.5 leading-snug" style={{ color: "rgba(255,255,255,0.45)" }}>{label}</div>
     </div>
   );
 }
 
 function CardLabel({ icon: IconComp, label, accent }) {
   return (
-    <div className="flex items-center gap-2 mb-3">
+    <div className="flex items-center gap-2 mb-3 min-w-0">
       <div
         className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
         style={{ background: `${accent}18`, color: accent, border: `1px solid ${accent}30` }}
@@ -85,7 +85,7 @@ function CardLabel({ icon: IconComp, label, accent }) {
         <IconComp size={16} />
       </div>
       <span
-        className="text-xs font-medium tracking-wide"
+        className="text-xs font-medium tracking-wide leading-tight"
         style={{ color: "rgba(255,255,255,0.45)" }}
       >
         {label}
@@ -94,28 +94,37 @@ function CardLabel({ icon: IconComp, label, accent }) {
   );
 }
 
-// ── Differentiator badge — unique to this section ─────────────────────────
-function DiffBadge({ children }) {
+// ── Phase step — used in the full-width timeline strip ────────────────────
+function PhaseStep({ number, title, sub, accent, last }) {
   return (
-    <span
-      className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full font-medium"
-      style={{
-        background: "rgba(251,191,36,0.12)",
-        border: "1px solid rgba(251,191,36,0.28)",
-        color: "#fbbf24",
-      }}
-    >
-      <span
-        className="w-1.5 h-1.5 rounded-full"
-        style={{ background: "#fbbf24" }}
-      />
-      {children}
-    </span>
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-0 flex-1 min-w-0">
+      <div className="flex sm:flex-col items-center sm:items-center gap-3 sm:gap-0 w-full sm:w-auto">
+        {/* Circle */}
+        <div
+          className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-xs font-bold"
+          style={{ background: `${accent}20`, border: `2px solid ${accent}50`, color: accent }}
+        >
+          {number}
+        </div>
+        {/* Connector line — horizontal on desktop, hidden on mobile */}
+        {!last && (
+          <div
+            className="hidden sm:block flex-1 h-px mx-2"
+            style={{ background: "rgba(255,255,255,0.12)", minWidth: 24 }}
+          />
+        )}
+      </div>
+      {/* Label */}
+      <div className="sm:hidden flex flex-col ml-0">
+        <span className="text-xs font-semibold text-white leading-tight">{title}</span>
+        <span className="text-xs mt-0.5 leading-snug" style={{ color: "rgba(255,255,255,0.45)" }}>{sub}</span>
+      </div>
+    </div>
   );
 }
 
 // ── Section ───────────────────────────────────────────────────────────────
-export default function CoreModulesSection() {
+export default function OurServicesSection() {
   const [hovered, setHovered] = useState(null);
 
   const cs = (id) => (hovered === id ? glassHover : glass);
@@ -123,6 +132,14 @@ export default function CoreModulesSection() {
     onMouseEnter: () => setHovered(id),
     onMouseLeave: () => setHovered(null),
   });
+
+  const phases = [
+    { number: "01", title: "Setup",      sub: "Configure",   accent: "#93c5fd" },
+    { number: "02", title: "Customise",  sub: "Tailor",      accent: "#a78bfa" },
+    { number: "03", title: "Migrate",    sub: "Transfer",    accent: "#5eead4" },
+    { number: "04", title: "Train",      sub: "Onboard",     accent: "#4ade80" },
+    { number: "05", title: "Support",    sub: "Sustain",     accent: "#fbbf24" },
+  ];
 
   return (
     <div
@@ -140,315 +157,308 @@ export default function CoreModulesSection() {
             className="text-xs font-semibold tracking-widest uppercase mb-4"
             style={{ color: "rgba(255,255,255,0.45)" }}
           >
-            Built for Education
+            Implementation & Beyond
           </p>
           <h2 className="text-3xl md:text-5xl font-light text-white leading-tight mb-4">
-            Core Modules
+            Our Services
           </h2>
           <p
-            className="text-sm md:text-base max-w-2xl mx-auto leading-relaxed mb-5"
+            className="text-sm md:text-base max-w-xl mx-auto leading-relaxed"
             style={{ color: "rgba(255,255,255,0.55)" }}
           >
-            Unlike a generic CRM, every module here is purpose-built for schools —
-            covering the academic, operational, and communication workflows that
-            educational institutions actually run on.
+            We don't just hand you a platform — we implement it. From first
+            configuration through to ongoing support, we're with your school
+            at every stage of the journey.
           </p>
-          {/* Differentiator callout */}
-          <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full mx-auto"
-            style={{
-              background: "rgba(251,191,36,0.08)",
-              border: "1px solid rgba(251,191,36,0.2)",
-            }}
-          >
-            <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#fbbf24" }} />
-            <span className="text-xs font-medium" style={{ color: "#fbbf24" }}>
-              This is where it differs from a CRM — school-specific by design, not by configuration
-            </span>
-          </div>
         </div>
 
         {/* ══════════════════════════════════════════
-            BENTO GRID — 6 items (even)
-            Row 1: [SIS col-span-1]              [Academic Mgmt col-span-2]
-            Row 2: [Timetable col-span-2]        [Attendance col-span-1]
-            Row 3: [Comms Portal col-span-1]     [Fee & Payment col-span-1]     [Diff summary col-span-1]
+            BENTO GRID — 5 items (odd)
+            Row 1: [Setup col-span-2]         [Customization col-span-1]
+            Row 2: [Data Migration col-span-1] [Training col-span-1]    [Support col-span-1]
+            Row 3: [Full-width timeline strip col-span-3]
+            Mobile: all cards full-width stacked
         ══════════════════════════════════════════ */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-          {/* ── CARD 1: Student Information System — narrow (col-span-1) ── */}
+          {/* ── CARD 1: System Setup & Configuration — wide hero (col-span-2) ── */}
           <div
-            className="md:col-span-1 rounded-2xl p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("sis")}
-            {...hp("sis")}
+            className="md:col-span-2 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+            style={cs("setup")}
+            {...hp("setup")}
           >
-            <div className="flex items-start justify-between mb-1">
-              <CardLabel icon={Database} label="STUDENT INFORMATION SYSTEM" accent="#93c5fd" />
-            </div>
-            <div className="flex items-center gap-2 mb-4">
-              <Chip color="#93c5fd">SIS</Chip>
-              <DiffBadge>Not in CRM</DiffBadge>
-            </div>
-
-            <h3 className="text-base font-semibold text-white mb-2">
-              The Single Source of Truth
-            </h3>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
-              A structured student record purpose-built for schools — covering
-              enrolment, guardianship, medical notes, and academic history in
-              a format no generic CRM can replicate out of the box.
-            </p>
-
-            <div className="mt-auto">
-              <FeatureRow>Enrolment & re-enrolment flows</FeatureRow>
-              <FeatureRow>Guardian & emergency contacts</FeatureRow>
-              <FeatureRow>Medical & SEN flags</FeatureRow>
-              <FeatureRow>Full academic history archive</FeatureRow>
-            </div>
-          </div>
-
-          {/* ── CARD 2: Academic Management — wide hero (col-span-2) ── */}
-          <div
-            className="md:col-span-2 rounded-2xl p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("academic")}
-            {...hp("academic")}
-          >
-            <div className="flex items-start justify-between mb-4">
-              <CardLabel icon={GraduationCap} label="ACADEMIC MANAGEMENT" accent="#a78bfa" />
-              <div className="flex items-center gap-2">
-                <Chip color="#a78bfa">Grades · Exams · Curriculum</Chip>
-              </div>
+            <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
+              <CardLabel icon={Settings2} label="SYSTEM SETUP & CONFIGURATION" accent="#93c5fd" />
+              <Chip color="#93c5fd">Foundation phase</Chip>
             </div>
 
             <h3 className="text-xl font-semibold text-white mb-2">
-              The Full Academic Lifecycle, Managed
+              Built Right from Day One
             </h3>
             <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.6)" }}>
-              From curriculum planning through to exam results and transcripts —
-              this module handles the entire academic workflow in one place.
-              Teachers set assessments, record marks, and publish report cards
-              without ever leaving the platform.
+              Before any staff logs in, we lay the groundwork — configuring your
+              school structure, user roles, academic calendar, and module settings
+              so the platform reflects how your institution actually operates.
+              Nothing generic, nothing to undo later.
             </p>
 
-            {/* Academic workflow grid on inner surface */}
-            <div className="grid grid-cols-3 gap-px mb-5 overflow-hidden" style={innerSurface}>
-              {[
-                { label: "Curriculum", sub: "Syllabus & learning objectives" },
-                { label: "Assessments", sub: "Assignments, tests & exams" },
-                { label: "Results", sub: "Grades, GPA & transcripts" },
-              ].map(({ label, sub }) => (
-                <div key={label} className="p-3">
-                  <div className="text-xs font-semibold text-white mb-0.5">{label}</div>
-                  <div className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>{sub}</div>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex items-center gap-2 mb-4">
-              <DiffBadge>Education-specific — CRMs have no curriculum layer</DiffBadge>
-            </div>
-
-            <div className="flex gap-3 mt-auto">
-              <StatBox value="Custom" label="Grading schemes" />
-              <StatBox value="Auto" label="Report generation" />
-              <StatBox value="Multi-term" label="Exam scheduling" />
-            </div>
-          </div>
-
-          {/* ── CARD 3: Timetable & Scheduling — wide (col-span-2) ── */}
-          <div
-            className="md:col-span-2 rounded-2xl p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("timetable")}
-            {...hp("timetable")}
-          >
-            <div className="flex items-start justify-between mb-4">
-              <CardLabel icon={Clock4} label="TIMETABLE & SCHEDULING" accent="#fbbf24" />
-              <div className="flex items-center gap-2">
-                <Chip color="#fbbf24">Conflict-free</Chip>
-              </div>
-            </div>
-
-            <h3 className="text-xl font-semibold text-white mb-2">
-              School Scheduling CRMs Can't Do
-            </h3>
-            <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Period-based scheduling with bell times, room allocation, and teacher
-              workload balancing — all with automatic clash detection. A generic
-              CRM has no concept of a school period, a form group, or a bell schedule.
-            </p>
-
-            {/* Scheduling dimensions on inner surface */}
-            <div className="grid grid-cols-2 gap-px mb-5 overflow-hidden" style={innerSurface}>
-              {[
-                { label: "Rooms", sub: "Capacity-aware allocation" },
-                { label: "Teachers", sub: "Load-balanced assignment" },
-                { label: "Classes", sub: "Form groups & sets" },
-                { label: "Bell times", sub: "Custom period structure" },
-              ].map(({ label, sub }) => (
-                <div key={label} className="p-3">
-                  <div className="text-xs font-semibold text-white mb-0.5">{label}</div>
-                  <div className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>{sub}</div>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex gap-3 mt-auto">
-              <StatBox value="Auto" label="Clash detection" />
-              <StatBox value="Live" label="Updates" />
-              <StatBox value="iCal" label="Export" />
-            </div>
-          </div>
-
-          {/* ── CARD 4: Attendance Management — narrow (col-span-1) ── */}
-          <div
-            className="md:col-span-1 rounded-2xl p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("attendance")}
-            {...hp("attendance")}
-          >
-            <div className="flex items-start justify-between mb-1">
-              <CardLabel icon={CalendarCheck} label="ATTENDANCE MANAGEMENT" accent="#4ade80" />
-            </div>
-            <div className="flex items-center gap-2 mb-4">
-              <Chip color="#4ade80">Per-period</Chip>
-              <DiffBadge>Not in CRM</DiffBadge>
-            </div>
-
-            <h3 className="text-base font-semibold text-white mb-2">
-              Period-by-Period Registers
-            </h3>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Attendance tracked at every lesson, not just daily check-ins.
-              Absence patterns trigger alerts before they become safeguarding concerns.
-            </p>
-
-            <div className="mt-auto">
-              <FeatureRow>Period-level digital register</FeatureRow>
-              <FeatureRow>Automated absence alerts</FeatureRow>
-              <FeatureRow>Safeguarding threshold flags</FeatureRow>
-              <FeatureRow>Statutory compliance reports</FeatureRow>
-            </div>
-          </div>
-
-          {/* ── CARD 5: Parent & Teacher Communication Portal — narrow (col-span-1) ── */}
-          <div
-            className="md:col-span-1 rounded-2xl p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("comms")}
-            {...hp("comms")}
-          >
-            <div className="flex items-start justify-between mb-1">
-              <CardLabel icon={MessagesSquare} label="COMMUNICATION PORTAL" accent="#5eead4" />
-            </div>
-            <Chip color="#5eead4">Two-way</Chip>
-
-            <h3 className="text-base font-semibold text-white mt-4 mb-2">
-              School-Aware Messaging
-            </h3>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Unlike a CRM inbox, messages here are contextualised by class,
-              student, and role — parents see their child's data, teachers
-              see their class, admins see everything.
-            </p>
-
-            <div className="mt-auto">
-              <FeatureRow>Role-scoped parent & teacher views</FeatureRow>
-              <FeatureRow>Class & school-wide announcements</FeatureRow>
-              <FeatureRow>SMS & email notification bridge</FeatureRow>
-              <FeatureRow>Read receipts & message log</FeatureRow>
-            </div>
-          </div>
-
-          {/* ── CARD 6: Fee & Payment Management — narrow (col-span-1) ── */}
-          <div
-            className="md:col-span-1 rounded-2xl p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("fees")}
-            {...hp("fees")}
-          >
-            <div className="flex items-start justify-between mb-1">
-              <CardLabel icon={CreditCard} label="FEE & PAYMENT MANAGEMENT" accent="#f87171" />
-            </div>
-            <Chip color="#f87171">School billing</Chip>
-
-            <h3 className="text-base font-semibold text-white mt-4 mb-2">
-              Tuition, Levies & Beyond
-            </h3>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
-              School fee structures are complex — term-based tuition, sibling
-              discounts, activity levies, bursaries. This module handles all of
-              it; a CRM's billing tools simply aren't built for it.
-            </p>
-
-            <div className="mt-auto">
-              <FeatureRow>Term-based tuition scheduling</FeatureRow>
-              <FeatureRow>Sibling & bursary discounts</FeatureRow>
-              <FeatureRow>Activity & trip levies</FeatureRow>
-              <FeatureRow>Overdue reminders & receipts</FeatureRow>
-            </div>
-          </div>
-
-          {/* ── CARD 7: CRM Differentiator summary — col-span-1 balances row 3 ── */}
-          <div
-            className="md:col-span-1 rounded-2xl p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={{ ...glassStrong }}
-          >
-            <p
-              className="text-xs font-semibold tracking-widest uppercase mb-3"
-              style={{ color: "rgba(255,255,255,0.45)" }}
+            {/* Setup phases on inner surface */}
+            <div
+              className="grid grid-cols-1 sm:grid-cols-2 gap-px mb-5 overflow-hidden"
+              style={innerSurface}
             >
-              vs. a generic CRM
-            </p>
-
-            <h3 className="text-base font-semibold text-white mb-2">
-              Why a CRM Falls Short
-            </h3>
-            <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.6)" }}>
-              A CRM manages contacts and pipelines. A school needs periods,
-              registers, curricula, and safeguarding — none of which exist
-              in a CRM without heavy, costly customisation.
-            </p>
-
-            <div className="flex flex-col gap-2 mb-5">
               {[
-                { feature: "Curriculum layer", crm: false },
-                { feature: "Bell-period timetable", crm: false },
-                { feature: "Per-period attendance", crm: false },
-                { feature: "Safeguarding flags", crm: false },
-                { feature: "Term-based billing", crm: false },
-              ].map(({ feature, crm }) => (
-                <div
-                  key={feature}
-                  className="flex items-center justify-between px-3 py-2 rounded-xl"
-                  style={{
-                    background: "rgba(255,255,255,0.06)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                  }}
+                { label: "School structure",    sub: "Departments, classes & year groups" },
+                { label: "User roles & access", sub: "Admin, teacher, parent permissions" },
+                { label: "Academic calendar",   sub: "Terms, holidays & exam periods" },
+                { label: "Module activation",   sub: "Enable only what you need" },
+              ].map(({ label, sub }) => (
+                <div key={label} className="p-3">
+                  <div className="text-xs font-semibold text-white mb-0.5">{label}</div>
+                  <div className="text-xs leading-snug" style={{ color: "rgba(255,255,255,0.45)" }}>{sub}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-auto">
+              <StatBox value="< 5 days" label="Avg. setup time" />
+              <StatBox value="Zero" label="Downtime" />
+              <StatBox value="Dedicated" label="Setup engineer" />
+            </div>
+          </div>
+
+          {/* ── CARD 2: Customization — narrow (col-span-1) ── */}
+          <div
+            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+            style={cs("custom")}
+            {...hp("custom")}
+          >
+            <div className="flex items-start justify-between mb-1">
+              <CardLabel icon={SlidersHorizontal} label="CUSTOMISATION" accent="#a78bfa" />
+            </div>
+            <Chip color="#a78bfa">School-specific</Chip>
+
+            <h3 className="text-base font-semibold text-white mt-4 mb-2">
+              Tailored to Your Requirements
+            </h3>
+            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
+              Every school runs differently. We configure grading schemes,
+              report card templates, fee structures, and workflows to match
+              exactly how your institution works — not the other way around.
+            </p>
+
+            <div className="mt-auto">
+              <FeatureRow>Custom grading & report templates</FeatureRow>
+              <FeatureRow>School-specific fee structures</FeatureRow>
+              <FeatureRow>Branded parent portal</FeatureRow>
+              <FeatureRow>Custom fields & data points</FeatureRow>
+            </div>
+          </div>
+
+          {/* ── CARD 3: Data Migration — narrow (col-span-1) ── */}
+          <div
+            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+            style={cs("migration")}
+            {...hp("migration")}
+          >
+            <div className="flex items-start justify-between mb-1">
+              <CardLabel icon={DatabaseZap} label="DATA MIGRATION" accent="#5eead4" />
+            </div>
+            <Chip color="#5eead4">Existing records</Chip>
+
+            <h3 className="text-base font-semibold text-white mt-4 mb-2">
+              Your History, Moved Safely
+            </h3>
+            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
+              Student records, academic history, and fee data transferred from
+              your existing system — cleaned, mapped, and verified before
+              anything goes live.
+            </p>
+
+            <div className="mt-auto">
+              <FeatureRow>CSV, Excel & legacy system imports</FeatureRow>
+              <FeatureRow>Data cleaning & deduplication</FeatureRow>
+              <FeatureRow>Pre-migration audit report</FeatureRow>
+              <FeatureRow>Rollback safety net</FeatureRow>
+            </div>
+          </div>
+
+          {/* ── CARD 4: Staff Training & Onboarding — narrow (col-span-1) ── */}
+          <div
+            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+            style={cs("training")}
+            {...hp("training")}
+          >
+            <div className="flex items-start justify-between mb-1">
+              <CardLabel icon={Users2} label="STAFF TRAINING & ONBOARDING" accent="#4ade80" />
+            </div>
+            <Chip color="#4ade80">Role-based</Chip>
+
+            <h3 className="text-base font-semibold text-white mt-4 mb-2">
+              Confident from the First Login
+            </h3>
+            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
+              Separate training tracks for admins, teachers, and office staff —
+              each focused on only the modules they'll actually use, so no one
+              is overwhelmed on go-live day.
+            </p>
+
+            <div className="mt-auto">
+              <FeatureRow>Role-segmented training sessions</FeatureRow>
+              <FeatureRow>Live walkthrough & Q&A</FeatureRow>
+              <FeatureRow>Recorded sessions for new hires</FeatureRow>
+              <FeatureRow>Quick-reference user guides</FeatureRow>
+            </div>
+          </div>
+
+          {/* ── CARD 5: Ongoing Technical Support — narrow (col-span-1) ── */}
+          <div
+            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+            style={cs("support")}
+            {...hp("support")}
+          >
+            <div className="flex items-start justify-between mb-1">
+              <CardLabel icon={LifeBuoy} label="ONGOING TECHNICAL SUPPORT" accent="#fbbf24" />
+            </div>
+            <Chip color="#fbbf24">Post-launch</Chip>
+
+            <h3 className="text-base font-semibold text-white mt-4 mb-2">
+              We Stay After Go-Live
+            </h3>
+            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
+              Implementation doesn't end at launch. Our support team handles
+              issues, updates, and change requests so your staff can focus on
+              teaching — not troubleshooting.
+            </p>
+
+            <div className="mb-4">
+              <FeatureRow>Dedicated support channel</FeatureRow>
+              <FeatureRow>Bug fixes & platform updates</FeatureRow>
+              <FeatureRow>Change request handling</FeatureRow>
+              <FeatureRow>Regular check-in calls</FeatureRow>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-auto">
+              <StatBox value="24/7" label="Support access" />
+              <StatBox value="< 4h" label="Response SLA" />
+            </div>
+          </div>
+
+          {/* ── ROW 3: Full-width implementation timeline (col-span-3) ──
+               Odd count = this strip closes the grid cleanly             ── */}
+          <div
+            className="md:col-span-3 rounded-2xl p-5 md:p-6 hover:-translate-y-0.5 transition-transform duration-300"
+            style={glassStrong}
+          >
+            {/* Strip header */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
+              <div>
+                <p
+                  className="text-xs font-semibold tracking-widest uppercase mb-1"
+                  style={{ color: "rgba(255,255,255,0.45)" }}
                 >
-                  <span className="text-xs" style={{ color: "rgba(255,255,255,0.65)" }}>
-                    {feature}
-                  </span>
-                  <span
-                    className="text-xs font-semibold px-2 py-0.5 rounded-full"
-                    style={{
-                      background: crm ? "rgba(74,222,128,0.12)" : "rgba(248,113,113,0.12)",
-                      color: crm ? "#4ade80" : "#f87171",
-                      border: `1px solid ${crm ? "rgba(74,222,128,0.25)" : "rgba(248,113,113,0.25)"}`,
-                    }}
-                  >
-                    {crm ? "✓ CRM" : "✗ CRM"}
-                  </span>
+                  Implementation journey
+                </p>
+                <h3 className="text-base font-semibold text-white">
+                  From Contract to Fully Live — Typically 3–6 Weeks
+                </h3>
+              </div>
+              <button
+                className="shrink-0 self-start sm:self-auto px-5 py-2 rounded-full text-xs font-semibold transition-all duration-200 hover:opacity-90 active:scale-95"
+                style={{
+                  background: "rgba(147,197,253,0.18)",
+                  border: "1px solid rgba(147,197,253,0.35)",
+                  color: "#93c5fd",
+                }}
+              >
+                Start your implementation →
+              </button>
+            </div>
+
+            {/* Timeline
+                 Mobile:  vertical stack — circle + connector line + label side by side
+                 Desktop: horizontal row across all 5 steps with connecting lines          */}
+            <div>
+              {/* ── DESKTOP: horizontal (hidden on mobile) ── */}
+              <div className="hidden md:grid md:grid-cols-5 gap-0">
+                {[
+                  { n: "01", title: "Setup",      sub: "School structure & roles",  accent: "#93c5fd" },
+                  { n: "02", title: "Customise",  sub: "Templates & workflows",     accent: "#a78bfa" },
+                  { n: "03", title: "Migrate",    sub: "Transfer existing records", accent: "#5eead4" },
+                  { n: "04", title: "Train",      sub: "Staff onboarding sessions", accent: "#4ade80" },
+                  { n: "05", title: "Support",    sub: "Ongoing post-launch care",  accent: "#fbbf24" },
+                ].map(({ n, title, sub, accent }, i, arr) => (
+                  <div key={n} className="flex flex-col items-center">
+                    {/* Circle + connector */}
+                    <div className="flex items-center w-full">
+                      <div
+                        className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 text-xs font-bold"
+                        style={{ background: `${accent}20`, border: `2px solid ${accent}55`, color: accent }}
+                      >
+                        {n}
+                      </div>
+                      {i < arr.length - 1 && (
+                        <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.1)" }} />
+                      )}
+                    </div>
+                    {/* Label */}
+                    <div className="text-center mt-3 px-2 w-full">
+                      <div className="text-xs font-semibold text-white leading-tight">{title}</div>
+                      <div className="text-xs mt-0.5 leading-snug" style={{ color: "rgba(255,255,255,0.45)" }}>{sub}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* ── MOBILE: vertical stack (hidden on md+) ── */}
+              <div className="flex flex-col md:hidden gap-0">
+                {[
+                  { n: "01", title: "Setup",      sub: "School structure & roles",  accent: "#93c5fd" },
+                  { n: "02", title: "Customise",  sub: "Templates & workflows",     accent: "#a78bfa" },
+                  { n: "03", title: "Migrate",    sub: "Transfer existing records", accent: "#5eead4" },
+                  { n: "04", title: "Train",      sub: "Staff onboarding sessions", accent: "#4ade80" },
+                  { n: "05", title: "Support",    sub: "Ongoing post-launch care",  accent: "#fbbf24" },
+                ].map(({ n, title, sub, accent }, i, arr) => (
+                  <div key={n} className="flex items-stretch gap-3">
+                    {/* Left column: circle + vertical line */}
+                    <div className="flex flex-col items-center">
+                      <div
+                        className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-xs font-bold"
+                        style={{ background: `${accent}20`, border: `2px solid ${accent}55`, color: accent }}
+                      >
+                        {n}
+                      </div>
+                      {i < arr.length - 1 && (
+                        <div className="flex-1 w-px my-1" style={{ background: "rgba(255,255,255,0.1)", minHeight: 20 }} />
+                      )}
+                    </div>
+                    {/* Right column: text */}
+                    <div className={`flex flex-col justify-start ${i < arr.length - 1 ? "pb-4" : ""}`}>
+                      <div className="text-xs font-semibold text-white leading-tight pt-1.5">{title}</div>
+                      <div className="text-xs mt-0.5 leading-snug" style={{ color: "rgba(255,255,255,0.45)" }}>{sub}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Checklist row — visible below timeline */}
+            <div
+              className="flex flex-wrap gap-3 mt-5 pt-4"
+              style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+            >
+              {[
+                "Dedicated implementation manager",
+                "Weekly progress updates",
+                "Go-live sign-off checklist",
+                "30-day post-launch review",
+              ].map((item) => (
+                <div key={item} className="flex items-center gap-1.5">
+                  <CheckCircle2 size={12} style={{ color: "#4ade80", flexShrink: 0 }} />
+                  <span className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>{item}</span>
                 </div>
               ))}
             </div>
-
-            <button
-              className="mt-auto w-full py-2.5 rounded-full text-xs font-semibold transition-all duration-200 hover:opacity-90 active:scale-95"
-              style={{
-                background: "rgba(251,191,36,0.14)",
-                border: "1px solid rgba(251,191,36,0.3)",
-                color: "#fbbf24",
-              }}
-            >
-              See full comparison →
-            </button>
           </div>
 
         </div>
