@@ -4,6 +4,7 @@ import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
 import Holder from '../../Holder'
 import Features from '../../Aspects/school/features'
+import Modules from '../../Aspects/school/Modules'
 
 
 
@@ -65,6 +66,9 @@ const School = () => {
 
             {/* Features */}
             <Features />
+
+            {/* Modules */}
+            <Modules />
 
             {/* Holder */}
             {/* <Holder /> */}

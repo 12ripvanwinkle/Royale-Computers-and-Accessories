@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from 'react'
+import { glass, glassHover, innerSurface, glassStrong } from '../CCTV-Holder/CCTVStyles'
 import {
   Database,
   GraduationCap,
@@ -8,44 +9,15 @@ import {
   CreditCard,
 } from "lucide-react";
 
-// ── Glass styles ──────────────────────────────────────────────────────────
-const glass = {
-  background: "rgba(255,255,255,0.09)",
-  border: "1px solid rgba(255,255,255,0.16)",
-  backdropFilter: "blur(12px)",
-  WebkitBackdropFilter: "blur(12px)",
-};
-
-const glassHover = {
-  background: "rgba(255,255,255,0.13)",
-  border: "1px solid rgba(255,255,255,0.22)",
-  backdropFilter: "blur(12px)",
-  WebkitBackdropFilter: "blur(12px)",
-};
-
-const glassStrong = {
-  background: "rgba(255,255,255,0.11)",
-  border: "1px solid rgba(255,255,255,0.18)",
-  backdropFilter: "blur(14px)",
-  WebkitBackdropFilter: "blur(14px)",
-};
-
-const innerSurface = {
-  background: "rgba(255,255,255,0.06)",
-  border: "1px solid rgba(255,255,255,0.1)",
-  borderRadius: 12,
-};
-
-// ── Micro components ──────────────────────────────────────────────────────
 function Chip({ children, color = "#93c5fd" }) {
   return (
-    <span
-      className="inline-block text-xs px-2.5 py-1 rounded-full"
+    <div
+      className="inline-block text-xs px-2.5 py-1 rounded-full whitespace-nowrap"
       style={{ background: `${color}18`, border: `1px solid ${color}35`, color }}
     >
       {children}
-    </span>
-  );
+    </div>
+  )
 }
 
 function FeatureRow({ children }) {
@@ -57,27 +29,27 @@ function FeatureRow({ children }) {
       <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#4ade80" }} />
       <span className="text-xs" style={{ color: "rgba(255,255,255,0.78)" }}>{children}</span>
     </div>
-  );
+  )
 }
 
 function StatBox({ value, label }) {
   return (
     <div
-      className="flex-1 rounded-xl px-3 py-2.5 text-center"
+      className="rounded-xl px-3 py-2.5 text-center w-full"
       style={{
         background: "rgba(255,255,255,0.08)",
         border: "1px solid rgba(255,255,255,0.1)",
       }}
     >
       <div className="text-base font-semibold text-white leading-tight">{value}</div>
-      <div className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>{label}</div>
+      <div className="text-xs mt-0.5 leading-snug" style={{ color: "rgba(255,255,255,0.45)" }}>{label}</div>
     </div>
-  );
+  )
 }
 
 function CardLabel({ icon: IconComp, label, accent }) {
   return (
-    <div className="flex items-center gap-2 mb-3">
+    <div className="flex items-center gap-2 mb-3 min-w-0">
       <div
         className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
         style={{ background: `${accent}18`, color: accent, border: `1px solid ${accent}30` }}
@@ -85,37 +57,33 @@ function CardLabel({ icon: IconComp, label, accent }) {
         <IconComp size={16} />
       </div>
       <span
-        className="text-xs font-medium tracking-wide"
+        className="text-xs font-medium tracking-wide leading-tight"
         style={{ color: "rgba(255,255,255,0.45)" }}
       >
         {label}
       </span>
     </div>
-  );
+  )
 }
 
-// ── Differentiator badge — unique to this section ─────────────────────────
 function DiffBadge({ children }) {
   return (
     <span
-      className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full font-medium"
+      className="inline-flex items-start gap-1.5 text-xs px-2.5 py-1.5 rounded-xl font-medium"
       style={{
         background: "rgba(251,191,36,0.12)",
         border: "1px solid rgba(251,191,36,0.28)",
         color: "#fbbf24",
       }}
     >
-      <span
-        className="w-1.5 h-1.5 rounded-full"
-        style={{ background: "#fbbf24" }}
-      />
+      <span className="w-1.5 h-1.5 rounded-full shrink-0 mt-0.5" style={{ background: "#fbbf24" }} />
       {children}
     </span>
-  );
+  )
 }
 
-// ── Section ───────────────────────────────────────────────────────────────
-export default function CoreModulesSection() {
+const Modules = () => {
+
   const [hovered, setHovered] = useState(null);
 
   const cs = (id) => (hovered === id ? glassHover : glass);
@@ -134,7 +102,7 @@ export default function CoreModulesSection() {
     >
       <div className="max-w-5xl mx-auto">
 
-        {/* ── Header ── */}
+        {/* Header */}
         <div className="text-center mb-12">
           <p
             className="text-xs font-semibold tracking-widest uppercase mb-4"
@@ -153,16 +121,17 @@ export default function CoreModulesSection() {
             covering the academic, operational, and communication workflows that
             educational institutions actually run on.
           </p>
-          {/* Differentiator callout */}
+
+          {/* Differentiator callout — wraps gracefully on mobile */}
           <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full mx-auto"
+            className="inline-flex items-start sm:items-center gap-2 px-4 py-2.5 rounded-2xl sm:rounded-full mx-auto text-left sm:text-center max-w-sm sm:max-w-none"
             style={{
               background: "rgba(251,191,36,0.08)",
               border: "1px solid rgba(251,191,36,0.2)",
             }}
           >
-            <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#fbbf24" }} />
-            <span className="text-xs font-medium" style={{ color: "#fbbf24" }}>
+            <span className="w-1.5 h-1.5 rounded-full shrink-0 mt-0.5 sm:mt-0" style={{ background: "#fbbf24" }} />
+            <span className="text-xs font-medium leading-relaxed" style={{ color: "#fbbf24" }}>
               This is where it differs from a CRM — school-specific by design, not by configuration
             </span>
           </div>
@@ -170,22 +139,25 @@ export default function CoreModulesSection() {
 
         {/* ══════════════════════════════════════════
             BENTO GRID — 6 items (even)
-            Row 1: [SIS col-span-1]              [Academic Mgmt col-span-2]
-            Row 2: [Timetable col-span-2]        [Attendance col-span-1]
-            Row 3: [Comms Portal col-span-1]     [Fee & Payment col-span-1]     [Diff summary col-span-1]
+            Row 1: [SIS col-span-1]           [Academic Mgmt col-span-2]
+            Row 2: [Timetable col-span-2]     [Attendance col-span-1]
+            Row 3: [Comms col-span-1]         [Fees col-span-1]          [Dashboard col-span-1]
+            Mobile: all cards full-width, stacked
         ══════════════════════════════════════════ */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-          {/* ── CARD 1: Student Information System — narrow (col-span-1) ── */}
+          {/* ── Card 1: Student Information System — narrow (col-span-1) ── */}
           <div
-            className="md:col-span-1 rounded-2xl p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
             style={cs("sis")}
             {...hp("sis")}
           >
             <div className="flex items-start justify-between mb-1">
               <CardLabel icon={Database} label="STUDENT INFORMATION SYSTEM" accent="#93c5fd" />
             </div>
-            <div className="flex items-center gap-2 mb-4">
+
+            {/* Chips wrap on small screens */}
+            <div className="flex flex-wrap items-center gap-2 mb-4">
               <Chip color="#93c5fd">SIS</Chip>
               <DiffBadge>Not in CRM</DiffBadge>
             </div>
@@ -207,17 +179,15 @@ export default function CoreModulesSection() {
             </div>
           </div>
 
-          {/* ── CARD 2: Academic Management — wide hero (col-span-2) ── */}
+          {/* ── Card 2: Academic Management — wide (col-span-2) ── */}
           <div
-            className="md:col-span-2 rounded-2xl p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+            className="md:col-span-2 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
             style={cs("academic")}
             {...hp("academic")}
           >
-            <div className="flex items-start justify-between mb-4">
+            <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
               <CardLabel icon={GraduationCap} label="ACADEMIC MANAGEMENT" accent="#a78bfa" />
-              <div className="flex items-center gap-2">
-                <Chip color="#a78bfa">Grades · Exams · Curriculum</Chip>
-              </div>
+              <Chip color="#a78bfa">Grades · Exams · Curriculum</Chip>
             </div>
 
             <h3 className="text-xl font-semibold text-white mb-2">
@@ -230,8 +200,11 @@ export default function CoreModulesSection() {
               without ever leaving the platform.
             </p>
 
-            {/* Academic workflow grid on inner surface */}
-            <div className="grid grid-cols-3 gap-px mb-5 overflow-hidden" style={innerSurface}>
+            {/* Academic workflow — collapses to 1-col on mobile */}
+            <div
+              className="grid grid-cols-1 sm:grid-cols-3 gap-px mb-5 overflow-hidden"
+              style={innerSurface}
+            >
               {[
                 { label: "Curriculum", sub: "Syllabus & learning objectives" },
                 { label: "Assessments", sub: "Assignments, tests & exams" },
@@ -244,28 +217,27 @@ export default function CoreModulesSection() {
               ))}
             </div>
 
-            <div className="flex items-center gap-2 mb-4">
+            <div className="mb-4">
               <DiffBadge>Education-specific — CRMs have no curriculum layer</DiffBadge>
             </div>
 
-            <div className="flex gap-3 mt-auto">
+            {/* Stat boxes wrap on very small screens */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-auto">
               <StatBox value="Custom" label="Grading schemes" />
               <StatBox value="Auto" label="Report generation" />
               <StatBox value="Multi-term" label="Exam scheduling" />
             </div>
           </div>
 
-          {/* ── CARD 3: Timetable & Scheduling — wide (col-span-2) ── */}
+          {/* ── Card 3: Timetable & Scheduling — wide (col-span-2) ── */}
           <div
-            className="md:col-span-2 rounded-2xl p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+            className="md:col-span-2 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
             style={cs("timetable")}
             {...hp("timetable")}
           >
-            <div className="flex items-start justify-between mb-4">
+            <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
               <CardLabel icon={Clock4} label="TIMETABLE & SCHEDULING" accent="#fbbf24" />
-              <div className="flex items-center gap-2">
-                <Chip color="#fbbf24">Conflict-free</Chip>
-              </div>
+              <Chip color="#fbbf24">Conflict-free</Chip>
             </div>
 
             <h3 className="text-xl font-semibold text-white mb-2">
@@ -277,8 +249,11 @@ export default function CoreModulesSection() {
               CRM has no concept of a school period, a form group, or a bell schedule.
             </p>
 
-            {/* Scheduling dimensions on inner surface */}
-            <div className="grid grid-cols-2 gap-px mb-5 overflow-hidden" style={innerSurface}>
+            {/* Scheduling dimensions — 2-col on sm+, 1-col on mobile */}
+            <div
+              className="grid grid-cols-1 sm:grid-cols-2 gap-px mb-5 overflow-hidden"
+              style={innerSurface}
+            >
               {[
                 { label: "Rooms", sub: "Capacity-aware allocation" },
                 { label: "Teachers", sub: "Load-balanced assignment" },
@@ -292,23 +267,24 @@ export default function CoreModulesSection() {
               ))}
             </div>
 
-            <div className="flex gap-3 mt-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-auto">
               <StatBox value="Auto" label="Clash detection" />
               <StatBox value="Live" label="Updates" />
               <StatBox value="iCal" label="Export" />
             </div>
           </div>
 
-          {/* ── CARD 4: Attendance Management — narrow (col-span-1) ── */}
+          {/* ── Card 4: Attendance Management — narrow (col-span-1) ── */}
           <div
-            className="md:col-span-1 rounded-2xl p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
             style={cs("attendance")}
             {...hp("attendance")}
           >
             <div className="flex items-start justify-between mb-1">
               <CardLabel icon={CalendarCheck} label="ATTENDANCE MANAGEMENT" accent="#4ade80" />
             </div>
-            <div className="flex items-center gap-2 mb-4">
+
+            <div className="flex flex-wrap items-center gap-2 mb-4">
               <Chip color="#4ade80">Per-period</Chip>
               <DiffBadge>Not in CRM</DiffBadge>
             </div>
@@ -329,9 +305,9 @@ export default function CoreModulesSection() {
             </div>
           </div>
 
-          {/* ── CARD 5: Parent & Teacher Communication Portal — narrow (col-span-1) ── */}
+          {/* ── Card 5: Communication Portal — narrow (col-span-1) ── */}
           <div
-            className="md:col-span-1 rounded-2xl p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
             style={cs("comms")}
             {...hp("comms")}
           >
@@ -357,9 +333,9 @@ export default function CoreModulesSection() {
             </div>
           </div>
 
-          {/* ── CARD 6: Fee & Payment Management — narrow (col-span-1) ── */}
+          {/* ── Card 6: Fee & Payment Management — narrow (col-span-1) ── */}
           <div
-            className="md:col-span-1 rounded-2xl p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
             style={cs("fees")}
             {...hp("fees")}
           >
@@ -385,55 +361,48 @@ export default function CoreModulesSection() {
             </div>
           </div>
 
-          {/* ── CARD 7: CRM Differentiator summary — col-span-1 balances row 3 ── */}
+          {/* ── Card 7: Admin Dashboard snapshot — col-span-1 balances row 3 ── */}
           <div
-            className="md:col-span-1 rounded-2xl p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
             style={{ ...glassStrong }}
           >
             <p
               className="text-xs font-semibold tracking-widest uppercase mb-3"
               style={{ color: "rgba(255,255,255,0.45)" }}
             >
-              vs. a generic CRM
+              Admin at a glance
             </p>
 
             <h3 className="text-base font-semibold text-white mb-2">
-              Why a CRM Falls Short
+              Your School. One Dashboard.
             </h3>
             <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.6)" }}>
-              A CRM manages contacts and pipelines. A school needs periods,
-              registers, curricula, and safeguarding — none of which exist
-              in a CRM without heavy, costly customisation.
+              Every module feeds into a single admin view — so principals and
+              office staff always have a live pulse on the whole school without
+              switching between systems.
             </p>
 
             <div className="flex flex-col gap-2 mb-5">
               {[
-                { feature: "Curriculum layer", crm: false },
-                { feature: "Bell-period timetable", crm: false },
-                { feature: "Per-period attendance", crm: false },
-                { feature: "Safeguarding flags", crm: false },
-                { feature: "Term-based billing", crm: false },
-              ].map(({ feature, crm }) => (
+                { metric: "Students enrolled", value: "1,240", accent: "#93c5fd" },
+                { metric: "Attendance today",  value: "96.4%", accent: "#4ade80" },
+                { metric: "Fees outstanding",  value: "18",    accent: "#f87171" },
+                { metric: "Classes in session", value: "34 / 36", accent: "#fbbf24" },
+                { metric: "Messages unread",   value: "7",     accent: "#5eead4" },
+              ].map(({ metric, value, accent }) => (
                 <div
-                  key={feature}
+                  key={metric}
                   className="flex items-center justify-between px-3 py-2 rounded-xl"
                   style={{
                     background: "rgba(255,255,255,0.06)",
                     border: "1px solid rgba(255,255,255,0.08)",
                   }}
                 >
-                  <span className="text-xs" style={{ color: "rgba(255,255,255,0.65)" }}>
-                    {feature}
+                  <span className="text-xs truncate mr-2" style={{ color: "rgba(255,255,255,0.55)" }}>
+                    {metric}
                   </span>
-                  <span
-                    className="text-xs font-semibold px-2 py-0.5 rounded-full"
-                    style={{
-                      background: crm ? "rgba(74,222,128,0.12)" : "rgba(248,113,113,0.12)",
-                      color: crm ? "#4ade80" : "#f87171",
-                      border: `1px solid ${crm ? "rgba(74,222,128,0.25)" : "rgba(248,113,113,0.25)"}`,
-                    }}
-                  >
-                    {crm ? "✓ CRM" : "✗ CRM"}
+                  <span className="text-xs font-semibold shrink-0" style={{ color: accent }}>
+                    {value}
                   </span>
                 </div>
               ))}
@@ -442,17 +411,19 @@ export default function CoreModulesSection() {
             <button
               className="mt-auto w-full py-2.5 rounded-full text-xs font-semibold transition-all duration-200 hover:opacity-90 active:scale-95"
               style={{
-                background: "rgba(251,191,36,0.14)",
-                border: "1px solid rgba(251,191,36,0.3)",
-                color: "#fbbf24",
+                background: "rgba(147,197,253,0.18)",
+                border: "1px solid rgba(147,197,253,0.35)",
+                color: "#93c5fd",
               }}
             >
-              See full comparison →
+              Explore the dashboard →
             </button>
           </div>
 
         </div>
       </div>
     </div>
-  );
+  )
 }
+
+export default Modules
