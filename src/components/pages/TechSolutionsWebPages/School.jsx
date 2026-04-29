@@ -6,6 +6,7 @@ import Holder from '../../Holder'
 import Features from '../../Aspects/school/features'
 import Modules from '../../Aspects/school/Modules'
 import Services from '../../Aspects/school/Services'
+import HowItWorks from '../../Aspects/school/HowItWorks'
 
 
 
@@ -73,6 +74,9 @@ const School = () => {
 
             {/* Services */}
             <Services />
+
+            {/* How it works */}
+            <HowItWorks />
 
             {/* Holder */}
             {/* <Holder /> */}

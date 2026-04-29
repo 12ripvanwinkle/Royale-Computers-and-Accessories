@@ -1,11 +1,13 @@
 import { useState } from "react";
 import {
+  ClipboardList,
   Settings2,
-  SlidersHorizontal,
   DatabaseZap,
   Users2,
-  LifeBuoy,
+  Rocket,
+  ShieldCheck,
   CheckCircle2,
+  ArrowRight,
 } from "lucide-react";
 
 // ── Glass styles ──────────────────────────────────────────────────────────
@@ -94,37 +96,8 @@ function CardLabel({ icon: IconComp, label, accent }) {
   );
 }
 
-// ── Phase step — used in the full-width timeline strip ────────────────────
-function PhaseStep({ number, title, sub, accent, last }) {
-  return (
-    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-0 flex-1 min-w-0">
-      <div className="flex sm:flex-col items-center sm:items-center gap-3 sm:gap-0 w-full sm:w-auto">
-        {/* Circle */}
-        <div
-          className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-xs font-bold"
-          style={{ background: `${accent}20`, border: `2px solid ${accent}50`, color: accent }}
-        >
-          {number}
-        </div>
-        {/* Connector line — horizontal on desktop, hidden on mobile */}
-        {!last && (
-          <div
-            className="hidden sm:block flex-1 h-px mx-2"
-            style={{ background: "rgba(255,255,255,0.12)", minWidth: 24 }}
-          />
-        )}
-      </div>
-      {/* Label */}
-      <div className="sm:hidden flex flex-col ml-0">
-        <span className="text-xs font-semibold text-white leading-tight">{title}</span>
-        <span className="text-xs mt-0.5 leading-snug" style={{ color: "rgba(255,255,255,0.45)" }}>{sub}</span>
-      </div>
-    </div>
-  );
-}
-
 // ── Section ───────────────────────────────────────────────────────────────
-export default function OurServicesSection() {
+export default function HowItWorksSection() {
   const [hovered, setHovered] = useState(null);
 
   const cs = (id) => (hovered === id ? glassHover : glass);
@@ -132,14 +105,6 @@ export default function OurServicesSection() {
     onMouseEnter: () => setHovered(id),
     onMouseLeave: () => setHovered(null),
   });
-
-  const phases = [
-    { number: "01", title: "Setup",      sub: "Configure",   accent: "#93c5fd" },
-    { number: "02", title: "Customise",  sub: "Tailor",      accent: "#a78bfa" },
-    { number: "03", title: "Migrate",    sub: "Transfer",    accent: "#5eead4" },
-    { number: "04", title: "Train",      sub: "Onboard",     accent: "#4ade80" },
-    { number: "05", title: "Support",    sub: "Sustain",     accent: "#fbbf24" },
-  ];
 
   return (
     <div
@@ -157,61 +122,252 @@ export default function OurServicesSection() {
             className="text-xs font-semibold tracking-widest uppercase mb-4"
             style={{ color: "rgba(255,255,255,0.45)" }}
           >
-            Implementation & Beyond
+            The Process
           </p>
           <h2 className="text-3xl md:text-5xl font-light text-white leading-tight mb-4">
-            Our Services
+            How It Works
           </h2>
           <p
             className="text-sm md:text-base max-w-xl mx-auto leading-relaxed"
             style={{ color: "rgba(255,255,255,0.55)" }}
           >
-            We don't just hand you a platform — we implement it. From first
-            configuration through to ongoing support, we're with your school
-            at every stage of the journey.
+            Six structured steps that take your school from first conversation
+            to a fully live, supported platform — with nothing left to chance.
           </p>
         </div>
 
         {/* ══════════════════════════════════════════
-            BENTO GRID — 5 items (odd)
-            Row 1: [Setup col-span-2]         [Customization col-span-1]
-            Row 2: [Data Migration col-span-1] [Training col-span-1]    [Support col-span-1]
-            Row 3: [Full-width timeline strip col-span-3]
-            Mobile: all cards full-width stacked
+            BENTO GRID — 6 items + extras (even, GridX-inspired)
+
+            Row 1: [Step 01 hero — col-span-2]         [Step 02 narrow — col-span-1]
+            Row 2: [Stats strip — col-span-1]          [Step 03 — col-span-1]          [Step 04 — col-span-1]
+            Row 3: [Step 05 — col-span-1]              [Step 06 wide — col-span-2]
+            Row 4: [Full-width CTA timeline — col-span-3]
         ══════════════════════════════════════════ */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-          {/* ── CARD 1: System Setup & Configuration — wide hero (col-span-2) ── */}
+          {/* ══ ROW 1 ══════════════════════════════════════════════════════ */}
+
+          {/* ── STEP 01: Requirements — wide content card (col-span-2) ── */}
           <div
             className="md:col-span-2 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("setup")}
-            {...hp("setup")}
+            style={cs("s1")}
+            {...hp("s1")}
           >
             <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
-              <CardLabel icon={Settings2} label="SYSTEM SETUP & CONFIGURATION" accent="#93c5fd" />
-              <Chip color="#93c5fd">Foundation phase</Chip>
+              <CardLabel icon={ClipboardList} label="STEP 01 — REQUIREMENTS ANALYSIS" accent="#93c5fd" />
+              <Chip color="#93c5fd">Discovery</Chip>
             </div>
 
             <h3 className="text-xl font-semibold text-white mb-2">
-              Built Right from Day One
+              Understanding Your School
             </h3>
             <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Before any staff logs in, we lay the groundwork — configuring your
-              school structure, user roles, academic calendar, and module settings
-              so the platform reflects how your institution actually operates.
-              Nothing generic, nothing to undo later.
+              We start by listening. Our team works directly with your admin and
+              leadership to map your school's structure, workflows, pain points,
+              and goals — before a single setting is touched.
             </p>
 
-            {/* Setup phases on inner surface */}
             <div
               className="grid grid-cols-1 sm:grid-cols-2 gap-px mb-5 overflow-hidden"
               style={innerSurface}
             >
               {[
-                { label: "School structure",    sub: "Departments, classes & year groups" },
-                { label: "User roles & access", sub: "Admin, teacher, parent permissions" },
-                { label: "Academic calendar",   sub: "Terms, holidays & exam periods" },
-                { label: "Module activation",   sub: "Enable only what you need" },
+                { label: "School profile",   sub: "Size, structure & year groups" },
+                { label: "Workflow review",  sub: "How your admin currently operates" },
+                { label: "Pain points",      sub: "What's not working today" },
+                { label: "Success criteria", sub: "What good looks like at go-live" },
+              ].map(({ label, sub }) => (
+                <div key={label} className="p-3">
+                  <div className="text-xs font-semibold text-white mb-0.5">{label}</div>
+                  <div className="text-xs leading-snug" style={{ color: "rgba(255,255,255,0.45)" }}>{sub}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-auto">
+              <StatBox value="1–2 days" label="Workshop duration" />
+              <StatBox value="100%" label="Requirements documented" />
+            </div>
+          </div>
+
+          {/* ── STEP 02: Setup — narrow feature card (col-span-1) ── */}
+          <div
+            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+            style={cs("s2")}
+            {...hp("s2")}
+          >
+            <div className="flex items-start justify-between mb-1">
+              <CardLabel icon={Settings2} label="STEP 02 — SETUP & CUSTOMISATION" accent="#a78bfa" />
+            </div>
+            <Chip color="#a78bfa">Configuration</Chip>
+
+            <h3 className="text-base font-semibold text-white mt-4 mb-2">
+              Built Around You
+            </h3>
+            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
+              Using your requirements as the blueprint, we configure modules,
+              roles, calendar, grading schemes, and templates to match your
+              school from day one.
+            </p>
+
+            <div className="mt-auto">
+              <FeatureRow>Module activation & configuration</FeatureRow>
+              <FeatureRow>User roles & permission setup</FeatureRow>
+              <FeatureRow>Academic calendar & term structure</FeatureRow>
+              <FeatureRow>Custom grading & report templates</FeatureRow>
+            </div>
+          </div>
+
+          {/* ══ ROW 2 ══════════════════════════════════════════════════════ */}
+
+          {/* ── STATS CARD — pure numbers, GridX-style (col-span-1) ── */}
+          <div
+            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col justify-between hover:-translate-y-0.5 transition-transform duration-300"
+            style={{ ...glassStrong }}
+          >
+            <p
+              className="text-xs font-semibold tracking-widest uppercase mb-4"
+              style={{ color: "rgba(255,255,255,0.45)" }}
+            >
+              By the numbers
+            </p>
+
+            <div className="flex flex-col gap-4 flex-1 justify-center">
+              {[
+                { value: "3–6",    unit: "weeks",   label: "Avg. implementation", accent: "#93c5fd" },
+                { value: "< 5",    unit: "days",    label: "System setup time",   accent: "#a78bfa" },
+                { value: "100%",   unit: "",        label: "Data verified pre-launch", accent: "#4ade80" },
+                { value: "24 / 7", unit: "",        label: "Post-launch support", accent: "#fbbf24" },
+              ].map(({ value, unit, label, accent }) => (
+                <div key={label} className="flex items-end justify-between">
+                  <span className="text-xs leading-snug" style={{ color: "rgba(255,255,255,0.5)" }}>
+                    {label}
+                  </span>
+                  <div className="flex items-baseline gap-1 shrink-0 ml-3">
+                    <span className="text-lg font-semibold text-white leading-none">{value}</span>
+                    {unit && (
+                      <span className="text-xs" style={{ color: accent }}>{unit}</span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ── STEP 03: Data Import — narrow feature card (col-span-1) ── */}
+          <div
+            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+            style={cs("s3")}
+            {...hp("s3")}
+          >
+            <div className="flex items-start justify-between mb-1">
+              <CardLabel icon={DatabaseZap} label="STEP 03 — DATA IMPORT" accent="#5eead4" />
+            </div>
+            <Chip color="#5eead4">Migration</Chip>
+
+            <h3 className="text-base font-semibold text-white mt-4 mb-2">
+              Your Records, Moved Safely
+            </h3>
+            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
+              Existing student records, history, and fee data cleaned, mapped,
+              and imported — everything verified before anything goes live.
+            </p>
+
+            <div className="mt-auto">
+              <FeatureRow>CSV, Excel & legacy imports</FeatureRow>
+              <FeatureRow>Data cleaning & deduplication</FeatureRow>
+              <FeatureRow>Pre-import audit report</FeatureRow>
+              <FeatureRow>Rollback safety net</FeatureRow>
+            </div>
+          </div>
+
+          {/* ── STEP 04: Staff Training — narrow feature card (col-span-1) ── */}
+          <div
+            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+            style={cs("s4")}
+            {...hp("s4")}
+          >
+            <div className="flex items-start justify-between mb-1">
+              <CardLabel icon={Users2} label="STEP 04 — STAFF TRAINING" accent="#4ade80" />
+            </div>
+            <Chip color="#4ade80">Onboarding</Chip>
+
+            <h3 className="text-base font-semibold text-white mt-4 mb-2">
+              Confident Before Day One
+            </h3>
+            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
+              Role-specific sessions for admins, teachers, and office staff —
+              each focused only on what they'll actually use.
+            </p>
+
+            <div className="mt-auto">
+              <FeatureRow>Role-segmented training tracks</FeatureRow>
+              <FeatureRow>Live walkthrough & Q&A</FeatureRow>
+              <FeatureRow>Recorded sessions for future hires</FeatureRow>
+              <FeatureRow>Quick-reference guides</FeatureRow>
+            </div>
+          </div>
+
+          {/* ══ ROW 3 ══════════════════════════════════════════════════════ */}
+
+          {/* ── STEP 05: Go-live — narrow (col-span-1) ── */}
+          <div
+            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+            style={cs("s5")}
+            {...hp("s5")}
+          >
+            <div className="flex items-start justify-between mb-1">
+              <CardLabel icon={Rocket} label="STEP 05 — GO-LIVE" accent="#fbbf24" />
+            </div>
+            <Chip color="#fbbf24">Launch day</Chip>
+
+            <h3 className="text-base font-semibold text-white mt-4 mb-2">
+              We're There on Launch Day
+            </h3>
+            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
+              Go-live isn't left to chance. Our team is present — remote or
+              on-site — monitoring the platform in real time as your school
+              switches over.
+            </p>
+
+            <div className="mt-auto">
+              <FeatureRow>Supervised go-live session</FeatureRow>
+              <FeatureRow>Real-time issue monitoring</FeatureRow>
+              <FeatureRow>Staff on-call support</FeatureRow>
+              <FeatureRow>Go-live sign-off checklist</FeatureRow>
+            </div>
+          </div>
+
+          {/* ── STEP 06: Ongoing Support — wide content card (col-span-2) ── */}
+          <div
+            className="md:col-span-2 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+            style={cs("s6")}
+            {...hp("s6")}
+          >
+            <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
+              <CardLabel icon={ShieldCheck} label="STEP 06 — ONGOING SUPPORT" accent="#f87171" />
+              <Chip color="#f87171">Post-launch</Chip>
+            </div>
+
+            <h3 className="text-xl font-semibold text-white mb-2">
+              We Stay After the Switch
+            </h3>
+            <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.6)" }}>
+              Implementation doesn't end at launch. A dedicated support channel,
+              regular platform updates, and a 30-day review ensure your school
+              isn't left to figure things out alone — and that the platform
+              keeps improving as your needs evolve.
+            </p>
+
+            <div
+              className="grid grid-cols-1 sm:grid-cols-3 gap-px mb-5 overflow-hidden"
+              style={innerSurface}
+            >
+              {[
+                { label: "Post-launch channel", sub: "Dedicated line for issues & changes" },
+                { label: "Platform updates",    sub: "Fixes & new features included" },
+                { label: "30-day review",       sub: "Formal check-in & optimisation" },
               ].map(({ label, sub }) => (
                 <div key={label} className="p-3">
                   <div className="text-xs font-semibold text-white mb-0.5">{label}</div>
@@ -221,230 +377,105 @@ export default function OurServicesSection() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-auto">
-              <StatBox value="< 5 days" label="Avg. setup time" />
-              <StatBox value="Zero" label="Downtime" />
-              <StatBox value="Dedicated" label="Setup engineer" />
-            </div>
-          </div>
-
-          {/* ── CARD 2: Customization — narrow (col-span-1) ── */}
-          <div
-            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("custom")}
-            {...hp("custom")}
-          >
-            <div className="flex items-start justify-between mb-1">
-              <CardLabel icon={SlidersHorizontal} label="CUSTOMISATION" accent="#a78bfa" />
-            </div>
-            <Chip color="#a78bfa">School-specific</Chip>
-
-            <h3 className="text-base font-semibold text-white mt-4 mb-2">
-              Tailored to Your Requirements
-            </h3>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Every school runs differently. We configure grading schemes,
-              report card templates, fee structures, and workflows to match
-              exactly how your institution works — not the other way around.
-            </p>
-
-            <div className="mt-auto">
-              <FeatureRow>Custom grading & report templates</FeatureRow>
-              <FeatureRow>School-specific fee structures</FeatureRow>
-              <FeatureRow>Branded parent portal</FeatureRow>
-              <FeatureRow>Custom fields & data points</FeatureRow>
-            </div>
-          </div>
-
-          {/* ── CARD 3: Data Migration — narrow (col-span-1) ── */}
-          <div
-            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("migration")}
-            {...hp("migration")}
-          >
-            <div className="flex items-start justify-between mb-1">
-              <CardLabel icon={DatabaseZap} label="DATA MIGRATION" accent="#5eead4" />
-            </div>
-            <Chip color="#5eead4">Existing records</Chip>
-
-            <h3 className="text-base font-semibold text-white mt-4 mb-2">
-              Your History, Moved Safely
-            </h3>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Student records, academic history, and fee data transferred from
-              your existing system — cleaned, mapped, and verified before
-              anything goes live.
-            </p>
-
-            <div className="mt-auto">
-              <FeatureRow>CSV, Excel & legacy system imports</FeatureRow>
-              <FeatureRow>Data cleaning & deduplication</FeatureRow>
-              <FeatureRow>Pre-migration audit report</FeatureRow>
-              <FeatureRow>Rollback safety net</FeatureRow>
-            </div>
-          </div>
-
-          {/* ── CARD 4: Staff Training & Onboarding — narrow (col-span-1) ── */}
-          <div
-            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("training")}
-            {...hp("training")}
-          >
-            <div className="flex items-start justify-between mb-1">
-              <CardLabel icon={Users2} label="STAFF TRAINING & ONBOARDING" accent="#4ade80" />
-            </div>
-            <Chip color="#4ade80">Role-based</Chip>
-
-            <h3 className="text-base font-semibold text-white mt-4 mb-2">
-              Confident from the First Login
-            </h3>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Separate training tracks for admins, teachers, and office staff —
-              each focused on only the modules they'll actually use, so no one
-              is overwhelmed on go-live day.
-            </p>
-
-            <div className="mt-auto">
-              <FeatureRow>Role-segmented training sessions</FeatureRow>
-              <FeatureRow>Live walkthrough & Q&A</FeatureRow>
-              <FeatureRow>Recorded sessions for new hires</FeatureRow>
-              <FeatureRow>Quick-reference user guides</FeatureRow>
-            </div>
-          </div>
-
-          {/* ── CARD 5: Ongoing Technical Support — narrow (col-span-1) ── */}
-          <div
-            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("support")}
-            {...hp("support")}
-          >
-            <div className="flex items-start justify-between mb-1">
-              <CardLabel icon={LifeBuoy} label="ONGOING TECHNICAL SUPPORT" accent="#fbbf24" />
-            </div>
-            <Chip color="#fbbf24">Post-launch</Chip>
-
-            <h3 className="text-base font-semibold text-white mt-4 mb-2">
-              We Stay After Go-Live
-            </h3>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Implementation doesn't end at launch. Our support team handles
-              issues, updates, and change requests so your staff can focus on
-              teaching — not troubleshooting.
-            </p>
-
-            <div className="mb-4">
-              <FeatureRow>Dedicated support channel</FeatureRow>
-              <FeatureRow>Bug fixes & platform updates</FeatureRow>
-              <FeatureRow>Change request handling</FeatureRow>
-              <FeatureRow>Regular check-in calls</FeatureRow>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-auto">
               <StatBox value="24/7" label="Support access" />
               <StatBox value="< 4h" label="Response SLA" />
+              <StatBox value="30 days" label="Post-launch review" />
             </div>
           </div>
 
-          {/* ── ROW 3: Full-width implementation timeline (col-span-3) ──
-               Odd count = this strip closes the grid cleanly             ── */}
+          {/* ══ ROW 4: Full-width CTA + timeline ══════════════════════════ */}
           <div
             className="md:col-span-3 rounded-2xl p-5 md:p-6 hover:-translate-y-0.5 transition-transform duration-300"
             style={glassStrong}
           >
             {/* Strip header */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
               <div>
                 <p
                   className="text-xs font-semibold tracking-widest uppercase mb-1"
                   style={{ color: "rgba(255,255,255,0.45)" }}
                 >
-                  Implementation journey
+                  The full journey
                 </p>
                 <h3 className="text-base font-semibold text-white">
-                  From Contract to Fully Live — Typically 3–6 Weeks
+                  Discovery Call to Fully Live — Typically 3–6 Weeks
                 </h3>
               </div>
               <button
-                className="shrink-0 self-start sm:self-auto px-5 py-2 rounded-full text-xs font-semibold transition-all duration-200 hover:opacity-90 active:scale-95"
+                className="shrink-0 self-start sm:self-auto flex items-center gap-2 px-5 py-2 rounded-full text-xs font-semibold transition-all duration-200 hover:opacity-90 active:scale-95"
                 style={{
                   background: "rgba(147,197,253,0.18)",
                   border: "1px solid rgba(147,197,253,0.35)",
                   color: "#93c5fd",
                 }}
               >
-                Start your implementation →
+                Start your journey <ArrowRight size={12} />
               </button>
             </div>
 
-            {/* Timeline
-                 Mobile:  vertical stack — circle + connector line + label side by side
-                 Desktop: horizontal row across all 5 steps with connecting lines          */}
-            <div>
-              {/* ── DESKTOP: horizontal (hidden on mobile) ── */}
-              <div className="hidden md:grid md:grid-cols-5 gap-0">
-                {[
-                  { n: "01", title: "Setup",      sub: "School structure & roles",  accent: "#93c5fd" },
-                  { n: "02", title: "Customise",  sub: "Templates & workflows",     accent: "#a78bfa" },
-                  { n: "03", title: "Migrate",    sub: "Transfer existing records", accent: "#5eead4" },
-                  { n: "04", title: "Train",      sub: "Staff onboarding sessions", accent: "#4ade80" },
-                  { n: "05", title: "Support",    sub: "Ongoing post-launch care",  accent: "#fbbf24" },
-                ].map(({ n, title, sub, accent }, i, arr) => (
-                  <div key={n} className="flex flex-col items-center">
-                    {/* Circle + connector */}
-                    <div className="flex items-center w-full">
-                      <div
-                        className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 text-xs font-bold"
-                        style={{ background: `${accent}20`, border: `2px solid ${accent}55`, color: accent }}
-                      >
-                        {n}
-                      </div>
-                      {i < arr.length - 1 && (
-                        <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.1)" }} />
-                      )}
+            {/* ── DESKTOP timeline ── */}
+            <div className="hidden md:grid md:grid-cols-6 gap-0 mb-6">
+              {[
+                { n: "01", title: "Requirements", sub: "Discovery",      accent: "#93c5fd" },
+                { n: "02", title: "Setup",         sub: "Configure",     accent: "#a78bfa" },
+                { n: "03", title: "Data import",   sub: "Migrate",       accent: "#5eead4" },
+                { n: "04", title: "Training",      sub: "Onboard",       accent: "#4ade80" },
+                { n: "05", title: "Go-live",       sub: "Launch",        accent: "#fbbf24" },
+                { n: "06", title: "Support",       sub: "Post-launch",   accent: "#f87171" },
+              ].map(({ n, title, sub, accent }, i, arr) => (
+                <div key={n} className="flex flex-col items-center">
+                  <div className="flex items-center w-full">
+                    <div
+                      className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 text-xs font-bold"
+                      style={{ background: `${accent}20`, border: `2px solid ${accent}55`, color: accent }}
+                    >
+                      {n}
                     </div>
-                    {/* Label */}
-                    <div className="text-center mt-3 px-2 w-full">
-                      <div className="text-xs font-semibold text-white leading-tight">{title}</div>
-                      <div className="text-xs mt-0.5 leading-snug" style={{ color: "rgba(255,255,255,0.45)" }}>{sub}</div>
-                    </div>
+                    {i < arr.length - 1 && (
+                      <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.1)" }} />
+                    )}
                   </div>
-                ))}
-              </div>
-
-              {/* ── MOBILE: vertical stack (hidden on md+) ── */}
-              <div className="flex flex-col md:hidden gap-0">
-                {[
-                  { n: "01", title: "Setup",      sub: "School structure & roles",  accent: "#93c5fd" },
-                  { n: "02", title: "Customise",  sub: "Templates & workflows",     accent: "#a78bfa" },
-                  { n: "03", title: "Migrate",    sub: "Transfer existing records", accent: "#5eead4" },
-                  { n: "04", title: "Train",      sub: "Staff onboarding sessions", accent: "#4ade80" },
-                  { n: "05", title: "Support",    sub: "Ongoing post-launch care",  accent: "#fbbf24" },
-                ].map(({ n, title, sub, accent }, i, arr) => (
-                  <div key={n} className="flex items-stretch gap-3">
-                    {/* Left column: circle + vertical line */}
-                    <div className="flex flex-col items-center">
-                      <div
-                        className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-xs font-bold"
-                        style={{ background: `${accent}20`, border: `2px solid ${accent}55`, color: accent }}
-                      >
-                        {n}
-                      </div>
-                      {i < arr.length - 1 && (
-                        <div className="flex-1 w-px my-1" style={{ background: "rgba(255,255,255,0.1)", minHeight: 20 }} />
-                      )}
-                    </div>
-                    {/* Right column: text */}
-                    <div className={`flex flex-col justify-start ${i < arr.length - 1 ? "pb-4" : ""}`}>
-                      <div className="text-xs font-semibold text-white leading-tight pt-1.5">{title}</div>
-                      <div className="text-xs mt-0.5 leading-snug" style={{ color: "rgba(255,255,255,0.45)" }}>{sub}</div>
-                    </div>
+                  <div className="text-center mt-3 px-1 w-full">
+                    <div className="text-xs font-semibold text-white leading-tight">{title}</div>
+                    <div className="text-xs mt-0.5 leading-snug" style={{ color: "rgba(255,255,255,0.45)" }}>{sub}</div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
 
-            {/* Checklist row — visible below timeline */}
+            {/* ── MOBILE timeline: vertical stack ── */}
+            <div className="flex flex-col md:hidden gap-0 mb-6">
+              {[
+                { n: "01", title: "Requirements", sub: "Discovery",      accent: "#93c5fd" },
+                { n: "02", title: "Setup",         sub: "Configure",     accent: "#a78bfa" },
+                { n: "03", title: "Data import",   sub: "Migrate",       accent: "#5eead4" },
+                { n: "04", title: "Training",      sub: "Onboard",       accent: "#4ade80" },
+                { n: "05", title: "Go-live",       sub: "Launch",        accent: "#fbbf24" },
+                { n: "06", title: "Support",       sub: "Post-launch",   accent: "#f87171" },
+              ].map(({ n, title, sub, accent }, i, arr) => (
+                <div key={n} className="flex items-stretch gap-3">
+                  <div className="flex flex-col items-center">
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-xs font-bold"
+                      style={{ background: `${accent}20`, border: `2px solid ${accent}55`, color: accent }}
+                    >
+                      {n}
+                    </div>
+                    {i < arr.length - 1 && (
+                      <div className="flex-1 w-px my-1" style={{ background: "rgba(255,255,255,0.1)", minHeight: 20 }} />
+                    )}
+                  </div>
+                  <div className={`flex flex-col justify-start ${i < arr.length - 1 ? "pb-4" : ""}`}>
+                    <div className="text-xs font-semibold text-white leading-tight pt-1.5">{title}</div>
+                    <div className="text-xs mt-0.5 leading-snug" style={{ color: "rgba(255,255,255,0.45)" }}>{sub}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Checklist row */}
             <div
-              className="flex flex-wrap gap-3 mt-5 pt-4"
+              className="flex flex-wrap gap-x-5 gap-y-2 pt-4"
               style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
             >
               {[
@@ -452,6 +483,7 @@ export default function OurServicesSection() {
                 "Weekly progress updates",
                 "Go-live sign-off checklist",
                 "30-day post-launch review",
+                "No disruption to school operations",
               ].map((item) => (
                 <div key={item} className="flex items-center gap-1.5">
                   <CheckCircle2 size={12} style={{ color: "#4ade80", flexShrink: 0 }} />
