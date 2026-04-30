@@ -306,7 +306,7 @@ const Tech = () => {
                 </div>
 
                 {/* Notifications - Narrow */}
-                <div className="md:col-span-1"
+                <div className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
                   style={cs("notif")}
                   {...hp("notif")}
                 >

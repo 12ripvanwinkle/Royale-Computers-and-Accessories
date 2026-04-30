@@ -8,6 +8,7 @@ import Modules from '../../Aspects/school/Modules'
 import Services from '../../Aspects/school/Services'
 import HowItWorks from '../../Aspects/school/HowItWorks'
 import Tech from '../../Aspects/school/Tech'
+import WhyChooseUs from '../../Aspects/school/WhyChooseUs'
 
 
 
@@ -81,6 +82,9 @@ const School = () => {
 
             {/* Tech integrations */}
             <Tech />
+
+            {/* Why Choose Us */}
+            <WhyChooseUs />
 
             {/* Holder */}
             {/* <Holder /> */}
