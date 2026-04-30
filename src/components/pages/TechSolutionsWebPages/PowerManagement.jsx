@@ -7,6 +7,7 @@ import SystemTypes from '../../Aspects/power-management/SystemTypes'
 import Benefits from '../../Aspects/power-management/Benefits'
 import Services from '../../Aspects/power-management/Services'
 import HowItWorks from '../../Aspects/power-management/HowItWorks'
+import FAQSection from '../../Aspects/Faqs/FAQs'
 
 const PowerManagement = () => {
   return (
@@ -77,6 +78,9 @@ const PowerManagement = () => {
 
             {/* How It Works */}
             <HowItWorks />
+            
+            {/* FAQs */}
+            <FAQSection />
 
             {/* Contact us */}
             <Contact />

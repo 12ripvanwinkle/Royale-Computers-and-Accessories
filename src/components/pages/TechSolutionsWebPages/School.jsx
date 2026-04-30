@@ -9,6 +9,7 @@ import Services from '../../Aspects/school/Services'
 import HowItWorks from '../../Aspects/school/HowItWorks'
 import Tech from '../../Aspects/school/Tech'
 import WhyChooseUs from '../../Aspects/school/WhyChooseUs'
+import FAQSection from '../../Aspects/Faqs/FAQs'
 
 
 
@@ -85,6 +86,15 @@ const School = () => {
 
             {/* Why Choose Us */}
             <WhyChooseUs />
+
+            {/* FAQs */}
+            <FAQSection />
+
+            {/* Contact us */}
+            <Contact />
+
+            {/* Footer */}
+            <Footer />
 
             {/* Holder */}
             {/* <Holder /> */}

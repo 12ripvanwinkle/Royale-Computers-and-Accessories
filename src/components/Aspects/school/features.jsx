@@ -133,7 +133,7 @@ const Features = () => {
                         ))}
                     </div>
 
-                    <div className="flex gap-3 mt-auto">
+                    <div className="flex gap-3 mt-auto ">
                         <StatBox value="∞" label="Student records" />
                         <StatBox value="GDPR" label="Compliant" />
                         <StatBox value="Full" label="Audit trail" />

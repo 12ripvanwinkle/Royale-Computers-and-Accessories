@@ -7,6 +7,7 @@ import TypesOfSecurity from '../../Aspects/Network-security/TypesOfSecurity'
 import Benefits from '../../Aspects/Network-security/Benefits'
 import Services from '../../Aspects/Network-security/Services'
 import HowItWorks from '../../Aspects/Network-security/HowItWorks'
+import FAQSection from '../../Aspects/Faqs/FAQs'
 
 const NetworkSecurity = () => {
   return (
@@ -77,6 +78,9 @@ const NetworkSecurity = () => {
 
             {/* How It Works */}
             <HowItWorks />
+
+            {/* FAQs */}
+            <FAQSection />
 
             {/* Contact Us */}
             <Contact />

@@ -7,6 +7,7 @@ import Types from '../../Aspects/digital-signage/Types'
 import HowItWorks from '../../Aspects/digital-signage/HowItWorks'
 import IntegrationTech from '../../Aspects/digital-signage/IntegrationTech'
 import TrustUs from '../../Aspects/digital-signage/TrustUs'
+import FAQSection from '../../Aspects/Faqs/FAQs'
 
 const DigitalSignage = () => {
   return (
@@ -73,6 +74,9 @@ const DigitalSignage = () => {
 
             {/* Why Choose us */}
             <TrustUs />
+
+            {/* FAQs */}
+            <FAQSection />
 
             {/* Contact us section */}
             <Contact />

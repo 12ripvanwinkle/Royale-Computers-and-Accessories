@@ -5,8 +5,8 @@ import Footer from '../../sections/Footer'
 import Features from '../../Aspects/CRM/Features'
 import Modules from '../../Aspects/CRM/Modules'
 import Services from '../../Aspects/CRM/Services'
+import FAQSection from '../../Aspects/Faqs/FAQs'
 // import Holder from '../../Holder'
-
 
 const CRM = () => {
   return (
@@ -76,7 +76,7 @@ const CRM = () => {
             {/* <Holder /> */}
 
             {/* FAQS */}
-            
+            <FAQSection />
 
             {/* Contact */}
             <Contact />
