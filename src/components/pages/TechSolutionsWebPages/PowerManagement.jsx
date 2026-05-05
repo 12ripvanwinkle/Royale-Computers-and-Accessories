@@ -4,9 +4,6 @@ import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
 import Features from '../../Aspects/power-management/Features'
 import SystemTypes from '../../Aspects/power-management/SystemTypes'
-import Benefits from '../../Aspects/power-management/Benefits'
-import Services from '../../Aspects/power-management/Services'
-import HowItWorks from '../../Aspects/power-management/HowItWorks'
 import FAQSection from '../../Aspects/Faqs/FAQs'
 
 const PowerManagement = () => {
@@ -70,14 +67,15 @@ const PowerManagement = () => {
             {/* Types of Systems */}
             <SystemTypes />
 
+
             {/* Benefits */}
-            <Benefits />
+            {/* <Benefits /> */}
 
             {/* Services */}
-            <Services />
+            {/* <Services /> */}
 
             {/* How It Works */}
-            <HowItWorks />
+            {/* <HowItWorks /> */}
             
             {/* FAQs */}
             <FAQSection />

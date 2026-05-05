@@ -39,7 +39,7 @@ const CCTV = () => {
         </button>
 
         {/* Hero image */}
-        <div className="w-full max-w-5xl rounded-2xl overflow-hidden ml-10"
+        <div className="w-full max-w-5xl rounded-2xl overflow-hidden ml-1"
           style={{
             aspectRatio: "16/9",
             border: "1px solid rgba(255,255,255,0.15)",
