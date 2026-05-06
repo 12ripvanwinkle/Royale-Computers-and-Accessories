@@ -399,3 +399,44 @@ export function GeneratorMockup() {
         </div>
     )
 }
+
+// Services
+export function Row({children, accent = "#4ade80"}) {
+    return (
+        <div className="flex items-center gap-2 py-2" style={{borderBottom: "1px solid rgba(255,255,255,0.08)"}}>
+          <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: accent }} />
+          <span className="text-xs leading-snug" style={{ color: "rgba(255,255,255,0.75)" }}>{children}</span>
+        </div>
+    )
+}
+
+export function Stat({value, label}) {
+    return (
+        <div className="rounded-xl px-3 py-2.5 text-center w-full" style={{background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)"}}>
+            <div className="text-base font-semibold text-white leading-tight">{value}</div>
+            <div className="text-xs mt-0.5 leading-snug" style={{ color: "rgba(255,255,255,0.45)" }}>{label}</div>
+        </div>
+    )
+}
+
+export function Label({icon: I, label, accent}) {
+    return (
+        <div className="flex items-center gap-2 mb-3 min-w-0">
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ background: `${accent}18`, color: accent, border: `1px solid ${accent}30` }}><I size={16} /></div>
+          <span className="text-xs font-medium tracking-wide leading-tight" style={{ color: "rgba(255,255,255,0.45)" }}>{label}</span>
+        </div>
+    )
+}
+
+export function InnerGrid({items, cols = 2}) {
+    return (
+        <div className={`grid grid-cols-1 ${cols === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2"} gap-px mb-5 overflow-hidden`} style={innerSurface}>
+            {items.map(({ label, sub }) => (
+                <div key={label} className="p-3">
+                <div className="text-xs font-semibold text-white mb-0.5">{label}</div>
+                <div className="text-xs leading-snug" style={{ color: "rgba(255,255,255,0.45)" }}>{sub}</div>
+                </div>
+            ))}
+        </div>
+    )
+}
