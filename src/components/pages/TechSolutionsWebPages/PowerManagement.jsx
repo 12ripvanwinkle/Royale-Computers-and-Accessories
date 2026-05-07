@@ -9,6 +9,10 @@ import PowerServicesSection from '../../Holder'
 import Services from '../../Aspects/power-management/Services'
 import HowItWorksSection from '../../Holder'
 import HowItWorks from '../../Aspects/power-management/HowItWorks'
+import TechIntegrationSection from '../../Holder'
+import TechIntegration from '../../Aspects/power-management/TechIntegration'
+import WhyChooseUsSection from '../../Holder'
+import WhyChooseUs from '../../Aspects/power-management/WhyChooseUs'
 
 const PowerManagement = () => {
   return (
@@ -74,9 +78,14 @@ const PowerManagement = () => {
             {/* Services */}
             <Services />
 
-
             {/* How It Works */}
             <HowItWorks />
+
+            {/* Tech Integration */}
+            <TechIntegration />
+
+            {/* Why Choose us */}
+            <WhyChooseUs />
             
             {/* FAQs */}
             <FAQSection />

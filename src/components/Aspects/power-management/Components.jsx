@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {glass, glassHover, glassStrong, innerSurface} from '../CCTV-Holder/CCTVStyles'
 import { phases, alerts,  } from './index';
+import {Star} from 'lucide-react'
 
 
 export function Chip({ children, color = "#93c5fd" }) {
@@ -437,6 +438,46 @@ export function InnerGrid({items, cols = 2}) {
                 <div className="text-xs leading-snug" style={{ color: "rgba(255,255,255,0.45)" }}>{sub}</div>
                 </div>
             ))}
+        </div>
+    )
+}
+
+// Tech Integration Section
+export function IconBubble({icon: I, accent, label}) {
+    return (
+        <div className="flex flex-col items-center gap-2">
+            <div className="w-12 h-12 rounded-2xl flex items-center justify-center"
+                style={{ background: `${accent}15`, border: `1px solid ${accent}30`, color: accent }}
+            >
+                <I size={20} />
+            </div>
+            <span className="text-xs text-center leading-tight" style={{ color: "rgba(255,255,255,0.5)" }}>{label}</span>
+        </div>
+    )
+}
+
+// Why Choose us Function
+export function StarRating({ count = 5 }) {
+    return (
+        <div className="flex items-center gap-0.5">
+            {Array.from({ length: count }).map((_, i) => (
+                <Star key={i} size={11} fill="#fbbf24" style={{ color: "#fbbf24" }} />
+            ))}
+        </div>
+    )
+}
+
+export function Testimonial({quote, name, role}) {
+    return (
+        <div className="rounded-xl p-3" style={innerSurface}>
+            <StarRating />
+            <p className="text-xs leading-relaxed mt-2 mb-2" style={{ color: "rgba(255,255,255,0.62)"}}>
+                "{quote}""
+            </p>
+            <div className="">
+                <span className="text-xs font-semibold text-white">{name}</span>
+                <span className="text-xs ml-1" style={{ color: "rgba(255,255,255,0.38)" }}>· {role}</span>
+            </div>
         </div>
     )
 }

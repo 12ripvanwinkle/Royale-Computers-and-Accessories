@@ -16,7 +16,7 @@ const Services = () => {
 
   const [hovered, setHovered] = useState(null);
   const cs = (id) => (hovered === id ? glassHover : glass);
-  const hp = (id) => ({ onMouseEnter: () => setHovered(id), onMouseLeave: () => setHov(null) });
+  const hp = (id) => ({ onMouseEnter: () => setHovered(id), onMouseLeave: () => setHovered(null) });
 
   return (
     <div className="w-full px-4 md:px-6 py-16 md:py-24" style={{fontFamily: '"Playfair Display", serif', color: "white"}}>
