@@ -1,196 +1,162 @@
 import React, { useState } from 'react'
-import {Chip, Row, Stat, Label, InnerGrid, Testimonial, StarRating} from './Components'
-import {glass, glassHover, glassStrong, innerSurface} from '../CCTV-Holder/CCTVStyles'
+import {Reasons, Testimonials} from './index'
+import { glass, glassHover, glassStrong } from "../CCTV-Holder/CCTVStyles";
 import {
-  ShieldCheck,
-  SlidersHorizontal,
-  Wrench,
-  Activity,
-  TrendingUp,
-  CheckCircle2,
-  Star,
-  Users,
+    ArrowRight, Star, CheckCircle2,
 } from "lucide-react";
 
 const WhyChooseUs = () => {
-    
-  const [hovered, setHovered] = useState(null);
-  const cs = (id) => (hovered === id ? glassHover : glass);
-  const hp = (id) => ({ onMouseEnter: () => setHovered(id), onMouseLeave: () => setHovered(null) });
+
+  const [hovered, setHovered] = useState(null)
 
   return (
-    <div className="w-full px-4 md:px-6 py-16 md:py-24"
-        style={{fontFamily: '"Playfair Display", serif', color: "white"}}
+    <section className="w-full px-4 sm:px-6 md:px-10 lg:px-14 py-14 sm:py-20 md:py-24"
+        style={{color: "white"}}
     >
-        <div className="max-w-5xl mx-auto">
-            
-            <div className="text-center mb-12">
-                <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{color: "rgba(255,255,255,0.45)"}}>
-                    The Difference 
-                </p>
-                <h2 className="text-3xl md:text-5xl font-light text-white leading-tight mb-4">
-                    Why Choose Us 
-                </h2>
-                <p className="text-sm md:text-base max-w-xl mx-auto leading-relaxed"
-                    style={{color: "rgba(255,255,255,0.55)"}}
+        <div className="max-w-6xl mx-auto flex flex-col gap-4">
+
+            {/* Header */}
+            <div className="text-center mb-6 sm:mb-10">
+                <p className="text-xs font-semibold uppercase tracking-widest mb-3"
+                    style={{color: "rgba(255,255,255,0.35)", letterSpacing: "0.22em"}}
                 >
-                    Power management is critical infrastructure. We bring the expertise, equipment, and long-term commitment that critical systems demand.
+                    The Difference
+                </p>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4"
+                    style={{letterSpacing: "-0.03em", lineHeight: 1.05}}
+                >
+                    Why Choose us. 
+                </h2>
+                <p className="text-sm sm:text-base font-light max-w-md mx-auto leading-relaxed"
+                    style={{color: "rgba(255,255,255,0.45)"}}
+                >
+                    The expertise, equipment, and long-term commitment that critical infrastructure demands.
                 </p>
             </div>
 
-            {/* Bento Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-
-                {/* Expertise */}
-                <div className="md:col-span-2 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-                    style={cs("exp")} {...hp("exp")}
-                >
-                    <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
-                        <Label icon={ShieldCheck} label="EXPERTISE IN CRITICAL POWER SYSTEMS" accent="#93c5fd" />
-                        <Chip color="#93c5fd">Field-proven</Chip>
-                    </div>
-                    
-                    <h3 className="text-xl font-semibold text-white mb-2">
-                        Specialists, Not Generalists
-                    </h3>
-                    <p className="text-sm leading-relaxed mb-5" style={{color: "rgba(255,255,255,0.6)"}}>
-                        Power management is all we do. Our engineers are certified across UPS, generator, PDU, and BMS systems — with hands-on experience in data centres, healthcare, retail, and industrial facilities where power failure is simply not an option.
-                    </p>
-                    <InnerGrid cols={2} items={[
-                        { label: "Certified engineers",     sub: "Across all major power system categories" },
-                        { label: "Multi-sector experience", sub: "Data centres, healthcare, retail, industrial" },
-                        { label: "Standards compliance",    sub: "IEC, ISO 50001, NFPA 110 aligned" },
-                        { label: "200+ deployments",        sub: "From single-site to multi-site estates" },
-                        ]} 
-                    />
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-auto">
-                        <Stat value="200+" label="Systems deployed" />
-                        <Stat value="15+" label="Years experience" />
-                        <Stat value="99.9%" label="Post-install uptime" />
-                    </div>
-                </div>
-
-                {/* Customised */}
-                <div className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-                    style={cs("cust")} {...hp("cust")}
-                >
-                    <div className="flex items-start justify-between mb-1"><Label icon={SlidersHorizontal} label="CUSTOMISED ENERGY SOLUTIONS" accent="#a78bfa" /></div>
-                    <Chip color="#a78bfa">Tailored</Chip>
-
-                    <h3 className="text-base font-semibold text-white mt-4 mb-2">
-                        No Off-the-Shelf Answers 
-                    </h3>
-                    <p className="text-sm leading-relaxed mb-4" style={{color: "rgba(255,255,255,0.6)"}}>
-                        Every site has a different load profile, layout, and growth plan. We design solutions around your specific requirements — not a product catalogue.
-                    </p>
-
-                    <div className="mt-auto">
-                        <Row accent="#a78bfa">Site-specific load analysis</Row>
-                        <Row accent="#a78bfa">Equipment chosen for your needs</Row>
-                        <Row accent="#a78bfa">Phased rollout options</Row>
-                        <Row accent="#a78bfa">Budget-aligned design</Row>
-                    </div>
-                </div>
-
-                {/* Reliable */}
-                <div className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-                    style={cs("rel")} {...hp("rel")}
-                >
-                    <div className="flex items-start justify-between mb-1"><Label icon={Wrench} label="RELIABLE EQUIPMENT AND INSTALLATION" accent="#fbbf24" /></div>
-                    <Chip color="#fbbf24">Tier-1 hardware</Chip>
-
-                    <h3 className="text-base font-semibold text-white mt-4 mb-2">
-                        Built to Last, Install to Standard 
-                    </h3>
-                    <p className="text-sm leading-relaxed mb-4" style={{color: "rgba(255,255,255,0.6)"}}>
-                        We source only from proven manufacturers and install to the highest standards — every job is commissioned, tested, and signed off before we leave site.
-                    </p>
-
-                    <div className="mt-auto">
-                        <Row accent="#fbbf24">Tier-1 manufacturer partnerships</Row>
-                        <Row accent="#fbbf24">Full commissioning and testing</Row>
-                        <Row accent="#fbbf24">Signed handover documentation</Row>
-                        <Row accent="#fbbf24">Manufacturer warranty backed</Row>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-auto">
-                        <Stat value="5yr" label="Avg. equipment warranty" />
-                        <Stat value="100%" label="Tested before sign-off" />
-                    </div>
-                </div>
-
-                {/* Monitoring + Scalable */}
-                <div className="md:col-span-2 rounded-2xl p-5 md:p-6 flex-col hover:-translate-y-0.5 transition-transform duration-300"
-                    style={cs("rel")} {...hp("rel")}
-                >
-                    <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
-                        <Label icon={Activity} label="ONGOING MONITORING, SUPPORT AND SCALABILITY" accent="#4ade80" />
-                        <Chip color="#4ade80">Long-term</Chip>
-                    </div>
-
-                    <h3 className="text-xlfont-semibold text-white mb-2">
-                        A Partner, Not Just a Contractor 
-                    </h3>
-                    <p className="text-sm leading-relaxed mb-5" style={{color: "rgba(255,255,255,0.6)"}}>
-                        We stay involved long after installation — monitoring your systems, responding to incidents, and scaling your infrastructure as your business grows. One relationship, every phase of your power journey.
-                    </p>
-
-                    <InnerGrid cols={3} items={[
-                        { label: "24/7 monitoring",    sub: "Live surveillance across all sites" },
-                        { label: "Rapid response",     sub: "Under 4-hour SLA on critical issues" },
-                        { label: "Scalable systems",   sub: "Expand capacity without starting over" },
-                        ]} 
-                    />
-
-                    {/* Actual Testimonials */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
-                        <Testimonial
-                            quote="They stayed on-site until everything was perfect. The monitoring dashboard has been invaluable ever since."
-                            name="James O."
-                            role="Facilities Manager, Nexcore Logistics"
-                        />
-                        <Testimonial
-                            quote="We expanded to three new sites and they scaled our system without any disruption to existing operations."
-                            name="Linda K."
-                            role="Head of Operations, MedPoint Clinics"
-                        />
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-auto">
-                        <Stat value="24/7" label="Remote monitoring" />
-                        <Stat value="< 4h" label="Response SLA" />
-                        <Stat value="Unlimited" label="Sites scalable to" />
-                    </div>
-                </div>
-
-                {/* CTA Strip */}
-                <div className="md:col-span-3 rounded-2xl px-5 md:px-6 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4" style={glassStrong}>
-                    <div>
-                        <div className="flex items-center gap-2 mb-2">
-                            <StarRating />
-                            <span className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>4.9 from 200+ clients</span>
+            {/* Reason Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {Reasons.map(({ id, icon: Icon, color, stat, statLabel, headline, body }) => (
+                    <div
+                    key={id}
+                    className="rounded-2xl p-6 sm:p-7 flex flex-col gap-4 hover:-translate-y-0.5 transition-transform duration-300"
+                    style={hovered === id ? glassHover : glass}
+                    onMouseEnter={() => setHov(id)}
+                    onMouseLeave={() => setHov(null)}
+                    >
+                    {/* Icon + big stat side by side */}
+                    <div className="flex items-center justify-between">
+                        <div
+                        className="w-10 h-10 rounded-xl flex items-center justify-center"
+                        style={{ background: `${color}15`, border: `1px solid ${color}28`, color }}
+                        >
+                        <Icon size={18} strokeWidth={1.75} />
                         </div>
-                        <h3 className="text-base font-semibold text-white">Ready to protect your power infrastructure?</h3>
+                        <div className="text-right">
+                        <div className="text-2xl font-black" style={{ color, lineHeight: 1 }}>{stat}</div>
+                        <div className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>{statLabel}</div>
+                        </div>
                     </div>
-                    <div className="flex flex-col items-start sm:items-end gap-3 shrink-0">
-                        <div className="flex flex-wrap gap-3">
-                            {["Certified engineers", "Free site assessment", "No lock-in contracts"].map(item => (
-                            <div key={item} className="flex items-center gap-1.5">
-                                <CheckCircle2 size={12} style={{ color: "#4ade80", flexShrink: 0 }} />
-                                <span className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>{item}</span>
-                            </div>
+
+                    {/* Text */}
+                    <div>
+                        <h3 className="text-base sm:text-lg font-bold text-white mb-1.5">{headline}</h3>
+                        <p className="text-sm font-light leading-relaxed" style={{ color: "rgba(255,255,255,0.52)" }}>
+                        {body}
+                        </p>
+                    </div>
+                    </div>
+                ))}
+            </div>
+
+            {/* Testimonials strip */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {Testimonials.map(({ quote, name, role, rating }) => (
+                    <div
+                    key={name}
+                    className="rounded-2xl p-5 sm:p-6 flex flex-col gap-3"
+                    style={glass}
+                    >
+                    {/* Stars */}
+                    <div className="flex gap-0.5">
+                        {[...Array(rating)].map((_, i) => (
+                        <Star key={i} size={12} strokeWidth={0} fill="#fbbf24" />
+                        ))}
+                    </div>
+                    {/* Quote */}
+                    <p
+                        className="text-sm font-light leading-relaxed italic flex-1"
+                        style={{ color: "rgba(255,255,255,0.65)" }}
+                    >
+                        "{quote}"
+                    </p>
+                    {/* Attribution */}
+                    <div
+                        className="pt-3 flex items-center gap-2"
+                        style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
+                    >
+                        <div
+                        className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
+                        style={{ background: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.6)" }}
+                        >
+                        {name[0]}
+                        </div>
+                        <div>
+                        <div className="text-xs font-semibold text-white">{name}</div>
+                        <div className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>{role}</div>
+                        </div>
+                    </div>
+                    </div>
+                ))}
+            </div>
+
+            {/* CTA Strip */}
+            <div className="rounded-2xl px-5 sm:px-8 py-5 sm:py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                style={glassStrong}
+            >
+                <div>
+                    {/* Star Ratings */}
+                    <div className="flex items-center gap-2 mb-1.5">
+                        <div className="flex gap-0.5">
+                            {[...Array(5)].map((_, i) => (
+                            <Star key={i} size={12} strokeWidth={0} fill="#fbbf24" />
                             ))}
                         </div>
-                        <button
-                            className="flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 hover:opacity-90 active:scale-95"
-                            style={{ background: "rgba(147,197,253,0.18)", border: "1px solid rgba(147,197,253,0.35)", color: "#93c5fd" }}
-                        >
-                            Book a free assessment
-                        </button>
+                        <span className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>4.9 from 200+ clients</span>
                     </div>
+                    <h3 className="text-sm sm:text-base font-semibold text-white">
+                        Ready to protect your power infrastructure?
+                    </h3>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 shrink-0">
+                    <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+                        {["Free assessment", "Certified engineers", "No lock-in"].map(item => (
+                            <div key={item} className="flex items-center gap-1.5">
+                                <CheckCircle2 size={11} style={{ color: "#4ade80", flexShrink: 0 }} />
+                                <span className="text-xs" style={{ color: "rgba(255,255,255,0.55)" }}>{item}</span>
+                            </div>
+                        ))}
+                    </div>
+                    <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold shrink-0"
+                        style={{ background: "#ff751f", color: "white", transition: "all 0.2s ease" }}
+                        onMouseEnter={e => {
+                            e.currentTarget.style.background = "#ff8c3f";
+                            e.currentTarget.style.boxShadow = "0 6px 20px rgba(255,117,31,0.4)";
+                            e.currentTarget.style.transform = "translateY(-1px)";
+                        }}
+                        onMouseLeave={e => {
+                            e.currentTarget.style.background = "#ff751f";
+                            e.currentTarget.style.boxShadow = "none";
+                            e.currentTarget.style.transform = "translateY(0)";
+                        }}
+                        >
+                        Book a Free Assessment <ArrowRight size={14} strokeWidth={2.5} />
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
   )
 }
 

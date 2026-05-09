@@ -1,307 +1,275 @@
-import { useState } from "react";
-import { Zap, Scale, BatteryCharging, BarChart3, Bell, Wifi, ShieldCheck, Leaf, Activity, CheckCircle2 } from "lucide-react";
-import { glass, glassHover, glassStrong, innerSurface } from "../CCTV-Holder/CCTVStyles";
-import { Chip, FeatureRow, StatBox, CardLabel, EnergyBar, LoadBalance, Alert, UPS } from "./Components";
+import React, { useEffect, useState } from 'react'
+import { Zap, Scale, BatteryCharging, Wifi, ShieldCheck, Activity, ArrowRight } from "lucide-react";
+import { glass, glassHover } from "../CCTV-Holder/CCTVStyles";
+import {Pill, IconBox, EnergyBar, PhaseBar} from './Components'
 
-function InnerGrid({ items }) {
-  const cols = items.length === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2";
-  return (
-    <div
-      className={`grid grid-cols-1 ${cols} gap-px mb-5 overflow-hidden`}
-      style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12 }}
-    >
-      {items.map(({ label, sub }) => (
-        <div key={label} className="p-3">
-          <div className="text-xs font-semibold text-white mb-0.5">{label}</div>
-          <div className="text-xs leading-snug" style={{ color: "rgba(255,255,255,0.45)" }}>{sub}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
+const Features = () => {
 
-export default function KeyFeaturesSection() {
-  const [hov, setHov] = useState(null);
-  const cs  = (id) => (hov === id ? glassHover : glass);
-  const hp  = (id) => ({ onMouseEnter: () => setHov(id), onMouseLeave: () => setHov(null) });
+  const[hover, setHovered] = useState(null);
+  const cs  = (id) => (hover === id ? glassHover : glass);
+  const hp  = (id) => ({ onMouseEnter: () => setHovered(id), onMouseLeave: () => setHovered(null) });
+
+  const [phases, setPhases] = useState([68, 71, 64]);
+  useEffect(() => {
+    const iv = setInterval(() => {
+      setPhases([
+        Math.floor(Math.random() * 20) + 60,
+        Math.floor(Math.random() * 20) + 60,
+        Math.floor(Math.random() * 20) + 58,
+      ]);
+    }, 1200);
+    return () => clearInterval(iv);
+  }, [])
+
+  const phaseColors = ["#93c5fd", "#a78bfa", "#5eead4"];
 
   return (
-    <div
-      className="w-full px-4 md:px-6 py-16 md:py-24"
-      style={{ fontFamily: '"Playfair Display", serif', color: "white" }}
+    <section id="features" className="w-full px-4 sm:px-6 md:px-10 lg:px-14 py-14 sm:py-20 md:py-24"
+      style={{color: "white"}}
     >
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
+        
+        {/* Section Header */}
+        <div className="text-center mb-10 sm:mb-14">
 
-        {/* Section header */}
-        <div className="text-center mb-12">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.45)" }}>
+          <p className="text-xs font-semibold uppercase tracking-widest mb-3"
+            style={{color: "rgba(255,255,255,0.35)", letterSpacing: "0.22em"}}
+          >
             Built-In Intelligence
           </p>
-          <h2 className="text-3xl md:text-5xl font-light text-white leading-tight mb-4">Key Features</h2>
-          <p className="text-sm md:text-base max-w-xl mx-auto leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
-            Every tool you need to monitor, protect, and optimise your electrical infrastructure — from a single circuit to a multi-site operation.
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4"
+            style={{letterSpacing: "-0.03em", lineHeight: 1.05}}
+          >
+            Everything in One Platform
+          </h2>
+          <p className="text-sm sm:text-base font-light max-w-lg mx-auto leading-relaxed"
+            style={{color: "rgba(255,255,255,0.5)"}}
+          >
+            Monitor, protect, and optimise your electrical infrastructure — from a single circuit to a thousand sites.
           </p>
+
         </div>
 
-        {/*
-          4-col bento grid
-          Row 1: [Energy col-2]          [Load col-2]
-          Row 2: [Backup col-1] [Analytics col-1] [Alerts col-2]
-          Row 3: [Remote col-2] [Surge col-1]     [Efficiency col-1]
-          Row 4: [Strip col-4]
-        */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        {/* Bento Grid */}
+        <div className="grid grid-colss-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
 
-          {/* ── Energy Monitoring ── col-span-2 */}
-          <div
-            className="md:col-span-2 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
+          {/* Card 1:  Energy Monitoring */}
+          <div className="sm:col-span-2 md:col-span-2 rounded-2xl p-5 sm:p-6 flex flex-col gap-4 transition-transform duration-300 hover:-translate-y-0.5"
             style={cs("e")} {...hp("e")}
           >
-            <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
-              <CardLabel icon={Zap} label="REAL-TIME ENERGY MONITORING" accent="#4ade80" />
-              <Chip color="#4ade80">Live</Chip>
-            </div>
-            <h3 className="text-xl font-semibold text-white mb-2">Every Circuit. Every Second.</h3>
-            <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Second-by-second power draw tracked across every circuit, zone, and device. Spike detection fires before damage occurs — not after.
-            </p>
-            <InnerGrid items={[
-              { label: "Circuit metering",  sub: "Per-circuit kWh tracking"   },
-              { label: "Spike detection",   sub: "Fires before damage occurs"  },
-              { label: "Trend analysis",    sub: "Historical consumption data" },
-              { label: "Zone mapping",      sub: "Floor-level visibility"      },
-            ]} />
-            <EnergyBar />
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-3">
-              <StatBox value="±0.5%" label="Accuracy" />
-              <StatBox value="1s"    label="Update interval" />
-              <StatBox value="8+"    label="Circuits tracked" />
-            </div>
-          </div>
-
-          {/* ── Load Balancing ── col-span-2 */}
-          <div
-            className="md:col-span-2 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("l")} {...hp("l")}
-          >
-            <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
-              <CardLabel icon={Scale} label="SMART LOAD BALANCING" accent="#93c5fd" />
-              <Chip color="#93c5fd">3-Phase</Chip>
-            </div>
-            <h3 className="text-xl font-semibold text-white mb-2">No Circuit Left Overloaded</h3>
-            <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Intelligent distribution continuously redistributes demand across phases — preventing bottlenecks and extending equipment life without manual intervention.
-            </p>
-            <InnerGrid items={[
-              { label: "3-phase balancing",   sub: "Continuous auto-redistribution" },
-              { label: "Overload prevention", sub: "Threshold-based protection"     },
-              { label: "Demand forecasting",  sub: "AI-assisted prediction"         },
-              { label: "Response time",       sub: "< 200ms reaction"               },
-            ]} />
-            <LoadBalance />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3">
-              <StatBox value="Auto"    label="Redistribution" />
-              <StatBox value="< 200ms" label="Response time"  />
-            </div>
-          </div>
-
-          {/* ── Backup Power ── col-span-1 */}
-          <div
-            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("b")} {...hp("b")}
-          >
-            <div className="flex items-start justify-between mb-1">
-              <CardLabel icon={BatteryCharging} label="BACKUP POWER" accent="#5eead4" />
-            </div>
-            <Chip color="#5eead4">UPS &amp; Gen</Chip>
-            <h3 className="text-base font-semibold text-white mt-4 mb-2">Power That Never Stops</h3>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Automatic failover to UPS or generator in under 20ms. Runtime estimates update live so you always know how long you have.
-            </p>
-            <UPS />
-            <div className="mt-auto">
-              <FeatureRow accent="#5eead4">Automatic failover &lt; 20ms</FeatureRow>
-              <FeatureRow accent="#5eead4">Live runtime estimation</FeatureRow>
-              <FeatureRow accent="#5eead4">Generator integration</FeatureRow>
-              <FeatureRow accent="#5eead4">Battery health monitoring</FeatureRow>
-            </div>
-          </div>
-
-          {/* ── Analytics ── col-span-1 */}
-          <div
-            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("an")} {...hp("an")}
-          >
-            <div className="flex items-start justify-between mb-1">
-              <CardLabel icon={BarChart3} label="POWER ANALYTICS" accent="#fbbf24" />
-            </div>
-            <Chip color="#fbbf24">Reporting</Chip>
-            <h3 className="text-base font-semibold text-white mt-4 mb-2">Data That Drives Decisions</h3>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
-              24-month rolling data with trend charts, cost breakdowns, and exportable reports — built for both engineers and management.
-            </p>
-            <div className="mt-auto">
-              <FeatureRow accent="#fbbf24">24-month data retention</FeatureRow>
-              <FeatureRow accent="#fbbf24">Cost breakdown by zone</FeatureRow>
-              <FeatureRow accent="#fbbf24">Trend &amp; forecast charts</FeatureRow>
-              <FeatureRow accent="#fbbf24">PDF &amp; CSV export</FeatureRow>
-            </div>
-          </div>
-
-          {/* ── Automated Alerts ── col-span-2 */}
-          <div
-            className="md:col-span-2 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("al")} {...hp("al")}
-          >
-            <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
-              <CardLabel icon={Bell} label="AUTOMATED ALERTS" accent="#f87171" />
-              <Chip color="#f87171">Real-time</Chip>
-            </div>
-            <h3 className="text-xl font-semibold text-white mb-2">Know Before It Becomes a Problem</h3>
-            <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Threshold-based triggers fire the moment something deviates — voltage spikes, overloads, or failed failovers — delivered by SMS, email, or dashboard before damage occurs.
-            </p>
-            <InnerGrid items={[
-              { label: "Voltage spike alerts", sub: "Fires within 1 second"      },
-              { label: "Overload warnings",    sub: "Configurable thresholds"    },
-              { label: "Failover notifications",sub: "UPS & generator events"    },
-            ]} />
-            <Alert />
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-3">
-              <StatBox value="< 1s"       label="Alert latency" />
-              <StatBox value="SMS + Email" label="Channels"      />
-              <StatBox value="Custom"      label="Thresholds"    />
-            </div>
-          </div>
-
-          {/* ── Remote Monitoring ── col-span-2 */}
-          <div
-            className="md:col-span-2 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("r")} {...hp("r")}
-          >
-            <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
-              <CardLabel icon={Wifi} label="REMOTE MONITORING & CONTROL" accent="#a78bfa" />
-              <Chip color="#a78bfa">Multi-site</Chip>
-            </div>
-            <h3 className="text-xl font-semibold text-white mb-2">All Sites. One Dashboard.</h3>
-            <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Manage every location from a single cloud interface — view live status, push configuration changes, and respond to incidents without stepping on site.
-            </p>
-            <InnerGrid items={[
-              { label: "Live site status", sub: "All locations in one view"  },
-              { label: "Remote control",   sub: "Circuit on/off & scheduling"},
-              { label: "Incident response",sub: "Act without being on-site"  },
-              { label: "Config push",      sub: "Update thresholds remotely" },
-            ]} />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-auto">
-              <StatBox value="Unlimited" label="Sites supported"   />
-              <StatBox value="99.9%"     label="Dashboard uptime"  />
-            </div>
-          </div>
-
-          {/* ── Surge Protection ── col-span-1 */}
-          <div
-            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("s")} {...hp("s")}
-          >
-            <div className="flex items-start justify-between mb-1">
-              <CardLabel icon={ShieldCheck} label="SURGE PROTECTION" accent="#f87171" />
-            </div>
-            <Chip color="#f87171">TVSS</Chip>
-            <h3 className="text-base font-semibold text-white mt-4 mb-2">Every Device Protected</h3>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Multi-stage transient voltage suppressors guard every connected device. Every blocked event is logged with timestamp and severity.
-            </p>
-            <div className="mt-auto">
-              <FeatureRow accent="#f87171">Multi-stage TVSS</FeatureRow>
-              <FeatureRow accent="#f87171">±1% voltage regulation</FeatureRow>
-              <FeatureRow accent="#f87171">Event logging &amp; history</FeatureRow>
-              <FeatureRow accent="#f87171">Equipment warranty cover</FeatureRow>
-            </div>
-          </div>
-
-          {/* ── Energy Efficiency ── col-span-1 */}
-          <div
-            className="md:col-span-1 rounded-2xl p-5 md:p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300"
-            style={cs("ef")} {...hp("ef")}
-          >
-            <div className="flex items-start justify-between mb-1">
-              <CardLabel icon={Leaf} label="ENERGY EFFICIENCY" accent="#4ade80" />
-            </div>
-            <Chip color="#4ade80">AI-assisted</Chip>
-            <h3 className="text-base font-semibold text-white mt-4 mb-2">Less Waste. Lower Bills.</h3>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Continuous analysis identifies idle loads, inefficient scheduling, and waste patterns — with actionable recommendations to cut spend.
-            </p>
-            <div className="mb-4">
-              <FeatureRow accent="#4ade80">Idle load detection</FeatureRow>
-              <FeatureRow accent="#4ade80">Schedule optimisation</FeatureRow>
-              <FeatureRow accent="#4ade80">PUE benchmarking</FeatureRow>
-              <FeatureRow accent="#4ade80">Savings projections</FeatureRow>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-auto">
-              <StatBox value="−40%" label="Avg. saving"  />
-              <StatBox value="Live"  label="PUE tracking" />
-            </div>
-          </div>
-
-          {/* ── Full-width spec strip ── col-span-4 */}
-          <div className="md:col-span-4 rounded-2xl p-5 md:p-6" style={glassStrong}>
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
-              <div>
-                <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "rgba(255,255,255,0.45)" }}>
-                  Technical specifications
-                </p>
-                <h3 className="text-base font-semibold text-white">Enterprise-Grade. Field-Proven.</h3>
+            <div className="flex items-start justify-between gap-2">
+              <div className="flex items-center gap-2.5">
+                <IconBox icon={Zap} color="#4ade80" />
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.35)", letterSpacing: "0.15em" }}>Real-Time</p>
+                  <h3 className="text-base sm:text-lg font-bold text-white leading-tight">Energy Monitoring</h3>
+                </div>
               </div>
-              <button
-                className="shrink-0 self-start sm:self-auto flex items-center gap-2 px-5 py-2 rounded-full text-xs font-semibold hover:opacity-90 active:scale-95 transition-all duration-200"
-                style={{ background: "rgba(74,222,128,0.15)", border: "1px solid rgba(74,222,128,0.3)", color: "#4ade80" }}
-              >
-                <Activity size={12} /> Request a datasheet
-              </button>
+              <Pill color="#4ade80">Live</Pill>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-              {[
-                { label: "Monitoring resolution", value: "1-second intervals",    accent: "#4ade80" },
-                { label: "Measurement accuracy",  value: "±0.5% full scale",      accent: "#93c5fd" },
-                { label: "Failover speed",        value: "< 20ms automatic",      accent: "#5eead4" },
-                { label: "Alert latency",         value: "< 1 second",            accent: "#f87171" },
-                { label: "Dashboard uptime",      value: "99.9% SLA",             accent: "#fbbf24" },
-                { label: "Data retention",        value: "24 months rolling",     accent: "#a78bfa" },
-                { label: "Protocol support",      value: "Modbus, BACnet, SNMP",  accent: "#93c5fd" },
-                { label: "Deployment",            value: "Cloud + on-premise",    accent: "#4ade80" },
-              ].map(({ label, value, accent }) => (
-                <div
-                  key={label}
-                  className="rounded-xl p-3"
-                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
-                >
-                  <div className="text-xs leading-snug mb-1" style={{ color: "rgba(255,255,255,0.4)" }}>{label}</div>
-                  <div className="text-xs font-semibold leading-snug" style={{ color: accent }}>{value}</div>
+            <p className="text-sm font-light leading-relaxed" style={{color: "rgba(255,255,255,0.55)"}}>
+              Per-circuit kWh tracking with spike detection that fires <em>before</em> damage occurs — not after.
+            </p>
+
+            {/* 3 quick stats inline */}
+            <div className="flex items-center gap-4 flex-wrap">
+              {[["±0.5%", "Accuracy"], ["1s", "Update interval"], ["8+", "Circuits"]].map(([val, lbl]) => (
+                <div key={lbl}>
+                  <div className="text-base font-bold text-white">{val}</div>
+                  <div className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>{lbl}</div>
                 </div>
               ))}
             </div>
 
-            <div className="flex flex-wrap gap-x-5 gap-y-2 pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+            <EnergyBar />
+          </div>
+
+          {/* Card 2: Load Balancing */}
+          <div className="sm:col-span-2 md:col-span-2 rounded-2xl p-5 sm:p-6 flex flex-col gap-4 transition-transform duration-300 hover:-translate-y-0.5"
+            style={cs("l")} {...hp("l")}
+          >
+
+            <div className="flex items-start justify-between gap-2">
+
+              <div className="flex items-center gap-2 5">
+                <IconBox icon={Scale} color="#93c5fd" />
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.35)", letterSpacing: "0.15em" }}>Smart</p>
+                  <h3 className="text-base sm:text-lg font-bold text-white leading-tight">Load Balancing</h3>
+                </div>
+              </div>
+              <Pill color="#93c5fd">3-Phase</Pill>
+
+            </div>
+
+            <p className="text-sm font-light leading-relaxed" style={{color: "rgba(255,255,255,0.55)"}}>
+              Demand is continuously redistributed across phases — preventing bottlenecks and extending equipment life without manual intervention.
+            </p>
+
+            {/* Live Phase Bars */}
+            <div className="rounded-xl p-3 flex flex-col gap-3 mt-auto"
+              style={{background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)"}}
+            >
+
+              <div className="flex items-center justify-between">
+                <span className="text-xs" style={{ color: "rgba(255,255,255,0.3)", fontFamily: "monospace" }}>3-phase-monitor</span>
+                <Pill color="#93c5fd">Balanced</Pill>
+              </div>
+              {["Phase A", "Phase B", "Phase C"].map((lbl, i) => (
+                <PhaseBar key={lbl} label={lbl} value={phases[i]} color={phaseColors[i]} />
+              ))}
+            </div>
+
+            <div className="flex items-center gap-2 text-xs" style={{color: "rgba(255,255,255,0.35)"}}>
+              <Activity size={12} style={{ color: "#93c5fd" }} />
+              Auto-redistributes in &lt; 200ms
+            </div>
+
+          </div>
+
+          {/* Card 3: Backup Power */}
+          <div className="sm:col-span-1 md:col-span-1 rounded-2xl p-5 sm:p-6 flex flex-col transition-transform duration-300 hover:-translate-y-0.5"
+            style={cs("b")} {...hp("b")}
+          > 
+
+            <div className="flex items-center gap-2 5">
+              <IconBox icon={BatteryCharging} color="#5eead4" />
+              <div>
+                <p className="text-xs font-medium uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.35)", letterSpacing: "0.15em" }}>UPS & Gen</p>
+                <h3 className="text-base font-bold text-white leading-tight">Backup Power</h3>
+              </div>
+            </div>
+
+            <p className="text-sm font-light leading-relaxed" style={{color: "rgba(255,255,255,0.55)"}}>
+              Automatic failover in under 20ms. Runtime estimates update live so you always know how long you have.
+            </p>
+
+            <div className="flex flex-col gap-2 mt-auto">
               {[
-                "No proprietary hardware lock-in",
-                "Integrates with existing SCADA systems",
-                "Open API for third-party tools",
-                "ISO 50001 aligned",
-                "GDPR-compliant data handling",
+                "Failover < 20ms",
+                "Live runtime estimates",
+                "Generator integration",
+                "Battery health alerts",
               ].map(item => (
-                <div key={item} className="flex items-center gap-1.5">
-                  <CheckCircle2 size={12} style={{ color: "#4ade80", flexShrink: 0 }} />
+                <div key={item} className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#5eead4" }} />
                   <span className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>{item}</span>
                 </div>
               ))}
             </div>
+
           </div>
 
+          {/* Card 4: Remote Monitoring */}
+          <div className="sm:col-span-2 md:col-span-2 rounded-2xl p-5 sm:p-6 flex flex-col duration-300 gap-3 transition-transform hover:-translate-y-0.5"
+            style={cs("r")} {...hp("r")}
+          >
+            <div className="flex items-start justify-between gap-2">
+              <div className="flex items-center gap-2.5">
+                <IconBox icon={Wifi} color="#a78bfa" />
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.35)", letterSpacing: "0.15em" }}>Multi-site</p>
+                  <h3 className="text-base sm:text-lg font-bold text-white leading-tight">Remote Control</h3>
+                </div>
+              </div>
+              <Pill color="#a78bfa">Unlimited Sites</Pill>
+            </div>
+
+            <p className="text-sm font-light leading-relaxed" style={{color: "rgba(255,255,255,0.55)"}}>
+              Manage every location from one cloud dashboard. View live status, push config changes, and respond to incidents — without stepping on site.
+            </p>
+
+            {/* 2-col mini stats */}
+            <div className="grid grid-cols-2 gap-3 mt-auto">
+              {[["Unlimited", "Sites supported"], ["99.9%", "Dashboard uptime"]].map(([val, lbl]) => (
+                <div
+                  key={lbl}
+                  className="rounded-xl p-3 text-center"
+                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
+                >
+                  <div className="text-lg font-bold text-white">{val}</div>
+                  <div className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.38)" }}>{lbl}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Card 5: Surge Protection */}
+          <div className="sm:col-span-1 md:col-span-1 rounded-2xl p-5 sm:p-6 flex flex-col duration-300 gap-3 transition-transform hover:-translate-y-0.5"
+            style={cs("s")} {...hp("s")}
+          >
+
+            <div className="flex items-center gap-2 5">
+
+              <IconBox icon={ShieldCheck} color="#f87171" />
+              <div>
+                <p className="text-xs font-medium uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.35)", letterSpacing: "0.15em" }}>TVSS</p>
+                <h3 className="text-base font-bold text-white leading-tight">Surge Protection</h3>
+              </div>
+
+            </div>
+            
+            <p className="text-sm font-light leading-relaxed" style={{color: "rgba(255,255,255,0.55)"}}>
+              Multi-stage suppressors guard every device. Every blocked surge is logged with timestamp and severity.
+            </p>
+
+            <div className="flex flex-col gap-2 mt-auto">
+              {[
+                "Multi-stage TVSS",
+                "±1% voltage regulation",
+                "Full event history",
+                "Equipment warranty cover",
+              ].map(item => (
+                <div key={item} className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#f87171" }} />
+                  <span className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>{item}</span>
+                </div>
+              ))}
+            </div>
+
+          </div>
         </div>
+
+        {/* Bottom CTA Strip */}
+        <div className="mt-4 rounded-2xl px-5 sm:px-8 py-5 sm:py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+          style={{
+            background: "rgba(255,117,31,0.07)",
+            border: "1px solid rgba(255,117,31,0.2)",
+          }}
+        >
+          
+          <div>
+            <p className="text-sm sm:text-base font-semibold text-white">Need the full technical specs?</p>
+            <p className="text-xs sm:text-sm font-light mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>
+              Modbus · BACnet · SNMP · ISO 50001 · 24-month data retention
+            </p>
+          </div>
+
+          <button className="shrink-0 flex items-center gap-2 text-xs sm:text-sm font-bold px-5 py-2.5 rounded-xl transition-all duration-200"
+            style={{
+              background: "#ff751f",
+              color: "white",
+              transition: "all 0.2s ease",
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.background = "#ff8c3f";
+              e.currentTarget.style.boxShadow = "0 6px 24px rgba(255,117,31,0.4)";
+              e.currentTarget.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = "#ff751f";
+              e.currentTarget.style.boxShadow = "none";
+              e.currentTarget.style.transform = "translateY(0)";
+            }}  
+          >
+            Request a Datasheet <ArrowRight size={14} strokeWidth={2.5} />
+          </button>
+        </div>
+
       </div>
-    </div>
-  );
+    </section>
+  )
 }
+
+export default Features

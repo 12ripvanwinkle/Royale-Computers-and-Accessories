@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@0,400..900;1,400..900&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -12,7 +12,7 @@ body {
   background: linear-gradient(180deg, #4d7aa3 0%, #3d6287 50%, #2d4a6b 100%);
   color: white;
   scroll-behavior: smooth;
-  font-family: "Playfair Display", serif;
+  font-family: "Inter", serif;
   position: relative;
 }
 
