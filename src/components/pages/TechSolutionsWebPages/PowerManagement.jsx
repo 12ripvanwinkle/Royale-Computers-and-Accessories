@@ -9,7 +9,7 @@ import Services from '../../Aspects/power-management/Services';
 import HowItWorks from '../../Aspects/power-management/HowItWorks';
 import TechIntegration from '../../Aspects/power-management/TechIntegration';
 import WhyChooseUs from '../../Aspects/power-management/WhyChooseUs';
-import FAQs from '../../Aspects/Faqs/FAQs'
+import FAQSection from '../../Aspects/Faqs/FAQs'
 
 import { Zap, Clock, Server, ArrowRight, ShieldCheck, Activity } from "lucide-react";
 
@@ -232,7 +232,7 @@ const PowerManagement = () => {
             <WhyChooseUs />
             
             {/* FAQs */}
-            <FAQs />
+            <FAQSection />
 
             {/* Contact us */}
             <Contact />

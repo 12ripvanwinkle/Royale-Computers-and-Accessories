@@ -2,87 +2,279 @@ import React from 'react'
 import TitleHeader from '../../TitleHeader'
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
-import Holder from '../../Holder'
-import Features from '../../Aspects/school/features'
-import Modules from '../../Aspects/school/Modules'
+import FAQSection from '../../Aspects/Faqs/FAQs'
+import StatsStrip from '../../Aspects/school/StatsStrip'
+
+import { GraduationCap, Users, BookOpen, ArrowRight, ShieldCheck, BarChart3 } from "lucide-react";
+import SchoolFeatures from '../../Aspects/school/Features'
 import Services from '../../Aspects/school/Services'
 import HowItWorks from '../../Aspects/school/HowItWorks'
-import Tech from '../../Aspects/school/Tech'
 import WhyChooseUs from '../../Aspects/school/WhyChooseUs'
-import FAQSection from '../../Aspects/Faqs/FAQs'
 
 
 
 
 const School = () => {
   return (
-    <section className="mt-70">
+    <section className="mt-20">
         <div className="min-h-screen flex flex-col items-center justify-start pt-8 md:pt-16 px-4 md:px-6">
+            
+            {/* Hero Section */}
 
-            {/* Header */}
-            <div className="text-center mb-6 md:mb-8">
-                <TitleHeader title="School Management Software" className="" />
-                <p className="font-semibold text-2xl md:text-4xl tracking-tight mt-3 md:mt-5"
-                    style={{color: "rgba(255,255,255,0.65)"}}
-                >
-                    Enroll. Engage. Excel.
-                </p>
+            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 py-12 sm:py-16 md:py-20 lg:py-28">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 lg:gap-14 items-center">
+                    
+                    {/* Left Side */}
+                    <div className="md:col-span-7 flex flex-col items-start gap-5 sm:gap-6">
+
+                        {/* Eyebrow Pill */}
+                        <span
+                            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase px-3 py-1.5 rounded-full"
+                            style={{
+                                color: "#ff751f",
+                                background: "rgba(255,117,31,0.1)",
+                                border: "1px solid rgba(255,117,31,0.28)",
+                                letterSpacing: "0.18em",
+                            }}
+                        >
+                            <GraduationCap size={11} strokeWidth={2.5} />
+                            School Management Software
+                        </span>
+
+                        {/* Headline */}
+                        <h1
+                            className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-none"
+                            style={{
+                                fontFamily: "'Inter', sans-serif",
+                                letterSpacing: "-0.03em",
+                                lineHeight: "1.02",
+                            }}
+                        >
+                            Run Your School. <br />
+                            <span
+                                style={{
+                                    background: "linear-gradient(90deg, #ff751f 0%, #ffaa6b 100%)",
+                                    WebkitBackgroundClip: "text",
+                                    WebkitTextFillColor: "transparent",
+                                    backgroundClip: "text",
+                                }}
+                            >
+                                Not Your Paperwork.
+                            </span>
+                        </h1>
+
+                        {/* Sub Headline */}
+                        <p
+                            className="text-base sm:text-lg font-light leading-relaxed max-w-xl"
+                            style={{
+                                color: "rgba(255,255,255,0.58)",
+                                lineHeight: "1.75",
+                            }}
+                        >
+                            Replace fragmented spreadsheets and manual admin with one platform.
+                            Track attendance, grades, fees, and communication — all in real time.
+                        </p>
+
+                        {/* Trust Stats */}
+                        <div className="grid grid-cols-3 gap-2 sm:gap-4 w-full">
+                            {[
+                                { icon: Users, value: "500+", label: "Schools" },
+                                { icon: BookOpen, value: "1–1000+", label: "Classes" },
+                                { icon: BarChart3, value: "Live", label: "Reporting" },
+                            ].map(({ icon: Icon, value, label }) => (
+                                <div
+                                    key={label}
+                                    className="flex flex-col gap-1 p-2.5 sm:p-3 rounded-xl min-w-0"
+                                    style={{
+                                        background: "rgba(255,255,255,0.04)",
+                                        border: "1px solid rgba(255,255,255,0.07)",
+                                    }}
+                                >
+                                    <Icon
+                                        size={13}
+                                        strokeWidth={1.75}
+                                        style={{
+                                            color: "#ff751f",
+                                            flexShrink: 0,
+                                        }}
+                                    />
+
+                                    <span
+                                        className="text-base sm:text-xl font-bold mt-0.5 leading-tight"
+                                        style={{
+                                            color: "#ff751f",
+                                            fontFamily: "'Inter', sans-serif",
+                                            wordBreak: "break-word",
+                                        }}
+                                    >
+                                        {value}
+                                    </span>
+
+                                    <span
+                                        className="text-xs leading-tight"
+                                        style={{
+                                            color: "rgba(255,255,255,0.32)",
+                                            letterSpacing: "0.05em",
+                                        }}
+                                    >
+                                        {label}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Feature Bullets */}
+                        <ul className="flex flex-col gap-2.5 mt-1">
+                            {[
+                                { icon: ShieldCheck, text: "Centralise student records, attendance & grades" },
+                                { icon: BarChart3, text: "Real-time academic performance dashboards" },
+                                { icon: Users, text: "Parent, teacher & admin portals in one platform" },
+                            ].map(({ icon: Icon, text }) => (
+                                <li key={text} className="flex items-center gap-2.5">
+                                    <Icon
+                                        size={15}
+                                        strokeWidth={2}
+                                        style={{
+                                            color: "#ff751f",
+                                            flexShrink: 0,
+                                        }}
+                                    />
+
+                                    <span
+                                        className="text-sm sm:text-base font-light"
+                                        style={{
+                                            color: "rgba(255,255,255,0.6)",
+                                        }}
+                                    >
+                                        {text}
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+
+                        {/* Primary CTA */}
+                        <button
+                            className="w-full sm:w-auto mt-1 flex items-center justify-center gap-2 text-sm sm:text-base font-bold px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl"
+                            style={{
+                                background: "#ff751f",
+                                color: "white",
+                                fontFamily: "'Inter', sans-serif",
+                                letterSpacing: "0.01em",
+                                transition: "all 0.2s ease",
+                            }}
+                            onMouseEnter={e => {
+                                e.currentTarget.style.background = "#ff8c3f";
+                                e.currentTarget.style.boxShadow = "0 10px 32px rgba(255,117,31,0.42)";
+                                e.currentTarget.style.transform = "translateY(-2px)";
+                            }}
+                            onMouseLeave={e => {
+                                e.currentTarget.style.background = "#ff751f";
+                                e.currentTarget.style.boxShadow = "none";
+                                e.currentTarget.style.transform = "translateY(0)";
+                            }}
+                            onClick={() =>
+                                document
+                                    .getElementById("contact")
+                                    ?.scrollIntoView({ behavior: "smooth" })
+                            }
+                        >
+                            Book a Free Demo
+                            <ArrowRight size={16} strokeWidth={2.5} />
+                        </button>
+                    </div>
+
+                    {/* Right Side */}
+                    <div className="md:col-span-5 w-full">
+
+                        {/* Image */}
+                        <div
+                            className="card w-full rounded-2xl overflow-hidden"
+                            style={{
+                                aspectRatio: "4/3",
+                                border: "1px solid rgba(255,255,255,0.08)",
+                                background: "rgba(0,0,0,0.3)",
+                                boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+                                position: "relative",
+                                transition: "box-shadow 0.4s ease, transform 0.4s ease",
+                            }}
+                            onMouseEnter={e => {
+                                e.currentTarget.style.boxShadow =
+                                    "0 28px 80px rgba(0,0,0,0.55), 0 0 48px rgba(255,117,31,0.2)";
+                                e.currentTarget.style.transform = "translateY(-5px)";
+                            }}
+                            onMouseLeave={e => {
+                                e.currentTarget.style.boxShadow =
+                                    "0 20px 60px rgba(0,0,0,0.5)";
+                                e.currentTarget.style.transform = "translateY(0)";
+                            }}
+                        >
+                            <img
+                                src="/images/max.jpg"
+                                alt="School Management Dashboard"
+                                className="w-full h-full object-cover"
+                                style={{
+                                    filter: "brightness(0.88) contrast(1.06)",
+                                }}
+                            />
+
+                            {/* Bottom Gradient */}
+                            <div
+                                className="absolute inset-0 pointer-events-none"
+                                style={{
+                                    background:
+                                        "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 55%)",
+                                }}
+                            />
+
+                            {/* Live Badge */}
+                            <div
+                                className="absolute bottom-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold"
+                                style={{
+                                    background: "rgba(0,0,0,0.65)",
+                                    border: "1px solid rgba(255,255,255,0.12)",
+                                    color: "white",
+                                    backdropFilter: "blur(8px)",
+                                }}
+                            >
+                                <span
+                                    className="block rounded-full"
+                                    style={{
+                                        width: 7,
+                                        height: 7,
+                                        background: "#22c55e",
+                                        boxShadow: "0 0 6px #22c55e",
+                                        animation: "pulse 2s infinite",
+                                    }}
+                                />
+                                Dashboard Live
+                            </div>
+                        </div>
+
+                        {/* Caption */}
+                        <p
+                            className="text-xs mt-3 text-center"
+                            style={{
+                                color: "rgba(255,255,255,0.22)",
+                                letterSpacing: "0.1em",
+                            }}
+                        >
+                            Centralised cloud-based school administration platform
+                        </p>
+
+                    </div>
+                </div>
             </div>
 
-            {/* CTA Button */}
-            <button className="text-sm font-medium px-6 py-2 rounded-full mb-8 md:mb-10 transition-all duration-200"
-            style={{
-                border: "1px solid rgba(255,255,255,0.4)",
-                color: "white",
-                background: "transparent",
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.15)"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}
-            onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-                Learn More
-            </button>
-
-            {/* Hero Image */}
-            <div className="w-full max-w-5xl mx-auto rounded-2xl overflow-hidden"
-            style={{
-                aspectRatio: "16/9",
-                border: "1px solid rgba(255,255,255,0.15)",
-                background: "rgba(0,0,0,0.25)",
-            }}
-            >
-                <img src="/images/max.jpg" alt="Access Control System" className="w-full h-full object-cover" />
-            </div>
-
-            {/* Overview */}
-            <div className="text-center mt-20 max-w-3xl mx-auto px-4">
-                <h2 className="text-4xl sm:text-5xl font-light text-white leading-tight mb-6">
-                    Complete transparency for every classroom.
-
-                </h2>
-                <p className="text-base sm:text-lg font-light leading-relaxed"
-                    style={{color: "rgba(255,255,255,0.62)"}}
-                >
-                    Our school management solutions transform standard administrative databases into high-performance learning ecosystems that deliver
-                    up to 99.9% more efficiency than traditional legacy systems. Using our centralized cloud-based platform, your faculty team can 
-                    track attendance, monitor student progress, or manage academic records across one or a thousand classrooms in real-time.
-                </p>
-            </div>
+            <StatsStrip />
 
             {/* Features */}
-            <Features />
-
-            {/* Modules */}
-            <Modules />
+            <SchoolFeatures />
 
             {/* Services */}
             <Services />
 
             {/* How it works */}
             <HowItWorks />
-
-            {/* Tech integrations */}
-            <Tech />
 
             {/* Why Choose Us */}
             <WhyChooseUs />
