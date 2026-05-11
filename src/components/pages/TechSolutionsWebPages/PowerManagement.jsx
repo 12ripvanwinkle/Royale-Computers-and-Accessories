@@ -2,7 +2,6 @@ import React from 'react'
 import TitleHeader from '../../TitleHeader'
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
-import Holder from '../../Holder'
 import Features from '../../Aspects/power-management/Features';
 import SystemTypes from '../../Aspects/power-management/SystemTypes';
 import Services from '../../Aspects/power-management/Services';
