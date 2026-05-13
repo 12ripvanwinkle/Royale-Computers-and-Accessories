@@ -1,437 +1,519 @@
-import {ShieldAlert,
-        Radar, 
-        Lock, 
-        Bug, 
-        Activity, 
-        Monitor,
-        ShieldOff, 
-        MessageSquareLock, 
-        Database, 
-        ServerCrash,  
-        Search, 
-        Wrench, 
-        MonitorCheck, 
-        Siren,
-        ShieldCheck, 
-        TrendingUp,
-    } from 'lucide-react'
-
-
-export const rules = [
-    { src: '192.168.1.0/24', dst: 'ANY',           action: 'ALLOW', color: '#4ade80' },
-    { src: '0.0.0.0/0',      dst: 'PORT 22',       action: 'DENY',  color: '#f87171' },
-    { src: '10.0.0.5',       dst: 'PORT 3389',     action: 'DENY',  color: '#f87171' },
-    { src: 'TRUSTED',        dst: 'INTERNAL',      action: 'ALLOW', color: '#4ade80' },
-];
-
-export const alerts = [
-    { label: 'Port scan detected',     severity: 'High', color: '#f87171', blocked: true },
-    { label: 'SQL injection attempt',  severity: 'High', color: '#f87171', blocked: true },
-    { label: 'Unusual auth pattern',   severity: 'Med',  color: '#fbbf24', blocked: true },
-    { label: 'DNS anomaly flagged',    severity: 'Low',  color: '#4ade80', blocked: false },
-];
-
-export const tunnels = [
-    { label: 'HQ ↔ Branch London',  users: 14, color: '#a78bfa' },
-    { label: 'HQ ↔ Remote Workers', users: 38, color: '#a78bfa' },
-    { label: 'HQ ↔ Data Centre',    users: 3,  color: '#a78bfa' },
-];
-
-export const threats = [
-    { label: 'Ransomware signature',  score: 100, color: '#f87171' },
-    { label: 'Trojan heuristic',      score: 78,  color: '#fbbf24' },
-    { label: 'Spyware pattern',       score: 92,  color: '#f87171' },
-    { label: 'Adware detected',       score: 55,  color: '#fbbf24' },
-];
-
-export const endpoints = [
-    { label: 'Workstation-01',  status: 'Protected', color: '#4ade80', os: 'Win 11' },
-    { label: 'Laptop-Sarah',    status: 'Protected', color: '#4ade80', os: 'macOS'  },
-    { label: 'Server-DB-01',    status: 'Protected', color: '#4ade80', os: 'Ubuntu' },
-    { label: 'Tablet-Reception',status: 'Updating',  color: '#fbbf24', os: 'iOS'   },
-];
-
-import {Firewall, Ids, Vpn, Malware, Traffic, Endpoint} from './Components'
+import { ArrowRight, ShieldCheck, Eye, Lock, Zap, Network, AlertTriangle,
+    Clock, Award, Users,
+    Wifi,Server, 
+    Search, Shield, Activity, Wrench, BookOpen, Cloud, 
+    ClipboardList, Settings2 ,DatabaseZap, Users2, Rocket, 
+    TrendingUp, HeadphonesIcon
+ } from "lucide-react"
 
 export const features = [
     {
         id: 1,
-        icon: ShieldAlert,
-        accent: '#f87171',
-        eyebrow: 'Perimeter Defence',
-        title: 'Firewalls',
-        stat: { value: 'Next-gen', label: 'Deep packet inspection' },
-        description: 'Next-generation firewalls inspect every packet at the application layer — enforcing granular allow/deny rules, blocking known bad actors, and preventing unauthorised access across all network segments.',
-        highlights: ['Application-layer filtering', 'Geo-blocking & IP reputation', 'Zone-based rule sets'],
-        mockup: Firewall,
+        icon: ShieldCheck,
+        color: "#ff751f",
+        pill: "Core Defence",
+        eyebrow: "Threat Prevention",
+        headline: "Stop Threats Before They Land",
+        body: "Proactive perimeter defence blocks malicious traffic, malware, and unauthorised access attempts before they ever reach your internal network.",
+        bullets: [
+            "Next-gen firewall with deep packet inspection",
+            "Automatic signature & behaviour-based blocking",
+            "Zero-day exploit protection",
+        ],
+        stats: [["99.97%", "Block Rate"], ["<1ms", "Latency Impact"]],
+        span: 1,
     },
     {
         id: 2,
-        icon: Radar,
-        accent: '#f87171',
-        eyebrow: 'Threat Detection',
-        title: 'Intrusion Detection & Prevention',
-        stat: { value: 'Real-time', label: 'Automated blocking' },
-        description: 'IDS/IPS systems continuously analyse traffic for attack signatures and behavioural anomalies — automatically blocking threats like port scans, injection attempts, and lateral movement before damage occurs.',
-        highlights: ['Signature & behaviour analysis', 'Automatic threat blocking', 'Full alert audit trail'],
-        mockup: Ids,
+        icon: Eye,
+        color: "#3b82f6",
+        pill: "Always On",
+        eyebrow: "Real-Time Monitoring",
+        headline: "Full Visibility Across Every Node",
+        body: "Live dashboards surface anomalies, suspicious sessions, and policy violations the moment they occur — across every device on your network.",
+        bullets: [
+            "Traffic analysis across all network layers",
+            "Instant alerts on policy violations",
+            "Historical log retention & audit trails",
+        ],
+        stats: [["Live", "Feed"], ["360°", "Coverage"]],
+        span: 1,
     },
     {
         id: 3,
-        icon: Lock,
-        accent: '#a78bfa',
-        eyebrow: 'Secure Connectivity',
-        title: 'VPN Security',
-        stat: { value: 'AES-256', label: 'Encrypted tunnels' },
-        description: 'Site-to-site and remote-access VPNs ensure all traffic between offices, data centres, and remote workers is encrypted end-to-end — with certificate-based authentication and split-tunnelling controls.',
-        highlights: ['Site-to-site & remote access', 'Certificate-based auth', 'Split-tunnelling control'],
-        mockup: Vpn,
+        icon: AlertTriangle,
+        color: "#ec4899",
+        pill: "Rapid Response",
+        eyebrow: "Incident Management",
+        headline: "Detect, Triage & Respond Fast",
+        body: "Automated incident workflows cut mean time to response. Every alert is triaged, assigned, and tracked from detection through to resolution in one place.",
+        bullets: [
+            "Auto-triage with severity scoring",
+            "One-click isolation of compromised nodes",
+            "Full incident timeline & post-mortem reports",
+        ],
+        stats: [["~4 min", "Avg. MTTR"], ["100%", "Traceability"]],
+        span: 2,
     },
     {
         id: 4,
-        icon: Bug,
-        accent: '#fbbf24',
-        eyebrow: 'Threat Prevention',
-        title: 'Malware Protection',
-        stat: { value: 'Zero-day', label: 'Heuristic detection' },
-        description: 'Multi-layered malware protection combines signature databases with heuristic and behavioural engines — catching known threats instantly and identifying zero-day variants before they execute.',
-        highlights: ['Signature + heuristic engines', 'Real-time file scanning', 'Automatic quarantine'],
-        mockup: Malware,
+        icon: Lock,
+        color: "#a855f7",
+        pill: "Zero Trust",
+        eyebrow: "Access Control",
+        headline: "Least-Privilege by Default",
+        body: "Role-based access and zero-trust policies ensure users and devices only reach exactly what they need — nothing more.",
+        bullets: [
+            "Granular RBAC across all resources",
+            "MFA enforcement at every entry point",
+            "Device posture checks before access is granted",
+        ],
+        stats: [["0", "Implicit Trust"], ["RBAC", "Enforced"]],
+        span: 1,
     },
     {
         id: 5,
-        icon: Activity,
-        accent: '#5eead4',
-        eyebrow: 'Network Visibility',
-        title: 'Traffic Monitoring',
-        stat: { value: 'Full flow', label: 'Packet-level analysis' },
-        description: 'Deep flow analysis gives complete visibility into what is traversing your network — identifying bandwidth hogs, unusual data transfers, shadow IT, and exfiltration attempts in real time.',
-        highlights: ['Full packet capture', 'Bandwidth usage by device', 'Anomalous flow alerting'],
-        mockup: Traffic,
+        icon: Network,
+        color: "#22c55e",
+        pill: "Unified View",
+        eyebrow: "Network Intelligence",
+        headline: "One Platform. Every Asset.",
+        body: "Map, monitor, and manage your entire network topology from a single pane of glass — from on-prem infrastructure to cloud endpoints.",
+        bullets: [
+            "Auto-discovery of new devices & endpoints",
+            "Real-time topology mapping",
+            "Cloud, hybrid & on-prem support",
+        ],
+        stats: [["1–∞", "Nodes"], ["Multi-Cloud", "Ready"]],
+        span: 1,
+    },
+]
+
+export const Stats = [
+    {
+        icon: ShieldCheck,
+        value: "99.97%",
+        label: "Threat Block Rate",
     },
     {
-        id: 6,
-        icon: Monitor,
-        accent: '#4ade80',
-        eyebrow: 'Device Protection',
-        title: 'Endpoint Security',
-        stat: { value: 'Centralised', label: 'Policy management' },
-        description: 'EDR agents on every managed device provide continuous protection, patch status monitoring, and behavioural telemetry — all managed from a single console regardless of OS or location.',
-        highlights: ['EDR on all managed devices', 'Patch compliance tracking', 'Remote isolation capability'],
-        mockup: Endpoint,
+        icon: Clock,
+        value: "< 4 min",
+        label: "Mean Time to Respond",
+    },
+    {
+        icon: Network,
+        value: "10,000+",
+        label: "Nodes Protected",
+    },
+    {
+        icon: Award,
+        value: "8+ Years",
+        label: "Industry Experience",
+    },
+    {
+        icon: Users,
+        value: "300+",
+        label: "Enterprise Clients",
+    },
+    {
+        icon: Zap,
+        value: "24 / 7",
+        label: "Live Monitoring",
     },
 ]
 
-export const SecurityRules = [
-    { src: '192.168.1.0/24', dst: 'INTERNET',    action: 'ALLOW', color: '#4ade80' },
-    { src: '0.0.0.0/0',      dst: 'PORT 22',     action: 'DENY',  color: '#f87171' },
-    { src: '10.0.0.5',       dst: 'PORT 3389',   action: 'DENY',  color: '#f87171' },
-    { src: 'TRUSTED ZONE',   dst: 'INTERNAL',    action: 'ALLOW', color: '#4ade80' },
-]
-
-export const SecurityTunnels = [
-    { label: 'HQ ↔ Branch Office',  users: 14, color: '#a78bfa' },
-    { label: 'HQ ↔ Remote Workers', users: 38, color: '#a78bfa' },
-    { label: 'HQ ↔ Data Centre',    users: 3,  color: '#a78bfa' },
-]
-
-export const SecurityEndpoints = [
-    { label: 'Workstation-01',   status: 'Protected', color: '#4ade80', os: 'Win 11' },
-    { label: 'Laptop-Sarah',     status: 'Protected', color: '#4ade80', os: 'macOS'  },
-    { label: 'Server-DB-01',     status: 'Protected', color: '#4ade80', os: 'Ubuntu' },
-    { label: 'Tablet-Reception', status: 'Updating',  color: '#fbbf24', os: 'iOS'   },
-]
-
-export const Securitythreats = [
-    { label: 'Port scan detected',    severity: 'High', color: '#f87171', blocked: true  },
-    { label: 'SQL injection attempt', severity: 'High', color: '#f87171', blocked: true  },
-    { label: 'Unusual auth pattern',  severity: 'Med',  color: '#fbbf24', blocked: true  },
-    { label: 'DNS anomaly flagged',   severity: 'Low',  color: '#4ade80', blocked: false },
-]
-
-import {SecurityFirewall, SecurityVpn, SecurityEndpoint, Network, Threat} from './Components'
-
-export const types = [
+export const Types = [
     {
         id: 1,
-        icon: ShieldAlert,
-        accent: '#f87171',
-        eyebrow: 'Perimeter Defence',
-        title: 'Firewall Protection',
-        stat: { value: 'Next-gen', label: 'Deep packet inspection' },
-        description: 'Next-generation firewalls inspect every packet at the application layer — enforcing granular allow/deny policies, blocking known threat actors, and segmenting your network into controlled trust zones.',
-        highlights: ['Application-layer filtering', 'Geo-blocking & IP reputation', 'Zone-based segmentation'],
-        mockup: SecurityFirewall,
+        icon: ShieldCheck,
+        accent: "#ff751f",
+        eyebrow: "Perimeter Defence",
+        title: "Firewall & Intrusion Prevention",
+        description: "Your first and most critical line of defence. Next-gen firewalls inspect every packet at the network edge, blocking threats before they ever enter your infrastructure.",
+        stat: { value: "99.97%", label: "Block Rate" },
+        highlights: [
+            "Deep packet inspection on all traffic",
+            "Geo-blocking & IP reputation filtering",
+            "Automatic rule updates & threat feeds",
+        ],
     },
     {
         id: 2,
-        icon: Lock,
-        accent: '#a78bfa',
-        eyebrow: 'Secure Connectivity',
-        title: 'VPN Solutions',
-        stat: { value: 'AES-256', label: 'End-to-end encryption' },
-        description: 'Site-to-site and remote-access VPNs keep all traffic between offices, data centres, and remote workers encrypted end-to-end — with certificate-based authentication and always-on enforcement policies.',
-        highlights: ['Site-to-site & remote access', 'Certificate-based auth', 'Always-on policy enforcement'],
-        mockup: SecurityVpn,
+        icon: Eye,
+        accent: "#3b82f6",
+        eyebrow: "Threat Detection",
+        title: "Security Information & Event Management",
+        description: "SIEM aggregates logs and events from every corner of your network, applying AI-driven correlation to surface real threats fast and cut through alert noise.",
+        stat: { value: "< 4 min", label: "Avg. MTTR" },
+        highlights: [
+            "Centralised log aggregation & correlation",
+            "AI-assisted anomaly detection",
+            "Real-time dashboards & audit trails",
+        ],
     },
     {
         id: 3,
-        icon: Monitor,
-        accent: '#4ade80',
-        eyebrow: 'Device Protection',
-        title: 'Endpoint Security',
-        stat: { value: 'Centralised', label: 'Policy management' },
-        description: 'EDR agents deployed on every managed device provide continuous protection, real-time patch compliance tracking, and behavioural telemetry — all managed from a single console across every OS and location.',
-        highlights: ['EDR on all managed devices', 'Patch compliance tracking', 'Remote isolation capability'],
-        mockup: SecurityEndpoint,
+        icon: Lock,
+        accent: "#a855f7",
+        eyebrow: "Identity & Access",
+        title: "Zero Trust Access Control",
+        description: "No user or device is trusted by default. Every access request is verified, least-privilege is enforced, and lateral movement is stopped in its tracks.",
+        stat: { value: "0", label: "Implicit Trust" },
+        highlights: [
+            "MFA at every entry point",
+            "Granular role-based access control",
+            "Device posture checks before access",
+        ],
     },
     {
         id: 4,
-        icon: Activity,
-        accent: '#5eead4',
-        eyebrow: 'Full Visibility',
-        title: 'Network Monitoring',
-        stat: { value: 'Full flow', label: 'Packet-level analysis' },
-        description: 'Deep flow analysis provides complete visibility into every byte traversing your network — identifying bandwidth hogs, unusual data transfers, shadow IT, and potential exfiltration attempts in real time.',
-        highlights: ['Full packet capture', 'Bandwidth usage by device', 'Anomalous flow alerting'],
-        mockup: Network,
+        icon: Wifi,
+        accent: "#22c55e",
+        eyebrow: "Network Segmentation",
+        title: "Micro-Segmentation & VLANs",
+        description: "Divide your network into isolated zones so a breach in one segment can never cascade. Critical assets stay walled off regardless of what else is compromised.",
+        stat: { value: "100%", label: "Blast Containment" },
+        highlights: [
+            "VLAN isolation for critical systems",
+            "East-west traffic control",
+            "Automatic quarantine on anomaly detection",
+        ],
     },
     {
         id: 5,
-        icon: Radar,
-        accent: '#fbbf24',
-        eyebrow: 'Proactive Security',
-        title: 'Threat Detection System',
-        stat: { value: 'Real-time', label: 'Automated blocking' },
-        description: 'Signature and behavioural analysis engines work in tandem to identify and neutralise threats like port scans, injection attempts, and lateral movement — automatically blocking attacks before they cause damage.',
-        highlights: ['Signature & behaviour engines', 'Automated threat blocking', 'Full alert audit trail'],
-        mockup: Threat,
+        icon: Server,
+        accent: "#ec4899",
+        eyebrow: "Endpoint Security",
+        title: "Device Protection & EDR",
+        description: "Every managed device is a potential entry point. Endpoint Detection & Response monitors, detects, and neutralises threats directly on the device before they spread.",
+        stat: { value: "360°", label: "Endpoint Visibility" },
+        highlights: [
+            "Continuous endpoint health monitoring",
+            "Automated threat containment & rollback",
+            "Full device inventory & compliance checks",
+        ],
     },
-]
-
-export const attempts = [
-    { label: 'Brute-force login',     src: '45.33.32.156',   color: '#f87171' },
-    { label: 'Ransomware payload',    src: '198.51.100.22',  color: '#f87171' },
-    { label: 'Credential stuffing',   src: '203.0.113.99',   color: '#fbbf24' },
-    { label: 'Zero-day exploit',      src: '192.0.2.144',    color: '#f87171' },
-]
-
-export const channels = [
-    { label: 'Email gateway',       enc: 'TLS 1.3',    color: '#93c5fd' },
-    { label: 'VoIP traffic',        enc: 'SRTP',       color: '#93c5fd' },
-    { label: 'File transfers',      enc: 'SFTP/AES',   color: '#93c5fd' },
-    { label: 'Video conferencing',  enc: 'E2E AES-256', color: '#93c5fd' }, 
-]
-
-export const datasets = [
-    { label: 'Customer PII',    status: 'Encrypted', color: '#5eead4' },
-    { label: 'Payment records', status: 'Tokenised', color: '#5eead4' },
-    { label: 'Staff data',      status: 'Encrypted', color: '#5eead4' },
-    { label: 'Health records',  status: 'Encrypted', color: '#5eead4' },
 ]
 
 export const services = [
-    { label: 'Core network',     status: 'Online',  latency: '2ms',  color: '#4ade80' },
-    { label: 'Firewall cluster', status: 'Online',  latency: '1ms',  color: '#4ade80' },
-    { label: 'VPN gateway',      status: 'Online',  latency: '14ms', color: '#4ade80' },
-    { label: 'IDS/IPS engine',   status: 'Online',  latency: '3ms',  color: '#4ade80' },
-]
-
-import {Breach, Comms, Data, Uptime} from './Components'
-
-export const benefits = [
-    {
-        id: 1,
-        icon: ShieldOff,
-        accent: '#f87171',
-        eyebrow: 'Attack Prevention',
-        title: 'Prevent Breaches',
-        stat: { value: '99.9%', label: 'Threat block rate' },
-        description: 'Layered defences across your perimeter, network, and endpoints stop breaches before they start — blocking ransomware, credential stuffing, zero-day exploits, and brute-force attacks automatically, around the clock.',
-        highlights: ['Perimeter + endpoint coverage', 'Zero-day exploit blocking', 'Automated incident response'],
-        mockup: Breach,
-    },
-    {
-        id: 2,
-        icon: MessageSquareLock,
-        accent: '#93c5fd',
-        eyebrow: 'Data in Transit',
-        title: 'Secure Communications',
-        stat: { value: 'End-to-end', label: 'All channel encryption' },
-        description: 'Every communication channel — email, VoIP, file transfers, and video conferencing — is encrypted in transit using modern protocols, ensuring sensitive conversations and data can never be intercepted or tampered with.',
-        highlights: ['TLS 1.3 email gateway', 'SRTP voice encryption', 'E2E video & file transfer'],
-        mockup: Comms,
-    },
-    {
-        id: 3,
-        icon: Database,
-        accent: '#5eead4',
-        eyebrow: 'Data at Rest',
-        title: 'Protect Sensitive Data',
-        stat: { value: 'AES-256', label: 'At-rest encryption' },
-        description: 'Customer PII, payment records, health data, and staff files are encrypted at rest, tokenised where appropriate, and access-controlled by role — keeping you compliant with GDPR, PCI-DSS, and HIPAA requirements.',
-        highlights: ['AES-256 at-rest encryption', 'PII tokenisation', 'GDPR / PCI-DSS / HIPAA ready'],
-        mockup: Data,
-    },
-    {
-        id: 4,
-        icon: ServerCrash,
-        accent: '#4ade80',
-        eyebrow: 'Business Continuity',
-        title: 'Maintain Uptime',
-        stat: { value: '99.99%', label: 'Network availability' },
-        description: 'Redundant security infrastructure — clustered firewalls, failover VPN gateways, and high-availability IDS/IPS — ensures your defences never become a single point of failure, keeping operations running without interruption.',
-        highlights: ['Clustered firewall HA', 'Failover VPN gateways', 'Zero-downtime updates'],
-        mockup: Uptime,
-    },
-];
-
-export const checks = [
-    { label: 'Perimeter exposure',    score: 78, color: '#f87171' },
-    { label: 'Auth vulnerabilities',  score: 62, color: '#fbbf24' },
-    { label: 'Patch compliance',      score: 91, color: '#4ade80' },
-    { label: 'Data exposure risk',    score: 44, color: '#f87171' },
-]
-
-export const tasks = [
-    'Firewall rules deployed',
-    'IDS/IPS signatures loaded',
-    'VPN tunnels established',
-    'EDR agents rolled out',
-    'Policies enforced & tested',
-]
-
-export const feeds = [
-    { label: 'Firewall — perimeter', status: 'Online',  color: '#4ade80' },
-    { label: 'IDS/IPS engine',       status: 'Online',  color: '#4ade80' },
-    { label: 'Endpoint agents',      status: 'Online',  color: '#4ade80' },
-    { label: 'VPN gateway',          status: 'Online',  color: '#4ade80' },
-];
-
-export const timeline = [
-    { label: 'Threat detected',      time: '09:14:02', done: true  },
-    { label: 'Alert triggered',       time: '09:14:03', done: true  },
-    { label: 'SOC analyst engaged',   time: '09:14:45', done: false },
-    { label: 'Endpoint isolated',     time: '09:15:10', done: false },
-    { label: 'Threat neutralised',    time: '09:16:38', done: false },
-]
-
-import {Assessment, Implementation, Monitoring, Incident} from './Components'
-
-export const services2 = [
     {
         id: 1,
         icon: Search,
-        accent: '#fbbf24',
-        eyebrow: 'Step 01',
-        title: 'Network Security Assessment',
-        stat: { value: 'Full scope', label: 'Attack surface review' },
-        description: 'We begin with a comprehensive assessment of your network — mapping every exposed asset, evaluating firewall rules, testing authentication controls, and scoring vulnerabilities to build a prioritised remediation plan.',
-        highlights: ['Full attack surface mapping', 'Firewall & policy review', 'Prioritised risk report'],
-        mockup: Assessment,
+        accent: "#ff751f",
+        eyebrow: "Assessment",
+        title: "Security Audit & Risk Assessment",
+        description: "We start by mapping your entire attack surface — identifying vulnerabilities, misconfigurations, and gaps before a threat actor does. You get a full risk report with prioritised remediation.",
+        stat: { value: "100%", label: "Coverage" },
+        highlights: [
+            "Full network topology discovery",
+            "Vulnerability scanning & CVE mapping",
+            "Prioritised risk remediation roadmap",
+        ],
     },
     {
         id: 2,
-        icon: Wrench,
-        accent: '#a78bfa',
-        eyebrow: 'Step 02',
-        title: 'Implementation',
-        stat: { value: 'End-to-end', label: 'Deploy & configure' },
-        description: 'Our engineers deploy and configure every layer of your security stack — from next-gen firewalls and IDS/IPS to VPN tunnels, EDR agents, and access policies — all tested and documented before handover.',
-        highlights: ['Full stack deployment', 'Policy configuration & testing', 'Documentation & handover'],
-        mockup: Implementation,
+        icon: Shield,
+        accent: "#3b82f6",
+        eyebrow: "Managed Security",
+        title: "Managed Detection & Response",
+        description: "Our security analysts monitor your network around the clock, triaging alerts, investigating incidents, and neutralising threats — so your team can focus on the business.",
+        stat: { value: "24 / 7", label: "SOC Coverage" },
+        highlights: [
+            "Dedicated security operations centre",
+            "Real-time alert triage & escalation",
+            "Threat hunting & proactive defence",
+        ],
     },
     {
         id: 3,
-        icon: MonitorCheck,
-        accent: '#4ade80',
-        eyebrow: 'Step 03',
-        title: 'Monitoring',
-        stat: { value: '24 / 7', label: 'SOC coverage' },
-        description: 'Our Security Operations Centre monitors your entire network around the clock — correlating events across firewalls, endpoints, and logs to surface real threats fast and suppress false positives automatically.',
-        highlights: ['24/7 SOC analyst coverage', 'SIEM event correlation', 'False positive suppression'],
-        mockup: Monitoring,
+        icon: Activity,
+        accent: "#a855f7",
+        eyebrow: "Incident Response",
+        title: "Rapid Incident Response & Recovery",
+        description: "When a breach occurs, every minute counts. Our incident response team deploys fast — containing the threat, preserving forensic evidence, and restoring operations with minimal downtime.",
+        stat: { value: "< 4 min", label: "Avg. MTTR" },
+        highlights: [
+            "Immediate containment & isolation",
+            "Full forensic investigation & timeline",
+            "Post-incident hardening & report",
+        ],
     },
     {
         id: 4,
-        icon: Siren,
-        accent: '#f87171',
-        eyebrow: 'Step 04',
-        title: 'Incident Response',
-        stat: { value: '< 15min', label: 'Mean time to respond' },
-        description: 'When a threat is confirmed, our incident response team activates immediately — isolating affected endpoints, containing lateral movement, neutralising the threat, and producing a full post-incident report.',
-        highlights: ['Sub-15min response SLA', 'Endpoint isolation & containment', 'Post-incident forensic report'],
-        mockup: Incident,
+        icon: Wrench,
+        accent: "#22c55e",
+        eyebrow: "Implementation",
+        title: "Security Architecture & Deployment",
+        description: "From firewall configuration to zero-trust implementation, we design and deploy security infrastructure that fits your environment — on-prem, cloud, or hybrid.",
+        stat: { value: "Days", label: "Not Months" },
+        highlights: [
+            "Next-gen firewall & IPS deployment",
+            "Zero trust architecture design",
+            "Cloud, hybrid & on-prem support",
+        ],
+    },
+    {
+        id: 5,
+        icon: BookOpen,
+        accent: "#ec4899",
+        eyebrow: "Compliance",
+        title: "Compliance & Regulatory Advisory",
+        description: "We help you meet the frameworks that matter — ISO 27001, GDPR, NIS2, and more. Our advisors guide you through audits, gap analyses, and ongoing compliance maintenance.",
+        stat: { value: "ISO 27001", label: "Aligned" },
+        highlights: [
+            "Gap analysis against key frameworks",
+            "Policy & procedure documentation",
+            "Audit preparation & ongoing support",
+        ],
+    },
+    {
+        id: 6,
+        icon: Cloud,
+        accent: "#f59e0b",
+        eyebrow: "Cloud Security",
+        title: "Cloud & Hybrid Security",
+        description: "Secure your cloud workloads with the same rigour as your on-prem estate. We configure, monitor, and protect your AWS, Azure, or GCP environments end to end.",
+        stat: { value: "Multi-Cloud", label: "Ready" },
+        highlights: [
+            "Cloud posture management (CSPM)",
+            "Workload & container protection",
+            "Identity & access management in the cloud",
+        ],
     },
 ]
 
-export const risks = [
-    { label: 'Exposed attack surface', score: 74, color: '#f87171' },
-    { label: 'Auth weaknesses',        score: 58, color: '#fbbf24' },
-    { label: 'Unpatched services',     score: 82, color: '#f87171' },
-    { label: 'Data exposure risk',     score: 41, color: '#fbbf24' },
+// How it Works stuff
+export const HowItWorksStats = [
+  { value: "2",    unit: "wks",  label: "Avg. deployment time",      color: "#93c5fd" },
+  { value: "<48",  unit: "hrs",  label: "Threat monitoring setup",   color: "#a78bfa" },
+  { value: "99.9%",unit: null,   label: "Network uptime reliability",color: "#4ade80" },
+  { value: "24/7", unit: null,   label: "Security monitoring",       color: "#fbbf24" },
 ]
-
-export const tasks2 = [
-    'Firewall rules deployed',
-    'IDS/IPS configured',
-    'VPN tunnels live',
-    'EDR agents installed',
-    'Policies enforced',
-]
-
-export const feeds2 = [
-    { label: 'Firewall cluster',  status: 'Online', color: '#4ade80' },
-    { label: 'IDS/IPS engine',    status: 'Online', color: '#4ade80' },
-    { label: 'Endpoint agents',   status: 'Online', color: '#4ade80' },
-    { label: 'VPN gateway',       status: 'Online', color: '#4ade80' },
-]
-
-import {Risk, Setup, Monitoring2, Improvement} from './Components'
 
 export const steps = [
-    {
-        id: 1,
-        icon: Search,
-        accent: '#fbbf24',
-        eyebrow: 'Step 01',
-        title: 'Risk Assessment',
-        stat: { value: 'Full scope', label: 'Attack surface review' },
-        description: 'We start by mapping every asset, evaluating your existing controls, and scoring vulnerabilities across your perimeter, network, and endpoints — producing a clear, prioritised risk register to guide everything that follows.',
-        highlights: ['Full attack surface mapping', 'Control gap analysis', 'Prioritised risk register'],
-        mockup: Risk,
-    },
-    {
-        id: 2,
-        icon: ShieldCheck,
-        accent: '#93c5fd',
-        eyebrow: 'Step 02',
-        title: 'Security Setup',
-        stat: { value: 'Bespoke', label: 'Configured for your network' },
-        description: 'Using risk findings, we deploy and configure your full security stack — firewalls, IDS/IPS, VPN gateways, and EDR agents — all tailored to your network topology, user base, and compliance requirements.',
-        highlights: ['Full stack deployment', 'Topology-aware configuration', 'Compliance alignment'],
-        mockup: Setup,
-    },
-    {
-        id: 3,
-        icon: MonitorCheck,
-        accent: '#4ade80',
-        eyebrow: 'Step 03',
-        title: 'Monitoring',
-        stat: { value: '24 / 7', label: 'SOC coverage' },
-        description: 'Our Security Operations Centre watches your environment around the clock — correlating events across every layer, surfacing real threats fast, and responding to incidents before they escalate into breaches.',
-        highlights: ['24/7 SOC analyst coverage', 'SIEM event correlation', 'Sub-15min incident response'],
-        mockup: Monitoring,
-    },
-    {
-        id: 4,
-        icon: TrendingUp,
-        accent: '#5eead4',
-        eyebrow: 'Step 04',
-        title: 'Continuous Improvement',
-        stat: { value: 'Ongoing', label: 'Posture hardening' },
-        description: 'Security is never static. We run quarterly reviews, update threat signatures, close newly discovered gaps, and measure your posture over time — ensuring your defences grow stronger as the threat landscape evolves.',
-        highlights: ['Quarterly posture reviews', 'Threat intelligence updates', 'Coverage & gap tracking'],
-        mockup: Improvement,
-    },
+  {
+    n: "01",
+    icon: ClipboardList,
+    color: "#93c5fd",
+    phase: "Assessment",
+    title: "Understanding Your Infrastructure",
+    body: "We assess your network environment, identify vulnerabilities, and evaluate current security risks before deployment begins.",
+    points: [
+      "Infrastructure assessment",
+      "Risk & vulnerability review",
+      "Security gap analysis",
+      "Business continuity planning",
+    ],
+  },
+
+  {
+    n: "02",
+    icon: Settings2,
+    color: "#a78bfa",
+    phase: "Planning",
+    title: "Security Strategy Built Around You",
+    body: "Our team designs a tailored network security strategy aligned with your business operations and infrastructure needs.",
+    points: [
+      "Firewall planning",
+      "Access control policies",
+      "VPN & remote access setup",
+      "Security architecture mapping",
+    ],
+  },
+
+  {
+    n: "03",
+    icon: DatabaseZap,
+    color: "#5eead4",
+    phase: "Deployment",
+    title: "Secure System Implementation",
+    body: "Security tools, monitoring systems, and protection layers are deployed with minimal disruption to daily operations.",
+    points: [
+      "Firewall deployment",
+      "Threat monitoring setup",
+      "Endpoint protection",
+      "Secure network configuration",
+    ],
+  },
+
+  {
+    n: "04",
+    icon: Users2,
+    color: "#4ade80",
+    phase: "Testing",
+    title: "Validate & Strengthen Protection",
+    body: "We test your network defenses, validate configurations, and ensure your systems are protected against common threats.",
+    points: [
+      "Security validation testing",
+      "Vulnerability checks",
+      "Access verification",
+      "Performance optimization",
+    ],
+  },
+
+  {
+    n: "05",
+    icon: Rocket,
+    color: "#fbbf24",
+    phase: "Monitoring",
+    title: "Real-Time Threat Monitoring",
+    body: "Your network is continuously monitored to detect suspicious activity and respond quickly to potential threats.",
+    points: [
+      "24/7 monitoring",
+      "Threat detection alerts",
+      "Traffic analysis",
+      "Incident response support",
+    ],
+  },
+
+  {
+    n: "06",
+    icon: ShieldCheck,
+    color: "#f87171",
+    phase: "Support",
+    title: "Ongoing Security & Support",
+    body: "We provide continuous updates, maintenance, and expert support to keep your infrastructure secure and optimized.",
+    points: [
+      "Security updates",
+      "Ongoing maintenance",
+      "Dedicated support access",
+      "Rapid response assistance",
+    ],
+  },
+]
+
+export const checklist = [
+  "Dedicated security specialists",
+  "Minimal operational disruption",
+  "24/7 threat monitoring",
+  "Continuous security updates",
+  "Scalable protection for growing businesses",
+]
+
+// Why Choose us Stuff
+
+export const reasons = [
+  {
+    id: "protection",
+    icon: ShieldCheck,
+    color: "#93c5fd",
+    tag: "Proactive security",
+    title: "Protection Built for Modern Networks",
+    body: "Our security solutions are designed to identify threats early, reduce vulnerabilities, and keep your business protected without slowing operations down.",
+    points: [
+      "Real-time threat detection",
+      "Secure network architecture",
+      "Firewall & endpoint protection",
+      "Continuous risk monitoring",
+    ],
+    span: 1,
+  },
+
+  {
+    id: "visibility",
+    icon: Eye,
+    color: "#a78bfa",
+    tag: "Complete visibility",
+    title: "See What's Happening Across Your Network",
+    body: "Monitor network activity, user access, and potential threats through centralized dashboards and real-time alerts.",
+    points: [
+      "Live network monitoring",
+      "Instant threat alerts",
+      "Traffic & activity insights",
+      "Centralized security visibility",
+    ],
+
+    roles: [
+      { label: "IT Teams", sub: "Real-time monitoring & alerts", color: "#a78bfa" },
+      { label: "Managers", sub: "Clear operational visibility", color: "#5eead4" },
+      { label: "Remote Teams", sub: "Secure access from anywhere", color: "#93c5fd" },
+    ],
+
+    stats: [
+      { value: "24/7", label: "Threat monitoring" },
+      { value: "< 5 min", label: "Alert response visibility" },
+    ],
+
+    span: 2,
+  },
+
+  {
+    id: "scalable",
+    icon: TrendingUp,
+    color: "#4ade80",
+    tag: "Scales with you",
+    title: "Security That Grows With Your Business",
+    body: "From small offices to enterprise environments, our solutions scale alongside your infrastructure and operational needs.",
+    points: [
+      "Multi-site protection",
+      "Cloud & on-premise support",
+      "Flexible security architecture",
+      "Built for business growth",
+    ],
+
+    stats: [
+      { value: "Multi-site", label: "Infrastructure ready" },
+      { value: "Enterprise", label: "Scalable deployment" },
+    ],
+
+    span: 1,
+  },
+
+  {
+    id: "support",
+    icon: HeadphonesIcon,
+    color: "#fbbf24",
+    tag: "Always supported",
+    title: "Security Support You Can Rely On",
+    body: "Our team provides continuous monitoring, maintenance, and expert support to help keep your network secure and optimized.",
+    points: [
+      "Dedicated technical support",
+      "Ongoing maintenance",
+      "Security updates included",
+      "Rapid issue response",
+    ],
+
+    stats: [
+      { value: "24/7", label: "Support access" },
+      { value: "< 4h", label: "Response SLA" },
+    ],
+
+    span: 1,
+  },
+]
+
+export const trustStats = [
+  { value: "99.9%", label: "Network uptime",        color: "#93c5fd" },
+  { value: "24/7",  label: "Threat monitoring",      color: "#4ade80" },
+  { value: "< 5m",  label: "Alert visibility",       color: "#fbbf24" },
+  { value: "Multi-site", label: "Infrastructure support", color: "#a78bfa" },
+]
+
+export const testimonials = [
+  {
+    quote: "Their monitoring and security systems gave our team complete visibility across the network.",
+    name: "David R.",
+    role: "Operations Manager",
+  },
+
+  {
+    quote: "The deployment process was smooth, and the ongoing support has been excellent.",
+    name: "Melissa K.",
+    role: "IT Administrator",
+  },
+
+  {
+    quote: "We needed scalable protection for multiple locations, and the system has performed reliably.",
+    name: "Andre T.",
+    role: "Infrastructure Lead",
+  },
+]
+
+export const promises = [
+  "Real-time threat monitoring",
+  "Scalable network protection",
+  "Secure remote connectivity",
+  "Dedicated technical support",
+  "Reliable infrastructure security",
+  "Business-focused solutions",
 ]
