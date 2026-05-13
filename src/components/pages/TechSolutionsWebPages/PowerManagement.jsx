@@ -5,10 +5,12 @@ import Footer from '../../sections/Footer'
 import Features from '../../Aspects/power-management/Features';
 import SystemTypes from '../../Aspects/power-management/SystemTypes';
 import Services from '../../Aspects/power-management/Services';
-import HowItWorks from '../../Aspects/power-management/HowItWorks';
 import TechIntegration from '../../Aspects/power-management/TechIntegration';
-import WhyChooseUs from '../../Aspects/power-management/WhyChooseUs';
-import FAQSection from '../../Aspects/Faqs/FAQs'
+import FAQSection from '../../Aspects/Global/FAQs';
+import { howItWorksData } from '../../Aspects/Global/HowItWorksData';
+import HowItWorks from '../../Aspects/Global/HowItWorks';
+import { whyChooseUsData } from '../../Aspects/Global/WhyChooseUsData';
+import WhyChooseUs from '../../Aspects/Global/WhyChooseUs';
 
 import { Zap, Clock, Server, ArrowRight, ShieldCheck, Activity } from "lucide-react";
 
@@ -222,13 +224,13 @@ const PowerManagement = () => {
             <Services />
 
             {/* How It Works */}
-            <HowItWorks />
+            <HowItWorks {...howItWorksData.powerManagement} />
 
             {/* Tech Integration */}
             <TechIntegration />
 
             {/* Why Choose us */}
-            <WhyChooseUs />
+            <WhyChooseUs {...whyChooseUsData.powerManagement} />
             
             {/* FAQs */}
             <FAQSection />

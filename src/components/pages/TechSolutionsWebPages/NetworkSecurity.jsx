@@ -3,13 +3,14 @@ import TitleHeader from '../../TitleHeader'
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
 import Features from '../../Aspects/Network-security/Features'
-import FAQSection from '../../Aspects/Faqs/FAQs'
+import FAQSection from '../../Aspects/Global/FAQs';
 import TrustStrip from '../../Aspects/Network-security/TrustStrip'
 import TypesOfSecurity from '../../Aspects/Network-security/TypesOfSecurity'
 import Services from '../../Aspects/Network-security/Services'
-import HowItWorks from '../../Aspects/Network-security/HowItWorks'
 import WhyChooseUs from '../../Aspects/Network-security/WhyChooseUs'
 import { ShieldCheck, Network, BarChart3, Users, Lock, ArrowRight, ShieldAlert } from "lucide-react";
+import { howItWorksData } from '../../Aspects/Global/HowItWorksData';
+import HowItWorks from '../../Aspects/Global/HowItWorks';
 
 
 const NetworkSecurity = () => {
@@ -264,7 +265,7 @@ const NetworkSecurity = () => {
             <Services />
 
             {/* How It Works */}
-            <HowItWorks />
+            <HowItWorks {...howItWorksData.networkSecurity} />
 
             {/* Why Choose us */}
             <WhyChooseUs />

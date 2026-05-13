@@ -7,7 +7,7 @@ import Types from '../../Aspects/digital-signage/Types'
 import HowItWorks from '../../Aspects/digital-signage/HowItWorks'
 import IntegrationTech from '../../Aspects/digital-signage/IntegrationTech'
 import TrustUs from '../../Aspects/digital-signage/TrustUs'
-import FAQSection from '../../Aspects/Faqs/FAQs'
+import FAQSection from '../../Aspects/Global/FAQs';
 
 const DigitalSignage = () => {
   return (

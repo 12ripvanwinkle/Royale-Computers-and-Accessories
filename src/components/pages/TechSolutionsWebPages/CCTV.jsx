@@ -1,12 +1,10 @@
 import React from 'react'
 import { useState, } from "react";
 import TitleHeader from '../../TitleHeader'
-
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
 import { Features, Systems, TrustUs } from '../../Aspects/CCTV-Holder';
-import {StepFlow} from '../../Aspects/access-control';
-import FAQSection from '../../Aspects/Faqs/FAQs';
+import FAQSection from '../../Aspects/Global/FAQs';
 
 
 

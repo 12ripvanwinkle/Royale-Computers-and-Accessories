@@ -2,15 +2,15 @@ import React from 'react'
 import TitleHeader from '../../TitleHeader'
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
-import FAQSection from '../../Aspects/Faqs/FAQs'
+import FAQSection from '../../Aspects/Global/FAQs';
 import StatsStrip from '../../Aspects/school/StatsStrip'
-
 import { GraduationCap, Users, BookOpen, ArrowRight, ShieldCheck, BarChart3 } from "lucide-react";
 import SchoolFeatures from '../../Aspects/school/Features'
 import Services from '../../Aspects/school/Services'
-import HowItWorks from '../../Aspects/school/HowItWorks'
-import WhyChooseUs from '../../Aspects/school/WhyChooseUs'
-
+import { howItWorksData } from '../../Aspects/Global/HowItWorksData';
+import HowItWorks from '../../Aspects/Global/HowItWorks';
+import { whyChooseUsData } from '../../Aspects/Global/WhyChooseUsData';
+import WhyChooseUs from '../../Aspects/Global/WhyChooseUs';
 
 
 
@@ -274,10 +274,10 @@ const School = () => {
             <Services />
 
             {/* How it works */}
-            <HowItWorks />
+            <HowItWorks {...howItWorksData.school} />
 
             {/* Why Choose Us */}
-            <WhyChooseUs />
+            <WhyChooseUs {...whyChooseUsData.school} />
 
             {/* FAQs */}
             <FAQSection />

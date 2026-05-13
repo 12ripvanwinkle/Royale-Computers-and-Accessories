@@ -2,14 +2,14 @@ import React from 'react'
 import TitleHeader from '../../TitleHeader'
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
-import FAQSection from '../../Aspects/Faqs/FAQs'
+import FAQSection from '../../Aspects/Global/FAQs';
 // import Holder from '../../Holder'
 import { ArrowRight, TrendingUp, Users, BarChart3, Zap, ShieldCheck, } from 'lucide-react'
 import Features from '../../Aspects/CRM/Features'
 import Modules from '../../Aspects/CRM/Modules'
 import Services from '../../Aspects/CRM/Services'
-import WhyChooseUs from '../../Aspects/CRM/WhyChooseUs'
-
+import { whyChooseUsData } from '../../Aspects/Global/WhyChooseUsData';
+import WhyChooseUs from '../../Aspects/Global/WhyChooseUs';
 
 const CRM = () => {
   return (
@@ -211,7 +211,7 @@ const CRM = () => {
             <Services />
             
             {/* Why Choose us */}
-            <WhyChooseUs />
+            <WhyChooseUs {...whyChooseUsData.crm} />
 
             {/* FAQS */}
             <FAQSection />

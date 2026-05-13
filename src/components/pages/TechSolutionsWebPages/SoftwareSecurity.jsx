@@ -6,7 +6,7 @@ import Features from '../../Aspects/Software-security/Features'
 import Protection from '../../Aspects/Software-security/Protection'
 import Services from '../../Aspects/Software-security/Services'
 import HowItWorks from '../../Aspects/Software-security/HowItWorks'
-import FAQSection from '../../Aspects/Faqs/FAQs'
+import FAQSection from '../../Aspects/Global/FAQs';
 
 const SoftwareSecurity = () => {
   return (
