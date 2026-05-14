@@ -1,396 +1,281 @@
 import React, { useState } from 'react'
-import {reasons, trustStats, testimonials, promises} from './index'
-import {Star, CheckCircle2, ArrowRight, } from "lucide-react"
-import { glassStrong, glass, glassHover, } from '../CCTV-Holder/CCTVStyles'
+import { glass, glassHover, innerSurface } from './CCTVStyles'
+import {
+  Camera,
+  Wifi,
+  Moon,
+  Activity,
+  Globe,
+  LayoutGrid,
+} from 'lucide-react'
 
-// Helper Function
-const Stars = () => (
-  <div className="flex items-center gap-0.5">
-    {Array.from({ length: 5 }).map((_, i) => (
-      <Star key={i} size={11} fill="#fbbf24" style={{ color: "#fbbf24" }} />
-    ))}
-  </div>
-)
+// ─── Data ────────────────────────────────────────────────────────────────────
+const systems = [
+  {
+    id: 'ip-camera',
+    icon: Wifi,
+    label: 'Network Based',
+    badge: 'Most Popular',
+    accentColor: '#00e5a0',
+    imageFallbackBg: 'linear-gradient(135deg, #0a2a1f 0%, #0d1f17 100%)',
+    image: '/images/systems/ip-camera.jpg',
+    title: 'IP Camera Systems',
+    description:
+      'High-definition network cameras that stream and record over your existing LAN or Wi-Fi. Scalable from a single camera to enterprise-grade deployments.',
+    highlights: ['4K Resolution', 'PoE Powered', 'Remote Access', 'AI Analytics'],
+  },
+  {
+    id: 'analog-hd',
+    icon: Camera,
+    label: 'Traditional HD',
+    badge: 'Cost Effective',
+    accentColor: '#c09aff',
+    imageFallbackBg: 'linear-gradient(135deg, #1a0f2e 0%, #130d22 100%)',
+    image: '/images/systems/analog-hd.jpg',
+    title: 'HD Analog / TVI Systems',
+    description:
+      'Upgrade legacy coax wiring to full HD with TVI/AHD technology. Keep your existing cable runs while getting modern image quality and DVR recording.',
+    highlights: ['1080p–8MP', 'Coax Reuse', 'DVR Storage', 'Long Cable Runs'],
+  },
+  {
+    id: 'night-vision',
+    icon: Moon,
+    label: 'Low-Light',
+    badge: 'Night Ready',
+    accentColor: '#7ab8ff',
+    imageFallbackBg: 'linear-gradient(135deg, #0b1525 0%, #091220 100%)',
+    image: '/images/systems/night-vision.jpg',
+    title: 'Night Vision Cameras',
+    description:
+      'IR and colour night-vision cameras that deliver crisp footage in complete darkness. Infrared LEDs illuminate up to 100 m with zero visible light.',
+    highlights: ['Starlight Sensor', '100 m IR Range', 'Full-Colour Night', 'Auto IR Cut'],
+  },
+  {
+    id: 'motion-detection',
+    icon: Activity,
+    label: 'Smart Detection',
+    badge: 'AI Powered',
+    accentColor: '#f0a33c',
+    imageFallbackBg: 'linear-gradient(135deg, #251800 0%, #1c1200 100%)',
+    image: '/images/systems/motion.jpg',
+    title: 'Motion Detection Systems',
+    description:
+      'AI-driven perimeter protection that distinguishes people, vehicles, and animals from wind and shadows — eliminating false alerts around the clock.',
+    highlights: ['Person / Vehicle AI', 'Zone Masking', 'Instant Alerts', 'Event Clips'],
+  },
+  {
+    id: 'remote-viewing',
+    icon: Globe,
+    label: 'Cloud & Mobile',
+    badge: 'Always On',
+    accentColor: '#ff8775',
+    imageFallbackBg: 'linear-gradient(135deg, #250e0a 0%, #1c0a07 100%)',
+    image: '/images/systems/remote.jpg',
+    title: 'Remote Viewing Systems',
+    description:
+      'Monitor your property from anywhere in the world via smartphone, tablet, or browser. Encrypted P2P connections with no port-forwarding required.',
+    highlights: ['iOS & Android', 'Multi-Site View', 'Cloud Backup', 'Two-Way Audio'],
+  },
+  {
+    id: 'multi-location',
+    icon: LayoutGrid,
+    label: 'Enterprise',
+    badge: 'Multi-Site',
+    accentColor: '#60c8f0',
+    imageFallbackBg: 'linear-gradient(135deg, #071922 0%, #051318 100%)',
+    image: '/images/systems/multi-location.jpg',
+    title: 'Multi-Location Systems',
+    description:
+      'Centralised VMS platforms that unify cameras across multiple branches, warehouses, or sites into one management console with role-based access.',
+    highlights: ['Centralised VMS', 'Role-Based Access', 'Cross-Site Search', 'Health Monitoring'],
+  },
+]
 
-const WhyChooseUs = () => {
-
-  const [active, setActive] = useState(null)
+// ─── Card ─────────────────────────────────────────────────────────────────────
+function SystemCard({ system, index }) {
+  const [hovered, setHovered] = useState(false)
+  const Icon = system.icon
+  const color = system.accentColor
 
   return (
-    <section className="w-full px-4 sm:px-6 md:px-10 lg:px-14 py-16 sm:py-24"
-      style={{color:"white"}}
+    <div
+      className="rounded-2xl overflow-hidden transition-all duration-300 flex flex-col relative"
+      style={{
+        ...(hovered ? glassHover : glass),
+        borderRadius: 20,
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
-      <div className="max-w-5xl mx-auto">
+      {/* Radial glow — top-left */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(ellipse at 0% 0%, ${color}18, transparent 60%)`,
+          borderRadius: 20,
+          zIndex: 0,
+        }}
+      />
 
-        {/* Header */}
-        <div className="text-center mb-14">
+      {/* ── Image area ── */}
+      <div className="relative w-full overflow-hidden" style={{ height: 180, zIndex: 1 }}>
+        <div className="absolute inset-0" style={{ background: system.imageFallbackBg }} />
+        <img
+          src={system.image}
+          alt={system.title}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ opacity: 0.82 }}
+          onError={e => { e.currentTarget.style.display = 'none' }}
+        />
+        <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.22)' }} />
 
-          <p className="text-xs font-semibold uppercase tracking-widest mb-4"
-            style={{color: "rgba(255,255,255,0.3)", letterSpacing: "0.2em"}}
-          >
-            The Difference
-          </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-5"
-            style={{letterSpacing: "-0.03em", lineHeight: 1.05}}
-          >
-            Why Choose Us 
-          </h2>
-          <p className="text-sm sm:text-base font-light max-w-md mx-auto leading-relaxed"
-            style={{color: "rgba(255,255,255,0.45)"}}
-          >
-            Built specifically for schools — not adapted from a generic tool.
-            That focus shows in everything from the interface to the support.
-          </p>
-
-        </div>
-
-        {/* Bento Grid */}
-
-        {/* Row 1: */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-          {reasons.slice(0, 2).map(({ id, icon: Icon, color, tag, title, body, points, roles, stats, span }) => {
-            const isActive = active === id
-            return (
-              <div
-                key={id}
-                className={`
-                  relative overflow-hidden rounded-2xl cursor-default
-                  transition-all duration-300 hover:-translate-y-0.5
-                  ${span === 2 ? "md:col-span-2" : "md:col-span-1"}
-                `}
-                style={{
-                  ...(isActive ? glassHover : glass),
-                  background: `radial-gradient(ellipse at 0% 0%, ${color}18 0%, transparent 60%), ${isActive ? "rgba(255,255,255,0.07)" : "rgba(255,255,255,0.04)"}`,
-                }}
-                onMouseEnter={() => setActive(id)}
-                onMouseLeave={() => setActive(null)}
-              >
-                {/* Watermark icon */}
-                <div className="pointer-events-none absolute -bottom-4 -right-4 opacity-[0.045]" style={{ color }}>
-                  <Icon size={120} strokeWidth={1} />
-                </div>
-
-                <div className="relative z-10 p-6 flex flex-col gap-5 h-full">
-
-                  {/* Icon + tag */}
-                  <div className="flex items-center justify-between">
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                      style={{
-                        background: `${color}18`, border: `1px solid ${color}35`, color,
-                        boxShadow: isActive ? `0 0 16px ${color}25` : "none",
-                        transition: "box-shadow 0.3s ease",
-                      }}
-                    >
-                      <Icon size={18} strokeWidth={1.75} />
-                    </div>
-                    <span
-                      className="text-xs font-semibold px-3 py-1 rounded-full"
-                      style={{ color, background: `${color}14`, border: `1px solid ${color}28` }}
-                    >
-                      {tag}
-                    </span>
-                  </div>
-
-                  {/* Title + body — side by side on wide card */}
-                  <div className={`${span === 2 ? "md:flex md:gap-10" : ""} flex flex-col gap-2`}>
-                    <div className={span === 2 ? "md:w-2/5 shrink-0" : ""}>
-                      <h3 className="text-lg font-bold text-white leading-snug" style={{ letterSpacing: "-0.01em" }}>
-                        {title}
-                      </h3>
-                    </div>
-                    <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-                      {body}
-                    </p>
-                  </div>
-
-                  {/* Role pills — wide card only */}
-                  {roles && (
-                    <div className="flex gap-2">
-                      {roles.map(({ label, sub, color: rc }) => (
-                        <div
-                          key={label}
-                          className="flex-1 rounded-xl px-3 py-2.5"
-                          style={{ background: `${rc}0e`, border: `1px solid ${rc}25` }}
-                        >
-                          <div className="text-xs font-bold mb-0.5" style={{ color: rc }}>{label}</div>
-                          <div className="text-xs leading-snug" style={{ color: "rgba(255,255,255,0.45)" }}>{sub}</div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Points */}
-                  {!roles && (
-                    <ul
-                      className="flex flex-col gap-2.5 pt-4 mt-auto"
-                      style={{ borderTop: `1px solid ${color}18` }}
-                    >
-                      {points.map((pt) => (
-                        <li key={pt} className="flex items-center gap-2.5">
-                          <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: color, boxShadow: `0 0 6px ${color}80` }} />
-                          <span className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>{pt}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {/* Stats */}
-                  {stats && (
-                    <div className="flex gap-2 mt-auto">
-                      {stats.map(({ value, label }) => (
-                        <div
-                          key={label}
-                          className="flex-1 flex flex-col items-center justify-center px-3 py-3 rounded-xl text-center"
-                          style={{ background: `${color}0e`, border: `1px solid ${color}25` }}
-                        >
-                          <span className="text-lg font-black leading-none mb-1" style={{ color }}>{value}</span>
-                          <span className="text-xs" style={{ color: "rgba(255,255,255,0.38)" }}>{label}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Footnote — wide card only */}
-                  {id === "ui" && (
-                    <p className="text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>
-                      *We still offer training — it's just rarely needed after day two.
-                    </p>
-                  )}
-                </div>
-
-                <div
-                  className="absolute bottom-0 left-0 right-0 h-px"
-                  style={{ background: `linear-gradient(to right, ${color}50, transparent)`, opacity: isActive ? 1 : 0.4, transition: "opacity 0.3s ease" }}
-                />
-              </div>
-            )
-          })}
-        </div>
-
-        {/* Row 2 */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-
-          {/* Scale Card */}
-          {reasons.slice(2, 3).map(({ id, icon: Icon, color, tag, title, body, points, stats }) => {
-            const isActive = active === id
-            return (
-              <div
-                key={id}
-                className="md:col-span-1 relative overflow-hidden rounded-2xl cursor-default transition-all duration-300 hover:-translate-y-0.5"
-                style={{
-                  ...(isActive ? glassHover : glass),
-                  background: `radial-gradient(ellipse at 0% 0%, ${color}18 0%, transparent 60%), ${isActive ? "rgba(255,255,255,0.07)" : "rgba(255,255,255,0.04)"}`,
-                }}
-                onMouseEnter={() => setActive(id)}
-                onMouseLeave={() => setActive(null)}
-              >
-                <div className="pointer-events-none absolute -bottom-4 -right-4 opacity-[0.045]" style={{ color }}>
-                  <Icon size={120} strokeWidth={1} />
-                </div>
-                <div className="relative z-10 p-6 flex flex-col gap-5 h-full">
-                  <div className="flex items-center justify-between">
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                      style={{ background: `${color}18`, border: `1px solid ${color}35`, color, boxShadow: isActive ? `0 0 16px ${color}25` : "none", transition: "box-shadow 0.3s ease" }}
-                    >
-                      <Icon size={18} strokeWidth={1.75} />
-                    </div>
-                    <span className="text-xs font-semibold px-3 py-1 rounded-full" style={{ color, background: `${color}14`, border: `1px solid ${color}28` }}>
-                      {tag}
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-white leading-snug mb-2" style={{ letterSpacing: "-0.01em" }}>{title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{body}</p>
-                  </div>
-                  <ul className="flex flex-col gap-2.5 pt-4 mt-auto" style={{ borderTop: `1px solid ${color}18` }}>
-                    {points.map((pt) => (
-                      <li key={pt} className="flex items-center gap-2.5">
-                        <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: color, boxShadow: `0 0 6px ${color}80` }} />
-                        <span className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>{pt}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  {stats && (
-                    <div className="flex gap-2">
-                      {stats.map(({ value, label }) => (
-                        <div key={label} className="flex-1 flex flex-col items-center px-3 py-3 rounded-xl text-center" style={{ background: `${color}0e`, border: `1px solid ${color}25` }}>
-                          <span className="text-lg font-black leading-none mb-1" style={{ color }}>{value}</span>
-                          <span className="text-xs" style={{ color: "rgba(255,255,255,0.38)" }}>{label}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: `linear-gradient(to right, ${color}50, transparent)`, opacity: isActive ? 1 : 0.4, transition: "opacity 0.3s ease" }} />
-              </div>
-            )
-          })}
-
-          {/* Testimonials card */}
-          <div className="md:col-span-2 relative overflow-hidden rounded-2xl cursor-default transition-all duration-300 hover:-translate-y-0.5"
+        {/* Pill badge — top-right */}
+        <div className="absolute top-3 right-3">
+          <span
+            className="text-xs font-semibold px-2.5 py-1 rounded-full"
             style={{
-              ...(active === "testimonials" ? glassHover : glass),
-              background: `radial-gradient(ellipse at 100% 0%, #fbbf2412 0%, transparent 55%), ${active === "testimonials" ? "rgba(255,255,255,0.07)" : "rgba(255,255,255,0.04)"}`,
+              background: `${color}18`,
+              border: `1px solid ${color}40`,
+              color: color,
             }}
-            onMouseEnter={() => setActive("testimonials")}
-            onMouseLeave={() => setActive(null)}
           >
-            <div className="relative z-10 p-6 flex flex-col gap-4 h-full">
-              
-              <div className="flex items-center justify-between">
-                <p className="text-xs font-semibold uppercase tracking-widest" style={{color: "rgba(255,255,255,0.3)", letterSpacing: "0.18em"}}>
-                  What Schools Say 
-                </p>  
-                <div className="flex items-center gap-1.5">
-                 <Stars /> 
-                 <span className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>4.9 avg</span>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-3 flex-1">
-                {testimonials.map(({ quote, name, role }) => (
-                  <div
-                    key={name}
-                    className="rounded-xl p-4 flex flex-col gap-2"
-                    style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
-                  >
-                    <Stars />
-                    <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
-                      "{quote}"
-                    </p>
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-xs font-semibold text-white">{name}</span>
-                      <span className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>· {role}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-            </div>
-            <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "linear-gradient(to right, #fbbf2450, transparent)", opacity: active === "testimonials" ? 1 : 0.4, transition: "opacity 0.3s ease" }} />
-          </div>
-
-          {/* Support Card */}
-          {reasons.slice(3, 4).map(({ id, icon: Icon, color, tag, title, body, points, stats }) => {
-            const isActive = active === id
-            return (
-              <div
-                key={id}
-                className="md:col-span-1 relative overflow-hidden rounded-2xl cursor-default transition-all duration-300 hover:-translate-y-0.5"
-                style={{
-                  ...(isActive ? glassHover : glass),
-                  background: `radial-gradient(ellipse at 0% 0%, ${color}18 0%, transparent 60%), ${isActive ? "rgba(255,255,255,0.07)" : "rgba(255,255,255,0.04)"}`,
-                }}
-                onMouseEnter={() => setActive(id)}
-                onMouseLeave={() => setActive(null)}
-              >
-                <div className="pointer-events-none absolute -bottom-4 -right-4 opacity-[0.045]" style={{ color }}>
-                  <Icon size={120} strokeWidth={1} />
-                </div>
-                <div className="relative z-10 p-6 flex flex-col gap-5 h-full">
-                  <div className="flex items-center justify-between">
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                      style={{ background: `${color}18`, border: `1px solid ${color}35`, color, boxShadow: isActive ? `0 0 16px ${color}25` : "none", transition: "box-shadow 0.3s ease" }}
-                    >
-                      <Icon size={18} strokeWidth={1.75} />
-                    </div>
-                    <span className="text-xs font-semibold px-3 py-1 rounded-full" style={{ color, background: `${color}14`, border: `1px solid ${color}28` }}>
-                      {tag}
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-white leading-snug mb-2" style={{ letterSpacing: "-0.01em" }}>{title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{body}</p>
-                  </div>
-                  <ul className="flex flex-col gap-2.5 pt-4 mt-auto" style={{ borderTop: `1px solid ${color}18` }}>
-                    {points.map((pt) => (
-                      <li key={pt} className="flex items-center gap-2.5">
-                        <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: color, boxShadow: `0 0 6px ${color}80` }} />
-                        <span className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>{pt}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  {stats && (
-                    <div className="flex gap-2">
-                      {stats.map(({ value, label }) => (
-                        <div key={label} className="flex-1 flex flex-col items-center px-3 py-3 rounded-xl text-center" style={{ background: `${color}0e`, border: `1px solid ${color}25` }}>
-                          <span className="text-lg font-black leading-none mb-1" style={{ color }}>{value}</span>
-                          <span className="text-xs" style={{ color: "rgba(255,255,255,0.38)" }}>{label}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: `linear-gradient(to right, ${color}50, transparent)`, opacity: isActive ? 1 : 0.4, transition: "opacity 0.3s ease" }} />
-              </div>
-            )
-          })}
-
+            {system.badge}
+          </span>
         </div>
-        
-        {/* Cta Strip */}
-        <div className="relative overflow-hidden rounded-2xl px-6 py-6 flex flex-col md:flex-row md:items-center justify-between gap-6"
-          style={glassStrong}
+
+        {/* Step watermark — bottom-right */}
+        <div
+          className="absolute bottom-2 right-3 font-black select-none pointer-events-none"
+          style={{
+            fontSize: 48,
+            color: 'rgba(255,255,255,0.07)',
+            lineHeight: 1,
+            fontFamily: 'monospace',
+          }}
         >
+          {String(index + 1).padStart(2, '0')}
+        </div>
+      </div>
 
-          {/* Subtle glow */}
-          <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 120%, #93c5fd0a 0%, transparent 60%)" }} />
+      {/* ── Text area ── */}
+      <div className="flex flex-col gap-3 p-5 flex-1 relative" style={{ zIndex: 1 }}>
 
-          {/* Trust Stats */}
-          <div className="relative z-10 flex flex-wrap gap-6 flex-1">
-            {trustStats.map(({ value, label, color }) => (
-              <div key={label} className="flex flex-col">
-                <span className="text-2xl font-black leading-none" style={{ color }}>{value}</span>
-                <span className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.38)" }}>{label}</span>
-              </div>
-            ))}
+        {/* Icon + label */}
+        <div className="flex items-center gap-2.5">
+          <div
+            className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300"
+            style={{
+              background: `${color}18`,
+              border: `1px solid ${color}25`,
+              color: color,
+              boxShadow: hovered ? `0 0 16px ${color}25` : 'none',
+            }}
+          >
+            <Icon size={15} />
           </div>
-
-          {/* Divider */}
-          <div className="hidden md:block w-px self-stretch" style={{ background: "rgba(255,255,255,0.08)" }} />
-
-          {/* Promises + CTA */}
-          <div className="relative z-10 flex flex-col gap-4 md:w-72 shrink-0">
-            
-            <p className="text-xs font-semibold uppercase tracking-widest" style={{color: "rgba(255,255,255,0.3)", letterSpacing: "0.18em"}}>
-              Our Promise to every School
-            </p>
-            <div className="flex flex-wrap gap-x-4 gap-y-2">
-              {promises.map((item) => (
-                <div key={item} className="flex items-center gap-1.5">
-                  <CheckCircle2 size={11} style={{ color: "#4ade80", flexShrink: 0 }} />
-                  <span className="text-xs" style={{ color: "rgba(255,255,255,0.55)" }}>{item}</span>
-                </div>
-              ))}
-            </div>
-            <button
-              className="self-start flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-xl"
-              style={{ background: "#93c5fd", color: "#0f172a", transition: "all 0.2s ease" }}
-              onMouseEnter={e => {
-                e.currentTarget.style.background = "#bfdbfe"
-                e.currentTarget.style.boxShadow = "0 6px 24px rgba(147,197,253,0.3)"
-                e.currentTarget.style.transform = "translateY(-1px)"
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = "#93c5fd"
-                e.currentTarget.style.boxShadow = "none"
-                e.currentTarget.style.transform = "translateY(0)"
-              }}
-              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-            >
-              See it in action <ArrowRight size={14} strokeWidth={2.5} />
-            </button>
-
-          </div>
-
+          <span
+            className="text-xs font-medium tracking-wide"
+            style={{ color: 'rgba(255,255,255,0.45)' }}
+          >
+            {system.label}
+          </span>
         </div>
 
+        {/* Title */}
+        <h3 className="text-base font-semibold text-white leading-snug">
+          {system.title}
+        </h3>
+
+        {/* Description */}
+        <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.58)' }}>
+          {system.description}
+        </p>
+
+        {/* Highlight pills */}
+        <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
+          {system.highlights.map(h => (
+            <div
+              key={h}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full"
+              style={{
+                ...innerSurface,
+                background: `${color}0e`,
+                border: `1px solid ${color}25`,
+              }}
+            >
+              {/* Glowing bullet dot */}
+              <div
+                className="w-1.5 h-1.5 rounded-full shrink-0"
+                style={{
+                  background: color,
+                  boxShadow: `0 0 6px ${color}80`,
+                }}
+              />
+              <span className="text-xs" style={{ color: 'rgba(255,255,255,0.68)' }}>{h}</span>
+            </div>
+          ))}
+        </div>
       </div>
-    </section>
+
+      {/* Watermark icon — bottom-right of full card */}
+      <div
+        className="absolute bottom-4 right-4 pointer-events-none select-none"
+        style={{ opacity: 0.045, zIndex: 0, color: color }}
+      >
+        <Icon size={120} />
+      </div>
+
+      {/* Accent bottom line */}
+      <div
+        className="absolute bottom-0 left-0 right-0 pointer-events-none transition-opacity duration-300"
+        style={{
+          height: 1,
+          background: `linear-gradient(to right, transparent, ${color})`,
+          opacity: hovered ? 1 : 0.4,
+          borderRadius: '0 0 20px 20px',
+          zIndex: 2,
+        }}
+      />
+    </div>
   )
 }
 
-export default WhyChooseUs
+// ─── Section ──────────────────────────────────────────────────────────────────
+const Systems = () => {
+  return (
+    <div className="w-full px-4 md:px-6 py-16 md:py-24">
+      <div className="max-w-5xl mx-auto">
+
+        {/* Header */}
+        <div className="text-center mb-12">
+          <p
+            className="text-xs font-semibold tracking-widest uppercase mb-4"
+            style={{ color: 'rgba(255,255,255,0.45)' }}
+          >
+            Choose Your Surveillance System
+          </p>
+          <h2 className="text-3xl md:text-5xl font-light text-white leading-tight mb-4">
+            Types of CCTV Systems
+          </h2>
+          <p
+            className="text-sm md:text-base max-w-xl mx-auto leading-relaxed"
+            style={{ color: 'rgba(255,255,255,0.55)' }}
+          >
+            From high-tech IP cameras to rugged outdoor bullet cams — we supply,
+            install, and configure every type of CCTV system.
+          </p>
+        </div>
+
+        {/* 3-column bento grid — md only, no sm breakpoint (avoids orphan gap) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {systems.map((system, index) => (
+            <SystemCard key={system.id} system={system} index={index} />
+          ))}
+        </div>
+
+      </div>
+    </div>
+  )
+}
+
+export default Systems

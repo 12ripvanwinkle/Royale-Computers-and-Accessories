@@ -268,10 +268,162 @@ export const howItWorksData = {
         buttonHoverColor: "#bfdbfe",
         buttonTextColor: "#0f172a",
     },
+  },
+
+  // CCTV 
+  cctv: {
+    subtitle: "The Process",
+    heading: "How It Works",
+
+    description:
+        "From site assessment to live monitoring, we deploy modern CCTV systems designed to improve visibility, security, and operational awareness.",
+
+    stats: [
+        { value: "2",      unit: "wks", label: "Avg. deployment time", color: "#93c5fd" },
+        { value: "<48",    unit: "hrs", label: "Camera configuration", color: "#a78bfa" },
+        { value: "24/7",   unit: null,  label: "Live surveillance",    color: "#4ade80" },
+        { value: "Multi-site", unit: null, label: "Coverage support",  color: "#fbbf24" },
+    ],
+
+    steps: [
+        {
+        n: "01",
+        icon: ClipboardList,
+        color: "#93c5fd",
+        phase: "Assessment",
+
+        title: "Understanding Your Security Needs",
+
+        body:
+            "We assess your property layout, surveillance requirements, and risk areas to design the right CCTV solution.",
+
+        points: [
+            "Site security assessment",
+            "Coverage area analysis",
+            "Risk & blind spot review",
+            "Monitoring requirement planning",
+        ],
+        },
+
+        {
+        n: "02",
+        icon: Settings2,
+        color: "#a78bfa",
+        phase: "Planning",
+
+        title: "Built Around Your Environment",
+
+        body:
+            "Camera placement, recording systems, and monitoring infrastructure configured around your facility and operational needs.",
+
+        points: [
+            "Camera placement strategy",
+            "Recording system planning",
+            "Storage configuration",
+            "Monitoring architecture setup",
+        ],
+        },
+
+        {
+        n: "03",
+        icon: DatabaseZap,
+        color: "#5eead4",
+        phase: "Installation",
+
+        title: "Professional System Deployment",
+
+        body:
+            "Cameras, monitoring systems, and recording infrastructure installed with minimal disruption to your operations.",
+
+        points: [
+            "Camera installation",
+            "DVR/NVR configuration",
+            "Network integration",
+            "System validation testing",
+        ],
+        },
+
+        {
+        n: "04",
+        icon: Users2,
+        color: "#4ade80",
+        phase: "Configuration",
+
+        title: "Optimized for Daily Monitoring",
+
+        body:
+            "Monitoring dashboards, alerts, and remote viewing systems configured for secure and efficient surveillance management.",
+
+        points: [
+            "Remote viewing setup",
+            "Alert configuration",
+            "Monitoring dashboard setup",
+            "Administrator onboarding",
+        ],
+        },
+
+        {
+        n: "05",
+        icon: Rocket,
+        color: "#fbbf24",
+        phase: "Activation",
+
+        title: "Real-Time Surveillance Monitoring",
+
+        body:
+            "Your CCTV system goes live with centralized monitoring, real-time visibility, and secure footage access.",
+
+        points: [
+            "Live system activation",
+            "Real-time monitoring",
+            "Footage verification",
+            "Mobile access setup",
+        ],
+        },
+
+        {
+        n: "06",
+        icon: ShieldCheck,
+        color: "#f87171",
+        phase: "Support",
+
+        title: "Ongoing Maintenance & Support",
+
+        body:
+            "We provide continuous maintenance, system updates, and technical support to keep your surveillance infrastructure operating reliably.",
+
+        points: [
+            "System maintenance",
+            "Software & firmware updates",
+            "Dedicated support access",
+            "Rapid issue response",
+        ],
+        },
+    ],
+
+    checklist: [
+        "Dedicated surveillance specialists",
+        "Real-time deployment updates",
+        "System performance verification",
+        "Ongoing monitoring & support",
+        "Minimal disruption to operations",
+    ],
+
+    cta: {
+        timelineText: "Typically deployed in 1–2 weeks.",
+
+        buttonLabel: "Book a Free Consultation",
+
+        buttonColor: "#93c5fd",
+
+        buttonHoverColor: "#bfdbfe",
+
+        buttonTextColor: "#0f172a",
     },
+  },
     
     // ── Power Management ────────────────────────────────────────
-    powerManagement: {
+  powerManagement: {
     subtitle: "The Process",
     heading: "How It Works",
     description:
@@ -391,7 +543,7 @@ export const howItWorksData = {
         buttonHoverColor: "#bfdbfe",
         buttonTextColor: "#0f172a",
     },
-    },
+  },
 
   // ── Add more pages here following the same shape ──────────
   // myNewPage: { subtitle, heading, description, stats, steps, checklist, cta }

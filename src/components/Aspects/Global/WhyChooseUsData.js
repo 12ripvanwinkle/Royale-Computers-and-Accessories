@@ -13,6 +13,8 @@ import {
   BatteryCharging,
   Gauge,
   Activity,
+  Camera,
+  MonitorSmartphone, 
 } from "lucide-react"
 
 export const whyChooseUsData = {
@@ -926,5 +928,245 @@ export const whyChooseUsData = {
     },
   },
 
+  cctv: {
+    subtitle: "Why Businesses Choose Us",
+
+    heading: "Built for Smarter Surveillance & Reliable Security",
+
+    description:
+      "Modern CCTV solutions designed to improve visibility, strengthen security, and provide real-time monitoring across your property and operations.",
+
+    reasons: [
+      {
+        id: "coverage",
+
+        icon: Camera,
+
+        color: "#93c5fd",
+
+        tag: "Smart surveillance",
+
+        title: "Complete Visibility & Coverage",
+
+        body:
+          "Monitor critical areas with strategically designed surveillance systems built for real-world security needs.",
+
+        points: [
+          "HD & 4K surveillance cameras",
+          "Wide-area coverage planning",
+          "Indoor & outdoor deployment",
+          "Centralized monitoring systems",
+        ],
+
+        span: 1,
+      },
+
+      {
+        id: "monitoring",
+
+        icon: MonitorSmartphone,
+
+        color: "#a78bfa",
+
+        tag: "Real-time monitoring",
+
+        title: "Continuous Visibility & Control",
+
+        body:
+          "Access live footage, receive alerts, and monitor your property remotely with centralized surveillance management tools.",
+
+        points: [
+          "Live video monitoring",
+          "Remote mobile viewing",
+          "Motion detection alerts",
+          "Video playback & reporting",
+        ],
+
+        roles: [
+          {
+            label: "Security Teams",
+            sub: "Monitor incidents in real time",
+            color: "#a78bfa",
+          },
+
+          {
+            label: "Operations",
+            sub: "Improve site visibility & oversight",
+            color: "#5eead4",
+          },
+
+          {
+            label: "Management",
+            sub: "Access footage from anywhere",
+            color: "#93c5fd",
+          },
+        ],
+
+        stats: [
+          {
+            value: "24/7",
+            label: "Live monitoring",
+          },
+
+          {
+            value: "Real-Time",
+            label: "Alerts & visibility",
+          },
+        ],
+
+        span: 2,
+      },
+
+      {
+        id: "reliability",
+
+        icon: ShieldCheck,
+
+        color: "#4ade80",
+
+        tag: "Reliable protection",
+
+        title: "Built for Stability & Security",
+
+        body:
+          "Protect your business with scalable surveillance infrastructure designed for reliable performance and long-term security.",
+
+        points: [
+          "Night vision support",
+          "Secure video storage",
+          "Multi-site monitoring",
+          "Scalable surveillance systems",
+        ],
+
+        stats: [
+          {
+            value: "Multi-site",
+            label: "Location support",
+          },
+
+          {
+            value: "Scalable",
+            label: "System expansion",
+          },
+        ],
+
+        span: 1,
+      },
+
+      {
+        id: "support",
+
+        icon: HeadphonesIcon,
+
+        color: "#fbbf24",
+
+        tag: "Reliable support",
+
+        title: "Ongoing Maintenance & Support",
+
+        body:
+          "Our team provides continuous maintenance, system optimization, and technical support to keep your CCTV infrastructure running smoothly.",
+
+        points: [
+          "Dedicated technical support",
+          "Camera system maintenance",
+          "Firmware & software updates",
+          "Rapid issue response",
+        ],
+
+        stats: [
+          {
+            value: "24/7",
+            label: "Support access",
+          },
+
+          {
+            value: "<4h",
+            label: "Response SLA",
+          },
+        ],
+
+        span: 1,
+      },
+    ],
+
+    trustStats: [
+      {
+        value: "24/7",
+        label: "Live surveillance",
+        color: "#93c5fd",
+      },
+
+      {
+        value: "Real-Time",
+        label: "Alerts & monitoring",
+        color: "#4ade80",
+      },
+
+      {
+        value: "Multi-site",
+        label: "Coverage support",
+        color: "#fbbf24",
+      },
+
+      {
+        value: "Reliable",
+        label: "Security infrastructure",
+        color: "#a78bfa",
+      },
+    ],
+
+    testimonials: [
+      {
+        quote:
+          "The live monitoring and remote access features completely changed how we manage site security.",
+
+        name: "David L.",
+
+        role: "Facilities Manager",
+      },
+
+      {
+        quote:
+          "Camera coverage and footage quality exceeded expectations. The entire deployment was smooth.",
+
+        name: "Michelle R.",
+
+        role: "Operations Director",
+      },
+
+      {
+        quote:
+          "The system is easy to manage, and support has been responsive whenever we needed assistance.",
+
+        name: "Kevin T.",
+
+        role: "Infrastructure Coordinator",
+      },
+    ],
+
+    testimonialsLabel: "Trusted by modern businesses",
+
+    promises: [
+      "24/7 live surveillance",
+      "Remote monitoring access",
+      "Scalable CCTV infrastructure",
+      "Reliable video storage",
+      "Dedicated technical support",
+      "Continuous maintenance & updates",
+    ],
+
+    cta: {
+      promisesLabel: "What You Can Expect",
+
+      buttonLabel: "Book a Free Consultation",
+
+      buttonColor: "#93c5fd",
+
+      buttonHoverColor: "#bfdbfe",
+
+      buttonTextColor: "#0f172a",
+    },
+  },
   
 }

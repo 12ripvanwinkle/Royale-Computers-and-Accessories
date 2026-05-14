@@ -3,60 +3,207 @@ import { useState, } from "react";
 import TitleHeader from '../../TitleHeader'
 import Contact from '../../sections/Contact'
 import Footer from '../../sections/Footer'
-import { Features, Systems, TrustUs } from '../../Aspects/CCTV-Holder';
 import FAQSection from '../../Aspects/Global/FAQs';
-
+import { Zap, Clock, Server, ArrowRight, ShieldCheck, Activity } from "lucide-react";
+import Features from '../../Aspects/CCTV-Holder/features';
+import Systems from '../../Aspects/CCTV-Holder/Systems';
+import { howItWorksData } from '../../Aspects/Global/HowItWorksData';
+import HowItWorks from '../../Aspects/Global/HowItWorks';
+import { whyChooseUsData } from '../../Aspects/Global/WhyChooseUsData';
+import WhyChooseUs from '../../Aspects/Global/WhyChooseUs';
 
 
 const CCTV = () => {
   return (
-    <section className="mt-70">
+    <section className="mt-30">
       <div className="min-h-screen flex flex-col items-center justify-start pt-8 md:pt-16 px-4 md:px-6">
 
-        {/* Header */}
-        <div className="text-center mb-6 md:mb-8">
-          <TitleHeader title="CCTV Solutions" className="" />
-          <p className="font-semibold text-2xl md:text-4xl tracking-tight mt-3 md:mt-5"
-            style={{ color: "rgba(255,255,255,0.65)" }}>
-            Vigilant. Virtual. Vital.
-          </p>
-        </div>
+        {/* Hero Section */}
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 py-20 sm:py-16 md:py-20 lg:py-28">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 lg:gap-14 items-center">
 
-        {/* CTA button */}
-        <button className="text-sm font-medium px-6 py-2 rounded-full mb-8 md:mb-10 transition-all duration-200"
-          style={{
-            border: "1px solid rgba(255,255,255,0.4)",
-            color: "white",
-            background: "transparent",
-          }}
-          onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.15)"; }}
-          onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}
-          onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-        >
-          Learn More
-        </button>
+            {/* Left Side */}
+            <div className="md:col-span-7 flex flex-col items-start gap-5 sm:gap-6">
 
-        {/* Hero image */}
-        <div className="w-full max-w-5xl rounded-2xl overflow-hidden ml-1"
-          style={{
-            aspectRatio: "16/9",
-            border: "1px solid rgba(255,255,255,0.15)",
-            background: "rgba(0,0,0,0.25)",
-          }}>
-          <img src="/images/navii.jpg" alt="Access Control System" className="w-full h-full object-cover" />
-        </div>
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase px-3 py-1.5 rounded-full"
+                style={{
+                  color: "var(--color-orange-100)",
+                  background: "rgba(255,117,31,0.1)",
+                  border: "1px solid rgba(255,117,31,0.28)",
+                  letterSpacing: "0.18em",
+                }}
+              >
+                <Zap size={11} strokeWidth={2.5} />
+                Power Management
+              </span>
 
-        {/* Overview Section */}
-        <div className="text-center mt-20 max-w-3xl mx-auto px-4">
-            <h2 className="text-4xl sm:text-5xl font-light text-white leading-tight mb-6">
-                Smart Surveillance for Complete Security
-            </h2>
-            <p className="text-base sm:text-lg font-light leading-relaxed"
-                style={{ color: "rgba(255,255,255,0.62)" }}>
-                Our CCTV solutions provide businesses with a powerful deterrent and a reliable way to capture every detail. 
-                From AI-driven motion alerts that stop intruders in their tracks to crystal-clear 4K recording for indisputable evidence, 
-                we give you the tools to prevent incidents and protect your bottom line.
-            </p>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-none"
+                style={{
+                  letterSpacing: "-0.03em",
+                }}
+              >
+                Screens That <br />
+                <span
+                  style={{
+                    background: "linear-gradient(90deg, #ff751f 0%, #ffaa6b 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
+                >
+                  Never Fail.
+                </span>
+              </h1>
+
+              <p className="text-base sm:text-lg md:text-base lg:text-lg font-light leading-relaxed max-w-lg"
+                style={{
+                  color: "rgba(255,255,255,0.58)",
+                  lineHeight: "1.75",
+                }}
+              >
+                Protect your surveillance grid and eliminate blind spots.
+                Monitor, optimize, and control your entire security power infrastructure — from a single pane of glass.
+              </p>
+
+              <div className="grid grid-cols-3 gap-4 sm:gap-6 w-full max-w-sm sm:max-w-md">
+                    {[
+                      { icon: Clock, value: "99.9%", label: "Uptime" },
+                      { icon: Server, value: "1–1000+", label: "Units" },
+                      { icon: Activity, value: "Live", label: "Monitoring" },
+                    ].map(({ icon: Icon, value, label }) => (
+                      <div
+                        key={label}
+                        className="flex flex-col gap-1 p-3 rounded-xl"
+                        style={{
+                          background: "rgba(255,255,255,0.04)",
+                          border: "1px solid rgba(255,255,255,0.07)",
+                        }}
+                      >
+                        <Icon
+                          size={14}
+                          strokeWidth={1.75}
+                          style={{ color: "#ff751f" }}
+                        />
+
+                        <span
+                          className="text-lg sm:text-xl font-bold mt-0.5"
+                          style={{
+                            color: "#ff751f",
+                            fontFamily: "'Inter', sans-serif",
+                            lineHeight: 1,
+                          }}
+                        >
+                          {value}
+                        </span>
+
+                        <span
+                          className="text-xs"
+                          style={{
+                            color: "rgba(255,255,255,0.32)",
+                            letterSpacing: "0.1em",
+                          }}
+                        >
+                          {label}
+                        </span>
+                      </div>
+                    ))}
+              </div>
+
+              <ul className="flex flex-col gap-2.5 mt-1">
+                {[
+                      {
+                        icon: ShieldCheck,
+                        text: "Prevent hardware failures before they happen",
+                      },
+                      {
+                        icon: Zap,
+                        text: "Optimize power loads across every unit",
+                      },
+                      {
+                        icon: Activity,
+                        text: "Full visibility in real-time, anywhere",
+                      },
+                    ].map(({ icon: Icon, text }) => (
+                      <li key={text} className="flex items-center gap-2.5">
+                        <Icon
+                          size={15}
+                          strokeWidth={2}
+                          style={{ color: "#ff751f", flexShrink: 0 }}
+                        />
+
+                        <span
+                          className="text-sm sm:text-base font-light"
+                          style={{ color: "rgba(255,255,255,0.6)" }}
+                        >
+                          {text}
+                        </span>
+                      </li>
+                    ))}
+              </ul>
+
+              <button className="w-full sm:w-auto mt-1 flex items-center justify-center gap-2 text-sm sm:text-base font-bold px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl"
+                style={{
+                  background: "var(--color-orange-100)",
+                  color: "white",
+                }}
+              >
+                Request My Power Audit 
+                <ArrowRight size={16} strokeWidth={2.5} />
+              </button>
+
+            </div>
+
+            {/* Right Side */}
+            <div className="md:col-span-5 w-full">
+                <div className="card w-full rounded-2xl overflow-hidden"
+                  style={{
+                    aspectRatio: "4/3",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    background: "rgba(0,0,0,0.3)",
+                    boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+                    position: "relative",
+                  }}
+                >
+                  <img src="/images/max.jpg" alt="Power Management Dashboard" className="w-full h-full object-cover" />
+
+                  <div className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background:"linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 55%)",
+                    }}
+                  />
+
+                  <div className="absolute bottom-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold"
+                    style={{
+                      background: "rgba(0,0,0,0.65)",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      color: "white",
+                    }}
+                  >
+
+                    <span className="block rounded-full" 
+                      style={{
+                        width: 7,
+                        height: 7,
+                        background: "#22c55e",
+                      }}
+                    />
+                      System Online
+                    
+                  </div>
+
+                </div>
+
+                <p className="text-xs mt-3 text-center"
+                  style={{
+                    color: "rgba(255,255,255,0.22)",
+                    letterSpacing: "0.1em",
+                  }}
+                >
+                  Centralized cloud-based power control platform
+                </p>
+            </div>
+
+          </div>
         </div>
 
         {/* Features */}
@@ -65,11 +212,14 @@ const CCTV = () => {
         {/* CCTV Systems */}
         <Systems />
 
-        {/* Step Flow */}
-        <StepFlow />
-
         {/* Why Choose us / Why Trust Us */}
-        <TrustUs />
+        {/* <TrustUs /> */}
+        
+        {/* How it works stuff */}
+        <HowItWorks {...howItWorksData.cctv} />
+
+        {/* Why Choose Us */}
+        <WhyChooseUs {...whyChooseUsData.cctv} />
 
         {/* FAQs */}
         <FAQSection />
