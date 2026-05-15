@@ -15,6 +15,10 @@ import {
   Activity,
   Camera,
   MonitorSmartphone, 
+  MonitorPlay,
+  LayoutDashboard,
+  PanelsTopLeft,
+  
 } from "lucide-react"
 
 export const whyChooseUsData = {
@@ -1169,4 +1173,245 @@ export const whyChooseUsData = {
     },
   },
   
+  digitalSignage: {
+  subtitle: "Why Businesses Choose Us",
+
+  heading: "Built for Engaging Digital Experiences & Centralized Content Control",
+
+  description:
+    "Modern digital signage solutions designed to improve communication, strengthen brand visibility, and simplify content management across every screen.",
+
+  reasons: [
+    {
+      id: "display",
+
+      icon: MonitorPlay,
+
+      color: "#93c5fd",
+
+      tag: "Dynamic displays",
+
+      title: "Engaging Visual Communication",
+
+      body:
+        "Deliver impactful content across reception areas, retail spaces, offices, and public environments with professionally managed digital displays.",
+
+      points: [
+        "High-resolution display solutions",
+        "Indoor & outdoor signage support",
+        "Centralized content management",
+        "Multi-screen display deployment",
+      ],
+
+      span: 1,
+    },
+
+    {
+      id: "management",
+
+      icon: LayoutDashboard,
+
+      color: "#a78bfa",
+
+      tag: "Centralized management",
+
+      title: "Real-Time Content Control",
+
+      body:
+        "Update promotions, announcements, menus, and branded content instantly across one or multiple locations from a centralized platform.",
+
+      points: [
+        "Remote content scheduling",
+        "Live announcements & updates",
+        "Multi-location screen management",
+        "Content playlists & automation",
+      ],
+
+      roles: [
+        {
+          label: "Marketing",
+          sub: "Manage campaigns across displays",
+          color: "#a78bfa",
+        },
+
+        {
+          label: "Operations",
+          sub: "Control screens from one dashboard",
+          color: "#5eead4",
+        },
+
+        {
+          label: "Management",
+          sub: "Maintain consistent brand messaging",
+          color: "#93c5fd",
+        },
+      ],
+
+      stats: [
+        {
+          value: "Real-Time",
+          label: "Content updates",
+        },
+
+        {
+          value: "Multi-site",
+          label: "Screen management",
+        },
+      ],
+
+      span: 2,
+    },
+
+    {
+      id: "scalability",
+
+      icon: PanelsTopLeft,
+
+      color: "#4ade80",
+
+      tag: "Scalable infrastructure",
+
+      title: "Built for Reliable Performance",
+
+      body:
+        "Scalable digital signage systems designed for stable playback, continuous operation, and long-term business growth.",
+
+      points: [
+        "24/7 display operation",
+        "Cloud-based management",
+        "Scalable screen expansion",
+        "Reliable media playback",
+      ],
+
+      stats: [
+        {
+          value: "24/7",
+          label: "Display uptime",
+        },
+
+        {
+          value: "Scalable",
+          label: "Screen deployment",
+        },
+      ],
+
+      span: 1,
+    },
+
+    {
+      id: "support",
+
+      icon: HeadphonesIcon,
+
+      color: "#fbbf24",
+
+      tag: "Reliable support",
+
+      title: "Ongoing Maintenance & Support",
+
+      body:
+        "Our team provides continuous support, updates, and system optimization to keep your signage network running smoothly.",
+
+      points: [
+        "Dedicated technical support",
+        "Remote troubleshooting",
+        "Software & firmware updates",
+        "Rapid issue response",
+      ],
+
+      stats: [
+        {
+          value: "24/7",
+          label: "Support access",
+        },
+
+        {
+          value: "<4h",
+          label: "Response SLA",
+        },
+      ],
+
+      span: 1,
+    },
+  ],
+
+  trustStats: [
+    {
+      value: "Real-Time",
+      label: "Content updates",
+      color: "#93c5fd",
+    },
+
+    {
+      value: "Multi-site",
+      label: "Screen management",
+      color: "#4ade80",
+    },
+
+    {
+      value: "24/7",
+      label: "Display uptime",
+      color: "#fbbf24",
+    },
+
+    {
+      value: "Scalable",
+      label: "Digital signage infrastructure",
+      color: "#a78bfa",
+    },
+  ],
+
+  testimonials: [
+    {
+      quote:
+        "Managing promotions across multiple locations became effortless after switching to the new signage platform.",
+
+      name: "David L.",
+
+      role: "Marketing Manager",
+    },
+
+    {
+      quote:
+        "The displays look modern, updates are instant, and the entire deployment process was smooth.",
+
+      name: "Michelle R.",
+
+      role: "Operations Director",
+    },
+
+    {
+      quote:
+        "The centralized dashboard saved our team hours every week managing content manually.",
+
+      name: "Kevin T.",
+
+      role: "Infrastructure Coordinator",
+    },
+  ],
+
+  testimonialsLabel: "Trusted by modern businesses",
+
+  promises: [
+    "Real-time content management",
+    "Centralized screen control",
+    "Scalable digital signage infrastructure",
+    "Reliable 24/7 display operation",
+    "Dedicated technical support",
+    "Continuous maintenance & updates",
+  ],
+
+  cta: {
+    promisesLabel: "What You Can Expect",
+
+    buttonLabel: "Book a Free Consultation",
+
+    buttonColor: "#93c5fd",
+
+    buttonHoverColor: "#bfdbfe",
+
+    buttonTextColor: "#0f172a",
+  },
+  },
+
 }

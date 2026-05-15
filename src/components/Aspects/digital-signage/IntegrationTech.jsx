@@ -1,91 +1,77 @@
-import React, {useState} from 'react'
-import {cards} from './index'
-import { glassHover } from '../CCTV-Holder'
-import { glassStrong, } from './digitalStyles'
+import React from 'react'
+import { glassStrong } from '../CCTV-Holder/CCTVStyles'
+import {IntegrationCard} from './Components'
+import {cards,} from './index'
+import { Cloud, ShoppingCart, Code2, Radio, ArrowRight } from 'lucide-react'
 
 const IntegrationTech = () => {
-  const [hoveredCard, setHoveredCard] = useState(null)
-    
   return (
-    <div className="w-full px-4 md:px-6 py-16 md:py-24">
+    <div id='integrations' className="w-full px-4 sm:px-6 md:px-10 lg:px-14 py-14 sm:py-20 md:py-24"
+        style={{color: 'white'}}
+    >
         <div className="max-w-5xl mx-auto">
 
             {/* Header */}
-            <div className="text-center mb-12">
-                <p className="text-xs font-semibold tracking-widest uppercase mb-4"
-                    style={{color: 'rgba(255,255,255,0.45)'}}
-                >
-                    The Core Architecture
+            <div className="text-center mb-10 sm:mb-14">
+                <p className="text-xs font-semibold uppercase tracking-widest mb-3"
+                    style={{ color: 'rgba(255,255,255,0.35)', letterSpacing: '0.22em' }}>
+                    Connectivity
                 </p>
-                <h2 className="text-3xl md:text-5xl font-light text-white leading-tight mb-4">
-                    Technology &amp; Integration
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4"
+                    style={{ letterSpacing: '-0.03em', lineHeight: 1.05 }}>
+                    Plugs into everything.
                 </h2>
-                <p className="text-sm md:text-base max-w-xl mx-auto leading-relaxed"
-                    style={{color: 'rgba(255,255,255,0.55)'}}
-                >
-                    Our digital signage solutions plug seamlessly into your existing technology stack —
-                    no rip-and-replace required.
+                <p className="text-sm sm:text-base font-light max-w-xl mx-auto leading-relaxed"
+                    style={{ color: 'rgba(255,255,255,0.5)' }}>
+                    From cloud CMS platforms to live data feeds — our signage infrastructure connects with your existing tools out of the box.
                 </p>
             </div>
 
-            {/* Bento Grid Section */}
+            {/* Bento Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {cards.map(card => {
-                    const IconComp = card.icon
-                    const Mockup = card.mockup
-                    return (
-                    <div
-                        key={card.id}
-                        className={`${card.wide ? 'md:col-span-2' : 'md:col-span-1'} rounded-2xl p-6 flex flex-col hover:-translate-y-0.5 transition-transform duration-300`}
-                        style={hoveredCard === card.id ? glassHover : glassStrong}
-                        onMouseEnter={() => setHoveredCard(card.id)}
-                        onMouseLeave={() => setHoveredCard(null)}
-                    >
-                        {/* Mockup */}
-                        {Mockup && <Mockup />}
-
-
-                        {/* Text */}
-                        <div className="mt-auto">
-                        {/* Icon + label */}
-                        <div className="flex items-center gap-2.5 mb-3">
-                            <div
-                            className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-                            style={{
-                                background: card.accentBg,
-                                color: card.accent,
-                                border: `1px solid ${card.accentBorder}`,
-                            }}
-                            >
-                            <IconComp size={16} />
-                            </div>
-                            <span
-                            className="text-xs font-medium tracking-wide"
-                            style={{ color: 'rgba(255,255,255,0.45)' }}
-                            >
-                            {card.label}
-                            </span>
-                        </div>
-
-                        <h3 className="text-base font-semibold text-white mb-2">{card.title}</h3>
-                        <p className="text-sm leading-relaxed mb-3" style={{ color: 'rgba(255,255,255,0.6)' }}>
-                            {card.description}
-                        </p>
-
-                        {/* Highlights */}
-                        <div className="flex flex-col gap-1.5">
-                            {card.highlights.map(h => (
-                            <div key={h} className="flex items-center gap-2">
-                                <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: card.accent }} />
-                                <span className="text-xs" style={{ color: 'rgba(255,255,255,0.65)' }}>{h}</span>
-                            </div>
-                            ))}
-                        </div>
-                        </div>
-                    </div>
-                    )
-                })}
+                {cards.map(card => (
+                    <IntegrationCard key={card.id} card={card} />
+                ))}
             </div>
+
+            {/* CTA Strip */}
+            <div className="mt-4 rounded-2xl px-5 sm:px-8 py-5 sm:py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                style={glassStrong}
+            >
+
+                <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest mb-1"
+                        style={{color: 'rgba(255,255,255,0.35)', letterSpacing: '0.18em'}}
+                    >
+                        Need a custom integration
+                    </p>
+                    <h3 className="text-sm sm:text-base font-semibold text-white">
+                        We'll connect your signage to whatever you're running.
+                    </h3>
+                    <p className="text-xs mt-1 font-light" style={{color: 'rgba(255,255,255,0.4)'}}>
+                        Talk to our team — no integration is too bespoke.
+                    </p>
+                </div>
+
+                <button className="shrink-0 w-full sm:w-auto flex items-center justify-center gap-2 text-xs sm:text-sm font-bold px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl"
+                    style={{ background: '#00e5a0', color: '#0a0d0f', transition: 'all 0.2s ease' }}
+                    onMouseEnter={e => {
+                        e.currentTarget.style.background = '#33ecb4'
+                        e.currentTarget.style.boxShadow = '0 6px 24px rgba(0,229,160,0.35)'
+                        e.currentTarget.style.transform = 'translateY(-1px)'
+                    }}
+                    onMouseLeave={e => {
+                        e.currentTarget.style.background = '#00e5a0'
+                        e.currentTarget.style.boxShadow = 'none'
+                        e.currentTarget.style.transform = 'translateY(0)'
+                    }}
+                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                    Get in Touch <ArrowRight size={14} strokeWidth={2.5} />
+                </button>
+
+            </div>
+
         </div>
     </div>
   )

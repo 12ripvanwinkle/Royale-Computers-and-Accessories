@@ -421,6 +421,177 @@ export const howItWorksData = {
         buttonTextColor: "#0f172a",
     },
   },
+
+  // Digital Signage
+  digitalSignage: {
+    subtitle: "The Process",
+
+    heading: "How It Works",
+
+    description:
+        "From strategy to live content delivery, we deploy modern digital signage solutions designed to improve communication, engagement, and brand visibility.",
+
+    stats: [
+        { value: "2",      unit: "wks", label: "Avg. deployment time", color: "#93c5fd" },
+        { value: "<48",    unit: "hrs", label: "Display configuration", color: "#a78bfa" },
+        { value: "24/7",   unit: null,  label: "Content scheduling",    color: "#4ade80" },
+        { value: "Multi-site", unit: null, label: "Display management", color: "#fbbf24" },
+    ],
+
+    steps: [
+        {
+        n: "01",
+
+        icon: ClipboardList,
+
+        color: "#93c5fd",
+
+        phase: "Assessment",
+
+        title: "Understanding Your Display Needs",
+
+        body:
+            "We assess your space, audience, and communication goals to design the right digital signage solution.",
+
+        points: [
+            "Site & visibility assessment",
+            "Audience engagement planning",
+            "Display location analysis",
+            "Content strategy review",
+        ],
+        },
+
+        {
+        n: "02",
+
+        icon: Settings2,
+
+        color: "#a78bfa",
+
+        phase: "Planning",
+
+        title: "Built Around Your Environment",
+
+        body:
+            "Screen placement, content management systems, and display infrastructure configured around your operational needs.",
+
+        points: [
+            "Display placement strategy",
+            "CMS configuration planning",
+            "Content scheduling setup",
+            "Network infrastructure planning",
+        ],
+        },
+
+        {
+        n: "03",
+
+        icon: DatabaseZap,
+
+        color: "#5eead4",
+
+        phase: "Installation",
+
+        title: "Professional System Deployment",
+
+        body:
+            "Displays, media players, and supporting infrastructure installed with minimal disruption to your operations.",
+
+        points: [
+            "Display installation",
+            "Media player setup",
+            "Network integration",
+            "System performance testing",
+        ],
+        },
+
+        {
+        n: "04",
+
+        icon: Users2,
+
+        color: "#4ade80",
+
+        phase: "Configuration",
+
+        title: "Optimized for Daily Content Management",
+
+        body:
+            "Content scheduling, user permissions, and management dashboards configured for efficient day-to-day operation.",
+
+        points: [
+            "Content scheduling setup",
+            "User access configuration",
+            "Management dashboard setup",
+            "Administrator onboarding",
+        ],
+        },
+
+        {
+        n: "05",
+
+        icon: Rocket,
+
+        color: "#fbbf24",
+
+        phase: "Activation",
+
+        title: "Live Content Delivery",
+
+        body:
+            "Your digital signage network goes live with centralized content management and real-time display control.",
+
+        points: [
+            "Live system activation",
+            "Real-time content updates",
+            "Display verification",
+            "Remote management setup",
+        ],
+        },
+
+        {
+        n: "06",
+
+        icon: ShieldCheck,
+
+        color: "#f87171",
+
+        phase: "Support",
+
+        title: "Ongoing Maintenance & Support",
+
+        body:
+            "We provide continuous maintenance, software updates, and technical support to keep your signage systems running reliably.",
+
+        points: [
+            "System maintenance",
+            "Software & firmware updates",
+            "Dedicated support access",
+            "Rapid issue response",
+        ],
+        },
+    ],
+
+    checklist: [
+        "Dedicated signage specialists",
+        "Real-time deployment updates",
+        "Display performance verification",
+        "Ongoing monitoring & support",
+        "Minimal disruption to operations",
+    ],
+
+    cta: {
+        timelineText: "Typically deployed in 1–2 weeks.",
+
+        buttonLabel: "Book a Free Consultation",
+
+        buttonColor: "#93c5fd",
+
+        buttonHoverColor: "#bfdbfe",
+
+        buttonTextColor: "#0f172a",
+    },
+  },
     
     // ── Power Management ────────────────────────────────────────
   powerManagement: {
