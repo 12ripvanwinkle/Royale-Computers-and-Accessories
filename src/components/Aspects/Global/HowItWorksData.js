@@ -592,7 +592,176 @@ export const howItWorksData = {
         buttonTextColor: "#0f172a",
     },
   },
-    
+
+  softwareSecurity: {
+  subtitle: "The Process",
+
+  heading: "How It Works",
+
+  description:
+      "From security assessment to continuous protection, we deploy modern software security solutions designed to reduce risk, strengthen systems, and protect critical business operations.",
+
+  stats: [
+      { value: "2",      unit: "wks", label: "Avg. deployment time", color: "#93c5fd" },
+      { value: "<48",    unit: "hrs", label: "Security configuration", color: "#a78bfa" },
+      { value: "24/7",   unit: null,  label: "Threat monitoring",      color: "#4ade80" },
+      { value: "Multi-layer", unit: null, label: "Protection coverage", color: "#fbbf24" },
+  ],
+
+  steps: [
+      {
+      n: "01",
+
+      icon: ClipboardList,
+
+      color: "#93c5fd",
+
+      phase: "Assessment",
+
+      title: "Understanding Your Security Risks",
+
+      body:
+          "We assess your applications, infrastructure, and operational workflows to identify vulnerabilities and security gaps.",
+
+      points: [
+          "Security risk assessment",
+          "Vulnerability analysis",
+          "Infrastructure review",
+          "Compliance & policy evaluation",
+      ],
+      },
+
+      {
+      n: "02",
+
+      icon: Settings2,
+
+      color: "#a78bfa",
+
+      phase: "Planning",
+
+      title: "Built Around Your Environment",
+
+      body:
+          "Security frameworks, protection layers, and monitoring systems configured around your business and software infrastructure.",
+
+      points: [
+          "Access control planning",
+          "Security architecture setup",
+          "Threat monitoring configuration",
+          "Policy & permission structure",
+      ],
+      },
+
+      {
+      n: "03",
+
+      icon: DatabaseZap,
+
+      color: "#5eead4",
+
+      phase: "Deployment",
+
+      title: "Secure System Implementation",
+
+      body:
+          "Security tools, monitoring platforms, and protective measures deployed with minimal disruption to operations.",
+
+      points: [
+          "Security software deployment",
+          "Endpoint protection setup",
+          "System integration",
+          "Security validation testing",
+      ],
+      },
+
+      {
+      n: "04",
+
+      icon: Users2,
+
+      color: "#4ade80",
+
+      phase: "Configuration",
+
+      title: "Optimized for Daily Protection",
+
+      body:
+          "User permissions, monitoring dashboards, and security controls configured for secure day-to-day operations.",
+
+      points: [
+          "User access configuration",
+          "Monitoring dashboard setup",
+          "Alert & notification setup",
+          "Administrator onboarding",
+      ],
+      },
+
+      {
+      n: "05",
+
+      icon: Rocket,
+
+      color: "#fbbf24",
+
+      phase: "Activation",
+
+      title: "Real-Time Threat Monitoring",
+
+      body:
+          "Your security environment goes live with centralized monitoring, real-time threat visibility, and rapid response capabilities.",
+
+      points: [
+          "Live security activation",
+          "Real-time threat detection",
+          "Incident monitoring",
+          "Remote management access",
+      ],
+      },
+
+      {
+      n: "06",
+
+      icon: ShieldCheck,
+
+      color: "#f87171",
+
+      phase: "Support",
+
+      title: "Ongoing Maintenance & Support",
+
+      body:
+          "We provide continuous updates, threat monitoring, and technical support to keep your systems secure and resilient.",
+
+      points: [
+          "Security updates & patching",
+          "Continuous monitoring",
+          "Dedicated support access",
+          "Rapid incident response",
+      ],
+      },
+  ],
+
+  checklist: [
+      "Dedicated security specialists",
+      "Real-time deployment updates",
+      "System security verification",
+      "Continuous monitoring & support",
+      "Minimal disruption to operations",
+  ],
+
+  cta: {
+      timelineText: "Typically deployed in 1–2 weeks.",
+
+      buttonLabel: "Book a Free Consultation",
+
+      buttonColor: "#93c5fd",
+
+      buttonHoverColor: "#bfdbfe",
+
+      buttonTextColor: "#0f172a",
+  },
+  },
     // ── Power Management ────────────────────────────────────────
   powerManagement: {
     subtitle: "The Process",

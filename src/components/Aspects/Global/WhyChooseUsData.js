@@ -18,6 +18,7 @@ import {
   MonitorPlay,
   LayoutDashboard,
   PanelsTopLeft,
+  Radar,
   
 } from "lucide-react"
 
@@ -1171,6 +1172,247 @@ export const whyChooseUsData = {
 
       buttonTextColor: "#0f172a",
     },
+  },
+
+  softwareSecurity: {
+  subtitle: "Why Businesses Choose Us",
+
+  heading: "Built for Stronger Protection & Secure Operations",
+
+  description:
+    "Modern software security solutions designed to reduce vulnerabilities, strengthen protection, and provide real-time visibility across your systems and infrastructure.",
+
+  reasons: [
+    {
+      id: "protection",
+
+      icon: ShieldCheck,
+
+      color: "#93c5fd",
+
+      tag: "Advanced protection",
+
+      title: "Stronger Security Across Your Systems",
+
+      body:
+        "Protect critical applications, infrastructure, and business operations with layered security solutions built for modern threats.",
+
+      points: [
+        "Threat & vulnerability protection",
+        "Endpoint & application security",
+        "Multi-layer security architecture",
+        "Centralized protection management",
+      ],
+
+      span: 1,
+    },
+
+    {
+      id: "monitoring",
+
+      icon: Radar,
+
+      color: "#a78bfa",
+
+      tag: "Real-time monitoring",
+
+      title: "Continuous Visibility & Threat Detection",
+
+      body:
+        "Monitor systems, detect suspicious activity, and respond quickly with centralized security monitoring and alert management tools.",
+
+      points: [
+        "Real-time threat monitoring",
+        "Automated alerts & notifications",
+        "Security event tracking",
+        "Centralized monitoring dashboards",
+      ],
+
+      roles: [
+        {
+          label: "Security Teams",
+          sub: "Monitor threats in real time",
+          color: "#a78bfa",
+        },
+
+        {
+          label: "IT Teams",
+          sub: "Protect infrastructure & uptime",
+          color: "#5eead4",
+        },
+
+        {
+          label: "Management",
+          sub: "Maintain operational continuity",
+          color: "#93c5fd",
+        },
+      ],
+
+      stats: [
+        {
+          value: "24/7",
+          label: "Threat monitoring",
+        },
+
+        {
+          value: "Real-Time",
+          label: "Alerts & detection",
+        },
+      ],
+
+      span: 2,
+    },
+
+    {
+      id: "reliability",
+
+      icon: LockKeyhole,
+
+      color: "#4ade80",
+
+      tag: "Reliable security",
+
+      title: "Built for Stability & Resilience",
+
+      body:
+        "Secure business operations with scalable protection systems designed for reliability, continuity, and long-term security.",
+
+      points: [
+        "Access & identity protection",
+        "Secure data management",
+        "Scalable security infrastructure",
+        "Business continuity support",
+      ],
+
+      stats: [
+        {
+          value: "Multi-layer",
+          label: "Protection coverage",
+        },
+
+        {
+          value: "Scalable",
+          label: "Security expansion",
+        },
+      ],
+
+      span: 1,
+    },
+
+    {
+      id: "support",
+
+      icon: HeadphonesIcon,
+
+      color: "#fbbf24",
+
+      tag: "Reliable support",
+
+      title: "Ongoing Maintenance & Support",
+
+      body:
+        "Our team provides continuous updates, system optimization, and technical support to keep your security infrastructure protected and up to date.",
+
+      points: [
+        "Dedicated technical support",
+        "Security patch management",
+        "Continuous system monitoring",
+        "Rapid incident response",
+      ],
+
+      stats: [
+        {
+          value: "24/7",
+          label: "Support access",
+        },
+
+        {
+          value: "<4h",
+          label: "Response SLA",
+        },
+      ],
+
+      span: 1,
+    },
+  ],
+
+  trustStats: [
+    {
+      value: "24/7",
+      label: "Threat monitoring",
+      color: "#93c5fd",
+    },
+
+    {
+      value: "Real-Time",
+      label: "Alerts & detection",
+      color: "#4ade80",
+    },
+
+    {
+      value: "Multi-layer",
+      label: "Protection coverage",
+      color: "#fbbf24",
+    },
+
+    {
+      value: "Secure",
+      label: "Business infrastructure",
+      color: "#a78bfa",
+    },
+  ],
+
+  testimonials: [
+    {
+      quote:
+        "The monitoring and alert systems gave our team visibility into threats before they became serious issues.",
+
+      name: "David L.",
+
+      role: "IT Security Manager",
+    },
+
+    {
+      quote:
+        "Deployment was smooth, and the added security layers significantly improved confidence across our operations.",
+
+      name: "Michelle R.",
+
+      role: "Operations Director",
+    },
+
+    {
+      quote:
+        "The platform is easy to manage, and support has been responsive whenever we needed assistance.",
+
+      name: "Kevin T.",
+
+      role: "Infrastructure Coordinator",
+    },
+  ],
+
+  testimonialsLabel: "Trusted by modern businesses",
+
+  promises: [
+    "24/7 threat monitoring",
+    "Real-time security alerts",
+    "Scalable security infrastructure",
+    "Secure system protection",
+    "Dedicated technical support",
+    "Continuous updates & maintenance",
+  ],
+
+  cta: {
+    promisesLabel: "What You Can Expect",
+
+    buttonLabel: "Book a Free Consultation",
+
+    buttonColor: "#93c5fd",
+
+    buttonHoverColor: "#bfdbfe",
+
+    buttonTextColor: "#0f172a",
+  },
   },
   
   digitalSignage: {

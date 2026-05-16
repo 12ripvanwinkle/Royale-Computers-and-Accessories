@@ -1,313 +1,143 @@
-import React, { useEffect, useState } from 'react'
-import { glass, glassHover, glassStrong, innerSurface } from '../CCTV-Holder/CCTVStyles'
-import { Cloud, ShoppingCart, Code2, Radio, ArrowRight } from 'lucide-react'
+import { useState } from "react"
+import { glass, glassStrong } from '../CCTV-Holder/CCTVStyles'
+import { ShieldCheck, Bug, Rocket, Activity } from 'lucide-react'
 
-// ── Data ──────────────────────────────────────────────────────────────────────
+// ─── Data ─────────────────────────────────────────────────────────────────────
 
-const platforms = [
-  { name: 'Screenly',   color: '#4ade80', status: 'Connected' },
-  { name: 'NoviSign',   color: '#60a5fa', status: 'Connected' },
-  { name: 'Rise Vision', color: '#f472b6', status: 'Available' },
-  { name: 'Yodeck',     color: '#fb923c', status: 'Available' },
-]
-
-const endpoints = [
-  { method: 'GET',    path: '/api/screens',         color: '#4ade80' },
-  { method: 'POST',   path: '/api/content/push',    color: '#60a5fa' },
-  { method: 'PATCH',  path: '/api/schedule/:id',    color: '#fbbf24' },
-  { method: 'DELETE', path: '/api/playlist/:id',    color: '#f87171' },
-]
-
-const posItems = [
-  { name: 'Americano', price: '£3.20', cycle: 0 },
-  { name: 'Latte',     price: '£3.80', cycle: 1 },
-  { name: 'Croissant', price: '£2.50', cycle: 2 },
-]
-
-// Cards that make up the bento grid
-// Each has: id, icon, color, eyebrow, headline, pill, body, highlights, cols
-// Plus a `mockup` key that maps to which animated widget to render
-
-const cards = [
+const features = [
   {
-    id: 'cms',
-    icon: Cloud,
-    color: '#00e5a0',
-    eyebrow: 'Content Management',
-    headline: 'Cloud CMS Integration',
-    pill: '2 Active',
-    body: 'Connect your preferred digital signage CMS and push content to any screen — remotely, in real time, from one dashboard.',
-    highlights: ['Screenly, NoviSign, Yodeck & more', 'Remote playlist management', 'Role-based publishing access'],
-    mockup: 'cms',
-    cols: 2,
+    id: 'assessment', span: 2, strong: true,
+    icon: ShieldCheck, color: '#f87171',
+    pill: 'Step 1', eyebrow: 'Risk Assessment',
+    headline: 'Know your exposure before attackers do.',
+    body: 'We scan your entire stack — code, dependencies, infrastructure, and configuration — surfacing every exploitable weakness with a clear severity score and a prioritised fix list.',
+    bullets: [
+      'Full OWASP Top 10 vulnerability scan',
+      'Dependency & supply-chain audit',
+      'Auth, session & data-exposure checks',
+      'Delivered within 48 hours',
+    ],
+    stats: [['OWASP', 'Top 10'], ['Severity', 'Scored'], ['48h', 'Turnaround']],
   },
   {
-    id: 'pos',
-    icon: ShoppingCart,
-    color: '#f0a33c',
-    eyebrow: 'Point of Sale',
-    headline: 'POS Sync',
-    pill: 'Live',
-    body: 'Prices and menu items update on-screen the moment they change in your POS — no manual edits, no mismatches.',
-    highlights: ['Real-time price sync', 'Automatic menu updates', 'Supports Square, Lightspeed & more'],
-    mockup: 'pos',
-    cols: 1,
+    id: 'pentest', span: 1, strong: false,
+    icon: Bug, color: '#fbbf24',
+    pill: 'Step 2', eyebrow: 'Penetration Testing',
+    headline: 'Real attacks. Safe environment.',
+    body: 'Ethical hackers probe every layer — network, API, and application — using the same tools and techniques real attackers use, with a full proof-of-concept report.',
+    bullets: [
+      'Manual + automated exploit attempts',
+      'Network, API & app layer coverage',
+      'Proof-of-concept for every finding',
+    ],
+    stats: [['Manual', 'Testing'], ['All', 'Layers'], ['PoC', 'Included']],
   },
   {
-    id: 'api',
-    icon: Code2,
-    color: '#c09aff',
-    eyebrow: 'Developer',
-    headline: 'REST API Access',
-    pill: 'Open',
-    body: 'Full REST API so your dev team can push content, trigger playlists, and control screens from any internal system.',
-    highlights: ['Authenticated endpoints', 'Webhook support', 'Swagger docs included'],
-    mockup: 'api',
-    cols: 1,
+    id: 'implementation', span: 1, strong: false,
+    icon: Rocket, color: '#a78bfa',
+    pill: 'Step 3', eyebrow: 'Secure Implementation',
+    headline: 'Fixes shipped, not just listed.',
+    body: "We don't hand you a PDF and walk away. Our engineers implement every remediation — hardening config, deploying controls, and verifying the close.",
+    bullets: [
+      'Firewall rules & network hardening',
+      'MFA enforcement & secrets vault setup',
+      'SSL/TLS, certs & patch management',
+    ],
+    stats: [['Hands-On', 'Delivery'], ['Zero', 'Lock-in'], ['Verified', 'Close']],
   },
   {
-    id: 'datafeed',
-    icon: Radio,
-    color: '#60c8f0',
-    eyebrow: 'Live Data',
-    headline: 'Data Feed Display',
-    pill: 'Real-time',
-    body: 'Pull in live data — weather, exchange rates, footfall counters, sports scores — and display it dynamically on any screen.',
-    highlights: ['JSON / XML feed support', 'Auto-refresh intervals', 'Custom widget templates'],
-    mockup: 'datafeed',
-    cols: 2,
+    id: 'monitoring', span: 2, strong: true,
+    icon: Activity, color: '#4ade80',
+    pill: 'Step 4', eyebrow: '24/7 Monitoring',
+    headline: 'Always watching. Instantly responding.',
+    body: 'Continuous threat detection with real-time alerting, full audit logs for compliance, and SLA-backed incident escalation — so nothing slips through.',
+    bullets: [
+      'Real-time threat detection & alerting',
+      'Brute force, port scan & anomaly detection',
+      'Full audit log for compliance & forensics',
+      'Incident escalation with SLA guarantees',
+    ],
+    stats: [['24/7', 'Coverage'], ['< 1 min', 'Alert time'], ['Full', 'Audit log']],
   },
 ]
 
-// ── Mockup Components ─────────────────────────────────────────────────────────
+// ─── Card ─────────────────────────────────────────────────────────────────────
 
-function CmsMockup() {
-  return (
-    <div className="rounded-xl overflow-hidden mb-4" style={innerSurface}>
-      <div className="flex items-center justify-between px-3 py-2"
-        style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full" style={{ background: '#4ade80', boxShadow: '0 0 5px #4ade8099' }} />
-          <span className="text-xs text-white">CMS Platforms</span>
-        </div>
-        <span className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>2 Active</span>
-      </div>
-      <div className="p-3 flex flex-col gap-1.5">
-        {platforms.map(p => (
-          <div key={p.name} className="flex items-center gap-2.5 px-2 py-1.5 rounded-lg"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
-            <div className="w-2 h-2 rounded-full shrink-0" style={{ background: p.color }} />
-            <span className="text-xs flex-1" style={{ color: 'rgba(255,255,255,0.75)' }}>{p.name}</span>
-            <span className="text-xs px-2 py-0.5 rounded-full"
-              style={{
-                background: p.status === 'Connected' ? 'rgba(74,222,128,0.1)' : 'rgba(255,255,255,0.06)',
-                color: p.status === 'Connected' ? '#4ade80' : 'rgba(255,255,255,0.35)',
-                border: p.status === 'Connected' ? '1px solid rgba(74,222,128,0.25)' : '1px solid rgba(255,255,255,0.08)',
-              }}>
-              {p.status}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function PosMockup() {
-  const [tick, setTick] = useState(0)
-  useEffect(() => {
-    const iv = setInterval(() => setTick(t => t + 1), 2000)
-    return () => clearInterval(iv)
-  }, [])
-
-  return (
-    <div className="rounded-xl overflow-hidden mb-4" style={innerSurface}>
-      <div className="flex items-center gap-2 px-3 py-2"
-        style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-        <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>POS → Signage sync</span>
-        <div className="ml-auto flex items-center gap-1.5">
-          <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#4ade80', boxShadow: '0 0 4px #4ade8099' }} />
-          <span className="text-xs" style={{ color: '#4ade80' }}>Live</span>
-        </div>
-      </div>
-      <div className="p-3 flex flex-col gap-1.5">
-        {posItems.map((item, i) => {
-          const updated = tick % 3 === i
-          return (
-            <div key={item.name}
-              className="flex items-center gap-2 px-2 py-1.5 rounded-lg transition-all duration-500"
-              style={{
-                background: updated ? 'rgba(74,222,128,0.08)' : 'rgba(255,255,255,0.03)',
-                border: `1px solid ${updated ? 'rgba(74,222,128,0.2)' : 'rgba(255,255,255,0.06)'}`,
-              }}>
-              <span className="text-xs flex-1" style={{ color: 'rgba(255,255,255,0.75)' }}>{item.name}</span>
-              <span className="text-xs font-semibold"
-                style={{ color: updated ? '#4ade80' : 'rgba(255,255,255,0.55)' }}>
-                {item.price}
-              </span>
-              {updated && (
-                <span style={{ color: '#4ade80', fontSize: 9 }}>↑ updated</span>
-              )}
-            </div>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
-
-function ApiMockup() {
-  return (
-    <div className="rounded-xl overflow-hidden mb-4" style={innerSurface}>
-      <div className="flex items-center gap-1.5 px-3 py-2"
-        style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-        {['#f87171', '#fbbf24', '#4ade80'].map(c => (
-          <div key={c} className="w-2 h-2 rounded-full" style={{ background: c }} />
-        ))}
-        <span className="text-xs ml-2" style={{ color: 'rgba(255,255,255,0.3)', fontFamily: 'monospace' }}>REST API</span>
-      </div>
-      <div className="p-3 flex flex-col gap-1.5">
-        {endpoints.map(e => (
-          <div key={e.path} className="flex items-center gap-2 px-2 py-1.5 rounded-lg"
-            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <span className="text-xs font-bold shrink-0"
-              style={{ color: e.color, fontFamily: 'monospace', minWidth: 48 }}>
-              {e.method}
-            </span>
-            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.55)', fontFamily: 'monospace' }}>
-              {e.path}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function DataFeedMockup() {
-  const [values, setValues] = useState({ temp: 18, rate: 4.2, visitors: 312 })
-  useEffect(() => {
-    const iv = setInterval(() => {
-      setValues(v => ({
-        temp: +(v.temp + (Math.random() - 0.5) * 0.4).toFixed(1),
-        rate: +(v.rate + (Math.random() - 0.5) * 0.2).toFixed(2),
-        visitors: v.visitors + Math.floor(Math.random() * 3),
-      }))
-    }, 1600)
-    return () => clearInterval(iv)
-  }, [])
-
-  const feeds = [
-    { label: 'Temperature',   value: `${values.temp}°C`, color: '#fbbf24' },
-    { label: 'Exchange rate', value: `$${values.rate}`,  color: '#93c5fd' },
-    { label: 'Visitors today',value: `${values.visitors}`, color: '#4ade80' },
-  ]
-
-  return (
-    <div className="rounded-xl overflow-hidden mb-4" style={innerSurface}>
-      <div className="flex items-center gap-2 px-3 py-2"
-        style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-        <div className="w-2 h-2 rounded-full animate-pulse"
-          style={{ background: '#a78bfa', boxShadow: '0 0 5px #a78bfa99' }} />
-        <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Live Data Feed</span>
-      </div>
-      <div className="p-3 grid grid-cols-3 gap-2">
-        {feeds.map(f => (
-          <div key={f.label} className="flex flex-col items-center justify-center rounded-lg py-2.5 px-1"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
-            <span className="text-sm font-bold transition-all duration-500"
-              style={{ color: f.color, fontFamily: 'monospace' }}>
-              {f.value}
-            </span>
-            <span className="text-center leading-tight mt-1"
-              style={{ fontSize: 9, color: 'rgba(255,255,255,0.35)' }}>
-              {f.label}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-const mockupMap = {
-  cms:      <CmsMockup />,
-  pos:      <PosMockup />,
-  api:      <ApiMockup />,
-  datafeed: <DataFeedMockup />,
-}
-
-// ── Card ──────────────────────────────────────────────────────────────────────
-
-function IntegrationCard({ card }) {
-  const [active, setActive] = useState(false)
-  const { icon: Icon, color } = card
-  const colSpanClass = card.cols === 2 ? 'md:col-span-2' : 'md:col-span-1'
+function FeatureCard({ feature }) {
+  const [hovered, setHovered] = useState(false)
+  const { icon: Icon, color, pill, eyebrow, headline, body, bullets, stats, span, strong } = feature
 
   return (
     <div
-      className={`col-span-1 ${colSpanClass} relative overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-0.5`}
+      className={`col-span-1 md:col-span-${span} relative overflow-hidden flex flex-col transition-all duration-300`}
       style={{
-        ...(active ? glassHover : glass),
-        background: `radial-gradient(ellipse at 0% 0%, ${color}18 0%, transparent 60%), ${active ? 'rgba(255,255,255,0.07)' : 'rgba(255,255,255,0.04)'}`,
-        boxShadow: active ? `0 0 32px ${color}18` : 'none',
+        ...(strong ? glassStrong : glass),
+        ...(hovered ? { background: 'rgba(255,255,255,0.13)' } : {}),
+        borderRadius: 20,
+        padding: '1.35rem',
       }}
-      onMouseEnter={() => setActive(true)}
-      onMouseLeave={() => setActive(false)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
-      {/* Watermark icon */}
-      <div className="pointer-events-none absolute -bottom-4 -right-4 opacity-[0.045]" style={{ color }}>
-        <Icon size={110} strokeWidth={1} />
+      {/* Radial glow */}
+      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0, borderRadius: 20, background: `radial-gradient(ellipse at 0% 0%, ${color}18, transparent 55%)` }} />
+
+      {/* Watermark */}
+      <div aria-hidden="true" style={{ position: 'absolute', bottom: 12, right: 12, opacity: 0.04, color, zIndex: 0, pointerEvents: 'none' }}>
+        <Icon size={90} />
       </div>
 
-      <div className="relative z-10 p-5 sm:p-6 flex flex-col gap-4">
+      <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
 
-        {/* Icon + eyebrow + headline + pill */}
-        <div className="flex items-start justify-between gap-2">
-          <div className="flex items-center gap-2.5 min-w-0">
-            <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-              style={{
-                background: `${color}15`,
-                border: `1px solid ${color}28`,
-                color,
-                boxShadow: active ? `0 0 16px ${color}25` : 'none',
-                transition: 'box-shadow 0.3s ease',
-              }}
-            >
-              <Icon size={17} strokeWidth={1.75} />
+        {/* Header row */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+            <div style={{
+              width: 34, height: 34, borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+              background: `${color}18`, border: `1px solid ${color}28`, color,
+              boxShadow: hovered ? `0 0 14px ${color}28` : 'none', transition: 'box-shadow 0.3s',
+            }}>
+              <Icon size={15} />
             </div>
-            <div className="min-w-0">
-              <p className="text-xs font-medium uppercase"
-                style={{ color: 'rgba(255,255,255,0.35)', letterSpacing: '0.15em' }}>
-                {card.eyebrow}
-              </p>
-              <h3 className="text-base font-bold text-white leading-tight">{card.headline}</h3>
-            </div>
+            <span style={{ fontSize: '0.68rem', fontWeight: 500, letterSpacing: '0.07em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)' }}>
+              {eyebrow}
+            </span>
           </div>
-          <span
-            className="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full shrink-0"
-            style={{ color, background: `${color}15`, border: `1px solid ${color}28`, letterSpacing: '0.08em' }}
-          >
-            {card.pill}
+          <span style={{ fontSize: '0.65rem', fontWeight: 600, padding: '3px 10px', borderRadius: 999, whiteSpace: 'nowrap', background: `${color}18`, border: `1px solid ${color}30`, color }}>
+            {pill}
           </span>
         </div>
 
-        {/* Body */}
-        <p className="text-sm font-light leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>
-          {card.body}
-        </p>
-
-        {/* Mockup widget */}
-        {mockupMap[card.mockup]}
+        {/* Headline + body */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+          <h3 style={{ margin: 0, fontSize: 'clamp(0.98rem, 2.5vw, 1.08rem)', fontWeight: 600, color: '#fff', lineHeight: 1.3 }}>
+            {headline}
+          </h3>
+          <p style={{ margin: 0, fontSize: '0.8rem', lineHeight: 1.65, color: 'rgba(255,255,255,0.52)' }}>
+            {body}
+          </p>
+        </div>
 
         {/* Bullets */}
-        <div className="flex flex-col gap-2 -mt-2">
-          {card.highlights.map(h => (
-            <div key={h} className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full shrink-0"
-                style={{ background: color, boxShadow: `0 0 6px ${color}80` }} />
-              <span className="text-xs" style={{ color: 'rgba(255,255,255,0.6)' }}>{h}</span>
+        <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+          {bullets.map(b => (
+            <li key={b} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.55rem' }}>
+              <span style={{ width: 5, height: 5, borderRadius: '50%', flexShrink: 0, marginTop: '0.38rem', background: color, boxShadow: `0 0 5px ${color}90` }} />
+              <span style={{ fontSize: '0.78rem', lineHeight: 1.55, color: 'rgba(255,255,255,0.6)' }}>{b}</span>
+            </li>
+          ))}
+        </ul>
+
+        {/* Stats — vertical on mobile, row on md+ */}
+        <div
+          className="flex flex-col md:flex-row"
+          style={{ marginTop: 'auto', paddingTop: '0.85rem', borderTop: '1px solid rgba(255,255,255,0.07)', gap: '0.4rem' }}
+        >
+          {stats.map(([val, lbl]) => (
+            <div key={lbl} className="flex md:flex-col items-center md:items-start"
+              style={{ flex: 1, borderRadius: 9, padding: '0.45rem 0.7rem', gap: '0.3rem', background: `${color}0d`, border: `1px solid ${color}1e` }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: 700, color, lineHeight: 1, whiteSpace: 'nowrap' }}>{val}</span>
+              <span style={{ fontSize: '0.67rem', color: 'rgba(255,255,255,0.36)', lineHeight: 1, whiteSpace: 'nowrap' }}>{lbl}</span>
             </div>
           ))}
         </div>
@@ -315,94 +145,35 @@ function IntegrationCard({ card }) {
       </div>
 
       {/* Accent bottom line */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-px pointer-events-none"
-        style={{
-          background: `linear-gradient(to right, ${color}50, transparent)`,
-          opacity: active ? 1 : 0.4,
-          transition: 'opacity 0.3s ease',
-        }}
-      />
+      <div aria-hidden="true" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 1, zIndex: 2, pointerEvents: 'none', borderRadius: '0 0 20px 20px', background: `linear-gradient(to right, transparent, ${color})`, opacity: hovered ? 1 : 0.3, transition: 'opacity 0.3s' }} />
     </div>
   )
 }
 
-// ── Section ───────────────────────────────────────────────────────────────────
+// ─── Section ──────────────────────────────────────────────────────────────────
 
-const TechIntegration = () => {
+export default function SoftwareSecurityServices() {
   return (
-    <section
-      id="integrations"
-      className="w-full px-4 sm:px-6 md:px-10 lg:px-14 py-14 sm:py-20 md:py-24"
-      style={{ color: 'white' }}
-    >
-      <div className="max-w-5xl mx-auto">
+    <div style={{ width: '100%', padding: 'clamp(3rem, 8vw, 5rem) clamp(1rem, 4vw, 1.5rem)' }}>
+      <div style={{ maxWidth: 1024, margin: '0 auto' }}>
 
-        {/* Header */}
-        <div className="text-center mb-10 sm:mb-14">
-          <p className="text-xs font-semibold uppercase tracking-widest mb-3"
-            style={{ color: 'rgba(255,255,255,0.35)', letterSpacing: '0.22em' }}>
-            Connectivity
+        <div style={{ textAlign: 'center', marginBottom: 'clamp(1.75rem, 4vw, 2.5rem)' }}>
+          <p style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', marginBottom: '0.6rem' }}>
+            Security Services
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4"
-            style={{ letterSpacing: '-0.03em', lineHeight: 1.05 }}>
-            Plugs into everything.
+          <h2 style={{ fontSize: 'clamp(1.6rem, 5vw, 2.75rem)', fontWeight: 300, color: '#fff', lineHeight: 1.15, marginBottom: '0.75rem' }}>
+            Software Security
           </h2>
-          <p className="text-sm sm:text-base font-light max-w-xl mx-auto leading-relaxed"
-            style={{ color: 'rgba(255,255,255,0.5)' }}>
-            From cloud CMS platforms to live data feeds — our signage infrastructure connects with your existing tools out of the box.
+          <p style={{ fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', maxWidth: 440, margin: '0 auto', lineHeight: 1.65, color: 'rgba(255,255,255,0.48)' }}>
+            Assess, test, harden, and monitor — a full-cycle security practice built around your stack.
           </p>
         </div>
 
-        {/* Bento Grid
-            Row 1: CMS (2) + POS (1)
-            Row 2: API (1) + Data Feed (2)
-        */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {cards.map(card => (
-            <IntegrationCard key={card.id} card={card} />
-          ))}
-        </div>
-
-        {/* CTA Strip */}
-        <div
-          className="mt-4 rounded-2xl px-5 sm:px-8 py-5 sm:py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-          style={glassStrong}
-        >
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest mb-1"
-              style={{ color: 'rgba(255,255,255,0.35)', letterSpacing: '0.18em' }}>
-              Need a custom integration?
-            </p>
-            <h3 className="text-sm sm:text-base font-semibold text-white">
-              We'll connect your signage to whatever you're running.
-            </h3>
-            <p className="text-xs mt-1 font-light" style={{ color: 'rgba(255,255,255,0.4)' }}>
-              Talk to our team — no integration is too bespoke.
-            </p>
-          </div>
-          <button
-            className="shrink-0 w-full sm:w-auto flex items-center justify-center gap-2 text-xs sm:text-sm font-bold px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl"
-            style={{ background: '#00e5a0', color: '#0a0d0f', transition: 'all 0.2s ease' }}
-            onMouseEnter={e => {
-              e.currentTarget.style.background = '#33ecb4'
-              e.currentTarget.style.boxShadow = '0 6px 24px rgba(0,229,160,0.35)'
-              e.currentTarget.style.transform = 'translateY(-1px)'
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.background = '#00e5a0'
-              e.currentTarget.style.boxShadow = 'none'
-              e.currentTarget.style.transform = 'translateY(0)'
-            }}
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            Get in Touch <ArrowRight size={14} strokeWidth={2.5} />
-          </button>
+        <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: '0.75rem' }}>
+          {features.map(f => <FeatureCard key={f.id} feature={f} />)}
         </div>
 
       </div>
-    </section>
+    </div>
   )
 }
-
-export default TechIntegration

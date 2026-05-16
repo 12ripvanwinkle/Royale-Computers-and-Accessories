@@ -1,37 +1,36 @@
 import React from 'react'
-import { protections } from './index'
-import {ProtectionCard} from './ProtectionComponents'
+import { ProtectionCard } from './Components'
+import { items } from './index'
 
 const Protection = () => {
   return (
-    <div className="w-full px-4 md:px-6 py-16 md:py-24">
+    <div className="w-full px-4 sm:px-6 md:px-10 lg:px-14 py-14 sm:py-20 md:py-24"
+        style={{color: 'white'}}
+    >
         <div className="max-w-5xl mx-auto">
 
             {/* Header */}
-            <div className="text-center mb-12">
-                <p className="text-xs font-semibold tracking-widest uppercase mb-4"
-                    style={{ color: 'rgba(255,255,255,0.45)' }}
-                >
-                    Comprehensive Coverage
+            <div className="text-center mb-10 sm:mb-14">
+                <p className="text-xs font-semibold uppercase tracking-widest mb-3"
+                    style={{ color: 'rgba(255,255,255,0.35)', letterSpacing: '0.22em' }}>
+                    Layers of Protection
                 </p>
-                <h2 className="text-3xl md:text-5xl font-light text-white leading-tight mb-4">
-                    Types of Protection
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4"
+                    style={{ letterSpacing: '-0.03em', lineHeight: 1.05 }}>
+                    Security at every layer.
                 </h2>
-                <p className="text-sm md:text-base max-w-xl mx-auto leading-relaxed"
-                    style={{color: 'rgba(255,255,255,0.55)'}}
-                >
-                    Every vector. Every layer. Every threat — covered by purpose-built security
-                    disciplines that work together as a unified defence.    
+                <p className="text-sm sm:text-base font-light max-w-xl mx-auto leading-relaxed"
+                    style={{ color: 'rgba(255,255,255,0.5)' }}>
+                    From the application layer to your cloud infrastructure — every surface is hardened, monitored, and compliant.
                 </p>
             </div>
 
             {/* Bento Grid */}
             <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
-                {protections.map((item, index) => (
-                    <ProtectionCard key={item.id} item={item} index={index} />
+                {items.map(item => (
+                    <ProtectionCard key={item.id} item={item} />
                 ))}
             </div>
-
         </div>
     </div>
   )
