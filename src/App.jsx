@@ -19,6 +19,7 @@ import PowerManagement from './components/pages/TechSolutionsWebPages/PowerManag
 import NetworkSecurity from './components/pages/TechSolutionsWebPages/NetworkSecurity'
 import CRM from './components/pages/TechSolutionsWebPages/CRM'
 import School from './components/pages/TechSolutionsWebPages/School'
+import ScrollToTop from './components/ScrollToTop'
 // Create a HomePage component that holds all your sections
 const HomePage = () => (
   <>
@@ -46,6 +47,7 @@ const App = () => {
 
       {/* App Content */}
       <div className="app-content">
+        <ScrollToTop />
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />

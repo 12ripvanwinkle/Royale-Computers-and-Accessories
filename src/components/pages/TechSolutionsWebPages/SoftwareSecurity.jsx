@@ -252,19 +252,29 @@ const SoftwareSecurity = () => {
         </div>
 
         {/* Features */}
-        <Features />
+        <div id='SecurityFeatures'>
+            <Features />
+        </div>
 
         {/* Aspects of Protection */}
-        <Protection />
+        <div id='SecurityAspects'>
+            <Protection />
+        </div>
 
         {/* Services */}
-        <Services />
+        <div id=''>
+            <Services />
+        </div>  
 
         {/* How it works */}
-        <HowItWorks {...howItWorksData.softwareSecurity} />
+        <div id='SecurityProcess'>
+           <HowItWorks {...howItWorksData.softwareSecurity} /> 
+        </div>
 
         {/* Why Choose Us */}
-        <WhyChooseUs {...whyChooseUsData.softwareSecurity} />
+        <div id='SecurityWhyUs'>
+            <WhyChooseUs {...whyChooseUsData.softwareSecurity} />
+        </div>
 
         {/* FAQs */}
         <FAQSection />

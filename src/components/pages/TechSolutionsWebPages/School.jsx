@@ -20,7 +20,6 @@ const School = () => {
         <div className="min-h-screen flex flex-col items-center justify-start pt-8 md:pt-16 px-4 md:px-6">
             
             {/* Hero Section */}
-
             <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 py-12 sm:py-16 md:py-20 lg:py-28">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 lg:gap-14 items-center">
                     
@@ -268,16 +267,24 @@ const School = () => {
             <StatsStrip />
 
             {/* Features */}
-            <SchoolFeatures />
+            <div id="SchoolFeatures">
+                <SchoolFeatures />
+            </div>
 
             {/* Services */}
-            <Services />
+            <div id="SchoolServices">
+                <Services />
+            </div> 
 
             {/* How it works */}
-            <HowItWorks {...howItWorksData.school} />
+            <div id="SchoolProcess">
+                <HowItWorks {...howItWorksData.school} />
+            </div>
 
             {/* Why Choose Us */}
-            <WhyChooseUs {...whyChooseUsData.school} />
+            <div id="SchoolWhyUs">
+                <WhyChooseUs {...whyChooseUsData.school} />
+            </div>
 
             {/* FAQs */}
             <FAQSection />
@@ -288,8 +295,6 @@ const School = () => {
             {/* Footer */}
             <Footer />
 
-            {/* Holder */}
-            {/* <Holder /> */}
         </div>
     </section>
   )

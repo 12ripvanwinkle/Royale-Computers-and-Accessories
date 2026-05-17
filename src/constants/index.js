@@ -98,19 +98,15 @@ const accessSolutionNavlinks = [
   },
   {
     name: "Access Services",
-    link: "#services"
+    link: "#AccessServices"
   },
   {
     name: "Our Process",
-    link: "#assess"
+    link: "#AccessHowItWorks"
   },
   {
     name: "Why Us",
-    link: "#whyUs"
-  },
-  {
-    name: "FAQs",
-    link: "#faqs"
+    link: "#AccesswhyUs"
   },
 ];
 
@@ -125,20 +121,20 @@ const cctvNavlinks = [
   },
   {
     name: "Features",
-    link: "#features",
+    link: "#CCTVfeatures",
   },
   {
     name: "Systems",
-    link: "#types",
+    link: "#CCTVSystems",
   },
   {
-    name: "Process",
-    link: "#assess"
+    name: "Our Process",
+    link: "#CCTVProcess"
   },
   {
-    name: "FAQs",
-    link: "#faqs"
-  }
+    name: "Why Us",
+    link: "#CCTVwhyUs"
+  },
 ];
 
 const digitalSignageNavlinks = [
@@ -152,20 +148,24 @@ const digitalSignageNavlinks = [
   },
   {
     name: "Features",
-    link: "#features",
+    link: "#DSFeatures",
   },
   {
     name: "Types",
-    link: "#types",
+    link: "#DSTypes",
   },
   {
     name: "Integration",
-    link: "#integration"
+    link: "#DSIntegration"
   },
   {
-    name: "Why Choose Us",
-    link: "#whyUs"
-  }
+    name: "Our Process",
+    link: "#DSProcess"
+  },
+  {
+    name: "Why Us",
+    link: "#CCTVwhyUs"
+  },
 ];
 
 const SoftwareSecurityNavlinks = [
@@ -179,15 +179,19 @@ const SoftwareSecurityNavlinks = [
   },
   {
     name: "Features",
-    link: "#features",
+    link: "#SecurityFeatures",
   },
   {
-    name: "Aspects of Protection",
-    link: "#aspects"
+    name: "Aspects",
+    link: "#SecurityAspects"
+  },
+  {
+    name: "Our Process",
+    link: "#SecurityProcess"
   },
   {
     name: "Why Choose Us",
-    link: "#whyUs"
+    link: "#SecurityWhyUs"
   },
 ];
 
@@ -202,15 +206,19 @@ const PowerManagementNavlinks = [
   },
   {
     name: "Features",
-    link: "#features",
-  },
-  {
-    name: "Systems",
-    link: "#systems",
+    link: "#PowerFeatures",
   },
   {
     name: "Services",
-    link: "#services",
+    link: "#PowerServices",
+  },
+  {
+    name: "Our Process",
+    link: "#PowerProcess"
+  },
+  {
+    name: "Why Choose Us",
+    link: "#PowerWhyUs"
   },
 ];
 
@@ -225,15 +233,19 @@ const NetworkSecurityNavlinks = [
   },
   {
     name: "Features",
-    link: "#features",
+    link: "#NetworkFeatures",
   },
   {
-    name: "Security Types",
-    link: "#security",
+    name: "Types",
+    link: "#NetworkSecurityTypes",
   },
   {
-    name: "Services",
-    link: "#services",
+    name: "Our Process",
+    link: "#NetworkProcess"
+  },
+  {
+    name: "Why Choose Us",
+    link: "#NetworkWhyUs"
   },
 ];
 
@@ -248,15 +260,19 @@ const CRMNavlinks = [
   },
   {
     name: "Features",
-    link: "#features",
+    link: "#CRMFeatures",
   },
   {
     name: "Modules",
-    link: "#modules",
+    link: "#CRM-Modules",
   },
   {
-    name: "Services",
-    link: "#services",
+    name: "Our Process",
+    link: "#CRMProcess"
+  },
+  {
+    name: "Why Choose Us",
+    link: "#CRMWhyUs"
   },
 ];
 
@@ -271,15 +287,19 @@ const schoolNavlinks = [
   },
   {
     name: "Features",
-    link: "#features",
+    link: "#SchoolFeatures",
   },
   {
-    name: "Modules",
-    link: "#modules",
+    name: "Services",
+    link: "#SchoolServices",
   },
   {
     name: "Process",
-    link: "#process",
+    link: "#SchoolProcess",
+  },
+  {
+    name: "Why Choose Us",
+    link: "#SchoolWhyUs"
   },
 ];
 

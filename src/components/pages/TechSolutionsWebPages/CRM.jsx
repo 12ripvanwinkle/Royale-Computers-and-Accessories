@@ -10,6 +10,8 @@ import Modules from '../../Aspects/CRM/Modules'
 import Services from '../../Aspects/CRM/Services'
 import { whyChooseUsData } from '../../Aspects/Global/WhyChooseUsData';
 import WhyChooseUs from '../../Aspects/Global/WhyChooseUs';
+import { howItWorksData } from '../../Aspects/Global/HowItWorksData';
+import HowItWorks from '../../Aspects/Global/HowItWorks';
 
 const CRM = () => {
   return (
@@ -202,16 +204,27 @@ const CRM = () => {
             </div>
 
             {/* Key Features */}
-            <Features />
+            <div id="CRMFeatures">
+                <Features />
+            </div>
 
             {/* Modules */}
-            <Modules />
-
+            <div id="CRM-Modules">
+               <Modules /> 
+            </div>
+            
             {/* Services */}
             <Services />
+
+            {/* Our Process */}
+            <div id="CRMProcess">
+                <HowItWorks {...howItWorksData.crm} />
+            </div>
             
             {/* Why Choose us */}
-            <WhyChooseUs {...whyChooseUsData.crm} />
+            <div id="CRMWhyUs">
+              <WhyChooseUs {...whyChooseUsData.crm} />  
+            </div>
 
             {/* FAQS */}
             <FAQSection />

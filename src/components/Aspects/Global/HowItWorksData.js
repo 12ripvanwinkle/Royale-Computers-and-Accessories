@@ -5,6 +5,10 @@ import {
   Users2,
   Rocket,
   ShieldCheck,
+  UsersRound,
+  Workflow,
+  BarChart3,
+  HeadphonesIcon,
 } from "lucide-react"
 
 // ─────────────────────────────────────────────────────────────
@@ -592,7 +596,8 @@ export const howItWorksData = {
         buttonTextColor: "#0f172a",
     },
   },
-
+  
+  // Software Security 
   softwareSecurity: {
   subtitle: "The Process",
 
@@ -761,6 +766,176 @@ export const howItWorksData = {
 
       buttonTextColor: "#0f172a",
   },
+  },
+  // CRM
+  crm: {
+    subtitle: "The Process",
+
+    heading: "How It Works",
+
+    description:
+        "From business assessment to workflow automation, we deploy modern CRM solutions designed to improve customer relationships, streamline operations, and support business growth.",
+
+    stats: [
+        { value: "2",      unit: "wks", label: "Avg. deployment time", color: "#93c5fd" },
+        { value: "<48",    unit: "hrs", label: "CRM configuration",    color: "#a78bfa" },
+        { value: "24/7",   unit: null,  label: "Customer access",      color: "#4ade80" },
+        { value: "Scalable", unit: null, label: "Business support",    color: "#fbbf24" },
+    ],
+
+    steps: [
+        {
+        n: "01",
+
+        icon: ClipboardList,
+
+        color: "#93c5fd",
+
+        phase: "Assessment",
+
+        title: "Understanding Your Business Workflow",
+
+        body:
+            "We assess your sales processes, customer interactions, and operational workflows to design the right CRM solution for your business.",
+
+        points: [
+            "Business workflow analysis",
+            "Customer journey review",
+            "Sales process assessment",
+            "Operational requirement planning",
+        ],
+        },
+
+        {
+        n: "02",
+
+        icon: Settings2,
+
+        color: "#a78bfa",
+
+        phase: "Planning",
+
+        title: "Built Around Your Operations",
+
+        body:
+            "CRM features, automation tools, and reporting systems configured around your team structure and business goals.",
+
+        points: [
+            "CRM structure planning",
+            "Workflow automation setup",
+            "Sales pipeline configuration",
+            "Reporting & dashboard planning",
+        ],
+        },
+
+        {
+        n: "03",
+
+        icon: DatabaseZap,
+
+        color: "#5eead4",
+
+        phase: "Deployment",
+
+        title: "Professional CRM Implementation",
+
+        body:
+            "Customer databases, automation systems, and integrations deployed with minimal disruption to your operations.",
+
+        points: [
+            "CRM platform deployment",
+            "Customer data migration",
+            "Third-party integrations",
+            "System performance testing",
+        ],
+        },
+
+        {
+        n: "04",
+
+        icon: Users2,
+
+        color: "#4ade80",
+
+        phase: "Configuration",
+
+        title: "Optimized for Daily Operations",
+
+        body:
+            "User permissions, dashboards, automations, and communication tools configured for efficient day-to-day customer management.",
+
+        points: [
+            "User access configuration",
+            "Dashboard & reporting setup",
+            "Automation rule configuration",
+            "Team onboarding & training",
+        ],
+        },
+
+        {
+        n: "05",
+
+        icon: Rocket,
+
+        color: "#fbbf24",
+
+        phase: "Activation",
+
+        title: "Real-Time Customer Management",
+
+        body:
+            "Your CRM environment goes live with centralized customer management, automated workflows, and real-time business visibility.",
+
+        points: [
+            "Live CRM activation",
+            "Real-time sales tracking",
+            "Customer interaction monitoring",
+            "Remote platform access",
+        ],
+        },
+
+        {
+        n: "06",
+
+        icon: ShieldCheck,
+
+        color: "#f87171",
+
+        phase: "Support",
+
+        title: "Ongoing Maintenance & Support",
+
+        body:
+            "We provide continuous updates, optimization, and technical support to keep your CRM platform running efficiently as your business grows.",
+
+        points: [
+            "CRM maintenance & updates",
+            "Workflow optimization",
+            "Dedicated support access",
+            "Rapid issue response",
+        ],
+        },
+    ],
+
+    checklist: [
+        "Dedicated CRM specialists",
+        "Real-time deployment updates",
+        "Workflow & automation verification",
+        "Continuous support & optimization",
+        "Minimal disruption to operations",
+    ],
+
+    cta: {
+        timelineText: "Typically deployed in 1–2 weeks.",
+
+        buttonLabel: "Book a Free Consultation",
+
+        buttonColor: "#93c5fd",
+
+        buttonHoverColor: "#bfdbfe",
+
+        buttonTextColor: "#0f172a",
+    },
   },
     // ── Power Management ────────────────────────────────────────
   powerManagement: {

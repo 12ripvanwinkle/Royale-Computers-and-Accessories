@@ -245,16 +245,20 @@ const AccessControl = () => {
         </div>
 
         {/* Services */}
-        <Services />
+        <div id='AccessServices'>
+          <Services />
+        </div>
+        
 
         {/* How it works  */}
-        <HowItWorks {...howItWorksData.accessControl} />
-
-        {/* Step by step */}
-        {/* <StepFlow /> */}
+        <div id='AccessHowItWorks'>
+          <HowItWorks {...howItWorksData.accessControl} /> 
+        </div>
 
         {/* The Why us social proof section */}
-        <WhyChooseUs {...whyChooseUsData.accessControl} />
+        <div id='AccesswhyUs'>
+          <WhyChooseUs {...whyChooseUsData.accessControl} /> 
+        </div>
 
         {/* FAQs */}
         <FAQSection />

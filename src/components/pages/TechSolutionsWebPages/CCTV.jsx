@@ -250,20 +250,25 @@ const CCTV = () => {
         </div>
 
         {/* Features */}
-        <Features />
+        <div id='CCTVfeatures'>
+          <Features />
+        </div>
 
         {/* CCTV Systems */}
-        <Systems />
-
-        {/* Why Choose us / Why Trust Us */}
-        {/* <TrustUs /> */}
+        <div id='CCTVSystems'>
+          <Systems />
+        </div>
         
         {/* How it works stuff */}
-        <HowItWorks {...howItWorksData.cctv} />
+        <div id='CCTVProcess'>
+          <HowItWorks {...howItWorksData.cctv} />
+        </div>
 
         {/* Why Choose Us */}
-        <WhyChooseUs {...whyChooseUsData.cctv} />
-
+        <div id='CCTVwhyUs'>
+          <WhyChooseUs {...whyChooseUsData.cctv} />
+        </div>
+        
         {/* FAQs */}
         <FAQSection />
 

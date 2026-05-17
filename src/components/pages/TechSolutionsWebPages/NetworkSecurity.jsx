@@ -256,19 +256,29 @@ const NetworkSecurity = () => {
             <TrustStrip />
 
             {/* Features */}
-            <Features />
+            <div id="NetworkFeatures">
+                <Features />
+            </div>
 
             {/* Types of Security */}
-            <TypesOfSecurity />
+            <div id="NetworkSecurityTypes">
+                <TypesOfSecurity />
+            </div>    
 
             {/* Services */}
-            <Services />
+            <div>
+                <Services />
+            </div>       
 
             {/* How It Works */}
-            <HowItWorks {...howItWorksData.networkSecurity} />
+            <div id="NetworkProcess">
+                <HowItWorks {...howItWorksData.networkSecurity} />
+            </div>
 
             {/* Why Choose us */}
-            <WhyChooseUs />
+            <div id="NetworkWhyUs">
+                <WhyChooseUs />
+            </div>
 
             {/* FAQs */}
             <FAQSection />

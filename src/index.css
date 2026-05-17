@@ -61,11 +61,18 @@ body {
 }
 
 /* Hide video on mobile for better performance */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .video-background video {
     display: none;
   }
-}
+  .video-background::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('/images/bg-fallback.jpg') center/cover no-repeat;
+    z-index: 0;
+  }
+} */
 
 /* Larger, more visible floating orbs */
 body::before,

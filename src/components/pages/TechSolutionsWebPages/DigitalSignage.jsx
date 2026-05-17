@@ -252,21 +252,31 @@ const DigitalSignage = () => {
                     </div>
                 </div>
             </div>
-
+            
             {/* Digital Signage Features */}
-            <DSFeatures />
+            <div id='DSFeatures'>
+              <DSFeatures /> 
+            </div>
 
             {/* Types of Digital Signage */}
-            <Types />
-
+            <div id='DSTypes'>
+              <Types />  
+            </div>
+            
             {/* Technology Integration */}
-            <IntegrationTech />
-
+            <div id='DSIntegration'>
+              <IntegrationTech />  
+            </div>
+            
             {/* How it works */}
-            <HowItWorks {...howItWorksData.digitalSignage} />
+            <div id='DSProcess'>
+              <HowItWorks {...howItWorksData.digitalSignage} />  
+            </div>
 
             {/* Why Choose us */}
-            <WhyChooseUs {...whyChooseUsData.digitalSignage} />
+            <div id='CCTVwhyUs'>
+              <WhyChooseUs {...whyChooseUsData.digitalSignage} />
+            </div>
 
             {/* FAQs */}
             <FAQSection />

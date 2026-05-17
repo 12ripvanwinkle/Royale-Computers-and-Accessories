@@ -223,24 +223,35 @@ const PowerManagement = () => {
                 </div>
             </div>
 
-
             {/* Features */}
-            <Features />
+            <div id='PowerFeatures'>
+                <Features />
+            </div>    
 
             {/* Types of Systems */}
-            <SystemTypes />
+            <div id=''>
+                <SystemTypes />
+            </div>
 
             {/* Services */}
-            <Services />
-
-            {/* How It Works */}
-            <HowItWorks {...howItWorksData.powerManagement} />
+            <div id='PowerServices'>
+               <Services /> 
+            </div>
 
             {/* Tech Integration */}
-            <TechIntegration />
+            <div id="">
+               <TechIntegration /> 
+            </div>
 
+            {/* How It Works */}
+            <div id='PowerProcess'>
+                <HowItWorks {...howItWorksData.powerManagement} />
+            </div>
+            
             {/* Why Choose us */}
-            <WhyChooseUs {...whyChooseUsData.powerManagement} />
+            <div id='PowerWhyUs'>
+                <WhyChooseUs {...whyChooseUsData.powerManagement} />
+            </div>
             
             {/* FAQs */}
             <FAQSection />
